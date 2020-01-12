@@ -38,9 +38,21 @@ class Plateau
      */
     private $parties;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cases", mappedBy="plateau", orphanRemoval=true)
+     */
+    private $cases;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", inversedBy="plateaux")
+     */
+    private $utilisateurs;
+
     public function __construct()
     {
         $this->parties = new ArrayCollection();
+        $this->cases = new ArrayCollection();
+        $this->utilisateurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,6 +122,63 @@ class Plateau
             if ($party->getPlateau() === $this) {
                 $party->setPlateau(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cases[]
+     */
+    public function getCases(): Collection
+    {
+        return $this->cases;
+    }
+
+    public function addCase(Cases $case): self
+    {
+        if (!$this->cases->contains($case)) {
+            $this->cases[] = $case;
+            $case->setPlateau($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCase(Cases $case): self
+    {
+        if ($this->cases->contains($case)) {
+            $this->cases->removeElement($case);
+            // set the owning side to null (unless already changed)
+            if ($case->getPlateau() === $this) {
+                $case->setPlateau(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getUtilisateurs(): Collection
+    {
+        return $this->utilisateurs;
+    }
+
+    public function addUtilisateur(Utilisateur $utilisateur): self
+    {
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs[] = $utilisateur;
+        }
+
+        return $this;
+    }
+
+    public function removeUtilisateur(Utilisateur $utilisateur): self
+    {
+        if ($this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->removeElement($utilisateur);
         }
 
         return $this;

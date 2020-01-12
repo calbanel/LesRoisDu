@@ -68,11 +68,17 @@ class Utilisateur
      */
     private $plateauEnJeux;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Plateau", mappedBy="utilisateurs")
+     */
+    private $plateaux;
+
     public function __construct()
     {
         $this->partiesRejoins = new ArrayCollection();
         $this->partiesCree = new ArrayCollection();
         $this->plateauEnJeux = new ArrayCollection();
+        $this->plateaux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,6 +255,34 @@ class Utilisateur
             if ($plateauEnJeux->getJoueur() === $this) {
                 $plateauEnJeux->setJoueur(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plateau[]
+     */
+    public function getPlateaux(): Collection
+    {
+        return $this->plateaux;
+    }
+
+    public function addPlateau(Plateau $plateau): self
+    {
+        if (!$this->plateaux->contains($plateau)) {
+            $this->plateaux[] = $plateau;
+            $plateau->addUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlateau(Plateau $plateau): self
+    {
+        if ($this->plateaux->contains($plateau)) {
+            $this->plateaux->removeElement($plateau);
+            $plateau->removeUtilisateur($this);
         }
 
         return $this;

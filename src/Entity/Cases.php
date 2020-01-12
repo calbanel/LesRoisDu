@@ -37,6 +37,12 @@ class Cases
      */
     private $plateauEnJeu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Plateau", inversedBy="cases")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plateau;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Cases
     public function setPlateauEnJeu(?PlateauEnJeu $plateauEnJeu): self
     {
         $this->plateauEnJeu = $plateauEnJeu;
+
+        return $this;
+    }
+
+    public function getPlateau(): ?Plateau
+    {
+        return $this->plateau;
+    }
+
+    public function setPlateau(?Plateau $plateau): self
+    {
+        $this->plateau = $plateau;
 
         return $this;
     }
