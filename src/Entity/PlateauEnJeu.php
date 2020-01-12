@@ -31,6 +31,11 @@ class PlateauEnJeu
      */
     private $niveauDifficulte;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Partie", mappedBy="plateauDeJeu", cascade={"persist", "remove"})
+     */
+    private $partie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,24 @@ class PlateauEnJeu
     public function setNiveauDifficulte(string $niveauDifficulte): self
     {
         $this->niveauDifficulte = $niveauDifficulte;
+
+        return $this;
+    }
+
+    public function getPartie(): ?Partie
+    {
+        return $this->partie;
+    }
+
+    public function setPartie(?Partie $partie): self
+    {
+        $this->partie = $partie;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newPlateauDeJeu = null === $partie ? null : $this;
+        if ($partie->getPlateauDeJeu() !== $newPlateauDeJeu) {
+            $partie->setPlateauDeJeu($newPlateauDeJeu);
+        }
 
         return $this;
     }

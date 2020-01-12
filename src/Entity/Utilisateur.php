@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +52,22 @@ class Utilisateur
      * @ORM\Column(type="text")
      */
     private $avatar;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Partie", mappedBy="joueurs")
+     */
+    private $partiesRejoins;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Partie", mappedBy="createur")
+     */
+    private $partiesCree;
+
+    public function __construct()
+    {
+        $this->partiesRejoins = new ArrayCollection();
+        $this->partiesCree = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +154,65 @@ class Utilisateur
     public function setAvatar(string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Partie[]
+     */
+    public function getPartiesRejoins(): Collection
+    {
+        return $this->partiesRejoins;
+    }
+
+    public function addPartiesRejoin(Partie $partiesRejoin): self
+    {
+        if (!$this->partiesRejoins->contains($partiesRejoin)) {
+            $this->partiesRejoins[] = $partiesRejoin;
+            $partiesRejoin->addJoueur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartiesRejoin(Partie $partiesRejoin): self
+    {
+        if ($this->partiesRejoins->contains($partiesRejoin)) {
+            $this->partiesRejoins->removeElement($partiesRejoin);
+            $partiesRejoin->removeJoueur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Partie[]
+     */
+    public function getPartiesCree(): Collection
+    {
+        return $this->partiesCree;
+    }
+
+    public function addPartiesCree(Partie $partiesCree): self
+    {
+        if (!$this->partiesCree->contains($partiesCree)) {
+            $this->partiesCree[] = $partiesCree;
+            $partiesCree->setCreateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartiesCree(Partie $partiesCree): self
+    {
+        if ($this->partiesCree->contains($partiesCree)) {
+            $this->partiesCree->removeElement($partiesCree);
+            // set the owning side to null (unless already changed)
+            if ($partiesCree->getCreateur() === $this) {
+                $partiesCree->setCreateur(null);
+            }
+        }
 
         return $this;
     }

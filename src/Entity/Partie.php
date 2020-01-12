@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,32 @@ class Partie
      * @ORM\Column(type="string", length=5)
      */
     private $code;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Plateau", inversedBy="parties")
+     */
+    private $plateau;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PlateauEnJeu", inversedBy="partie", cascade={"persist", "remove"})
+     */
+    private $plateauDeJeu;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", inversedBy="partiesRejoins")
+     */
+    private $joueurs;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="partiesCree")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $createur;
+
+    public function __construct()
+    {
+        $this->joueurs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +96,68 @@ class Partie
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getPlateau(): ?Plateau
+    {
+        return $this->plateau;
+    }
+
+    public function setPlateau(?Plateau $plateau): self
+    {
+        $this->plateau = $plateau;
+
+        return $this;
+    }
+
+    public function getPlateauDeJeu(): ?PlateauEnJeu
+    {
+        return $this->plateauDeJeu;
+    }
+
+    public function setPlateauDeJeu(?PlateauEnJeu $plateauDeJeu): self
+    {
+        $this->plateauDeJeu = $plateauDeJeu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getJoueurs(): Collection
+    {
+        return $this->joueurs;
+    }
+
+    public function addJoueur(Utilisateur $joueur): self
+    {
+        if (!$this->joueurs->contains($joueur)) {
+            $this->joueurs[] = $joueur;
+        }
+
+        return $this;
+    }
+
+    public function removeJoueur(Utilisateur $joueur): self
+    {
+        if ($this->joueurs->contains($joueur)) {
+            $this->joueurs->removeElement($joueur);
+        }
+
+        return $this;
+    }
+
+    public function getCreateur(): ?Utilisateur
+    {
+        return $this->createur;
+    }
+
+    public function setCreateur(?Utilisateur $createur): self
+    {
+        $this->createur = $createur;
 
         return $this;
     }
