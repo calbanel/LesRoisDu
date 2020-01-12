@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PartieRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PlateauRepository")
  */
-class Partie
+class Plateau
 {
     /**
      * @ORM\Id()
@@ -27,9 +27,9 @@ class Partie
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=20)
      */
-    private $code;
+    private $niveauDifficulte;
 
     public function getId(): ?int
     {
@@ -60,14 +60,14 @@ class Partie
         return $this;
     }
 
-    public function getCode(): ?string
+    public function getNiveauDifficulte(): ?string
     {
-        return $this->code;
+        return $this->niveauDifficulte;
     }
 
-    public function setCode(string $code): self
+    public function setNiveauDifficulte(string $niveauDifficulte): self
     {
-        $this->code = $code;
+        $this->niveauDifficulte = $niveauDifficulte;
 
         return $this;
     }

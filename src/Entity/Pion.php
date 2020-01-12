@@ -22,7 +22,7 @@ class Pion
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=10)
      */
     private $couleur;
 
