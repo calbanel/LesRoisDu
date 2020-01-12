@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,27 @@ class PlateauEnJeu
      * @ORM\OneToOne(targetEntity="App\Entity\Partie", mappedBy="plateauDeJeu", cascade={"persist", "remove"})
      */
     private $partie;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Pion", mappedBy="plateauEnJeu", orphanRemoval=true)
+     */
+    private $pions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="plateauEnJeux")
+     */
+    private $joueur;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cases", mappedBy="plateauEnJeu", orphanRemoval=true)
+     */
+    private $cases;
+
+    public function __construct()
+    {
+        $this->pions = new ArrayCollection();
+        $this->cases = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +113,80 @@ class PlateauEnJeu
         $newPlateauDeJeu = null === $partie ? null : $this;
         if ($partie->getPlateauDeJeu() !== $newPlateauDeJeu) {
             $partie->setPlateauDeJeu($newPlateauDeJeu);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pion[]
+     */
+    public function getPions(): Collection
+    {
+        return $this->pions;
+    }
+
+    public function addPion(Pion $pion): self
+    {
+        if (!$this->pions->contains($pion)) {
+            $this->pions[] = $pion;
+            $pion->setPlateauEnJeu($this);
+        }
+
+        return $this;
+    }
+
+    public function removePion(Pion $pion): self
+    {
+        if ($this->pions->contains($pion)) {
+            $this->pions->removeElement($pion);
+            // set the owning side to null (unless already changed)
+            if ($pion->getPlateauEnJeu() === $this) {
+                $pion->setPlateauEnJeu(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getJoueur(): ?Utilisateur
+    {
+        return $this->joueur;
+    }
+
+    public function setJoueur(?Utilisateur $joueur): self
+    {
+        $this->joueur = $joueur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cases[]
+     */
+    public function getCases(): Collection
+    {
+        return $this->cases;
+    }
+
+    public function addCase(Cases $case): self
+    {
+        if (!$this->cases->contains($case)) {
+            $this->cases[] = $case;
+            $case->setPlateauEnJeu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCase(Cases $case): self
+    {
+        if ($this->cases->contains($case)) {
+            $this->cases->removeElement($case);
+            // set the owning side to null (unless already changed)
+            if ($case->getPlateauEnJeu() === $this) {
+                $case->setPlateauEnJeu(null);
+            }
         }
 
         return $this;

@@ -31,6 +31,12 @@ class Pion
      */
     private $avancementPlateau;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PlateauEnJeu", inversedBy="pions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plateauEnJeu;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +74,18 @@ class Pion
     public function setAvancementPlateau(int $avancementPlateau): self
     {
         $this->avancementPlateau = $avancementPlateau;
+
+        return $this;
+    }
+
+    public function getPlateauEnJeu(): ?PlateauEnJeu
+    {
+        return $this->plateauEnJeu;
+    }
+
+    public function setPlateauEnJeu(?PlateauEnJeu $plateauEnJeu): self
+    {
+        $this->plateauEnJeu = $plateauEnJeu;
 
         return $this;
     }

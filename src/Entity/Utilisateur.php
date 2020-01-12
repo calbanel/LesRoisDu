@@ -63,10 +63,16 @@ class Utilisateur
      */
     private $partiesCree;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PlateauEnJeu", mappedBy="joueur")
+     */
+    private $plateauEnJeux;
+
     public function __construct()
     {
         $this->partiesRejoins = new ArrayCollection();
         $this->partiesCree = new ArrayCollection();
+        $this->plateauEnJeux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -211,6 +217,37 @@ class Utilisateur
             // set the owning side to null (unless already changed)
             if ($partiesCree->getCreateur() === $this) {
                 $partiesCree->setCreateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PlateauEnJeu[]
+     */
+    public function getPlateauEnJeux(): Collection
+    {
+        return $this->plateauEnJeux;
+    }
+
+    public function addPlateauEnJeux(PlateauEnJeu $plateauEnJeux): self
+    {
+        if (!$this->plateauEnJeux->contains($plateauEnJeux)) {
+            $this->plateauEnJeux[] = $plateauEnJeux;
+            $plateauEnJeux->setJoueur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlateauEnJeux(PlateauEnJeu $plateauEnJeux): self
+    {
+        if ($this->plateauEnJeux->contains($plateauEnJeux)) {
+            $this->plateauEnJeux->removeElement($plateauEnJeux);
+            // set the owning side to null (unless already changed)
+            if ($plateauEnJeux->getJoueur() === $this) {
+                $plateauEnJeux->setJoueur(null);
             }
         }
 

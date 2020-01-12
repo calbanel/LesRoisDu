@@ -31,6 +31,12 @@ class Cases
      */
     private $codeValidation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PlateauEnJeu", inversedBy="cases")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plateauEnJeu;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +74,18 @@ class Cases
     public function setCodeValidation(?string $codeValidation): self
     {
         $this->codeValidation = $codeValidation;
+
+        return $this;
+    }
+
+    public function getPlateauEnJeu(): ?PlateauEnJeu
+    {
+        return $this->plateauEnJeu;
+    }
+
+    public function setPlateauEnJeu(?PlateauEnJeu $plateauEnJeu): self
+    {
+        $this->plateauEnJeu = $plateauEnJeu;
 
         return $this;
     }
