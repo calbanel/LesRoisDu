@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,16 @@ class Cases
      * @ORM\JoinColumn(nullable=false)
      */
     private $plateau;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ressource", mappedBy="cases", orphanRemoval=true)
+     */
+    private $ressources;
+
+    public function __construct()
+    {
+        $this->ressources = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +116,37 @@ class Cases
     public function setPlateau(?Plateau $plateau): self
     {
         $this->plateau = $plateau;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ressource[]
+     */
+    public function getRessources(): Collection
+    {
+        return $this->ressources;
+    }
+
+    public function addRessource(Ressource $ressource): self
+    {
+        if (!$this->ressources->contains($ressource)) {
+            $this->ressources[] = $ressource;
+            $ressource->setCases($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRessource(Ressource $ressource): self
+    {
+        if ($this->ressources->contains($ressource)) {
+            $this->ressources->removeElement($ressource);
+            // set the owning side to null (unless already changed)
+            if ($ressource->getCases() === $this) {
+                $ressource->setCases(null);
+            }
+        }
 
         return $this;
     }

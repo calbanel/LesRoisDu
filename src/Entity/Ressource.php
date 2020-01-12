@@ -21,6 +21,12 @@ class Ressource
      */
     private $chemin;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Cases", inversedBy="ressources")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $cases;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +40,18 @@ class Ressource
     public function setChemin(string $chemin): self
     {
         $this->chemin = $chemin;
+
+        return $this;
+    }
+
+    public function getCases(): ?Cases
+    {
+        return $this->cases;
+    }
+
+    public function setCases(?Cases $cases): self
+    {
+        $this->cases = $cases;
 
         return $this;
     }
