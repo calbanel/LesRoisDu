@@ -69,7 +69,7 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageCreationPartie()
     {
-        return $this->render('les_rois_du/creationPartie.html.twig');
+        return $this->render('les_rois_du/creationpartie.html.twig');
     }
 
     /**
