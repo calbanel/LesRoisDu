@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Plateau;
+use App\Entity\Cases;
+use App\Entity\Ressource;
 
 class LesRoisDuController extends AbstractController
 {
@@ -93,7 +96,9 @@ class LesRoisDuController extends AbstractController
      */
     public function affichagePlateau($idPlateau)
     {
-        return $this->render('les_rois_du/plateau.html.twig');
+        $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
+        $plateau = $repositoryPlateau->find($idPlateau);
+        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau]);
     }
 
     /**
