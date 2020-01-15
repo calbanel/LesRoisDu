@@ -35,13 +35,13 @@ class Cases
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PlateauEnJeu", inversedBy="cases")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $plateauEnJeu;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Plateau", inversedBy="cases")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $plateau;
 
