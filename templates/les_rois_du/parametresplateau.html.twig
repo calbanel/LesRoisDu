@@ -2,6 +2,35 @@
 
 {% block body %}
 
-<p> Bienvenue sur LES ROIS DU ... </p>
+
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-1">
+
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-4">
+			<h1><center>Paramètres {{plateau.nom}}</center></h1>
+			<BR>
+			<BR>
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+			<a role="button" href="{{ path('parametres_plateau', {'idPlateau' : plateau.id}) }}" class="btn btn-success">
+				Paramètres
+			</a>
+		</div>
+		<div class="col-md-1">
+			 
+			
+		</div>
 
 {% endblock %}

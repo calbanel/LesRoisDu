@@ -106,7 +106,9 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageParametresPlateau($idPlateau)
     {
-        return $this->render('les_rois_du/parametresplateau.html.twig');
+        $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
+        $plateau = $repositoryPlateau->find($idPlateau);
+        return $this->render('les_rois_du/parametresplateau.html.twig',['plateau'=>$plateau]);
     }
 
 
