@@ -16,51 +16,51 @@ class AppFixtures extends Fixture
         $faker = \Faker\Factory::create('fr_FR');
 
         $plateau12 = new Plateau();
-        $plateau->setNom("12 cases");
-        $plateau->setDescription("Un jolie plato tiens tiens tiens");
-        $plateau->setNiveauDifficulte("Facile");
+        $plateau12->setNom("12 cases");
+        $plateau12->setDescription("Un jolie plato tiens tiens tiens");
+        $plateau12->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau12);
 
         $plateau13 = new Plateau();
-        $plateau->setNom("13 cases");
-        $plateau->setDescription("Un jolie plato tiens tiens tiens");
-        $plateau->setNiveauDifficulte("Facile");
+        $plateau13->setNom("13 cases");
+        $plateau13->setDescription("Un jolie plato tiens tiens tiens");
+        $plateau13->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau13);
 
         $plateau14 = new Plateau();
-        $plateau->setNom("14 cases");
-        $plateau->setDescription("Un jolie plato tiens tiens tiens");
-        $plateau->setNiveauDifficulte("Facile");
+        $plateau14->setNom("14 cases");
+        $plateau14->setDescription("Un jolie plato tiens tiens tiens");
+        $plateau14->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau14);
 
         $plateau15 = new Plateau();
-        $plateau->setNom("15 cases");
-        $plateau->setDescription("Un jolie plato tiens tiens tiens");
-        $plateau->setNiveauDifficulte("Facile");
+        $plateau15->setNom("15 cases");
+        $plateau15->setDescription("Un jolie plato tiens tiens tiens");
+        $plateau15->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau15);
 
         $plateau16 = new Plateau();
-        $plateau->setNom("16 cases");
-        $plateau->setDescription("Un jolie plato tiens tiens tiens");
-        $plateau->setNiveauDifficulte("Facile");
+        $plateau16->setNom("16 cases");
+        $plateau16->setDescription("Un jolie plato tiens tiens tiens");
+        $plateau16->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau16);
 
         $plateau17 = new Plateau();
-        $plateau->setNom("17 cases");
-        $plateau->setDescription("Un jolie plato tiens tiens tiens");
-        $plateau->setNiveauDifficulte("Facile");
+        $plateau17->setNom("17 cases");
+        $plateau17->setDescription("Un jolie plato tiens tiens tiens");
+        $plateau17->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau17);
 
         $plateau18 = new Plateau();
-        $plateau->setNom("18 cases");
-        $plateau->setDescription("Un jolie plato tiens tiens tiens");
-        $plateau->setNiveauDifficulte("Facile");
+        $plateau18->setNom("18 cases");
+        $plateau18->setDescription("Un jolie plato tiens tiens tiens");
+        $plateau18->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau18);
 
