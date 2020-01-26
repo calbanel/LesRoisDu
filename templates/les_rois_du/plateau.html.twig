@@ -2,191 +2,209 @@
 
 {% block body %}
 
-	
 
 	{% set nbCases = 0 %}
 	{% for uneCase in plateau.cases %}
 		{% set nbCases = nbCases + 1 %}
 	{% endfor %}
 
-	
+
 	<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-1">
-
+		<div class="col-md-2">
+			<ul class="nav flex-column nav-tabs">
+				{% for plat in plateaux %}
+				<li class="nav-item">
+					<a class="nav-link active" href="{{ path('plateau', {'idPlateau' : plat.id}) }}">{{plat.nom}}</a>
+				</li>
+				{% endfor %}
+			</ul>
 		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-4">
-			<h1><center>{{plateau.nom}}</center></h1>
-			<BR>
-			<BR>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<a role="button" href="{{ path('parametres_plateau', {'idPlateau' : plateau.id}) }}" class="btn btn-success">
-				Paramètres
-			</a>
-		</div>
-		<div class="col-md-1">
-			 
-			
-		</div>
-	</div>
-
-	{% if nbCases == 12 %}
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
+		<div class="col-md-10">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+				<h1><center>{{plateau.nom}}</center></h1>
+				<BR>
+				<BR>
+				</div>
+				<div class="col-md-4">
+					<a role="button" href="{{ path('parametres_plateau', {'idPlateau' : plateau.id}) }}" class="btn btn-success">
+						Paramètres
+					</a>
+				</div>
+			</div>
+			{% if nbCases == 12 %}
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-2">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-1 bg-case">
+					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+					<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+				</div>
+				<div class="col-md-2">
+				</div>
+			</div>
+			{% endif %}
+			{% if nbCases == 18 %}
+				<div class="row">
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+					<div class="col-md-2">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+					<div class="col-md-3">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+					<div class="col-md-2">
+					</div>
+				</div>
+			</div>
+			{% endif %}
 		</div>
 	</div>
 </div>
 
-{% endif %}
+
 
 {% if nbCases == 13 %}
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -198,29 +216,29 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -287,27 +305,27 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -319,29 +337,29 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -408,27 +426,27 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -440,29 +458,29 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -529,27 +547,27 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -561,29 +579,29 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
 		</div>
 		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -650,126 +668,9 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-			<img alt="Bootstrap Image Preview" src="https://nsa40.casimages.com/img/2020/01/25/200125020123380127.png" height=157 width=157/>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-	</div>
-</div>
-
-{% endif %}
-
-{% if nbCases == 18 %}
-	<div class="container-fluid">
-	<div class="row">
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
@@ -777,91 +678,112 @@
 		<div class="col-md-1 bg-case">
 			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
-		<div class="col-md-1">
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
-		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
-		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
-		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
 		<div class="col-md-1">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-1">
 		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1 bg-case">
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
 		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
-		<div class="col-md-1 bg-case">
-			<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-			<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-1">
+		</div>
 		<div class="col-md-1">
 		</div>
 	</div>
 </div>
 
 {% endif %}
+
 
 {% endblock %}

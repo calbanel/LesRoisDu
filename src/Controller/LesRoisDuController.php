@@ -98,7 +98,8 @@ class LesRoisDuController extends AbstractController
     {
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
         $plateau = $repositoryPlateau->find($idPlateau);
-        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau]);
+        $plateaux = $repositoryPlateau->findAll();
+        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'plateaux'=>$plateaux]);
     }
 
     /**

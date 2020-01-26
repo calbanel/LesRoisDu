@@ -19,6 +19,6 @@
 background: url("/img/test.svg")  no-repeat; 
 background-size: 200px 200px;
 background-size: cover;
-background-color: rgba(0,0,255,.1);
+background-color: rgba(0,0,0,.1);
 }
 
