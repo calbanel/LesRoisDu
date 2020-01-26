@@ -3,34 +3,82 @@
 {% block body %}
 
 
-	<div class="container-fluid">
+<div class="container-fluid">
 	<div class="row">
+		<div class="col-md-12">
+			<h2 class="text-center">
+				Paramètres {{plateau.nom}}
+			</h2>
+			<BR>
+			<BR>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-4">
+			<dl>
+				<dt>
+					Nom du plateau
+				</dt>
+				<dd>
+					{{plateau.nom}}
+				</dd>
+				<dt>
+					Niveau de difficulté
+				</dt>
+				<dd>
+					{{plateau.niveauDifficulte}}
+				</dd>
+				<dt>
+					Nombre de cases
+				</dt>
+				<dd>
+					{% set nbCases = 0 %}
+					{% for uneCase in plateau.cases %}
+						{% set nbCases = nbCases + 1 %}
+					{% endfor %}
+					{{nbCases}}
+				</dd>
+			</dl>
+		</div>
+		<div class="col-md-4">
+			<dl>
+				<dt>
+					Description du plateau
+				</dt>
+				<dd>
+					{{plateau.description}}
+				</dd>
+			</dl>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-6">
+			<BR>
+			<blockquote class="blockquote">
+				<p class="mb-0">
+					Dans cette version les paramètres ne peuvent pas être modifiés.
+				</p>
+				<footer class="blockquote-footer">
+					L'équipe <cite>LesRoisDu</cite>
+				</footer>
+			</blockquote>
+		</div>
 		<div class="col-md-1">
+			<a href="{{ path('plateau', {'idPlateau' : plateau.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour</a>
 
 		</div>
 		<div class="col-md-1">
+			<button type="button" class="btn btn-success btn-block" disabled>Valider</button>
 		</div>
-		<div class="col-md-1">
+		<div class="col-md-2">
 		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-4">
-			<h1><center>Paramètres {{plateau.nom}}</center></h1>
-			<BR>
-			<BR>
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-1">
-			<a role="button" href="{{ path('parametres_plateau', {'idPlateau' : plateau.id}) }}" class="btn btn-success">
-				Paramètres
-			</a>
-		</div>
-		<div class="col-md-1">
-			 
-			
-		</div>
+	</div>
+</div>
 
 {% endblock %}
