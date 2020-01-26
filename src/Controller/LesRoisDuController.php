@@ -112,6 +112,16 @@ class LesRoisDuController extends AbstractController
         return $this->render('les_rois_du/parametresplateau.html.twig',['plateau'=>$plateau]);
     }
 
+    /**
+     * @Route("/plateaux/{idPlateau}/case{idCase}{numCase}", name="consultation_case")
+     */
+    public function affichageCase($idCase,$numCase)
+    {
+        $repositoryCases=$this->getDoctrine()->getRepository(Cases::class);
+        $cases = $repositoryCases->find($idCase);
+        return $this->render('les_rois_du/consultationcase.html.twig',['case'=>$cases, 'numCase'=>$numCase]);
+    }
+
 
 
 }
