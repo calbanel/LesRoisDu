@@ -9,7 +9,9 @@
 
         {% block stylesheets %}
 
+        	<link rel="stylesheet" href="{{asset('/css/style-plateau.css')}}"" ">
         	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         	
         {% endblock %}
 
@@ -23,8 +25,26 @@
 				</h1>
 			</div>
         {% endblock %}
+
         {% block menu %}
-        
+		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2BBBAD;">
+		  <a class="navbar-brand" href="#">LRD</a>
+		  <div class="collapse navbar-collapse">
+		    <ul class="navbar-nav">
+		      <li class="nav-item">
+		        <a class="nav-link" href="{{ path('hub') }}">Hub</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="{{ path('espace_partie') }}"">Parties</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="{{ path('espace_plateau') }}"">Plateaux</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+		<BR>
+		<BR>
         {% endblock %}
 
         {% block body %}
@@ -52,4 +72,3 @@
 
     </body>
 
-</html>

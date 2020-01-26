@@ -1,2 +1,28 @@
 {% extends 'monTemplate.html.twig' %}
 
+
+{% block body %}
+<div id="wrapper">
+
+				<!-- Intro -->
+                <section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+                                <form method="post" action="#">
+                                        <div class="fields">
+                                            <div class="field half">
+                                                <label for="name">Name</label>
+                                                <input type="text" name="name" id="name" />
+                                            </div>
+                                            <div class="field half">
+                                                <label for="password">Password</label>
+                                                <input type="password" name="password" id="password" />
+                                            </div>
+                                        </div>
+                                        <ul class="actions">
+                                            <li><a href="{{path ('hub')}}" class="button scrolly">SE CONNECTER</a></li>
+                                        </ul>
+                                    </form>
+						</div>
+					</section>
+
+{% endblock %}
