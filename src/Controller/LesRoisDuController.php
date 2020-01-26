@@ -113,7 +113,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/plateaux/{idPlateau}/case{idCase}{numCase}", name="consultation_case")
+     * @Route("/plateaux/{idPlateau}/case{idCase}_{numCase}", name="consultation_case")
      */
     public function affichageCase($idCase,$numCase)
     {
