@@ -7,14 +7,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		
 		{% block stylesheets %}
-		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="{{asset('/css/main.css')}}" />
 		<noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
 		{% endblock %}
 
 	</head>
 
+<body class="is-preload">
 	{% block sidebar %}
-	<body class="is-preload">
 			<!-- Sidebar -->
 				<section id="sidebar">
 					<div class="inner">
@@ -65,13 +65,13 @@
 
 			 {% block javascripts %}
 		<!-- Scripts -->
-			<script src="js/jquery.min.js"></script>
-			<script src="js/jquery.scrollex.min.js"></script>
-			<script src="js/jquery.scrolly.min.js"></script>
-			<script src="js/browser.min.js"></script>
-			<script src="js/breakpoints.min.js"></script>
-			<script src="js/util.js"></script>
-			<script src="js/main.js"></script>
+			<script src="{{asset('js/jquery.min.js')}}"></script>
+			<script src="{{asset('js/jquery.scrollex.min.js')}}"></script>
+			<script src="{{asset('/js/jquery.scrolly.min.js')}}"></script>
+			<script src="{{asset('/js/browser.min.js')}}"></script>
+			<script src="{{asset('/js/breakpoints.min.js')}}"></script>
+			<script src="{{asset('/js/util.js')}}"></script>
+			<script src="{{asset('/js/main.js')}}"></script>
 
 			{% endblock %}
 
