@@ -9,18 +9,15 @@
 
         {% block stylesheets %}
 
-        	<link rel="stylesheet" href="{{asset('/css/style-plateau.css')}}">
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
-			crossorigin="anonymous">
+        	<link rel="stylesheet" href="{{asset('/css/style-plateau.css')}}"" ">
+        	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         	
         {% endblock %}
 
     </head>
 
-	<body style="background: #b2dfdb;">
-		
+    <body style="background: #b2dfdb;">
         {% block slider %}
         <div class="page-header">
 				<h1>
@@ -38,10 +35,10 @@
 		        <a class="nav-link" href="{{ path('hub') }}">Hub</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="{{ path('espace_partie') }}">Parties</a>
+		        <a class="nav-link" href="{{ path('espace_partie') }}"">Parties</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="{{ path('espace_plateau') }}">Plateaux</a>
+		        <a class="nav-link" href="{{ path('espace_plateau') }}"">Plateaux</a>
 		      </li>
 		    </ul>
 		  </div>
@@ -74,4 +71,4 @@
         {% endblock %}
 
     </body>
-</html>
+
