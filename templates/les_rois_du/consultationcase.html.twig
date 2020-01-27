@@ -7,7 +7,11 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h2 class="text-center" style="color: #D5D0CF">
+				{% if case.plateauEnJeu is null %}
 				Case n°{{numCase}} de {{case.plateau.nom}}
+				{% else %}
+				Case n°{{numCase}} de {{case.plateauEnJeu.nom}}
+				{% endif %}
 			</h2>
 			<BR>
 			<BR>
@@ -72,7 +76,11 @@
 		</div>
 		<div class="col-md-2">
 			<BR>
-			<a href="{{ path('plateau', {'idPlateau' : case.plateau.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour au plateau</a>
+			{% if case.plateauEnJeu is null %}
+				<a href="{{ path('plateau', {'idPlateau' : case.plateau.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour au plateau</a>
+				{% else %}
+				<a href="{{ path('partie_en_cours', {'idPartie' : case.plateauEnJeu.partie.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour à la partie</a>
+				{% endif %}
 
 		</div>
 		<div class="col-md-2">

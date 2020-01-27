@@ -1,59 +1,882 @@
-{% extends 'monTemplate.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% set nbCases = 0 %}
+    {% for uneCase in partie.plateauDeJeu.cases %}
+        {% set nbCases = nbCases + 1 %}
+    {% endfor %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <h3 style="color:#D5D0CF"><center>Liste des parties</center></h3>
+            <ul class="nav flex-column nav-tabs">
+                {% for part in parties %}
+                <li class="nav-item">
+                    <a class="nav-link active" style="background-color: #D5D0CF;" href="{{ path('partie_en_cours', {'idPartie' : part.id}) }}">{{part.nom}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                <h1 style="color:#D5D0CF"><center>{{partie.nom}}</center></h1>
+                <BR>
+                <BR>
+                </div>
+                <div class="col-md-4">
+                    <a role="button" href="{{ path('parametres_partie', {'idPartie' : partie.id}) }}" class="btn btn-light">
+                        Paramètres
+                    </a>
+                <BR>
+                <BR>
+                </div>
+            </div>
+            {% if nbCases == 12 %}
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[0].id, 'numCase' : 1}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[5].id, 'numCase' : 6}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[6].id, 'numCase' : 7}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[7].id, 'numCase' : 8}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[8].id, 'numCase' : 9}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                    
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[9].id, 'numCase' : 10}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[1].id, 'numCase' : 2}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[2].id, 'numCase' : 3}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[3].id, 'numCase' : 4}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[4].id, 'numCase' : 5}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[10].id, 'numCase' : 11}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-1 bg-case">
+                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                    
+                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[11].id, 'numCase' : 12}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            {% endif %}
+
+            {% if nbCases == 13 %}
+            <div class="row"> 
+                <div class="col-md-2">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[2].id, 'numCase' : 3}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[3].id, 'numCase' : 4}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[4].id, 'numCase' : 5}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-3">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[10].id, 'numCase' : 11}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[11].id, 'numCase' : 12}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[12].id, 'numCase' : 13}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[0].id, 'numCase' : 1}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[1].id, 'numCase' : 2}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-1">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[5].id, 'numCase' : 6}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[6].id, 'numCase' : 7}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[7].id, 'numCase' : 8}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[8].id, 'numCase' : 9}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[9].id, 'numCase' : 10}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-3">
+                </div>
+            </div>      
+            {% endif %}
+
+            {% if nbCases == 14 %}
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[0].id, 'numCase' : 1}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-1">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[4].id, 'numCase' : 5}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[5].id, 'numCase' : 6}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[6].id, 'numCase' : 7}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-2">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[11].id, 'numCase' : 12}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[12].id, 'numCase' : 13}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[13].id, 'numCase' : 14}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[1].id, 'numCase' : 2}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[2].id, 'numCase' : 3}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[3].id, 'numCase' : 4}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-1">
+                </div>
+                    
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[7].id, 'numCase' : 8}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[8].id, 'numCase' : 9}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[9].id, 'numCase' : 10}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[10].id, 'numCase' : 11}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            {% endif %}
+
+            {% if nbCases == 15 %}
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[0].id, 'numCase' : 1}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-2">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[7].id, 'numCase' : 8}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[8].id, 'numCase' : 9}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[9].id, 'numCase' : 10}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[13].id, 'numCase' : 14}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                            
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[14].id, 'numCase' : 15}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-2">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[1].id, 'numCase' : 2}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[2].id, 'numCase' : 3}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[6].id, 'numCase' : 7}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[10].id, 'numCase' : 11}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[11].id, 'numCase' : 12}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[12].id, 'numCase' : 13}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[3].id, 'numCase' : 4}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>                      
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[4].id, 'numCase' : 5}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[5].id, 'numCase' : 6}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-7">
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if nbCases == 16 %}
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[0].id, 'numCase' : 1}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[1].id, 'numCase' : 2}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[2].id, 'numCase' : 3}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[3].id, 'numCase' : 4}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[9].id, 'numCase' : 10}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[10].id, 'numCase' : 11}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                            
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[11].id, 'numCase' : 12}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[4].id, 'numCase' : 5}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[8].id, 'numCase' : 9}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                            
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[12].id, 'numCase' : 13}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[5].id, 'numCase' : 6}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[6].id, 'numCase' : 7}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[7].id, 'numCase' : 8}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[13].id, 'numCase' : 14}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[14].id, 'numCase' : 15}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                            
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[15].id, 'numCase' : 16}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if nbCases == 17 %}
+            <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[3].id, 'numCase' : 4}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[4].id, 'numCase' : 5}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[5].id, 'numCase' : 6}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[11].id, 'numCase' : 12}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[12].id, 'numCase' : 13}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                            
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[13].id, 'numCase' : 14}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[2].id, 'numCase' : 3}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[6].id, 'numCase' : 7}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[10].id, 'numCase' : 11}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[14].id, 'numCase' : 15}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[15].id, 'numCase' : 16}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                            
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[16].id, 'numCase' : 17}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[0].id, 'numCase' : 1}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[1].id, 'numCase' : 2}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-1">
+                    </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[7].id, 'numCase' : 8}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[8].id, 'numCase' : 9}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                                <div class="col-md-1 bg-case">
+                                    <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                                            
+                                                        <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[9].id, 'numCase' : 10}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                                </div>
+                    <div class="col-md-5">
+                    </div>
+                </div>
+            {% endif %}
 
 
+            {% if nbCases == 18 %}
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[0].id, 'numCase' : 1}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[6].id, 'numCase' : 7}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[7].id, 'numCase' : 8}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[8].id, 'numCase' : 9}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[9].id, 'numCase' : 10}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[16].id, 'numCase' : 17}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[17].id, 'numCase' : 18}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[1].id, 'numCase' : 2}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[5].id, 'numCase' : 6}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[10].id, 'numCase' : 11}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[11].id, 'numCase' : 12}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[15].id, 'numCase' : 16}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[2].id, 'numCase' : 3}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[3].id, 'numCase' : 4}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[4].id, 'numCase' : 5}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[12].id, 'numCase' : 13}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        
+                    </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[13].id, 'numCase' : 14}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        </div>
+                    <div class="col-md-1 bg-case">
+                        <img alt="Case du partie.plateauDeJeu" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+                        
+                                            <a href="{{ path('consultation_case', {'idCase' : partie.plateauDeJeu.cases[14].id, 'numCase' : 15}) }}">
+                        <img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+                    </a>        </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-2">
+            <h3 style="color:#D5D0CF"><center>Utilisateurs</center></h3>
+            <ul class="list-group">
 
-{% block sidebar %}
-<body class="is-preload">
-		<!-- Sidebar -->
-			<section id="sidebar">
-				<div class="inner">
-					<nav>
-						<ul>
-                            
-							<li><a href="#partie">Partie</a></li>
-							<li><a href="#plateaux">Plateaux</a></li>
-							<li><a href="#compte">Compte</a></li>
-						</ul>
-					</nav>
-				</div>
-			</section>
+              <li class="list-group-item list-group-item-light" style="background-color:    #D5D0CF; color: #EE3030">{{partie.createur.pseudo}}</li>
+             {% for joueur in partie.joueurs %}
+              <li class="list-group-item list-group-item-light" style="background-color:    #D5D0CF;">{{joueur.pseudo}}</li>
+             {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
-    
-{%block body%}
-<div id="wrapper">
-        <!-- Intro -->
-            <section id="partie" class="wrapper style1 fullscreen fade-up">
-                <div class="inner">
-                    <h1>PARTIE</h1>
-                    <p>C'est ici pour lancer une partie</p>
-                    <ul class="actions">
-                        <li><a href="{{ path('espace_partie') }}" class="button scrolly">LANCER UNE PARTIE</a></li>
-                    </ul>
-                </div>
-            </section>
-            
-        <!-- Intro -->
-        <section id="plateaux" class="wrapper style1 fullscreen fade-up">
-                <div class="inner">
-                    <h1>Plateaux</h1>
-                    <p>C'est ici pour aller dans les plateaux</p>
-                    <ul class="actions">
-                        <li><a href="{{ path('espace_plateau') }}" class="button scrolly">ALLER DANS LES PLATAEUX</a></li>
-                    </ul>
-                </div>
-            </section>
-            
-        <!-- Intro -->
-        <section id="compte" class="wrapper style1 fullscreen fade-up">
-                <div class="inner">
-                    <h1>Compte utilisateur</h1>
-                    <p>C'est ici pour aller dans son compte</p>
-                    <ul class="actions">
-                        <li><a href="{{ path('espace_compte') }}" class="button scrolly">MON COMPTE</a></li>
-                    </ul>
-                </div>
-            </section>
 
-</div>
-{%endblock%}

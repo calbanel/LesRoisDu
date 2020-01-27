@@ -12,6 +12,7 @@
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
+			<h3 style="color:#D5D0CF"><center>Liste des plateaux</center></h3>
 			<ul class="nav flex-column nav-tabs">
 				{% for plat in plateaux %}
 				<li class="nav-item">
@@ -34,6 +35,8 @@
 						Paramètres
 					</a>
 				</div>
+				 <BR>
+                <BR>
 			</div>
 
 			{% if nbCases == 12 %}
@@ -43,7 +46,7 @@
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 
-  											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
+  											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
@@ -51,32 +54,32 @@
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 					
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
@@ -88,25 +91,25 @@
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
@@ -114,14 +117,14 @@
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
 				<div class="col-md-1 bg-case">
 					<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 					
-										<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
+										<a href="{{ path('consultation_case', {'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 				</div>
@@ -136,19 +139,19 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -156,20 +159,20 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -181,13 +184,13 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -195,32 +198,32 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -235,7 +238,7 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -243,19 +246,19 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -263,20 +266,20 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -288,19 +291,19 @@
 				</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -309,26 +312,26 @@
 					
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -343,7 +346,7 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -351,19 +354,19 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -371,14 +374,14 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 															
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -391,21 +394,13 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
-  						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
-					</a>		
-					</div>
-					<div class="col-md-1">
-					</div>
-					<div class="col-md-1 bg-case">
-						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -413,20 +408,28 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+  						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
+					</a>		
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-1 bg-case">
+						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -438,20 +441,20 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>						
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -466,25 +469,25 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -492,20 +495,20 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 															
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -517,7 +520,7 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -525,7 +528,7 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -534,7 +537,7 @@
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 															
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -546,19 +549,19 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -566,20 +569,20 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 															
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[15].id, 'numCase' : 16}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[15].id, 'numCase' : 16}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -594,19 +597,19 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -614,20 +617,20 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 															
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -639,7 +642,7 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -647,7 +650,7 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -655,7 +658,7 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -663,20 +666,20 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[15].id, 'numCase' : 16}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[15].id, 'numCase' : 16}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 															
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[16].id, 'numCase' : 17}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[16].id, 'numCase' : 17}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -688,13 +691,13 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -702,20 +705,20 @@
 					</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
 								<div class="col-md-1 bg-case">
 									<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 															
-														<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
+														<a href="{{ path('consultation_case', {'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 								</div>
@@ -731,7 +734,7 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[0].id, 'numCase' : 1}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>
 					</div>
@@ -739,25 +742,25 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[6].id, 'numCase' : 7}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[7].id, 'numCase' : 8}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[8].id, 'numCase' : 9}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[9].id, 'numCase' : 10}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -765,14 +768,14 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[16].id, 'numCase' : 17}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[16].id, 'numCase' : 17}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[17].id, 'numCase' : 18}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[17].id, 'numCase' : 18}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -784,7 +787,7 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[1].id, 'numCase' : 2}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -792,7 +795,7 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[5].id, 'numCase' : 6}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -800,13 +803,13 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[10].id, 'numCase' : 11}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[11].id, 'numCase' : 12}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
@@ -815,7 +818,7 @@
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[15].id, 'numCase' : 16}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[15].id, 'numCase' : 16}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		</div>
 					<div class="col-md-2">
@@ -826,36 +829,36 @@
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[2].id, 'numCase' : 3}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[3].id, 'numCase' : 4}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[4].id, 'numCase' : 5}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		</div>
 					<div class="col-md-3">
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[12].id, 'numCase' : 13}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		
 					</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[13].id, 'numCase' : 14}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		</div>
 					<div class="col-md-1 bg-case">
 						<img alt="Case du plateau" src="https://nsa40.casimages.com/img/2020/01/26/200126052425362646.png" class="image-case img-fluid"/>
 						
-											<a href="{{ path('consultation_case', {'idPlateau' : plateau.id, 'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
+											<a href="{{ path('consultation_case', {'idCase' : plateau.cases[14].id, 'numCase' : 15}) }}">
   						<img alt="Info case" src="https://image.flaticon.com/icons/png/512/61/61093.png" class="info-case img-fluid"/>
 					</a>		</div>
 					<div class="col-md-2">

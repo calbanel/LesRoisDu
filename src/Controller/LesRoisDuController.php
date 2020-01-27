@@ -5,8 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Plateau;
+use App\Entity\PlateauEnJeu;
+use App\Entity\Pion;
 use App\Entity\Cases;
 use App\Entity\Ressource;
+use App\Entity\Utilisateur;
+use App\Entity\Partie;
 
 class LesRoisDuController extends AbstractController
 {
@@ -80,7 +84,10 @@ class LesRoisDuController extends AbstractController
      */
     public function affichagePartieEnCours($idPartie)
     {
-        return $this->render('les_rois_du/partieencours.html.twig');
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $partie = $repositoryPartie->find($idPartie);
+        $parties = $repositoryPartie->findAll();
+        return $this->render('les_rois_du/partieencours.html.twig',['partie'=>$partie, 'parties'=>$parties]);
     }
 
     /**
@@ -113,7 +120,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/plateaux/{idPlateau}/case{idCase}_{numCase}", name="consultation_case")
+     * @Route("/case{idCase}_{numCase}", name="consultation_case")
      */
     public function affichageCase($idCase,$numCase)
     {
