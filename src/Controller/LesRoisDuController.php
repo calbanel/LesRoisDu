@@ -95,7 +95,9 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageParametresPartie($idPartie)
     {
-        return $this->render('les_rois_du/parametrespartie.html.twig');
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $partie = $repositoryPartie->find($idPartie);
+        return $this->render('les_rois_du/parametrespartie.html.twig',['partie'=>$partie]);
     }
 
     /**
