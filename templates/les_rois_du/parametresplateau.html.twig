@@ -6,7 +6,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center">
+			<h2 class="text-center" style="color: #D5D0CF">
 				Paramètres {{plateau.nom}}
 			</h2>
 			<BR>
@@ -18,22 +18,22 @@
 		</div>
 		<div class="col-md-4">
 			<dl>
-				<dt>
+				<dt style="color: #D5D0CF">
 					Nom du plateau
 				</dt>
-				<dd>
+				<dd style="color: #D5D0CF">
 					{{plateau.nom}}
 				</dd>
-				<dt>
+				<dt style="color: #D5D0CF">
 					Niveau de difficulté
 				</dt>
-				<dd>
+				<dd style="color: #D5D0CF">
 					{{plateau.niveauDifficulte}}
 				</dd>
-				<dt>
+				<dt style="color: #D5D0CF">
 					Nombre de cases
 				</dt>
-				<dd>
+				<dd style="color: #D5D0CF">
 					{% set nbCases = 0 %}
 					{% for uneCase in plateau.cases %}
 						{% set nbCases = nbCases + 1 %}
@@ -44,10 +44,10 @@
 		</div>
 		<div class="col-md-4">
 			<dl>
-				<dt>
+				<dt style="color: #D5D0CF">
 					Description du plateau
 				</dt>
-				<dd>
+				<dd style="color: #D5D0CF">
 					{{plateau.description}}
 				</dd>
 			</dl>
@@ -60,11 +60,11 @@
 		</div>
 		<div class="col-md-6">
 			<BR>
-			<blockquote class="blockquote">
+			<blockquote class="blockquote" style="color: #D5D0CF">
 				<p class="mb-0">
 					Dans cette version les paramètres ne peuvent pas être modifiés.
 				</p>
-				<footer class="blockquote-footer">
+				<footer class="blockquote-footer" style="color: #D5D0CF">
 					L'équipe <cite>LesRoisDu</cite>
 				</footer>
 			</blockquote>

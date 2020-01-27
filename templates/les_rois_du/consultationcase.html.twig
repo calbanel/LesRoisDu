@@ -6,7 +6,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center">
+			<h2 class="text-center" style="color: #D5D0CF">
 				Case n°{{numCase}} de {{case.plateau.nom}}
 			</h2>
 			<BR>
@@ -18,23 +18,23 @@
 		</div>
 		<div class="col-md-4">
 			<dl>
-				<dt>
+				<dt style="color: #D5D0CF">
 					Descriptif du défi
 				</dt>
-				<dd>
+				<dd style="color: #D5D0CF">
 					{{case.descriptifDefi}}
 				</dd>				
-				<dt>
+				<dt style="color: #D5D0CF">
 					Consignes
 				</dt>
-				<dd>
+				<dd style="color: #D5D0CF">
 					{{case.consignes}}
 				</dd>
 
-				<dt>
+				<dt style="color: #D5D0CF">
 					Code de validation activé ?
 				</dt>
-				<dd>
+				<dd style="color: #D5D0CF">
 					{% if case.codeValidation is null %}
 					Non
 					{% else %}
@@ -45,10 +45,10 @@
 		</div>
 		<div class="col-md-4">
 			<ul class="list-group">
-			  <li class="list-group-item">Ressources</li>
+			  <li class="list-group-item" style="background-color: 	#D5D0CF;">Ressources</li>
 
 			 {% for ress in case.ressources %}
-			  <li class="list-group-item list-group-item-light">{{ress.chemin}}</li>
+			  <li class="list-group-item list-group-item-light" style="background-color: 	#D5D0CF;">{{ress.chemin}}</li>
 			 {% endfor %}
 
 			</ul>
@@ -62,10 +62,10 @@
 		<div class="col-md-6">
 			<BR>
 			<blockquote class="blockquote">
-				<p class="mb-0">
+				<p class="mb-0" style="color: #D5D0CF">
 					Dans cette version les cases ne peuvent pas être modifiés.
 				</p>
-				<footer class="blockquote-footer">
+				<footer class="blockquote-footer" style="color: #D5D0CF">
 					L'équipe <cite>LesRoisDu</cite>
 				</footer>
 			</blockquote>
