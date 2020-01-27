@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
 
         $plateau15 = new Plateau();
         $plateau15->setNom("15 cases");
-        $plateau15->setDescription($faker->realText($maxNbChars = 400, $indexSize = 2));
+        $plateau15->setDescription("Lazone en personne");
         $plateau15->setNiveauDifficulte("Facile");
 
         $manager->persist($plateau15);
@@ -111,8 +111,6 @@ class AppFixtures extends Fixture
         $utilisateur1->addPlateau($plateau16);
         $utilisateur1->addPlateauEnJeux($plateauEnJeu);
 
-        $manager->persist($utilisateur1);
-        $manager->persist($utilisateur2);
         $manager->persist($partie);
 
         $pion1 = new Pion();
@@ -152,6 +150,79 @@ class AppFixtures extends Fixture
         $plateauEnJeu->addPion($pion3);
         $plateauEnJeu->addPion($pion4);
 
+
+
+
+
+
+
+
+        $plateauEnJeu2 = new PlateauEnJeu();
+        $plateauEnJeu2->setNom("15 cases");
+        $plateauEnJeu2->setDescription("Lazone en personne");
+        $plateauEnJeu2->setNiveauDifficulte("Facile");
+
+        $partie2 = new Partie();
+        $partie2->setPlateau($plateau15);
+        $partie2->setPlateauDeJeu($plateauEnJeu2);
+        $partie2->setCreateur($utilisateur2);
+        $partie2->addJoueur($utilisateur1);
+        $partie2->setNom("Partie D'Emma'");
+        $partie2->setDescription("Rah oe !");
+        $partie2->setCode("EDCBA");
+
+        $utilisateur2->addPartiesCree($partie2);
+        $utilisateur1->addPartiesRejoin($partie2);
+
+        $plateauEnJeu2->setJoueur($utilisateur1);
+
+        $plateauEnJeu2->setPartie($partie2);
+
+
+        $utilisateur2->addPlateau($plateau15);
+        $utilisateur2->addPlateauEnJeux($plateauEnJeu2);
+
+        $manager->persist($utilisateur2);
+        $manager->persist($utilisateur1);
+        $manager->persist($partie2);
+
+        $pion5 = new Pion();
+        $pion5->setNom("clem");
+        $pion5->setCouleur("12578");
+        $pion5->setAvancementPlateau(2);
+        $pion5->setPlateauEnJeu($plateauEnJeu2);
+
+        $manager->persist($pion5);
+
+        $pion6 = new Pion();
+        $pion6->setNom("emma");
+        $pion6->setCouleur("12878");
+        $pion6->setAvancementPlateau(5);
+        $pion6->setPlateauEnJeu($plateauEnJeu2);
+
+        $manager->persist($pion6);
+
+        $pion7 = new Pion();
+        $pion7->setNom("bastos");
+        $pion7->setCouleur("12678");
+        $pion7->setAvancementPlateau(4);
+        $pion7->setPlateauEnJeu($plateauEnJeu2);
+
+        $manager->persist($pion7);
+
+        $pion8 = new Pion();
+        $pion8->setNom("chris");
+        $pion8->setCouleur("12278");
+        $pion8->setAvancementPlateau(7);
+        $pion8->setPlateauEnJeu($plateauEnJeu2);
+
+        $manager->persist($pion8);
+
+        $plateauEnJeu2->addPion($pion5);
+        $plateauEnJeu2->addPion($pion6);
+        $plateauEnJeu2->addPion($pion7);
+        $plateauEnJeu2->addPion($pion8);
+
        	$tabCases = array();
         for ($i=0; $i < 12; $i++) {
             $cases = new Cases();
@@ -177,6 +248,7 @@ class AppFixtures extends Fixture
             $manager->persist($cases);
         }
 
+        
         for ($i=0; $i < 14; $i++) {
             $cases = new Cases();
             $cases->setDescriptifDefi($faker->realText($maxNbChars = 100, $indexSize = 2))
@@ -188,18 +260,35 @@ class AppFixtures extends Fixture
             array_push($tabCases, $cases);
             $manager->persist($cases);
         }
-
+        $cases15 = array();
         for ($i=0; $i < 15; $i++) {
             $cases = new Cases();
             $cases->setDescriptifDefi($faker->realText($maxNbChars = 100, $indexSize = 2))
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
-                ->setPlateau($plateau15)
             ;
+
+            array_push($cases15, $cases);
+            $cases->setPlateau($plateau15);
             
             array_push($tabCases, $cases);
             $manager->persist($cases);
         }
+
+        for ($i=0; $i < 15; $i++) {
+        	$cases = new Cases();
+            $cases->setDescriptifDefi($cases15[$i]->getDescriptifDefi())
+                ->setConsignes($cases15[$i]->getConsignes())
+                ->setCodeValidation($cases15[$i]->getCodeValidation())
+            ;
+            $cases->setPlateauEnJeu($plateauEnJeu2);
+            $plateauEnJeu2->addCase($cases);
+
+            array_push($tabCases, $cases);
+            $manager->persist($cases);
+
+        }
+        $manager->persist($plateauEnJeu2);
 
         $cases16 = array();
         for ($i=0; $i < 16; $i++) {
