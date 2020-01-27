@@ -5,8 +5,12 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Plateau;
+use App\Entity\PlateauEnJeu;
+use App\Entity\Pion;
 use App\Entity\Cases;
 use App\Entity\Ressource;
+use App\Entity\Utilisateur;
+use App\Entity\Partie;
 use Faker;
 
 class AppFixtures extends Fixture
@@ -45,7 +49,7 @@ class AppFixtures extends Fixture
 
         $plateau16 = new Plateau();
         $plateau16->setNom("16 cases");
-        $plateau16->setDescription($faker->realText($maxNbChars = 400, $indexSize = 2));
+        $plateau16->setDescription("Et merci bien");
         $plateau16->setNiveauDifficulte("Moyen");
 
         $manager->persist($plateau16);
@@ -63,6 +67,90 @@ class AppFixtures extends Fixture
         $plateau18->setNiveauDifficulte("Moyen");
 
         $manager->persist($plateau18);
+
+        $utilisateur1 = new Utilisateur();
+        $utilisateur1->setPseudo("calbanel");
+        $utilisateur1->setMotDePasse("mcb");
+        $utilisateur1->setAdresseMail("clement.albanel@gmail.com");
+        $utilisateur1->setNom("Albanel");
+        $utilisateur1->setPrenom("Clement");
+        $utilisateur1->setEstInvite(false);
+        $utilisateur1->setAvatar($faker->imageUrl($width = 200,$height = 200,'cats'));
+
+        $utilisateur2 = new Utilisateur();
+        $utilisateur2->setPseudo("eauzi");
+        $utilisateur2->setMotDePasse("souce");
+        $utilisateur2->setAdresseMail("emma.auzi@gmail.com");
+        $utilisateur2->setNom("Auzi");
+        $utilisateur2->setPrenom("Emma");
+        $utilisateur2->setEstInvite(false);
+        $utilisateur2->setAvatar($faker->imageUrl($width = 200,$height = 200,'cats'));
+
+        $plateauEnJeu = new PlateauEnJeu();
+        $plateauEnJeu->setNom("16 cases");
+        $plateauEnJeu->setDescription("Et merci bien");
+        $plateauEnJeu->setNiveauDifficulte("Moyen");
+
+        $partie = new Partie();
+        $partie->setPlateau($plateau16);
+        $partie->setPlateauDeJeu($plateauEnJeu);
+        $partie->setCreateur($utilisateur1);
+        $partie->addJoueur($utilisateur2);
+        $partie->setNom("Partie De Clém");
+        $partie->setDescription("Partie carrément incroyable !");
+        $partie->setCode("ABCDE");
+
+        $utilisateur1->addPartiesCree($partie);
+        $utilisateur2->addPartiesRejoin($partie);
+
+        $plateauEnJeu->setJoueur($utilisateur2);
+
+        $plateauEnJeu->setPartie($partie);
+
+
+        $utilisateur1->addPlateau($plateau16);
+        $utilisateur1->addPlateauEnJeux($plateauEnJeu);
+
+        $manager->persist($utilisateur1);
+        $manager->persist($utilisateur2);
+        $manager->persist($partie);
+
+        $pion1 = new Pion();
+        $pion1->setNom("clem");
+        $pion1->setCouleur("12578");
+        $pion1->setAvancementPlateau(2);
+        $pion1->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pion1);
+
+        $pion2 = new Pion();
+        $pion2->setNom("emma");
+        $pion2->setCouleur("12878");
+        $pion2->setAvancementPlateau(5);
+        $pion2->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pion2);
+
+        $pion3 = new Pion();
+        $pion3->setNom("bastos");
+        $pion3->setCouleur("12678");
+        $pion3->setAvancementPlateau(4);
+        $pion3->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pion3);
+
+        $pion4 = new Pion();
+        $pion4->setNom("chris");
+        $pion4->setCouleur("12278");
+        $pion4->setAvancementPlateau(7);
+        $pion4->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pion4);
+
+        $plateauEnJeu->addPion($pion1);
+        $plateauEnJeu->addPion($pion2);
+        $plateauEnJeu->addPion($pion3);
+        $plateauEnJeu->addPion($pion4);
 
        	$tabCases = array();
         for ($i=0; $i < 12; $i++) {
@@ -113,17 +201,35 @@ class AppFixtures extends Fixture
             $manager->persist($cases);
         }
 
+        $cases16 = array();
         for ($i=0; $i < 16; $i++) {
             $cases = new Cases();
             $cases->setDescriptifDefi($faker->realText($maxNbChars = 100, $indexSize = 2))
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
-                ->setPlateau($plateau16)
             ;
+
+            array_push($cases16, $cases);
+            $cases->setPlateau($plateau16);
             
             array_push($tabCases, $cases);
             $manager->persist($cases);
         }
+
+        for ($i=0; $i < 16; $i++) {
+        	$cases = new Cases();
+            $cases->setDescriptifDefi($cases16[$i]->getDescriptifDefi())
+                ->setConsignes($cases16[$i]->getConsignes())
+                ->setCodeValidation($cases16[$i]->getCodeValidation())
+            ;
+            $cases->setPlateauEnJeu($plateauEnJeu);
+            $plateauEnJeu->addCase($cases);
+
+            array_push($tabCases, $cases);
+            $manager->persist($cases);
+
+        }
+        $manager->persist($plateauEnJeu);
 
         for ($i=0; $i < 17; $i++) {
             $cases = new Cases();
@@ -149,7 +255,7 @@ class AppFixtures extends Fixture
             $manager->persist($cases);
         }
 
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 200; $i++) {
 
             $ressource = new Ressource();
 
