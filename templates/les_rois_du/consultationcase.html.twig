@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h2 class="text-center">
-				Paramètres {{plateau.nom}}
+				Case n°{{numCase}} de {{case.plateau.nom}}
 			</h2>
 			<BR>
 			<BR>
@@ -19,38 +19,39 @@
 		<div class="col-md-4">
 			<dl>
 				<dt>
-					Nom du plateau
+					Descriptif du défi
 				</dt>
 				<dd>
-					{{plateau.nom}}
-				</dd>
+					{{case.descriptifDefi}}
+				</dd>				
 				<dt>
-					Niveau de difficulté
+					Consignes
 				</dt>
 				<dd>
-					{{plateau.niveauDifficulte}}
+					{{case.consignes}}
 				</dd>
+
 				<dt>
-					Nombre de cases
+					Code de validation activé ?
 				</dt>
 				<dd>
-					{% set nbCases = 0 %}
-					{% for uneCase in plateau.cases %}
-						{% set nbCases = nbCases + 1 %}
-					{% endfor %}
-					{{nbCases}}
+					{% if case.codeValidation is null %}
+					Non
+					{% else %}
+					Oui
+					{% endif %}
 				</dd>
 			</dl>
 		</div>
 		<div class="col-md-4">
-			<dl>
-				<dt>
-					Description du plateau
-				</dt>
-				<dd>
-					{{plateau.description}}
-				</dd>
-			</dl>
+			<ul class="list-group">
+			  <li class="list-group-item">Ressources</li>
+
+			 {% for ress in case.ressources %}
+			  <li class="list-group-item list-group-item-light">{{ress.chemin}}</li>
+			 {% endfor %}
+
+			</ul>
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -62,19 +63,17 @@
 			<BR>
 			<blockquote class="blockquote">
 				<p class="mb-0">
-					Dans cette version les paramètres ne peuvent pas être modifiés.
+					Dans cette version les cases ne peuvent pas être modifiés.
 				</p>
 				<footer class="blockquote-footer">
 					L'équipe <cite>LesRoisDu</cite>
 				</footer>
 			</blockquote>
 		</div>
-		<div class="col-md-1">
-			<a href="{{ path('plateau', {'idPlateau' : plateau.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour</a>
+		<div class="col-md-2">
+			<BR>
+			<a href="{{ path('plateau', {'idPlateau' : case.plateau.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour au plateau</a>
 
-		</div>
-		<div class="col-md-1">
-			<button type="button" class="btn btn-success btn-block" disabled>Valider</button>
 		</div>
 		<div class="col-md-2">
 		</div>

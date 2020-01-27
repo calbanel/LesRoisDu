@@ -98,7 +98,8 @@ class LesRoisDuController extends AbstractController
     {
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
         $plateau = $repositoryPlateau->find($idPlateau);
-        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau]);
+        $plateaux = $repositoryPlateau->findAll();
+        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'plateaux'=>$plateaux]);
     }
 
     /**
@@ -109,6 +110,16 @@ class LesRoisDuController extends AbstractController
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
         $plateau = $repositoryPlateau->find($idPlateau);
         return $this->render('les_rois_du/parametresplateau.html.twig',['plateau'=>$plateau]);
+    }
+
+    /**
+     * @Route("/plateaux/{idPlateau}/case{idCase}_{numCase}", name="consultation_case")
+     */
+    public function affichageCase($idCase,$numCase)
+    {
+        $repositoryCases=$this->getDoctrine()->getRepository(Cases::class);
+        $cases = $repositoryCases->find($idCase);
+        return $this->render('les_rois_du/consultationcase.html.twig',['case'=>$cases, 'numCase'=>$numCase]);
     }
 
 
