@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{% block title %}LesRoisDu{% endblock %}</title>
-
+		
 		<meta charset="utf-8" />
+		<title>{% block title %}LesRoisDu{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		
 		{% block stylesheets %}
-		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="{{asset('/css/main.css')}}" />
 		<noscript><link rel="stylesheet" href="css/noscript.css" /></noscript>
 		{% endblock %}
 
 	</head>
 
+<body class="is-preload">
+
 	{% block sidebar %}
-	<body class="is-preload">
 			<!-- Sidebar -->
 				<section id="sidebar">
 					<div class="inner">
