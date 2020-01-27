@@ -68,7 +68,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/parties/creation", name="creation_partie")
+     * @Route("/partiescreation", name="creation_partie")
      */
     public function affichageCreationPartie()
     {
