@@ -51,7 +51,10 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageEspacePartie()
     {
-        return $this->render('les_rois_du/espacepartie.html.twig');
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $parties = $repositoryPartie->findAll();
+        
+        return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
     }
 
     /**
@@ -68,7 +71,10 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageEspacePlateau()
     {
-        return $this->render('les_rois_du/espaceplateau.html.twig');
+        $repositoryPlateaux=$this->getDoctrine()->getRepository(Plateau::class);
+        $plateaux = $repositoryPlateaux->findAll();
+        
+        return $this->render('les_rois_du/espaceplateau.html.twig', ['plateaux'=>$plateaux]);
     }
 
     /**

@@ -27,22 +27,23 @@
                             <section id="one" class="wrapper style2 spotlights">
                                     
 
-                                    <!-- Boucle pour chaque partie (à rajouter) -->
-                                    
+                                    <!-- Boucle pour chaque partie  -->
+                                    {% for partie in parties %}
                                     <section>
                                             <a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="center center" /></a>
                                             <div class="content">
                                                 <div class="inner">
-                                                    <h2>Nom de la partie</h2>
-                                                    <p>Description de la partie</p>
+                                                    <h2> {{ partie.nom }}</h2>
+                                                    <p>{{ partie.description }} </p>
                                                     <ul class="actions">
-                                                        <li><a href="generic.html" class="button">Consulter</a></li>
+                                                        <li><a href="{{path ('partie_en_cours', {'idPartie': partie.id}) }}" class="button">Consulter</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </section>
     
                                         <!-- Fin boucle -->
+                                        {% endfor %}
     
                             </div>
                         </section>
