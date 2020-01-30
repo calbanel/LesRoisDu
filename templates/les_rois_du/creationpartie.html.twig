@@ -1,19 +1,6 @@
 {% extends 'monTemplate.html.twig' %}
 
-{% block sidebar %}
-<body class="is-preload">
-        <!-- Sidebar -->
-            <section id="sidebar">
-                <div class="inner">
-                    <nav>
-                        <ul>
-                            <li><a href="{{path ('hub')}}">MENU</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </section>
 
-{% endblock %}
 {% block body %}
 		<!-- Wrapper -->
 <div id="wrapper">
@@ -35,28 +22,31 @@
                                         
                                         <div class="fields">                                           
                                             <div class="field half">
-                                                Nom de la partie : <input type="text" name="nomPartie" id="nomPartie" value="Ma premiere partie" />
+                                           
+                                            <label>Nom de la partie</label>    
+                                            <input type="text" name="nomPartie" id="nomPartie" value="Ma premiere partie" />
                                             </div>									
                                         </div>
-                                        
 
-                                        <div class="fields">  
-                                            <div class="field half">
-                                                Nombre de plateaux : <input type="range" list="tickmarks">
-                                            </div>
+                                        
+                                        <label>   Nombre de plateaux :</label>
+                                        <div class="slidecontainer">
+                                        <input type="range" min="1" max="4" value="0" class="slider" id="myRange" >
+                                        <p>Valeur: <span id="demo"></span></p>
                                         </div>
 
-                                        <div class="fields">  
-                                                <div class="field half">
-                                                 Nombre pions par plateau : <input type="range" value="1" max="4" min="1" step="1">
-                                                </div>
-                                            </div>
+                                        <label>   Nombre de pions par plateau :</label>
+                                        <div class="slidecontainer">
+                                        <input type="range" min="1" max="4" value="0" class="slider" id="myEgnar" >
+                                        <p>Valeur: <span id="omed"></span></p>
+                                        </div>
 
-                                            <div class="fields">  
-                                                    <div class="field half">
-                                                     Nombre de faces sur le dé : <input type="range" value="1" max="4" min="1" step="1">
-                                                    </div>
-                                                </div>    
+                                        <label>   Nombre de faces sur le dé :</label>
+                                        <div class="slidecontainer">
+                                        <input type="range" min="1" max="4" value="0" class="slider" id="monRanch" >
+                                        <p>Valeur: <span id="aled"></span></p>
+                                        </div>
+
                                         
 										
 									</form>
@@ -84,5 +74,32 @@
                 </div>
             </section>
             
-</div>       
+</div>   
+
+<script>
+        var slider1 = document.getElementById("myRange");
+        var output1 = document.getElementById("demo");
+        output1.innerHTML = slider1.value;
+        
+        slider1.oninput = function() {
+          output1.innerHTML = this.value;
+        }
+
+        var slider2 = document.getElementById("myEgnar");
+        var output2 = document.getElementById("omed");
+        output2.innerHTML = slider2.value;
+        
+        slider2.oninput = function() {
+          output2.innerHTML = this.value;
+        }
+
+        var slider3 = document.getElementById("monRanch");
+        var output3 = document.getElementById("aled");
+        output3.innerHTML = slider3.value;
+        
+        slider3.oninput = function() {
+          output3.innerHTML = this.value;
+        }
+</script>
 {% endblock %}
+
