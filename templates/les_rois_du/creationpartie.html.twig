@@ -22,14 +22,67 @@
         <!-- Intro -->
         <section id="partie" class="wrapper style1 fullscreen fade-up">
                 <div class="inner">
-                    <h1>CREATION DE PARTIE</h1>
-                    <p>C'est ici pour creer une partie</p>
-                    <ul class="actions">
-                        <li><a href="#" class="button scrolly">JOUER PARTIE</a></li>
-                    </ul>
+                    <h1>CREER UNE PARTIE</h1>
+                  
+
+                    <section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+                            
+                          
+						
+								<section>
+									<form method="post" action="#">
+                                        
+                                        <div class="fields">                                           
+                                            <div class="field half">
+                                                Nom de la partie : <input type="text" name="nomPartie" id="nomPartie" value="Ma premiere partie" />
+                                            </div>									
+                                        </div>
+                                        
+
+                                        <div class="fields">  
+                                            <div class="field half">
+                                                Nombre de plateaux : <input type="range" list="tickmarks">
+                                            </div>
+                                        </div>
+
+                                        <div class="fields">  
+                                                <div class="field half">
+                                                 Nombre pions par plateau : <input type="range" value="1" max="4" min="1" step="1">
+                                                </div>
+                                            </div>
+
+                                            <div class="fields">  
+                                                    <div class="field half">
+                                                     Nombre de faces sur le dé : <input type="range" value="1" max="4" min="1" step="1">
+                                                    </div>
+                                                </div>    
+                                        
+										
+									</form>
+                                
+                                </section>
+								<section>
+									<div class="field">
+                                        <label for="description">Description</label>
+                                        <textarea name="description" id="description" rows="8"></textarea>
+                                    </div>
+                                </section>
+                                
+
+                            </div>
+                            
+                            <ul class="actions">
+                                    <li><a href="#" class="button submit">Valider</a></li>
+                                    <li><a href="{{path ('creation_partie') }}" class="button submit">Annuler </a></li>
+                            </ul>
+
+						</div>
+					</section>
+
+
                 </div>
             </section>
             
-     
 </div>       
 {% endblock %}
