@@ -7,7 +7,7 @@
                 <div class="inner">
                     <nav>
                         <ul>
-                            <li><a href="{{path ('hub')}}">HUB</a></li>
+                            <li><a href="{{path ('hub')}}">MENU</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -30,13 +30,14 @@
                                     <!-- Boucle pour chaque partie  -->
                                     {% for partie in parties %}
                                     <section>
-                                            <a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="center center" /></a>
+                                            <a href="#" class="image"><img src="img/LesRoisDuBad.png" alt="" data-position="center center" /></a>
                                             <div class="content">
                                                 <div class="inner">
                                                     <h2> {{ partie.nom }}</h2>
                                                     <p>{{ partie.description }} </p>
                                                     <ul class="actions">
                                                         <li><a href="{{path ('partie_en_cours', {'idPartie': partie.id}) }}" class="button">Consulter</a></li>
+                                                        <li><a href="{{path ('espace_partie') }}" class="button">Supprimer</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
