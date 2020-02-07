@@ -14,6 +14,8 @@ use App\Entity\Partie;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LesRoisDuController extends AbstractController
 {
@@ -91,13 +93,20 @@ class LesRoisDuController extends AbstractController
 
        // Création de l'objet formulaire
        $formulairePartie=$this->createFormBuilder($partie)
-       ->add('Nom')
+       ->add('Nom',TextType::class)
        ->add('Description',TextareaType::class)
+       ->add('nbPlateaux',null,['data' => '1', 'disabled' => 'true'])
+       ->add('nbPionParPlateau',null,['data' => '1', 'disabled' => 'true'])
+       ->add('nbFacesDe',null,['data' => '4', 'disabled' => 'true'])
+       ->add('PlateauDeJeu', EntityType::class, ['class' => Plateau::class,
+                                                'choice_label' => 'nom',
+                                                'multiple' => false,
+                                                'expanded' => false])
        ->getForm();
 
        $formulairePartie->handleRequest($request);
 
-       if ($formulairePartie->isSubmitted())
+       if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
        {        
           // Enregistrer la ressource en base de données
           $manager->persist($partie);

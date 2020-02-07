@@ -18,17 +18,21 @@
           {{form_start(vueFormulaireCreationPartie)}}
           {{ form_row(vueFormulaireCreationPartie.Nom)}}
           {{ form_row(vueFormulaireCreationPartie.Description)}}
+          {{ form_row(vueFormulaireCreationPartie.nbPlateaux, { 'label' : 'Nombre de plateau' })}}
+          {{ form_row(vueFormulaireCreationPartie.nbPionParPlateau, { 'label' : 'Nombre de pions par plateau' })}}
+          {{ form_row(vueFormulaireCreationPartie.nbFacesDe, { 'label' : 'Nombre de faces sur le dé' })}}
+          {{ form_row(vueFormulaireCreationPartie.PlateauDeJeu, { 'label' : 'Plateau sélectionné' })}}
 
         </div>
 
         <ul class="actions">
-          <li><a href="{{path ('espace_plateau') }}" class="button submit">Valider</a></li>
+          <li><a href="{{path ('espace_partie') }}" class="button submit">Valider</a></li>
           <li><a href="{{path ('creation_partie') }}" class="button submit">Annuler </a></li>
         </ul>
 
-        </div>
-
     {{form_end(vueFormulaireCreationPartie)}}
+
+    </div>
 
   </section>
 
