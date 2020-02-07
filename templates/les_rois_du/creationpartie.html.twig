@@ -2,104 +2,66 @@
 
 
 {% block body %}
-		<!-- Wrapper -->
+<!-- Wrapper -->
 <div id="wrapper">
 
-				
-        <!-- Intro -->
-        <section id="partie" class="wrapper style1 fullscreen fade-up">
-                <div class="inner">
-                    <h1>CREER UNE PARTIE</h1>
-                  
 
-                    <section id="three" class="wrapper style1 fade-up">
-						<div class="inner">
-                            
-                          
-						
-								<section>
-									<form method="post" action="#">
-                                        
-                                        <div class="fields">                                           
-                                            <div class="field half">
-                                           
-                                            <label>Nom de la partie</label>    
-                                            <input type="text" name="nomPartie" id="nomPartie" value="Ma premiere partie" />
-                                            </div>									
-                                        </div>
-
-                                        
-                                        <label>   Nombre de plateaux :</label>
-                                        <div class="slidecontainer">
-                                        <input type="range" min="1" max="4" value="0" class="slider" id="myRange" >
-                                        <p>Valeur: <span id="demo"></span></p>
-                                        </div>
-
-                                        <label>   Nombre de pions par plateau :</label>
-                                        <div class="slidecontainer">
-                                        <input type="range" min="1" max="4" value="0" class="slider" id="myEgnar" >
-                                        <p>Valeur: <span id="omed"></span></p>
-                                        </div>
-
-                                        <label>   Nombre de faces sur le dé :</label>
-                                        <div class="slidecontainer">
-                                        <input type="range" min="1" max="4" value="0" class="slider" id="monRanch" >
-                                        <p>Valeur: <span id="aled"></span></p>
-                                        </div>
-
-                                        
-										
-									</form>
-                                
-                                </section>
-								<section>
-									<div class="field">
-                                        <label for="description">Description</label>
-                                        <textarea name="description" id="description" rows="8"></textarea>
-                                    </div>
-                                </section>
-                                
-
-                            </div>
-                            
-                            <ul class="actions">
-                                    <li><a href="{{path ('espace_plateau') }}" class="button submit">Valider</a></li>
-                                    <li><a href="{{path ('creation_partie') }}" class="button submit">Annuler </a></li>
-                            </ul>
-
-						</div>
-					</section>
+  <!-- Intro -->
+  <section id="partie" class="wrapper style1 fullscreen fade-up">
+    <div class="inner">
+      <h1>CREER UNE PARTIE</h1>
 
 
-                </div>
-            </section>
-            
-</div>   
+      <section id="three" class="wrapper style1 fade-up">
+        <div class="inner">
+
+          {{form_start(vueFormulaireCreationPartie)}}
+          {{ form_row(vueFormulaireCreationPartie.Nom)}}
+          {{ form_row(vueFormulaireCreationPartie.Description)}}
+
+        </div>
+
+        <ul class="actions">
+          <li><a href="{{path ('espace_plateau') }}" class="button submit">Valider</a></li>
+          <li><a href="{{path ('creation_partie') }}" class="button submit">Annuler </a></li>
+        </ul>
+
+        </div>
+
+    {{form_end(vueFormulaireCreationPartie)}}
+
+  </section>
+
+
+</div>
+</section>
+
+</div>
 
 <script>
-        var slider1 = document.getElementById("myRange");
-        var output1 = document.getElementById("demo");
-        output1.innerHTML = slider1.value;
-        
-        slider1.oninput = function() {
-          output1.innerHTML = this.value;
-        }
+  var slider1 = document.getElementById("myRange");
+  var output1 = document.getElementById("demo");
+  output1.innerHTML = slider1.value;
 
-        var slider2 = document.getElementById("myEgnar");
-        var output2 = document.getElementById("omed");
-        output2.innerHTML = slider2.value;
-        
-        slider2.oninput = function() {
-          output2.innerHTML = this.value;
-        }
+  slider1.oninput = function () {
+    output1.innerHTML = this.value;
+  }
 
-        var slider3 = document.getElementById("monRanch");
-        var output3 = document.getElementById("aled");
-        output3.innerHTML = slider3.value;
-        
-        slider3.oninput = function() {
-          output3.innerHTML = this.value;
-        }
+  var slider2 = document.getElementById("myEgnar");
+  var output2 = document.getElementById("omed");
+  output2.innerHTML = slider2.value;
+
+  slider2.oninput = function () {
+    output2.innerHTML = this.value;
+  }
+
+  var slider3 = document.getElementById("monRanch");
+  var output3 = document.getElementById("aled");
+  output3.innerHTML = slider3.value;
+
+  slider3.oninput = function () {
+    output3.innerHTML = this.value;
+  }
 </script>
 {% endblock %}
 

@@ -11,6 +11,9 @@ use App\Entity\Cases;
 use App\Entity\Ressource;
 use App\Entity\Utilisateur;
 use App\Entity\Partie;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class LesRoisDuController extends AbstractController
 {
@@ -80,9 +83,31 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties/creation", name="creation_partie")
      */
-    public function affichageCreationPartie()
+    public function affichageCreationPartie(Request $request, ObjectManager $manager)
     {
-        return $this->render('les_rois_du/creationpartie.html.twig');
+       
+       // Création d'une entrprise vierge
+       $partie=new Partie();
+
+       // Création de l'objet formulaire
+       $formulairePartie=$this->createFormBuilder($partie)
+       ->add('Nom')
+       ->add('Description',TextareaType::class)
+       ->getForm();
+
+       $formulairePartie->handleRequest($request);
+
+       if ($formulairePartie->isSubmitted())
+       {        
+          // Enregistrer la ressource en base de données
+          $manager->persist($partie);
+          $manager->flush();
+
+          // Rediriger l'utilisateur vers la page d'accueil
+          return $this->redirectToRoute('espace_partie');
+       }
+        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(),
+        ]);
     }
 
     /**
