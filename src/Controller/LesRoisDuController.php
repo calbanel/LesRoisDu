@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LesRoisDuController extends AbstractController
@@ -95,10 +96,10 @@ class LesRoisDuController extends AbstractController
        $formulairePartie=$this->createFormBuilder($partie)
        ->add('Nom',TextType::class)
        ->add('Description',TextareaType::class)
-       ->add('nbPlateaux',null,['data' => '1', 'disabled' => 'true'])
-       ->add('nbPionParPlateau',null,['data' => '1', 'disabled' => 'true'])
-       ->add('nbFacesDe',null,['data' => '4', 'disabled' => 'true'])
-       ->add('PlateauDeJeu', EntityType::class, ['class' => Plateau::class,
+       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'disabled' => 'true'])
+       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'disabled' => 'true'])
+       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'disabled' => 'true'])
+       ->add('plateau', EntityType::class, ['class' => Plateau::class,
                                                 'choice_label' => 'nom',
                                                 'multiple' => false,
                                                 'expanded' => false])
@@ -108,12 +109,15 @@ class LesRoisDuController extends AbstractController
 
        if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
        {        
+          $partie->setPateauDeJeu($partie->plateau);
+              
           // Enregistrer la ressource en base de données
           $manager->persist($partie);
           $manager->flush();
 
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_partie');
+          echo "ca marche";
        }
         return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(),
         ]);

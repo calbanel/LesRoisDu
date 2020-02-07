@@ -21,7 +21,7 @@
           {{ form_row(vueFormulaireCreationPartie.nbPlateaux, { 'label' : 'Nombre de plateau' })}}
           {{ form_row(vueFormulaireCreationPartie.nbPionParPlateau, { 'label' : 'Nombre de pions par plateau' })}}
           {{ form_row(vueFormulaireCreationPartie.nbFacesDe, { 'label' : 'Nombre de faces sur le dé' })}}
-          {{ form_row(vueFormulaireCreationPartie.PlateauDeJeu, { 'label' : 'Plateau sélectionné' })}}
+          {{ form_row(vueFormulaireCreationPartie.plateau, { 'label' : 'Plateau sélectionné' })}}
 
         </div>
 
@@ -30,7 +30,7 @@
           <li><a href="{{path ('creation_partie') }}" class="button submit">Annuler </a></li>
         </ul>
 
-    {{form_end(vueFormulaireCreationPartie)}}
+        {{form_end(vueFormulaireCreationPartie)}}
 
     </div>
 
