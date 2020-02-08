@@ -60,7 +60,7 @@ class LesRoisDuController extends AbstractController
                                                   'required'=>true,
                                                   'first_options'=>['label'=>'Mot de passe'],
                                                   'second_options' => ['label' => 'Confirmez votre mot de passe']])
-            ->add('Avatar',UrlType::class)        
+        ->add('Avatar',UrlType::class)        
         ->getForm();
 
         $formulaireUtilisateur->handleRequest($request);
