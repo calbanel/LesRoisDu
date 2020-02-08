@@ -16,6 +16,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LesRoisDuController extends AbstractController
@@ -39,9 +43,45 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/inscription", name="page_inscription")
      */
-    public function affichagePageInscription()
+    public function affichagePageInscription(Request $request, ObjectManager $manager)
     {
-        return $this->render('les_rois_du/inscription.html.twig');
+        // Création d'une entrprise vierge
+        $utilisateur=new Utilisateur();
+
+        // Création de l'objet formulaire
+        $formulaireUtilisateur=$this->createFormBuilder($utilisateur)
+        ->add('Nom',TextType::class)
+        ->add('Prenom',TextType::class)
+        ->add('AdresseMail',EmailType::class)
+        ->add('Pseudo',TextType::class)
+        ->add('MotDePasse', RepeatedType::class, ['type'=>PasswordType::class,
+                                                  'invalid_message'=> 'Les mots de passe doivent correspondre',
+                                                  'options'=> ['attr' => ['class' => 'password-field']],
+                                                  'required'=>true,
+                                                  'first_options'=>['label'=>'Mot de passe'],
+                                                  'second_options' => ['label' => 'Confirmez votre mot de passe']])
+            ->add('Avatar',UrlType::class)        
+        ->getForm();
+
+        $formulaireUtilisateur->handleRequest($request);
+
+        if ($formulaireUtilisateur->isSubmitted() && $formulaireUtilisateur->isValid())
+        {        
+           // l'utilisateur cree un compte il n'est donc pas invité
+            $utilisateur->setEstInvite(false);
+           
+            // Enregistrer la ressource en base de données
+           $manager->persist($utilisateur);
+           $manager->flush();
+
+           // Rediriger l'utilisateur vers la page d'accueil
+           return $this->redirectToRoute('hub');
+        }
+        
+        
+        
+        
+        return $this->render('les_rois_du/inscription.html.twig',['vueFormulaireInscription' => $formulaireUtilisateur->createView()]);
     }
 
     /**
