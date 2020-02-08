@@ -108,8 +108,36 @@ class LesRoisDuController extends AbstractController
        $formulairePartie->handleRequest($request);
 
        if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
-       {        
-          $partie->setPateauDeJeu($partie->plateau);
+       {     
+            $plateau = $partie->getPlateau();  
+
+            $plateauEnJeu= new PlateauEnJeu();
+            $tabCases = $plateau->getCases();
+
+          foreach($tabCases as $uneCase)
+          {
+            $cases= new Cases();
+            $cases->setDescriptifDefi($uneCase->getDescriptifDefi());
+            $cases->setConsignes($uneCase->getConsignes());
+            $cases->setCodeValidation($uneCase->getCodeValidation());
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource)
+            {
+                $ressource = new Ressource();
+                $ressource->setChemin($uneRessource->getChemin());
+                //$ressource->setCases($cases);
+                $cases->addRessource($ressource);
+            }
+           //$cases->setPlateauEnJeu($plateauEnJeu);
+            $plateauEnJeu->addCases($cases);
+          }
+
+          $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
+          $plateauEnJeu->setNom($plateau->getNom());
+          $plateauEnJeu->setDescription($plateau->getDescription());
+          $plateauEnJeu->setPartie($partie);
+          $partie->setPlateauDeJeu($plateauEnJeu);
+
               
           // Enregistrer la ressource en base de données
           $manager->persist($partie);
