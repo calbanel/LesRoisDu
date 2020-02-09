@@ -104,6 +104,16 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
+     * @Route("/TESTparties", name="TESTespace_partie")
+     */
+    public function affichageTESTEspacePartie()
+    {
+        
+        
+        return $this->render('les_rois_du/TESTespacepartie.html.twig');
+    }
+
+    /**
      * @Route("/compte", name="espace_compte")
      */
     public function affichageEspaceCompte()

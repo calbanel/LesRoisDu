@@ -1,0 +1,29 @@
+{% extends 'monTemplate.html.twig' %}
+    
+{% block plateau %}
+<link rel="stylesheet" href="{{asset('/css/tilemap/tilemap.css')}}" />
+{% endblock %}
+
+{% block sidebar %}
+<body class="is-preload">
+        <!-- Sidebar -->
+            <section id="sidebar">
+                <div class="inner">
+                    <nav>
+                        <ul>
+                            <li><a href="{{path ('hub')}}">MENU</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+{% endblock %}
+
+{% block body %}
+		
+			<div id="wrapper">
+                
+                <canvas id="canvas" >Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
+				
+			</div>
+{% endblock %}
