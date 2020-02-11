@@ -7,7 +7,7 @@ var DIRECTION = {
 
 var DUREE_ANIMATION = 4;
 var DUREE_DEPLACEMENT = 15;
-
+{
 
  
  this.x = x; // (en cases)

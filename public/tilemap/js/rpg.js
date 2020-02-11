@@ -66,7 +66,10 @@ function handleClick(e)
 	var pos = getMousePos(canvas, e);
 	posx = pos.x;
 	posy = pos.y;
+	
+	colonneCase = Math.floor(posx / 64) + 1;
+	ligneCase = Math.floor(posy / 64) + 1;
 
-	alert("posX : " + posx + "   posY : " + posy);
+	alert("ligneCase : " + ligneCase + "   colonneCase : " + colonneCase);	
 
 }
