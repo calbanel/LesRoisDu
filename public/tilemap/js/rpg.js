@@ -12,6 +12,9 @@ window.onload = function() {
 	canvas.width  = map.getLargeur();
 	canvas.height = map.getHauteur();
 	
+	canvas.onclick = function(e) {
+		handleClick(e);
+	}
 
 	setInterval(function() {
 	map.dessinerMap(ctx);
@@ -46,5 +49,24 @@ window.onload = function() {
 
 	return false;
 	}
+
+}
+
+function getMousePos(c, evt)
+{
+	var rect = c.getBoundingClientRect(); // permet de recupérer que l'espace du canvas pas autour
+	return {
+		x: evt.clientX - rect.left,
+		y: evt.clientY - rect.top
+	};
+}
+
+function handleClick(e)
+{
+	var pos = getMousePos(canvas, e);
+	posx = pos.x;
+	posy = pos.y;
+
+	alert("posX : " + posx + "   posY : " + posy);
 
 }
