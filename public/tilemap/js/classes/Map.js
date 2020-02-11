@@ -12,7 +12,7 @@ function Map(nom) {
 	
 	// Récupération des données 
 	var mapData = JSON.parse(mapJsonData);
-	var nomTileSet = 'tilesheet_shooter.png'
+	var nomTileSet = 'Octogone.png'
 	this.tileset = new Tileset(nomTileSet);
 
 	this.terrain = mapData.layers[0].data;

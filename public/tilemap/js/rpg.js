@@ -1,4 +1,4 @@
-var map = new Map("test_plusGrandeMapHorizontal");
+var map = new Map("plateauHozirontal");
 
 
 var joueur = new Personnage("hero.png", 2, 2, DIRECTION.BAS)

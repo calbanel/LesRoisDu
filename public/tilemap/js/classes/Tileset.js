@@ -7,7 +7,7 @@ function Tileset(url){
 			throw new Error("Erreur de chargement du tileset nommé \"" + url + "\".");
 		}
 		//Largeur du tileset et tile
-		this.referenceDuTileset.largeur = this.width / 32;
+		this.referenceDuTileset.largeur = this.width / 64;
 		
 	}
 	this.image.src = assetsBaseDir + 'tilesets/' + url;
@@ -18,8 +18,8 @@ Tileset.prototype.dessinerTile = function(numero, context, xDestination, yDestin
 		var xSourceEnTiles = numero % this.largeur;
 		if(xSourceEnTiles == 0) xSourceEnTiles = this.largeur;
 		var ySourceEnTiles = Math.ceil(numero / this.largeur);
-		var xSource = (xSourceEnTiles - 1) * 32;
-		var ySource = (ySourceEnTiles - 1) * 32;
-		context.drawImage(this.image, xSource, ySource, 32, 32, xDestination, yDestination, 32, 32);
+		var xSource = (xSourceEnTiles - 1) * 64;
+		var ySource = (ySourceEnTiles - 1) * 64;
+		context.drawImage(this.image, xSource, ySource, 64, 64, xDestination, yDestination, 64, 64);
 
 }
