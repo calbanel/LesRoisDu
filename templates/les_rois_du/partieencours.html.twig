@@ -7,6 +7,16 @@
 
 {% block body %}
 
+<script>
+function lancerDe()
+{
+    var faceDe=Math.random();
+    var faceObtenue=Math.ceil(faceDe*4);
+    alert("Vous avancez de "+ faceObtenue + " case(s) !");
+}
+
+</script>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
@@ -17,12 +27,13 @@
                     <a class="nav-link active" style="background-color: #D5D0CF;" href="{{ path('partie_en_cours', {'idPartie' : part.id}) }}">{{part.nom}}</a>
                 </li>
                 {% endfor %}
+
             </ul>
         </div>
+
         <div class="col-md-8">
             <div class="row">
                     <div class="col-md-2">
-
                     </div>
                 <div class="col-md-2">
                         <a role="button" href="#" class="btn btn-warning">
@@ -133,6 +144,9 @@
                 </div>
                 <div class="col-md-2">
                 </div>
+                <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
+                        Lancer le dé
+                </a>
             </div>
             {% endif %}
 
@@ -232,6 +246,9 @@
                     </div>
                 <div class="col-md-3">
                 </div>
+                <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
+                        Lancer le dé
+                </a>
             </div>      
             {% endif %}
 
@@ -340,6 +357,9 @@
                     </div>
                 <div class="col-md-3">
                 </div>
+                <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
+                        Lancer le dé
+                </a>
             </div>
             {% endif %}
 
@@ -463,6 +483,9 @@
                     </div>
                     <div class="col-md-7">
                     </div>
+                    <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
+                            Lancer le dé
+                    </a>
                 </div>
             {% endif %}
 
@@ -591,6 +614,9 @@
                                 </div>
                     <div class="col-md-1">
                     </div>
+                    <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
+                            Lancer le dé
+                    </a>
                 </div>
             {% endif %}
 
@@ -727,6 +753,9 @@
                                 </div>
                     <div class="col-md-5">
                     </div>
+                    <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
+                            Lancer le dé
+                    </a>
                 </div>
             {% endif %}
 
@@ -866,6 +895,9 @@
                     </a>        </div>
                     <div class="col-md-2">
                     </div>
+                    <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
+                            Lancer le dé
+                    </a>
                 </div>
             </div>
             {% endif %}

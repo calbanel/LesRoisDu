@@ -30,6 +30,7 @@ class Partie
 
     /**
      * @ORM\Column(type="string", length=5)
+     * @ORM\GeneratedValue()
      */
     private $code;
 
@@ -53,6 +54,21 @@ class Partie
      * @ORM\JoinColumn(nullable=false)
      */
     private $createur;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $nbPlateaux;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $nbPionParPlateau;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $nbFacesDe;
 
     public function __construct()
     {
@@ -158,6 +174,42 @@ class Partie
     public function setCreateur(?Utilisateur $createur): self
     {
         $this->createur = $createur;
+
+        return $this;
+    }
+
+    public function getNbPlateaux(): ?int
+    {
+        return $this->nbPlateaux;
+    }
+
+    public function setNbPlateaux(int $nbPlateaux): self
+    {
+        $this->nbPlateaux = $nbPlateaux;
+
+        return $this;
+    }
+
+    public function getNbPionParPlateau(): ?int
+    {
+        return $this->nbPionParPlateau;
+    }
+
+    public function setNbPionParPlateau(int $nbPionParPlateau): self
+    {
+        $this->nbPionParPlateau = $nbPionParPlateau;
+
+        return $this;
+    }
+
+    public function getNbFacesDe(): ?int
+    {
+        return $this->nbFacesDe;
+    }
+
+    public function setNbFacesDe(int $nbFacesDe): self
+    {
+        $this->nbFacesDe = $nbFacesDe;
 
         return $this;
     }
