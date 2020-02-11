@@ -14,12 +14,12 @@ function Tileset(url){
 }
 
 //Méthode de dessin du tile numéro "numero" dans le contexte 2D "context" aux doordonnées x et y 
-Tileset.prototype.dessinerTile = function(numero, context, xDestination, yDestination){
+Tileset.prototype.dessinerTile = function(numero, context, map, xDestination, yDestination){
 		var xSourceEnTiles = numero % this.largeur;
 		if(xSourceEnTiles == 0) xSourceEnTiles = this.largeur;
 		var ySourceEnTiles = Math.ceil(numero / this.largeur);
-		var xSource = (xSourceEnTiles - 1) * 64;
-		var ySource = (ySourceEnTiles - 1) * 64;
-		context.drawImage(this.image, xSource, ySource, 64, 64, xDestination, yDestination, 64, 64);
+		var xSource = (xSourceEnTiles - 1) * map.TILE_WIDTH;
+		var ySource = (ySourceEnTiles - 1) * map.TILE_HEIGHT;
+		context.drawImage(this.image, xSource, ySource, map.TILE_WIDTH, map.TILE_HEIGHT, xDestination, yDestination, map.TILE_WIDTH, map.TILE_HEIGHT);
 
 }
