@@ -13,7 +13,8 @@ window.onload = function() {
 	canvas.height = map.getHauteur();
 	
 	canvas.onclick = function(e) {
-		handleClick(e);
+		var caseClick = getPosCase(e);
+		//alert("Ligne de la case : " + caseClick.ligne + " Colonne de la case : " + caseClick.colonne);
 	}
 
 	setInterval(function() {
@@ -61,15 +62,16 @@ function getMousePos(c, evt)
 	};
 }
 
-function handleClick(e)
+function getPosCase(e)
 {
 	var pos = getMousePos(canvas, e);
-	posx = pos.x;
-	posy = pos.y;
 	
-	colonneCase = Math.floor(posx / 64) + 1;
-	ligneCase = Math.floor(posy / 64) + 1;
+	var colonneCase = Math.floor(pos.x / 64) + 1;
+	var ligneCase = Math.floor(pos.y / 64) + 1;
 
-	alert("ligneCase : " + ligneCase + "   colonneCase : " + colonneCase);	
+	return {
+		ligne: ligneCase,
+		colonne: colonneCase
+	};
 
 }
