@@ -19,25 +19,26 @@ function Map(nom) {
 	this.terrainHeight = mapData.layers[0].height;
 	this.terrainWidth = mapData.layers[0].width;
 
-	this.tileHeight = mapData.tileheight;
-	this.tileWidth = mapData.tilewidth;
+	this.TILE_HEIGHT = mapData.tileheight;
+	this.TILE_WIDTH = mapData.tilewidth;
 
-	// Liste des personnages présents sur le terrain.
-	this.personnages = new Array();
+
+	// Liste des pions présents sur le terrain.
+	this.pions = new Array();
 	
-	// Pour ajouter un personnage
-	Map.prototype.addPersonnage = function(perso) {
-		this.personnages.push(perso)
+	// Pour ajouter un pion
+	Map.prototype.addPion = function(pion) {
+		this.pions.push(pion)
 	};
 	
 	
 	// Pour récupérer la taille (en tiles) de la carte
 	Map.prototype.getLargeur = function() {
-		return this.terrainWidth * this.tileWidth;
+		return this.terrainWidth * this.TILE_WIDTH;
 	}
 	Map.prototype.getHauteur = function() {
 		
-		return (this.terrain.length / this.terrainWidth) * this.tileWidth ;	
+		return (this.terrain.length / this.terrainWidth) * this.TILE_WIDTH ;	
 	}
 
 	
@@ -51,13 +52,13 @@ function Map(nom) {
 			
 			for(var colonne = 0, nbColonne = this.terrainWidth ; colonne < nbColonne ; colonne++) {
 				var tuile = this.terrain[(ligne  * nbColonne) + colonne];
-				this.tileset.dessinerTile(tuile, context, colonne * this.tileHeight, ligne * this.tileHeight);
+				this.tileset.dessinerTile(tuile, context, map, colonne * this.TILE_HEIGHT, ligne * this.TILE_HEIGHT);
 			}
 		}
 		
-		// Dessin des personnages
-		for(var i = 0, l = this.personnages.length ; i < l ; i++) {
-			this.personnages[i].dessinerPersonnage(context);
+		// Dessin des pions
+		for(var i = 0, l = this.pions.length ; i < l ; i++) {
+			this.pions[i].dessinerPion(context, map);
 		}
 
 	}
