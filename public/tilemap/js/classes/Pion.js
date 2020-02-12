@@ -62,6 +62,13 @@ Pion.prototype.deplacerGauche = function() {
 	return true;
 }
 
+Pion.prototype.teleporterVersCase = function(x,y) {
+		
+	this.x = x;
+	this.y = y;
+		
+	return true;
+}
 
 
 
