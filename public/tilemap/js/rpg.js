@@ -18,11 +18,16 @@ window.onload = function() {
 		
 		if (caseClick.ligne == pion.y & caseClick.colonne == pion.x) {
 			
-		 	if (posParcours != 31) {
+			posParcours = posParcours + 1; 
+			
+			if (posParcours > FINPARCOURS) {
 				
-				posParcours = posParcours + 1;
+				pion.teleporterVersCase(parcoursX[FINPARCOURS],parcoursY[FINPARCOURS]);
+				
+			}
+			else
+			{
 				pion.teleporterVersCase(parcoursX[posParcours],parcoursY[posParcours]);
-				
 			}
 
 		}
@@ -39,6 +44,20 @@ window.onload = function() {
 
 	//déclaration des cases(lignes) du parcours en dur en attendant mieux
 	var parcoursY = new Array(1,1,1,1,1,1,1,1,1,1,2,3,3,3,3,3,3,3,3,3,3,4,5,5,5,5,5,5,5,5,5,5);
+
+	const FINPARCOURS = parcoursX.length - 1;
+	
+	// TEST PARCOURS AUTO
+	// var maMap = Array();
+	// for (var ligne = 1; ligne < map.terrainHeight ; ligne++) {
+		
+	// 	for (var colonne = 1 < map.terrainWidth ; colonne++) {
+			
+	// 		maMap.push()
+			
+	// 	}
+		
+	// }
 
 
 
@@ -86,8 +105,8 @@ function getPosCase(e)
 {
 	var pos = getMousePos(canvas, e);
 	
-	var colonneCase = Math.floor(pos.x / 64) + 1;
-	var ligneCase = Math.floor(pos.y / 64) + 1;
+	var colonneCase = Math.ceil(pos.x / map.TILE_WIDTH) ;
+	var ligneCase = Math.ceil(pos.y / map.TILE_HEIGHT) ;
 
 	return {
 		ligne: ligneCase,
