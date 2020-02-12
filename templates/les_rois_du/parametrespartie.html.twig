@@ -25,7 +25,31 @@
 		<div class="col-md-4">
 		</div>
 		<div class="col-md-2">
-			<button type="button" class="btn btn-danger btn-block" disabled>Supprimer la partie</button>
+			<div class="alert alert-warning" style="display: none">
+			    <!--<button type="button" class="close" id="fermer">&times;</button>-->
+			    <h4 class="alert-heading">Attention!</h4> 
+			    <p>Êtes vous sure de vouloir supprimer la partie ?</p>
+			    <!--<button type="button" class="close btn btn-danger" id="fermer">Non</button>-->
+			    <a href="{{ path('parametres_partie', {'idPartie' : partie.id}) }}" class="btn btn-danger" role="button" aria-pressed="true">Non</a>
+			    <a href="{{ path('supprimer_partie', {'idPartie' : partie.id}) }}" class="btn btn-success" role="button" aria-pressed="true">Oui</a>
+			    <!--<button type="button" class="btn btn-success">Oui</button>-->
+			    
+			  </div>
+			  <input type="button" class="btn btn-danger btn-block" value="Supprimer la partie">
+			</div>
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+			<script>  
+			  $(function (){
+			    $("input.btn").click(function() {
+			      $("input.btn").hide("slow")
+			      $(".alert").show("slow")
+			    })
+			    $(".close").click(function() {
+			      $(".alert").hide("slow")
+			      $("input.btn").show()
+			    })
+			  })
+			</script>
 			<BR>
 			<BR>
 		</div>
