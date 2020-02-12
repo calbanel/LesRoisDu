@@ -157,40 +157,116 @@ class LesRoisDuController extends AbstractController
 
        $formulairePartie->handleRequest($request);
 
-       if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
+       if ($formulairePartie->isSubmitted())
        {     
-            $plateau = $partie->getPlateau();  
+           $manager->persist($partie);
+            $plateau = $partie->getPlateau(); 
+            $plateau->addParty($partie);
+            $manager->persist($plateau);
+            
+            $utilisateur1 = new Utilisateur();
+          $utilisateur1->setPseudo("bastos");
+          $utilisateur1->setMotDePasse("mcb");
+          $utilisateur1->setAdresseMail("bastos.albanel@gmail.com");
+          $utilisateur1->setNom("Albanel");
+          $utilisateur1->setPrenom("Bastos");
+          $utilisateur1->setEstInvite(false);
+          $utilisateur1->setAvatar("https://www.google.com/url?sa=i&url=https%3A%2F%2Fgamergen.com%2Factualites%2Favatar-pandora-rising-possible-nom-jeu-ubisoft-na-vi-297799-1&psig=AOvVaw2OxTwThQuJ0fl5AtZ3FLGY&ust=1581271457638000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjOqa_FwucCFQAAAAAdAAAAABAD");
 
             $plateauEnJeu= new PlateauEnJeu();
-            $tabCases = $plateau->getCases();
+            $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
+          $plateauEnJeu->setNom($plateau->getNom());
+          $plateauEnJeu->setDescription($plateau->getDescription());
 
-          foreach($tabCases as $uneCase)
+          $partie->setPlateauDeJeu($plateauEnJeu);
+
+          $partie->setCreateur($utilisateur1);
+          $partie->addJoueur($utilisateur1);
+
+          $partie->setCode("Aghdd");
+
+          $utilisateur1->addPartiesCree($partie);
+
+          $utilisateur1->addPartiesRejoin($partie);
+
+          $plateauEnJeu->setJoueur($utilisateur1);
+
+            
+
+            $plateauEnJeu->setPartie($partie);
+
+            $utilisateur1->addPlateau($plateau);
+            $utilisateur1->addPlateauEnJeux($plateauEnJeu);
+
+            $manager->persist($utilisateur1);
+
+            $manager->persist($partie);
+
+            $pion1 = new Pion();
+          $pion1->setNom("clem");
+          $pion1->setCouleur("12578");
+          $pion1->setAvancementPlateau(2);
+          $pion1->setPlateauEnJeu($plateauEnJeu);
+  
+          $manager->persist($pion1);
+  
+          $pion2 = new Pion();
+          $pion2->setNom("emma");
+          $pion2->setCouleur("12878");
+          $pion2->setAvancementPlateau(5);
+          $pion2->setPlateauEnJeu($plateauEnJeu);
+  
+          $manager->persist($pion2);
+  
+          $pion3 = new Pion();
+          $pion3->setNom("bastos");
+          $pion3->setCouleur("12678");
+          $pion3->setAvancementPlateau(4);
+          $pion3->setPlateauEnJeu($plateauEnJeu);
+  
+          $manager->persist($pion3);
+  
+          $pion4 = new Pion();
+          $pion4->setNom("chris");
+          $pion4->setCouleur("12278");
+          $pion4->setAvancementPlateau(7);
+          $pion4->setPlateauEnJeu($plateauEnJeu);
+  
+          $manager->persist($pion4);
+  
+          $plateauEnJeu->addPion($pion1);
+          $plateauEnJeu->addPion($pion2);
+          $plateauEnJeu->addPion($pion3);
+          $plateauEnJeu->addPion($pion4);
+          
+          array_values($array)
+          foreach($plateau->getCases() as $uneCase)
           {
             $cases= new Cases();
             $cases->setDescriptifDefi($uneCase->getDescriptifDefi());
             $cases->setConsignes($uneCase->getConsignes());
             $cases->setCodeValidation($uneCase->getCodeValidation());
-            $tabRessource = $uneCase->getRessources();
-            foreach($tabRessource as $uneRessource)
+            $cases->setPlateauEnJeu($plateauEnJeu);
+            $manager->persist($cases);
+
+            foreach($uneCase->getRessources() as $uneRessource)
             {
                 $ressource = new Ressource();
                 $ressource->setChemin($uneRessource->getChemin());
-                //$ressource->setCases($cases);
+                $ressource->setCases($cases);
                 $cases->addRessource($ressource);
+                $manager->persist($cases);
+                $manager->persist($ressource);
             }
-           //$cases->setPlateauEnJeu($plateauEnJeu);
-            $plateauEnJeu->addCases($cases);
+            
+           
+            
+            
           }
-
-          $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
-          $plateauEnJeu->setNom($plateau->getNom());
-          $plateauEnJeu->setDescription($plateau->getDescription());
-          $plateauEnJeu->setPartie($partie);
-          $partie->setPlateauDeJeu($plateauEnJeu);
-
+          $manager->persist($plateauEnJeu);
               
           // Enregistrer la ressource en base de données
-          $manager->persist($partie);
+          
           $manager->flush();
 
           // Rediriger l'utilisateur vers la page d'accueil
