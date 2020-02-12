@@ -239,7 +239,7 @@ class LesRoisDuController extends AbstractController
           $plateauEnJeu->addPion($pion3);
           $plateauEnJeu->addPion($pion4);
           
-          array_values($array)
+          
           foreach($plateau->getCases() as $uneCase)
           {
             $cases= new Cases();
