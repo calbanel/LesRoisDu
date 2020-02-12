@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Plateau;
@@ -253,6 +254,33 @@ class LesRoisDuController extends AbstractController
         return $this->render('les_rois_du/consultationcase.html.twig',['case'=>$cases, 'numCase'=>$numCase]);
     }
 
+    /**
+     * @Route("/parties", name="supprimer_partie")
+     */
+    public function supprimerUnePartie($idPartie)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $repositoryPartie=$entityManager->getRepository(Partie::class);
 
+        $partieSupp = $repositoryPartie->find($idPartie);
+
+        $joueurs = $partieSupp->getJoueurs();
+
+       // $partieSupp->getPlateau()->removeParty($partieSupp);
+
+        $joueurs[0]->removePartiesRejoin($partieSupp);
+
+        $joueurs[0]->removePlateauEnJeux($partieSupp->getPlateauEnJeux());
+
+        $partieSupp->getCreateur()->removePartiesCree($partieSupp);
+
+        $entityManager->remove($partieSupp);
+
+        $entityManager->flush();
+
+        $parties = $repositoryPartie->findAll();
+        
+        return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
+    }
 
 }
