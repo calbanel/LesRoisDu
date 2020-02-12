@@ -9,16 +9,52 @@ map.addPion(pion);
 window.onload = function() {
 	var canvas = document.getElementById('canvas');
 	var ctx = canvas.getContext('2d');
-
+	
 	canvas.width  = map.getLargeur();
 	canvas.height = map.getHauteur();
+
 	
-	canvas.onclick = function(e) {
-		var caseClick = getPosCase(e);
-		
-		if (caseClick.ligne == pion.y & caseClick.colonne == pion.x) {
+	
+	//----------------------------------------------------------------------------------------------------------
+	//	DEPLACEMENT DU PION AU CLIQUE
+	//----------------------------------------------------------------------------------------------------------
+	// canvas.onclick = function(e) {
+	// 	var caseClick = getPosCase(e);
+	
+	// 	if (caseClick.ligne == pion.y & caseClick.colonne == pion.x) {
+	
+	// 		posParcours = posParcours + 1; 
+	
+	// 		if (posParcours > FINPARCOURS) {
+	
+	// 			pion.teleporterVersCase(parcoursX[FINPARCOURS],parcoursY[FINPARCOURS]);
+	
+	// 		}
+	// 		else
+	// 		{
+	// 			pion.teleporterVersCase(parcoursX[posParcours],parcoursY[posParcours]);
+	// 		}
+	
+	// 	}
+	
+	// }
+
+
+
+	//----------------------------------------------------------------------------------------------------------
+	//	AVANCER DE "VALEURDÉ" CASES, SI BOUTON "LANCER DÉ" == TRUE
+	//----------------------------------------------------------------------------------------------------------
+	var valeurDé = sessionStorage.getItem("valeurDé");
+	var clique = "false";	
+	
+	setInterval(function(){
+
+		valeurDé = sessionStorage.getItem("valeurDé");
+		clique = sessionStorage.getItem("clique");
+
+		if (clique == "true") {
 			
-			posParcours = posParcours + 1; 
+			posParcours = posParcours + parseInt(valeurDé); 
 			
 			if (posParcours > FINPARCOURS) {
 				
@@ -30,42 +66,58 @@ window.onload = function() {
 				pion.teleporterVersCase(parcoursX[posParcours],parcoursY[posParcours]);
 			}
 
+			sessionStorage.setItem("clique","false");
 		}
 
-	}
+	}, 100);
 
+		
+	
+	//----------------------------------------------------------------------------------------------------------
+	//	ACTUALISATION CONTINUE DE LA MAP
+	//----------------------------------------------------------------------------------------------------------
 	setInterval(function() {
-	map.dessinerMap(ctx);
+		map.dessinerMap(ctx);
 	}, 40);
 
+	
+	
+	//----------------------------------------------------------------------------------------------------------
+	//	DECLARATION DU PARCOURS
+	//----------------------------------------------------------------------------------------------------------
 	var posParcours = 0;	
 	//déclaration des cases(colonnes) du parcours en dur en attendant mieux
 	var parcoursX = new Array(1,2,3,4,5,6,7,8,9,10,10,10,9,8,7,6,5,4,3,2,1,1,1,2,3,4,5,6,7,8,9,10);
-
+	
 	//déclaration des cases(lignes) du parcours en dur en attendant mieux
 	var parcoursY = new Array(1,1,1,1,1,1,1,1,1,1,2,3,3,3,3,3,3,3,3,3,3,4,5,5,5,5,5,5,5,5,5,5);
-
-	const FINPARCOURS = parcoursX.length - 1;
 	
+	const FINPARCOURS = parcoursX.length - 1;
+
+
+
+	//----------------------------------------------------------------------------------------------------------
 	// TEST PARCOURS AUTO
+	//----------------------------------------------------------------------------------------------------------
 	// var maMap = Array();
 	// for (var ligne = 1; ligne < map.terrainHeight ; ligne++) {
-		
+	
 	// 	for (var colonne = 1 < map.terrainWidth ; colonne++) {
-			
+	
 	// 		maMap.push()
-			
+	
 	// 	}
-		
+	
 	// }
-
-
-
-	// // Gestion du clavier
+	
+	
+	
+	//----------------------------------------------------------------------------------------------------------
+	// DEPLACEMENT DU PION AU CLAVIER
+	//----------------------------------------------------------------------------------------------------------
 	// window.onkeydown = function(event) {
 	// 	var e = event || window.event;
-	// var key = e.which || e.keyCode;
-	
+	// var key = e.which || e.keyCode;	
 	
 	// switch(key) {
 	// case 38 : case 122 : case 119 : case 90 : case 87 : // Flèche haut, z, w, Z, W
@@ -81,16 +133,21 @@ window.onload = function() {
 	// 	pion.deplacerDroite();
 	// 	break;
 	// default : 
-	// 	//alert(key);
-	// 	// Si la touche ne nous sert pas, nous n'avons aucune raison de bloquer son comportement normal.
+	// 	alert(key);
+	//  Si la touche ne nous sert pas, nous n'avons aucune raison de bloquer son comportement normal.
 	// 	return true;
-	// }
-
-
+	// }	
+	
 	// return false;
 	// }
-
+	
 }
+
+
+
+//----------------------------------------------------------------------------------------------------------
+//	FONCTIONS :
+//----------------------------------------------------------------------------------------------------------
 
 function getMousePos(c, evt)
 {
@@ -107,10 +164,10 @@ function getPosCase(e)
 	
 	var colonneCase = Math.ceil(pos.x / map.TILE_WIDTH) ;
 	var ligneCase = Math.ceil(pos.y / map.TILE_HEIGHT) ;
-
+	
 	return {
 		ligne: ligneCase,
 		colonne: colonneCase
 	};
-
+	
 }
