@@ -24,10 +24,10 @@ function Map(nom) {
 	this.TILE_HEIGHT = mapData.tileheight;
 	this.TILE_WIDTH = mapData.tilewidth;
 
-
+	this.case = new Case('case.png', 2, 2);
 	// Liste des pions présents sur le terrain.
 	this.pions = new Array();
-	
+}	
 	// Pour ajouter un pion
 	Map.prototype.addPion = function(pion) {
 		this.pions.push(pion)
@@ -62,7 +62,17 @@ function Map(nom) {
 		for(var i = 0, l = this.pions.length ; i < l ; i++) {
 			this.pions[i].dessinerPion(context, map);
 		}
+		
+
+		this.case.dessinerCase(context, map);
+		
 
 	}
 
-}
+	Map.prototype.updateMap = function(){
+
+			if(this.case.clicked()){
+				console.log('clik');
+				this.case.x = this.case.x + 1;
+			}
+	}

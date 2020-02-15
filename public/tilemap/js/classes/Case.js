@@ -23,20 +23,23 @@ function Case(url, colonne, ligne)
 Case.prototype.dessinerCase = function(context, map) {
 	context.drawImage(
 	this.image,
-	((this.colonne - 1) * map.TILE_WIDTH) + map.TILE_WIDTH / 4,
-	((this.ligne - 1) * map.TILE_HEIGHT) + map.TILE_HEIGHT/4,
+	this.colonne + 10,
+	this.ligne + 10,
 	this.largeur,
 	this.hauteur
 	);
+
 }
 
-Case.prototype.clicked = function(mouseInfo){
+Case.prototype.clicked = function(){
+	
+	console.log(souris.x);
     var myTop = y;
     var myRgt = x + this.largeur;
     var myBot = y + this.hauteur;
     var myLft = x;
-    var clicked = true;
-    if(mouseInfo.x < myLft || mouseInfo.x > myRgt || mouseInfo.y < myTop || mouseInfo.y > myBot)
+	var clicked = true;
+    if(souris.x < myLft || souris.x > myRgt || souris.y < myTop || souris.y > myBot)
     {
         clicked = false;
     }
@@ -44,7 +47,6 @@ Case.prototype.clicked = function(mouseInfo){
     return clicked;
 
 }
-
 
 
 

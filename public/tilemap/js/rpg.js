@@ -15,74 +15,22 @@ window.onload = function() {
 	canvas.height = map.getHauteur();
 
 	canvas.addEventListener('mousedown', function(event) {
-		souris.x = event.pageX;
-		souris.y = event.pageY;
-		console.log(souris.x);
-		console.log(souris.y);
+		var rect = canvas.getBoundingClientRect();
+		souris.x = event.pageX - rect.left;
+		souris.y = event.pageY - rect.top;
 			})
 
 	canvas.addEventListener('mouseup', function(event) {
 		souris.x = false;
 		souris.y = false;
-		console.log('nie');
 			})
 
-			
-	//----------------------------------------------------------------------------------------------------------
-	//	DEPLACEMENT DU PION AU CLIQUE
-	//----------------------------------------------------------------------------------------------------------
-	// canvas.onclick = function(e) {
-	// 	var caseClick = getPosCase(e);
-	
-	// 	if (caseClick.ligne == pion.y & caseClick.colonne == pion.x) {
-	
-	// 		posParcours = posParcours + 1; 
-	
-	// 		if (posParcours > FINPARCOURS) {
-	
-	// 			pion.teleporterVersCase(parcoursX[FINPARCOURS],parcoursY[FINPARCOURS]);
-	
-	// 		}
-	// 		else
-	// 		{
-	// 			pion.teleporterVersCase(parcoursX[posParcours],parcoursY[posParcours]);
-	// 		}
-	
-	// 	}
-	
-	// }
 
 
 
 	//----------------------------------------------------------------------------------------------------------
 	//	AVANCER DE "VALEURDÉ" CASES, SI BOUTON "LANCER DÉ" == TRUE
 	//----------------------------------------------------------------------------------------------------------
-	var valeurDé = sessionStorage.getItem("valeurDé");
-	var clique = "false";	
-	
-	setInterval(function(){
-
-		valeurDé = sessionStorage.getItem("valeurDé");
-		clique = sessionStorage.getItem("clique");
-
-		if (clique == "true") {
-			
-			posParcours = posParcours + parseInt(valeurDé); 
-			
-			if (posParcours > FINPARCOURS) {
-				
-				pion.teleporterVersCase(parcoursX[FINPARCOURS],parcoursY[FINPARCOURS]);
-				
-			}
-			else
-			{
-				pion.teleporterVersCase(parcoursX[posParcours],parcoursY[posParcours]);
-			}
-
-			sessionStorage.setItem("clique","false");
-		}
-
-	}, 100);
 
 		
 	
@@ -91,6 +39,15 @@ window.onload = function() {
 	//----------------------------------------------------------------------------------------------------------
 	setInterval(function() {
 		map.dessinerMap(ctx);
+		
+		console.log(souris.x);
+		console.log(souris.y);
+		if (souris.x && souris.Y){
+			
+			console.log('clik');
+			map.updateMap();
+		}
+	
 	}, 40);
 
 	
@@ -107,21 +64,6 @@ window.onload = function() {
 	
 	const FINPARCOURS = parcoursX.length - 1;
 
-
-
-	//----------------------------------------------------------------------------------------------------------
-	// TEST PARCOURS AUTO
-	//----------------------------------------------------------------------------------------------------------
-	// var maMap = Array();
-	// for (var ligne = 1; ligne < map.terrainHeight ; ligne++) {
-	
-	// 	for (var colonne = 1 < map.terrainWidth ; colonne++) {
-	
-	// 		maMap.push()
-	
-	// 	}
-	
-	// }
 	
 }
 
@@ -130,16 +72,6 @@ window.onload = function() {
 //----------------------------------------------------------------------------------------------------------
 //	FONCTIONS :
 //----------------------------------------------------------------------------------------------------------
-
-function getMousePos(c, evt)
-{
-	var rect = c.getBoundingClientRect(); // permet de recupérer que l'espace du canvas pas autour
-	return {
-		x: evt.clientX - rect.left,
-		y: evt.clientY - rect.top
-	};
-}
-
 function getPosCase(e)
 {
 	var pos = getMousePos(canvas, e);
