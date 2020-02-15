@@ -19,7 +19,11 @@
             <link rel="stylesheet" href="{{asset('tilemap/css/style.css')}}" />
 
             <script> var assetsBaseDir = "{{ asset('tilemap/') }}"</script>
-
+            <script type="text/javascript" src="{{asset('tilemap/js/XmlHttpRequest.js')}}"></script>
+            <script type="text/javascript" src="{{asset('tilemap/js/classes/Pion.js')}}"></script>
+            <script type="text/javascript" src="{{asset('tilemap/js/classes/Case.js')}}"></script>
+            <script type="text/javascript" src="{{asset('tilemap/js/classes/Tileset.js')}}"></script>
+            <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/game.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
             {% endblock %}

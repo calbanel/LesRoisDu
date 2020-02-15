@@ -1,24 +1,32 @@
+var map = new Map("plateau30cases");
+var pion = new Pion("pionV1.png", 1, 1);
+var cases = new Case("case.png", 20, 20);
+map.addCase(cases);
+map.addPion(pion);
+const GAME_WIDTH =  map.getLargeur();;
+const GAME_HEIGHT = map.getHauteur();;
+
+
 class Game {
 
-    constructor(gameWidth, gameHeight)
+    constructor()
     {
-        this.gameWidth = gameWidth;
-        this.gameHeight = gameHeight;
+	    canvas.width  = GAME_WIDTH;
+        canvas.height = GAME_HEIGHT;
+        
+        this.gameWidth = canvas.width;
+        this.gameHeight = canvas.height;
     }
 
     start(){
-        console.log("start !");
-        
-        console.log(this.gameWidth);
-        
-        console.log(this.gameHeight);
+
     }
 
     update(deltaTime){
-
+        
     }
 
     draw(ctx){
-
+        map.draw(ctx);
     }
 }
