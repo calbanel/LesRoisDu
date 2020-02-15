@@ -1,8 +1,9 @@
 var map = new Map("plateau30cases");
 
-
-var pion = new Pion("pionV1.png", 1, 1)
+var pion = new Pion("pionV1.png", 1, 1);
 map.addPion(pion);
+var souris = new Souris();
+
 
 
 
@@ -13,8 +14,20 @@ window.onload = function() {
 	canvas.width  = map.getLargeur();
 	canvas.height = map.getHauteur();
 
-	
-	
+	canvas.addEventListener('mousedown', function(event) {
+		souris.x = event.pageX;
+		souris.y = event.pageY;
+		console.log(souris.x);
+		console.log(souris.y);
+			})
+
+	canvas.addEventListener('mouseup', function(event) {
+		souris.x = false;
+		souris.y = false;
+		console.log('nie');
+			})
+
+			
 	//----------------------------------------------------------------------------------------------------------
 	//	DEPLACEMENT DU PION AU CLIQUE
 	//----------------------------------------------------------------------------------------------------------
@@ -108,37 +121,6 @@ window.onload = function() {
 	
 	// 	}
 	
-	// }
-	
-	
-	
-	//----------------------------------------------------------------------------------------------------------
-	// DEPLACEMENT DU PION AU CLAVIER
-	//----------------------------------------------------------------------------------------------------------
-	// window.onkeydown = function(event) {
-	// 	var e = event || window.event;
-	// var key = e.which || e.keyCode;	
-	
-	// switch(key) {
-	// case 38 : case 122 : case 119 : case 90 : case 87 : // Flèche haut, z, w, Z, W
-	// 	pion.deplacerHaut();
-	// 	break;
-	// case 40 : case 115 : case 83 : // Flèche bas, s, S
-	// 	pion.deplacerBas();
-	// 	break;
-	// case 37 : case 113 : case 97 : case 81 : case 65 : // Flèche gauche, q, a, Q, A
-	// 	pion.deplacerGauche();
-	// 	break;
-	// case 39 : case 100 : case 68 : // Flèche droite, d, D
-	// 	pion.deplacerDroite();
-	// 	break;
-	// default : 
-	// 	alert(key);
-	//  Si la touche ne nous sert pas, nous n'avons aucune raison de bloquer son comportement normal.
-	// 	return true;
-	// }	
-	
-	// return false;
 	// }
 	
 }

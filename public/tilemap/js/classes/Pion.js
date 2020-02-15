@@ -1,9 +1,9 @@
 
-function Pion(url, x, y)
+function Pion(url, colonne, ligne)
 {
 
-	this.x = x;
-	this.y = y;
+	this.colonne = colonne;
+	this.ligne = ligne;
 	// Chargement de l'image dans l'attribut image
 	this.image = new Image();
 	this.image.referenceDuPerso = this;
@@ -23,8 +23,8 @@ function Pion(url, x, y)
 Pion.prototype.dessinerPion = function(context, map) {
 	context.drawImage(
 	this.image,
-	((this.x - 1) * map.TILE_WIDTH) + map.TILE_WIDTH / 4,
-	((this.y - 1) * map.TILE_HEIGHT) + map.TILE_HEIGHT/4,
+	((this.colonne - 1) * map.TILE_WIDTH) + map.TILE_WIDTH / 4,
+	((this.ligne - 1) * map.TILE_HEIGHT) + map.TILE_HEIGHT/4,
 	this.largeur,
 	this.hauteur
 	);
@@ -33,7 +33,7 @@ Pion.prototype.dessinerPion = function(context, map) {
 Pion.prototype.deplacerHaut = function() {
 		
 	// On effectue le déplacement
-	this.y = this.y - 1;
+	this.ligne = this.ligne - 1;
 		
 	return true;
 }
@@ -41,7 +41,7 @@ Pion.prototype.deplacerHaut = function() {
 Pion.prototype.deplacerDroite = function() {
 		
 	// On effectue le déplacement
-	this.x = this.x + 1;
+	this.colonne = this.colonne + 1;
 		
 	return true;
 }
@@ -49,7 +49,7 @@ Pion.prototype.deplacerDroite = function() {
 Pion.prototype.deplacerBas = function() {
 		
 	// On effectue le déplacement
-	this.y = this.y + 1;
+	this.ligne = this.ligne + 1;
 		
 	return true;
 }
@@ -57,15 +57,15 @@ Pion.prototype.deplacerBas = function() {
 Pion.prototype.deplacerGauche = function() {
 		
 	// On effectue le déplacement
-	this.x = this.x - 1;
+	this.colonne = this.colonne - 1;
 		
 	return true;
 }
 
-Pion.prototype.teleporterVersCase = function(x,y) {
+Pion.prototype.teleporterVersCase = function(colonne,ligne) {
 		
-	this.x = x;
-	this.y = y;
+	this.colonne = colonne;
+	this.ligne = ligne;
 		
 	return true;
 }

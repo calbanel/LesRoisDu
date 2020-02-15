@@ -1,36 +1,13 @@
 {% extends 'monTemplate.html.twig' %}
 
-
-
 {% block body %}
 		
-            
 
-			
-            <div id="wrapper">
+			<div id="wrapper">
                 
                 <canvas id="canvas" >Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
-
-            
-
-                <a role="button" href="#" onclick="lancerDe()" class="btn btn-warning">
-                    Lancer le dé
-                </a>
-
-			</div>            
-            
-            <script Language="Javascript">
-                function lancerDe()
-                {
-                    var faceDe=Math.random();
-                    var faceObtenue=Math.ceil(faceDe*4);
-                    sessionStorage.setItem("valeurDé",faceObtenue);
-                    sessionStorage.setItem("clique","true");
-                    alert("Vous avancez de "+ faceObtenue + " case(s) !");
-                }
-
-            </script>
-
+				
+			</div>
 
             {% block plateau %}
             <link rel="stylesheet" href="{{asset('tilemap/css/style.css')}}" />
@@ -40,7 +17,6 @@
             </script>
             <script type="text/javascript" src="{{asset('tilemap/js/XmlHttpRequest.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/Souris.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/Pion.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/Tileset.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
