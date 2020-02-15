@@ -35,15 +35,13 @@ class Case{
 
 	
 
-	clicked() {
-		
-		
-		var myTop = y;
-		var myRgt = x + this.largeur;
-		var myBot = y + this.hauteur;
-		var myLft = x;
+	clicked(sourisX, sourisY) {
+		var myTop = this.ligne;
+		var myRgt = this.colonne + this.largeur;
+		var myBot = this.ligne + this.hauteur;
+		var myLft = this.colonne;
 		var clicked = true;
-		if(souris.x < myLft || souris.x > myRgt || souris.y < myTop || souris.y > myBot)
+		if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
 		{
 			clicked = false;
 		}

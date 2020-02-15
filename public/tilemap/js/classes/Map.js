@@ -67,19 +67,19 @@ class Map{
 			
 			for(var colonne = 0, nbColonne = this.terrainWidth ; colonne < nbColonne ; colonne++) {
 				var tuile = this.terrain[(ligne  * nbColonne) + colonne];
-				this.tileset.draw(tuile, context, map, colonne * this.TILE_HEIGHT, ligne * this.TILE_HEIGHT);
+				this.tileset.draw(tuile, context, this, colonne * this.TILE_HEIGHT, ligne * this.TILE_HEIGHT);
 			}
 		}
 		
 		// Dessin des pions
 		for(var i = 0, l = this.pions.length ; i < l ; i++) {
-			this.pions[i].draw(context, map);
+			this.pions[i].draw(context, this);
 		}
 		
 
 		// Dessin des cases
 		for(var i = 0, l = this.cases.length ; i < l ; i++) {
-			this.cases[i].draw(context, map);
+			this.cases[i].draw(context, this);
 		}
 		
 

@@ -1,25 +1,30 @@
-var map = new Map("plateau30cases");
-var pion = new Pion("pionV1.png", 1, 1);
-var cases = new Case("case.png", 20, 20);
-map.addCase(cases);
-map.addPion(pion);
-const GAME_WIDTH =  map.getLargeur();;
-const GAME_HEIGHT = map.getHauteur();;
+
+
 
 
 class Game {
 
     constructor()
     {
+        this.map = new Map("plateau30cases");
+        const GAME_WIDTH =  this.map.getLargeur();
+        const GAME_HEIGHT = this.map.getHauteur();
 	    canvas.width  = GAME_WIDTH;
         canvas.height = GAME_HEIGHT;
+
+        this.pion = new Pion("pionV1.png", 1, 1);
+        this.cases = new Case("case.png", 20, 20);;
         
+
         this.gameWidth = canvas.width;
         this.gameHeight = canvas.height;
+
+        new InputHandler(this.cases, this);
     }
 
     start(){
-
+        this.map.addCase(this.cases);
+        this.map.addPion(this.pion);
     }
 
     update(deltaTime){
@@ -27,6 +32,6 @@ class Game {
     }
 
     draw(ctx){
-        map.draw(ctx);
+        this.map.draw(ctx);
     }
 }
