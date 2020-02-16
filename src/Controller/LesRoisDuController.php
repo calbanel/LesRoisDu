@@ -146,9 +146,9 @@ class LesRoisDuController extends AbstractController
        $formulairePartie=$this->createFormBuilder($partie)
        ->add('Nom',TextType::class)
        ->add('Description',TextareaType::class)
-       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'disabled' => 'true'])
-       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'disabled' => 'true'])
-       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'disabled' => 'true'])
+       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr' => ['readonly' => true]])
+       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr' => ['readonly' => true]])
+       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr' => ['readonly' => true]])
        ->add('plateau', EntityType::class, ['class' => Plateau::class,
                                                 'choice_label' => 'nom',
                                                 'multiple' => false,
