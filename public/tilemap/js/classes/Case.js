@@ -35,7 +35,7 @@ class Case{
 
 	
 
-	clicked(sourisX, sourisY) {
+	isClicked(sourisX, sourisY) {
 		var myTop = this.ligne;
 		var myRgt = this.colonne + this.largeur;
 		var myBot = this.ligne + this.hauteur;
@@ -47,6 +47,21 @@ class Case{
 		}
 
 		return clicked;
+
+	}
+
+	isOver(sourisX, sourisY) {
+		var myTop = this.ligne;
+		var myRgt = this.colonne + this.largeur;
+		var myBot = this.ligne + this.hauteur;
+		var myLft = this.colonne;
+		var over = true;
+		if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
+		{
+			over = false;
+		}
+
+		return over;
 
 	}
 }

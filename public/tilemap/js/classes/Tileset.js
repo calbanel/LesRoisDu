@@ -1,19 +1,19 @@
 class Tileset{
 	constructor(url){
 
-	//Chargement de l'image dans l'attribut image
-	this.image = new Image();
-	this.image.referenceDuTileset = this;
-	this.image.onload = function(){
-		if(!this.complete){
-			throw new Error("Erreur de chargement du tileset nommé \"" + url + "\".");
-		}
-		//Largeur du tileset et tile
-		this.referenceDuTileset.largeur = this.width / 64;
+		//Chargement de l'image dans l'attribut image
+		this.image = new Image();
+		this.image.referenceDuTileset = this;
+		this.image.onload = function(){
+			if(!this.complete){
+				throw new Error("Erreur de chargement du tileset nommé \"" + url + "\".");
+			}
+			//Largeur du tileset et tile
+			this.referenceDuTileset.largeur = this.width / 64;
 		
-	}	
+		}	
 
-	this.image.src = assetsBaseDir + 'tilesets/' + url;
+		this.image.src = assetsBaseDir + 'tilesets/' + url;
 	}
 
 	draw(numero, context, map, xDestination, yDestination){
@@ -24,6 +24,20 @@ class Tileset{
 		var ySource = (ySourceEnTiles - 1) * map.TILE_HEIGHT;
 		context.drawImage(this.image, xSource, ySource, map.TILE_WIDTH, map.TILE_HEIGHT, xDestination, yDestination, map.TILE_WIDTH, map.TILE_HEIGHT);
 
-}
+	}
+
+	getIdTile(x, y, map){
+        var col = Math.floor(x/map.TILE_WIDTH) ;
+		var lig = Math.floor(y/map.TILE_HEIGHT) ;
+		var id = 'undefined';
+		if (col>= 0 && col <= map.terrainWidth && lig >= 0 && lig<= map.terrainHeight)
+		{
+			id = map.terrain[(lig  * map.terrainWidth) + col];
+		}
+
+		return id;
+       
+    }
+
 }
 
