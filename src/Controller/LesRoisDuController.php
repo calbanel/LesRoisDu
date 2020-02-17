@@ -100,7 +100,7 @@ class LesRoisDuController extends AbstractController
     {
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $parties = $repositoryPartie->findAll();
-        
+        $this->addFlash('success',"misere"); 
         return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
     }
 
@@ -139,7 +139,9 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageCreationPartie(Request $request, ObjectManager $manager)
     {
-       
+        
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $createur = $repositoryUtilisateur->find(7);
        // Création d'une entrprise vierge
        $partie=new Partie();
 
@@ -147,10 +149,10 @@ class LesRoisDuController extends AbstractController
        $formulairePartie=$this->createFormBuilder($partie)
        ->add('Nom',TextType::class)
        ->add('Description',TextareaType::class)
-       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr' => ['readonly' => true]])
-       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr' => ['readonly' => true]])
-       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr' => ['readonly' => true]])
-       ->add('plateau', EntityType::class, ['class' => Plateau::class,
+       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
+      ->add('plateau', EntityType::class, ['class' => Plateau::class,
                                                 'choice_label' => 'nom',
                                                 'multiple' => false,
                                                 'expanded' => false])
@@ -159,118 +161,78 @@ class LesRoisDuController extends AbstractController
        $formulairePartie->handleRequest($request);
 
        if ($formulairePartie->isSubmitted())
-       {     
-            $plateau = $partie->getPlateau(); 
-            echo $plateau->getNom();
-            $utilisateur1 = new Utilisateur();
-          $utilisateur1->setPseudo("bastos");
-          $utilisateur1->setMotDePasse("mcb");
-          $utilisateur1->setAdresseMail("bastos.albanel@gmail.com");
-          $utilisateur1->setNom("Albanel");
-          $utilisateur1->setPrenom("Bastos");
-          $utilisateur1->setEstInvite(false);
-          $utilisateur1->setAvatar("https://www.google.com/url?sa=i&url=https%3A%2F%2Fgamergen.com%2Factualites%2Favatar-pandora-rising-possible-nom-jeu-ubisoft-na-vi-297799-1&psig=AOvVaw2OxTwThQuJ0fl5AtZ3FLGY&ust=1581271457638000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjOqa_FwucCFQAAAAAdAAAAABAD");
+       { 
+   
+        try {    
+        $plateau = $partie->getPlateau();
 
-            $plateauEnJeu= new PlateauEnJeu();
-            $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
-          $plateauEnJeu->setNom($plateau->getNom());
-          $plateauEnJeu->setDescription($plateau->getDescription());
+        $plateauEnJeu = new PlateauEnJeu();
+        $plateauEnJeu->setNom($plateau->getNom());
+        $plateauEnJeu->setDescription($plateau->getDescription());
+        $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
 
-          $partie->setPlateauDeJeu($plateauEnJeu);
 
-          $partie->setCreateur($utilisateur1);
-          $partie->addJoueur($utilisateur1);
+        $partie->setPlateauDeJeu($plateauEnJeu);
+        $partie->setCreateur($createur);
 
-          $partie->setCode("Aghdd");
+        $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
+        $partie->setCode($code);
 
-          $utilisateur1->addPartiesCree($partie);
+        $createur->addPartiesCree($partie);
 
-          $utilisateur1->addPartiesRejoin($partie);
+        $manager->persist($partie);
 
-          $plateauEnJeu->setJoueur($utilisateur1);
+        $plateauEnJeu->setPartie($partie);
 
-            
+        $manager->persist($createur);
+        
+        $tabCase = $plateau->getCases();
+        foreach($tabCase as $uneCase){
+            $cases = new Cases();
+            $cases->setDescriptifDefi($uneCase->getDescriptifDefi())
+                ->setConsignes($uneCase->getConsignes())
+                ->setCodeValidation($uneCase->getCodeValidation())
+            ;
 
-            $plateauEnJeu->setPartie($partie);
-
-            $utilisateur1->addPlateau($plateau);
-            $utilisateur1->addPlateauEnJeux($plateauEnJeu);
-
-            $manager->persist($utilisateur1);
-
-           
-
-            $pion1 = new Pion();
-          $pion1->setNom("clem");
-          $pion1->setCouleur("12578");
-          $pion1->setAvancementPlateau(2);
-          $pion1->setPlateauEnJeu($plateauEnJeu);
-  
-          $manager->persist($pion1);
-  
-          $pion2 = new Pion();
-          $pion2->setNom("emma");
-          $pion2->setCouleur("12878");
-          $pion2->setAvancementPlateau(5);
-          $pion2->setPlateauEnJeu($plateauEnJeu);
-  
-          $manager->persist($pion2);
-  
-          $pion3 = new Pion();
-          $pion3->setNom("bastos");
-          $pion3->setCouleur("12678");
-          $pion3->setAvancementPlateau(4);
-          $pion3->setPlateauEnJeu($plateauEnJeu);
-  
-          $manager->persist($pion3);
-  
-          $pion4 = new Pion();
-          $pion4->setNom("chris");
-          $pion4->setCouleur("12278");
-          $pion4->setAvancementPlateau(7);
-          $pion4->setPlateauEnJeu($plateauEnJeu);
-  
-          $manager->persist($pion4);
-  
-          $plateauEnJeu->addPion($pion1);
-          $plateauEnJeu->addPion($pion2);
-          $plateauEnJeu->addPion($pion3);
-          $plateauEnJeu->addPion($pion4);
-          
-          $tabCase = $plateau->getCases();
-          foreach($tabCase as $uneCase)
-          {
-            $cases= new Cases();
-            $cases->setDescriptifDefi($uneCase->getDescriptifDefi());
-            $cases->setConsignes($uneCase->getConsignes());
-            $cases->setCodeValidation($uneCase->getCodeValidation());
             $cases->setPlateauEnJeu($plateauEnJeu);
+            
+            $manager->persist($cases);
 
             $tabRessource = $uneCase->getRessources();
-            foreach($tabRessource as $uneRessource)
-            {
+            foreach($tabRessource as $uneRessource){
                 $ressource = new Ressource();
+
                 $ressource->setChemin($uneRessource->getChemin());
+
+            
                 $ressource->setCases($cases);
                 $cases->addRessource($ressource);
                 $manager->persist($cases);
+            
                 $manager->persist($ressource);
+
             }
-            
-           
-            
-            
-          }
-          $manager->persist($plateauEnJeu);
-          $manager->persist($partie);
+        }
+        
+
+            $manager->persist($plateauEnJeu);
+        
               
           // Enregistrer la ressource en base de données
           
           $manager->flush();
+          $this->addFlash('success',"Add done!");
+        } catch (DBALException $e) {
+            $this->addFlash('success',"Add not done: " . $e->getMessage());
+        return $this->redirectToRoute('espace_partie');
+        }
+     catch (\Exception $e) {
+        $this->addFlash('success',"Add not done: " . $e->getMessage());
+        return $this->redirectToRoute('espace_partie');
+    }
 
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_partie');
-          echo "ca marche";
        }
         return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(),
         ]);

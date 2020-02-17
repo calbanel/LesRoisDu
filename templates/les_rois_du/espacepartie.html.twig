@@ -16,6 +16,8 @@
 {% endblock %}
 
 {% block body %}
+
+
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -23,6 +25,7 @@
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
                             <h1>ESPACE PARTIES</h1>
+                            
                             
                             <section id="one" class="wrapper style2 spotlights">
                                     
@@ -33,6 +36,12 @@
                                             <a href="#" class="image"><img src="img/LesRoisDuBad.png" alt="" data-position="center center" /></a>
                                             <div class="content">
                                                 <div class="inner">
+                                                        {% for message in app.flashes('success') %}
+                                                        
+                                                          <p>  {{ message }}</p>
+
+                                                        {% endfor %}
+                                                     
                                                     <h2> {{ partie.nom }}</h2>
                                                     <p>{{ partie.description }} </p>
                                                     <ul class="actions">
