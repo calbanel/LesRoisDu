@@ -1,6 +1,8 @@
-function Map(nom) {
+class Map{
 	
-	// Création de l'objet XmlHttpRequest
+	constructor(nom){
+		this.nom = nom;
+		// Création de l'objet XmlHttpRequest
 	var xhr = getXMLHttpRequest();
 
 	// Chargement du fichier
@@ -22,27 +24,40 @@ function Map(nom) {
 	this.TILE_HEIGHT = mapData.tileheight;
 	this.TILE_WIDTH = mapData.tilewidth;
 
-
+	// Liste des cases présents sur le terrain.
+	this.cases = new Array;
 	// Liste des pions présents sur le terrain.
 	this.pions = new Array();
-	
+	}
+
 	// Pour ajouter un pion
-	Map.prototype.addPion = function(pion) {
+	addPion (pion) {
 		this.pions.push(pion)
 	};
-	
-	
+
+	// Pour ajouter une case
+	addCase(casee){
+		this.cases.push(casee);
+	}
+
 	// Pour récupérer la taille (en tiles) de la carte
-	Map.prototype.getLargeur = function() {
+	getLargeur() {
 		return this.terrainWidth * this.TILE_WIDTH;
 	}
-	Map.prototype.getHauteur = function() {
+	getHauteur() {
 		
 		return (this.terrain.length / this.terrainWidth) * this.TILE_WIDTH ;	
 	}
 
 	
-	Map.prototype.dessinerMap = function(context) {
+	update(deltaTime){
+		// Update des cases
+		for(var i = 0, l = this.cases.length ; i < l ; i++) {
+			this.cases[i].update(deltaTime);
+		}
+	}
+
+	draw(context) {
 		
 		//Dessin du plateau
 		var nbLignes = this.terrain.length / this.terrainWidth;
@@ -52,15 +67,23 @@ function Map(nom) {
 			
 			for(var colonne = 0, nbColonne = this.terrainWidth ; colonne < nbColonne ; colonne++) {
 				var tuile = this.terrain[(ligne  * nbColonne) + colonne];
-				this.tileset.dessinerTile(tuile, context, map, colonne * this.TILE_HEIGHT, ligne * this.TILE_HEIGHT);
+				this.tileset.draw(tuile, context, this, colonne * this.TILE_HEIGHT, ligne * this.TILE_HEIGHT);
 			}
 		}
 		
 		// Dessin des pions
 		for(var i = 0, l = this.pions.length ; i < l ; i++) {
-			this.pions[i].dessinerPion(context, map);
+			this.pions[i].draw(context, this);
 		}
+		
+
+		// Dessin des cases
+		for(var i = 0, l = this.cases.length ; i < l ; i++) {
+			this.cases[i].draw(context, this);
+		}
+		
 
 	}
 
-}
+}	
+	
