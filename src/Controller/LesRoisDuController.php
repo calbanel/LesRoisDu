@@ -13,6 +13,11 @@ use App\Entity\Ressource;
 use App\Entity\Utilisateur;
 use App\Entity\Partie;
 use Symfony\Component\HttpFoundation\Request;
+<<<<<<< HEAD
+=======
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
+>>>>>>> creation_partie
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -99,7 +104,7 @@ class LesRoisDuController extends AbstractController
     {
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $parties = $repositoryPartie->findAll();
-        
+        $this->addFlash('success',"misere"); 
         return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
     }
 
@@ -138,7 +143,9 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageCreationPartie(Request $request, ObjectManager $manager)
     {
-       
+        
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $createur = $repositoryUtilisateur->find(7);
        // Création d'une entrprise vierge
        $partie=new Partie();
 
@@ -146,10 +153,10 @@ class LesRoisDuController extends AbstractController
        $formulairePartie=$this->createFormBuilder($partie)
        ->add('Nom',TextType::class)
        ->add('Description',TextareaType::class)
-       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'disabled' => 'true'])
-       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'disabled' => 'true'])
-       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'disabled' => 'true'])
-       ->add('plateau', EntityType::class, ['class' => Plateau::class,
+       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
+      ->add('plateau', EntityType::class, ['class' => Plateau::class,
                                                 'choice_label' => 'nom',
                                                 'multiple' => false,
                                                 'expanded' => false])
@@ -157,45 +164,79 @@ class LesRoisDuController extends AbstractController
 
        $formulairePartie->handleRequest($request);
 
-       if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
-       {     
-            $plateau = $partie->getPlateau();  
+       if ($formulairePartie->isSubmitted())
+       { 
+   
+        try {    
+        $plateau = $partie->getPlateau();
 
-            $plateauEnJeu= new PlateauEnJeu();
-            $tabCases = $plateau->getCases();
+        $plateauEnJeu = new PlateauEnJeu();
+        $plateauEnJeu->setNom($plateau->getNom());
+        $plateauEnJeu->setDescription($plateau->getDescription());
+        $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
 
-          foreach($tabCases as $uneCase)
-          {
-            $cases= new Cases();
-            $cases->setDescriptifDefi($uneCase->getDescriptifDefi());
-            $cases->setConsignes($uneCase->getConsignes());
-            $cases->setCodeValidation($uneCase->getCodeValidation());
+
+        $partie->setPlateauDeJeu($plateauEnJeu);
+        $partie->setCreateur($createur);
+
+        $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
+        $partie->setCode($code);
+
+        $createur->addPartiesCree($partie);
+
+        $manager->persist($partie);
+
+        $plateauEnJeu->setPartie($partie);
+
+        $manager->persist($createur);
+        
+        $tabCase = $plateau->getCases();
+        foreach($tabCase as $uneCase){
+            $cases = new Cases();
+            $cases->setDescriptifDefi($uneCase->getDescriptifDefi())
+                ->setConsignes($uneCase->getConsignes())
+                ->setCodeValidation($uneCase->getCodeValidation())
+            ;
+
+            $cases->setPlateauEnJeu($plateauEnJeu);
+            
+            $manager->persist($cases);
+
             $tabRessource = $uneCase->getRessources();
-            foreach($tabRessource as $uneRessource)
-            {
+            foreach($tabRessource as $uneRessource){
                 $ressource = new Ressource();
+
                 $ressource->setChemin($uneRessource->getChemin());
-                //$ressource->setCases($cases);
+
+            
+                $ressource->setCases($cases);
                 $cases->addRessource($ressource);
+                $manager->persist($cases);
+            
+                $manager->persist($ressource);
+
             }
-           //$cases->setPlateauEnJeu($plateauEnJeu);
-            $plateauEnJeu->addCases($cases);
-          }
+        }
+        
 
-          $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
-          $plateauEnJeu->setNom($plateau->getNom());
-          $plateauEnJeu->setDescription($plateau->getDescription());
-          $plateauEnJeu->setPartie($partie);
-          $partie->setPlateauDeJeu($plateauEnJeu);
-
+            $manager->persist($plateauEnJeu);
+        
               
           // Enregistrer la ressource en base de données
-          $manager->persist($partie);
+          
           $manager->flush();
+          $this->addFlash('success',"Add done!");
+        } catch (DBALException $e) {
+            $this->addFlash('success',"Add not done: " . $e->getMessage());
+        return $this->redirectToRoute('espace_partie');
+        }
+     catch (\Exception $e) {
+        $this->addFlash('success',"Add not done: " . $e->getMessage());
+        return $this->redirectToRoute('espace_partie');
+    }
 
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_partie');
-          echo "ca marche";
        }
         return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(),
         ]);
