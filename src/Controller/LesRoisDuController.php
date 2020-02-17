@@ -13,6 +13,7 @@ use App\Entity\Utilisateur;
 use App\Entity\Partie;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -159,11 +160,8 @@ class LesRoisDuController extends AbstractController
 
        if ($formulairePartie->isSubmitted())
        {     
-           $manager->persist($partie);
             $plateau = $partie->getPlateau(); 
-            $plateau->addParty($partie);
-            $manager->persist($plateau);
-            
+            echo $plateau->getNom();
             $utilisateur1 = new Utilisateur();
           $utilisateur1->setPseudo("bastos");
           $utilisateur1->setMotDePasse("mcb");
@@ -200,7 +198,7 @@ class LesRoisDuController extends AbstractController
 
             $manager->persist($utilisateur1);
 
-            $manager->persist($partie);
+           
 
             $pion1 = new Pion();
           $pion1->setNom("clem");
@@ -239,17 +237,17 @@ class LesRoisDuController extends AbstractController
           $plateauEnJeu->addPion($pion3);
           $plateauEnJeu->addPion($pion4);
           
-          
-          foreach($plateau->getCases() as $uneCase)
+          $tabCase = $plateau->getCases();
+          foreach($tabCase as $uneCase)
           {
             $cases= new Cases();
             $cases->setDescriptifDefi($uneCase->getDescriptifDefi());
             $cases->setConsignes($uneCase->getConsignes());
             $cases->setCodeValidation($uneCase->getCodeValidation());
             $cases->setPlateauEnJeu($plateauEnJeu);
-            $manager->persist($cases);
 
-            foreach($uneCase->getRessources() as $uneRessource)
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource)
             {
                 $ressource = new Ressource();
                 $ressource->setChemin($uneRessource->getChemin());
@@ -264,6 +262,7 @@ class LesRoisDuController extends AbstractController
             
           }
           $manager->persist($plateauEnJeu);
+          $manager->persist($partie);
               
           // Enregistrer la ressource en base de données
           
