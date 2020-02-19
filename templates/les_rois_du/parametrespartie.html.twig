@@ -30,7 +30,7 @@
 			    <h4 class="alert-heading">Attention!</h4> 
 			    <p>Êtes vous sure de vouloir supprimer la partie ?</p>
 			    <!--<button type="button" class="close btn btn-danger" id="fermer">Non</button>-->
-			    <a href="{{ path('parametres_partie', {'idPartie' : partie.id}) }}" class="btn btn-danger" role="button" aria-pressed="true">Non</a>
+			    <a style="color:aliceblue" class="btn btn-danger fermeture" role="button" aria-pressed="true">Non</a>
 			    <a href="{{ path('supprimer_partie', {'idPartie' : partie.id}) }}" class="btn btn-success" role="button" aria-pressed="true">Oui</a>
 			    <!--<button type="button" class="btn btn-success">Oui</button>-->
 			    
@@ -44,7 +44,7 @@
 			      $("input.btn").hide("slow")
 			      $(".alert").show("slow")
 			    })
-			    $(".close").click(function() {
+			    $(".fermeture").click(function() {
 			      $(".alert").hide("slow")
 			      $("input.btn").show()
 			    })
