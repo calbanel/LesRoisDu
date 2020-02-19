@@ -8,19 +8,22 @@ class Game {
 	    canvas.width  = GAME_WIDTH;
         canvas.height = GAME_HEIGHT;
 
-        this.pion = new Pion("pionV1.png", 1, 1);
-        this.cases = new Case("case.png", 20, 20);;
+        this.pion = new Pion("pion_rouge.png", 1, 1);
+        this.cases = new Case("case.png", 1, 0);
+        this.dice = new De("de.png", 0, 1);
+
         
 
         this.gameWidth = canvas.width;
         this.gameHeight = canvas.height;
 
-        new InputHandler(this.cases, this);
+        new InputHandler(this);
     }
 
     start(){
         this.map.addCase(this.cases);
         this.map.addPion(this.pion);
+        this.map.addDe(this.dice);
     }
 
     update(deltaTime){

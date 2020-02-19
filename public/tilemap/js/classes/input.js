@@ -1,28 +1,41 @@
 class InputHandler {
-    constructor(cases, game) {
+    constructor(game) {
       
+        //Récupération des éléments cliquable de notre jeu
+        var dice = game.dice;
+        console.log(dice);
+
+        var map = game.map;
+
+
         this.sourisX = 0;
-        this.sourisY =0;
+        this.sourisY = 0;
 
         canvas.addEventListener('mousedown', function(event) {
             var rect = canvas.getBoundingClientRect();
             this.sourisX = event.pageX - rect.left;
             this.sourisY = event.pageY - rect.top;
 
+            var col = Math.floor(this.sourisX/map.TILE_WIDTH);
+		    var lig = Math.floor(this.sourisY/map.TILE_HEIGHT);
+
             if(this.sourisX && this.sourisY){
                     var id = game.map.tileset.getIdTile(this.sourisX, this.sourisY, game.map);
-                    console.log(id);
 
                     switch(id){
                         case 1:
-                            alert('Ceci est une case');
+                            alert('Je suis une case');
                             break;
                         case 2: 
-                            alert('Ceci n\'est pas une case');
+                            if(dice.isClicked(col, lig)){
+                              
+                                alert('Je suis le dé');
+                            }
                             break;
                         default:
                             alert('Je sais même pas où t\'as cliqué');
                     }
+
             }
         })
         

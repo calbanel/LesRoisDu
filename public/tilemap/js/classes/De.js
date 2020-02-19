@@ -1,4 +1,4 @@
-class Case{
+class De{
 
 	constructor(url, colonne, ligne){
 		this.colonne = colonne;
@@ -11,7 +11,7 @@ class Case{
 				throw "Erreur de chargement du sprite nommé \"" + url + "\".";
 			}
 				
-		// Taille de la case
+		// Taille de la De
 		this.referenceDuPerso.largeur = this.width;
 		this.referenceDuPerso.hauteur = this.height;
 	}
@@ -36,32 +36,21 @@ class Case{
 	
 
 	isClicked(sourisX, sourisY) {
-		var myTop = this.ligne;
-		var myRgt = this.colonne + this.largeur;
-		var myBot = this.ligne + this.hauteur;
-		var myLft = this.colonne;
+		// var myTop = this.ligne;
+		// var myRgt = this.colonne + this.largeur;
+		// var myBot = this.ligne + this.hauteur;
+		// var myLft = this.colonne;
 		var clicked = true;
-		if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
-		{
-			clicked = false;
-		}
+		// if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
+		// {
+		// 	clicked = false;
+		// }
 
+		if(sourisX != this.colonne || sourisY != this.ligne)
+		{
+			return false;
+		}
 		return clicked;
-
-	}
-
-	isOver(sourisX, sourisY) {
-		var myTop = this.ligne;
-		var myRgt = this.colonne + this.largeur;
-		var myBot = this.ligne + this.hauteur;
-		var myLft = this.colonne;
-		var over = true;
-		if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
-		{
-			over = false;
-		}
-
-		return over;
 
 	}
 }

@@ -27,8 +27,8 @@ class Tileset{
 	}
 
 	getIdTile(x, y, map){
-        var col = Math.floor(x/map.TILE_WIDTH) ;
-		var lig = Math.floor(y/map.TILE_HEIGHT) ;
+        var col = Math.floor(x/map.TILE_WIDTH);
+		var lig = Math.floor(y/map.TILE_HEIGHT);
 		var id = 'undefined';
 		if (col>= 0 && col <= map.terrainWidth && lig >= 0 && lig<= map.terrainHeight)
 		{
@@ -37,7 +37,14 @@ class Tileset{
 
 		return id;
        
-    }
+	}
+	
+	getNumCaseClique(x, y, map){
+		return position = {
+			col: Math.floor(x/map.TILE_WIDTH),
+			lig: Math.floor(y/map.TILE_HEIGHT)
+		};
+	}
 
 }
 

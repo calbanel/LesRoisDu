@@ -25,15 +25,21 @@ class Map{
 	this.TILE_WIDTH = mapData.tilewidth;
 
 	// Liste des cases présents sur le terrain.
-	this.cases = new Array;
+	this.cases = new Array();
 	// Liste des pions présents sur le terrain.
 	this.pions = new Array();
+
+	this.dice = new Array();
 	}
 
 	// Pour ajouter un pion
 	addPion (pion) {
-		this.pions.push(pion)
+		this.pions.push(pion);
 	};
+
+	addDe(de){
+		this.dice.push(de);
+	}
 
 	// Pour ajouter une case
 	addCase(casee){
@@ -80,6 +86,11 @@ class Map{
 		// Dessin des cases
 		for(var i = 0, l = this.cases.length ; i < l ; i++) {
 			this.cases[i].draw(context, this);
+		}
+
+		// Dessin du dé
+		for(var i = 0, l = this.dice.length ; i < l ; i++) {
+			this.dice[i].draw(context, this);
 		}
 		
 
