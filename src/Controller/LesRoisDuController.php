@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Doctrine\Common\Persistence\ObjectManager;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Plateau;
@@ -101,7 +101,7 @@ class LesRoisDuController extends AbstractController
     {
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $parties = $repositoryPartie->findAll();
-        $this->addFlash('success',"misere"); 
+        //$this->addFlash('success',"misere"); 
         return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
     }
 
@@ -292,32 +292,52 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/parties", name="supprimer_partie")
+     * @Route("/supression/partie{idPartie}", name="supprimer_partie")
      */
     public function supprimerUnePartie($idPartie)
     {
+        try {  
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryPartie=$entityManager->getRepository(Partie::class);
 
-        $partieSupp = $repositoryPartie->find($idPartie);
+        $partie = $repositoryPartie->find($idPartie);
 
-        $joueurs = $partieSupp->getJoueurs();
+        $plateauEnJeu = $partie->getPlateauDeJeu();
 
-       // $partieSupp->getPlateau()->removeParty($partieSupp);
+        $tabCase = $plateauEnJeu->getCases();
+        foreach($tabCase as $uneCase){
+            
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource){
+             
+                $entityManager->remove($uneRessource);
+                
+            }
 
-        $joueurs[0]->removePartiesRejoin($partieSupp);
+            $entityManager->remove($uneCase);
+        }
 
-        $joueurs[0]->removePlateauEnJeux($partieSupp->getPlateauEnJeux());
+        $tabPion = $plateauEnJeu->getPions();
+        foreach($tabPion as $unePion){
 
-        $partieSupp->getCreateur()->removePartiesCree($partieSupp);
+            $entityManager->remove($unePion);
+        }
 
-        $entityManager->remove($partieSupp);
+        $entityManager->remove($plateauEnJeu);
+        
+        $entityManager->remove($partie);
 
         $entityManager->flush();
+        $this->addFlash('success',"Add done!");
+        } catch (DBALException $e) {
+            $this->addFlash('success',"Add not done: " . $e->getMessage());
+        }
+     catch (\Exception $e) {
+        $this->addFlash('success',"Add not done: " . $e->getMessage());
 
-        $parties = $repositoryPartie->findAll();
-        
-        return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
+    }
+    return $this->redirectToRoute('espace_partie');
+
     }
 
 }
