@@ -318,7 +318,7 @@ class AppFixtures extends Fixture
             $manager->persist($cases);
 
         }
-        $manager->persist($plateauEnJeu);
+        
 
         for ($i=0; $i < 17; $i++) {
             $cases = new Cases();
