@@ -1,66 +1,90 @@
 {% extends 'monTemplate.html.twig' %}
 
 {% block sidebar %}
+
 <body class="is-preload">
-        <!-- Sidebar -->
-            <section id="sidebar">
-                <div class="inner">
-                    <nav>
-                        <ul>
-                            <li><a href="{{path ('hub')}}">MENU</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </section>
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <nav>
+                <ul>
+                    <li><a href="{{path ('hub')}}">MENU</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
 
-{% endblock %}
+    {% endblock %}
 
-{% block body %}
+    {% block body %}
 
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-				<!-- Intro -->
-					<section id="intro" class="wrapper style1 fullscreen fade-up">
-						<div class="inner">
-                            <h1>ESPACE PARTIES</h1>
-                            
-                            
-                            <section id="one" class="wrapper style2 spotlights">
-                                    
+        <!-- Intro -->
+        <section id="intro" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h1>ESPACE PARTIES</h1>
 
-                                    <!-- Boucle pour chaque partie  -->
-                                    {% for partie in parties %}
-                                    <section>
-                                            <a href="#" class="image"><img src="img/LesRoisDuBad.png" alt="" data-position="center center" /></a>
-                                            <div class="content">
-                                                <div class="inner">
-                                                        {% for message in app.flashes('success') %}
-                                                        
-                                                          <p>  {{ message }}</p>
 
-                                                        {% endfor %}
-                                                     
-                                                    <h2> {{ partie.nom }}</h2>
-                                                    <p>{{ partie.description }} </p>
-                                                    <ul class="actions">
-                                                        <li><a href="{{path ('partie_en_cours', {'idPartie': partie.id}) }}" class="button">Consulter</a></li>
-                                                        <li><a href="{{path ('espace_partie') }}" class="button">Supprimer</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </section>
-    
-                                        <!-- Fin boucle -->
-                                        {% endfor %}
-    
+                <section id="one" class="wrapper style2 spotlights">
+
+
+                    <!-- Boucle pour chaque partie  -->
+                    {% for partie in parties %}
+                    <section>
+                        <a href="#" class="image"><img src="img/LesRoisDuBad.png" alt=""
+                                data-position="center center" /></a>
+                        <div class="content">
+                            <div class="inner">
+                                {% for message in app.flashes('success') %}
+
+                                <p> {{ message }}</p>
+
+                                {% endfor %}
+
+                                <h2> {{ partie.nom }}</h2>
+                                <p>{{ partie.description }} </p>
+                                <ul class="actions">
+                                    <li><a href="{{path ('partie_en_cours', {'idPartie': partie.id}) }}"
+                                            class="button">Consulter</a></li>
+                                    <div class="alert alert-warning" style="display: none">
+                                        <h4 class="alert-heading">Attention!</h4>
+                                        <p>Êtes vous sure de vouloir supprimer la partie ?</p>
+                                        <a style="color:aliceblue"
+                                            class="btn btn-danger fermeture" role="button" aria-pressed="true">Non</a>
+                                        <a href="{{ path('supprimer_partie', {'idPartie' : partie.id}) }}"
+                                            class="btn btn-success" role="button" aria-pressed="true">Oui</a>
+                                    </div>
+                                    <li><input type="button" class="btn button" value="Supprimer la partie"></li>
+                                    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                                    <script>
+                                        $(function () {
+                                            $("input.btn").click(function () {
+                                                $("input.btn").hide("slow")
+                                                $(".alert").show("slow")
+                                            })
+                                            $(".fermeture").click(function () {
+                                                $(".alert").hide("slow")
+                                                $("input.btn").show()
+                                            })
+                                        })
+                                    </script>
+                                </ul>
                             </div>
-                        </section>
+                        </div>
+                    </section>
+
+                    <!-- Fin boucle -->
+                    {% endfor %}
+
+            </div>
+        </section>
 
 
-						</div>
-					</section>
+    </div>
+    </section>
 
-			</div>
-{% endblock %}
+    </div>
+    {% endblock %}
