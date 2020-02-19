@@ -35,35 +35,20 @@ class Case{
 
 	
 
-	isClicked(sourisX, sourisY) {
-		var myTop = this.ligne;
-		var myRgt = this.colonne + this.largeur;
-		var myBot = this.ligne + this.hauteur;
-		var myLft = this.colonne;
+	isClicked(col, lig) {
 		var clicked = true;
-		if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
+		if(col != this.colonne || lig != this.ligne)
 		{
-			clicked = false;
+			return false;
 		}
-
 		return clicked;
 
 	}
 
-	isOver(sourisX, sourisY) {
-		var myTop = this.ligne;
-		var myRgt = this.colonne + this.largeur;
-		var myBot = this.ligne + this.hauteur;
-		var myLft = this.colonne;
-		var over = true;
-		if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
-		{
-			over = false;
-		}
-
-		return over;
-
+	displayDefi(){
+		alert("Fais 100 pompes si tu veux rejouer");
 	}
+
 }
 
 	

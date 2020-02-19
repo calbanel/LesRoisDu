@@ -35,18 +35,10 @@ class De{
 
 	
 
-	isClicked(sourisX, sourisY) {
-		// var myTop = this.ligne;
-		// var myRgt = this.colonne + this.largeur;
-		// var myBot = this.ligne + this.hauteur;
-		// var myLft = this.colonne;
-		var clicked = true;
-		// if(sourisX < myLft || sourisX > myRgt || sourisY < myTop || sourisY > myBot)
-		// {
-		// 	clicked = false;
-		// }
+	isClicked(col, lig) {
 
-		if(sourisX != this.colonne || sourisY != this.ligne)
+		var clicked = true;
+		if(col != this.colonne || lig != this.ligne)
 		{
 			return false;
 		}
