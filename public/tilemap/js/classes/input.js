@@ -3,8 +3,8 @@ class InputHandler {
       
         //Récupération des éléments cliquable de notre jeu
         var dice = game.dice;
-        console.log(dice);
-
+        var cases = game.cases;
+        console.log(cases);
         var map = game.map;
 
 
@@ -24,7 +24,9 @@ class InputHandler {
 
                     switch(id){
                         case 1:
-                            alert('Je suis une case');
+                            if(cases.isClicked(col, lig)){
+                                cases.displayDefi();
+                            }
                             break;
                         case 2: 
                             if(dice.isClicked(col, lig)){
@@ -33,7 +35,7 @@ class InputHandler {
                             }
                             break;
                         default:
-                            alert('Je sais même pas où t\'as cliqué');
+                            alert('Je sais même pas où t\'as cliqué fry');
                     }
 
             }
