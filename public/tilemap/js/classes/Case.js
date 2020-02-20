@@ -1,6 +1,6 @@
 class Case{
 
-	constructor(url, colonne, ligne){
+	constructor(url, defi, colonne, ligne){
 		this.colonne = colonne;
 		this.ligne = ligne;
 		// Chargement de l'image dans l'attribut image
@@ -16,7 +16,7 @@ class Case{
 		this.referenceDuPerso.hauteur = this.height;
 	}
 
-		this.defi = "Fais 100 pompes si tu veux rejouer";
+		this.defi = defi;
 		this.image.src = assetsBaseDir + "sprites/" + url;
 	}
 

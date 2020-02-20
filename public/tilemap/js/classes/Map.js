@@ -24,12 +24,14 @@ class Map{
 	this.TILE_HEIGHT = mapData.tileheight;
 	this.TILE_WIDTH = mapData.tilewidth;
 
-	// Liste des cases présents sur le terrain.
-	this.cases = new Array();
 	// Liste des pions présents sur le terrain.
 	this.pions = new Array();
 
-	this.dice = new Array();
+	this.dice = new De();
+
+	this.parcours = new Parcours();
+
+
 	}
 
 	// Pour ajouter un pion
@@ -37,14 +39,14 @@ class Map{
 		this.pions.push(pion);
 	};
 
-	addDe(de){
-		this.dice.push(de);
+	setDice(dice){
+		this.dice = dice;
 	}
 
-	// Pour ajouter une case
-	addCase(casee){
-		this.cases.push(casee);
+	setParcours(parcours){
+		this.parcours = parcours;
 	}
+
 
 	// Pour récupérer la taille (en tiles) de la carte
 	getLargeur() {
@@ -76,21 +78,14 @@ class Map{
 				this.tileset.draw(tuile, context, this, colonne * this.TILE_HEIGHT, ligne * this.TILE_HEIGHT);
 			}
 		}
-		
+
+		this.dice.draw(context, this);
+
+		this.parcours.draw(context, this);
+
 		// Dessin des pions
 		for(var i = 0, l = this.pions.length ; i < l ; i++) {
 			this.pions[i].draw(context, this);
-		}
-		
-
-		// Dessin des cases
-		for(var i = 0, l = this.cases.length ; i < l ; i++) {
-			this.cases[i].draw(context, this);
-		}
-
-		// Dessin du dé
-		for(var i = 0, l = this.dice.length ; i < l ; i++) {
-			this.dice[i].draw(context, this);
 		}
 		
 

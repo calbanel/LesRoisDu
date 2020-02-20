@@ -9,7 +9,6 @@ class Game {
         canvas.height = GAME_HEIGHT;
 
         this.pion = new Pion("pion_rouge.png", 1, 1);
-        this.cases = new Case("case.png", 1, 0);
         this.dice = new De("de.png", 0, 1);
         this.parcours = new Parcours(this.map);
 
@@ -22,10 +21,10 @@ class Game {
     }
 
     start(){
-        this.map.addCase(this.cases);
         this.map.addPion(this.pion);
-        this.map.addDe(this.dice);
+        this.map.setDice(this.dice);
         this.parcours.creerCasesDuParcours();
+        this.map.setParcours(this.parcours);
     }
 
     update(deltaTime){
@@ -34,6 +33,5 @@ class Game {
 
     draw(ctx){
         this.map.draw(ctx);
-        this.parcours.draw(ctx,this.map);
     }
 }
