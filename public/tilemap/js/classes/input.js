@@ -20,7 +20,7 @@ class InputHandler {
 		    var lig = Math.floor(this.sourisY/map.TILE_HEIGHT);
 
             if(this.sourisX && this.sourisY){
-                    var id = game.map.tileset.getIdTile(this.sourisX, this.sourisY, game.map);
+                    var id = game.map.tileset.getIdTile(col, lig, game.map);
 
                     switch(id){
                         case 1:

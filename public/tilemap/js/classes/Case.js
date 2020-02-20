@@ -16,6 +16,7 @@ class Case{
 		this.referenceDuPerso.hauteur = this.height;
 	}
 
+		this.defi = "Fais 100 pompes si tu veux rejouer";
 		this.image.src = assetsBaseDir + "sprites/" + url;
 	}
 
@@ -46,7 +47,7 @@ class Case{
 	}
 
 	displayDefi(){
-		alert("Fais 100 pompes si tu veux rejouer");
+		alert(this.defi);
 	}
 
 }
