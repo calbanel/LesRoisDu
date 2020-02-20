@@ -50,6 +50,11 @@ class Cases
      */
     private $ressources;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numero;
+
     public function __construct()
     {
         $this->ressources = new ArrayCollection();
@@ -147,6 +152,18 @@ class Cases
                 $ressource->setCases(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(int $numero): self
+    {
+        $this->numero = $numero;
 
         return $this;
     }

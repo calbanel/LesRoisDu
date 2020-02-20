@@ -30,7 +30,6 @@ class Partie
 
     /**
      * @ORM\Column(type="string", length=5)
-     * @ORM\GeneratedValue()
      */
     private $code;
 
