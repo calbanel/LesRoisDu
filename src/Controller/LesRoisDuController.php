@@ -40,14 +40,6 @@ class LesRoisDuController extends AbstractController
     {
         return $this->render('les_rois_du/index.html.twig');
     }
-
-    /**
-     * @Route("/connexion", name="page_connexion")
-     */
-    public function affichagePageConnexion()
-    {
-        return $this->render('les_rois_du/connexion.html.twig');
-    }
     
     /**
      * @Route("/inscription", name="page_inscription")
