@@ -142,7 +142,7 @@ class LesRoisDuController extends AbstractController
     {
         
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
-        $createur = $repositoryUtilisateur->find(7);
+        $createur = $repositoryUtilisateur->find(3);
        // Création d'une entrprise vierge
        $partie=new Partie();
 
@@ -171,6 +171,7 @@ class LesRoisDuController extends AbstractController
         $plateauEnJeu->setNom($plateau->getNom());
         $plateauEnJeu->setDescription($plateau->getDescription());
         $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
+        $plateauEnJeu->setNbCases($plateau->getNbCases());
 
 
         $partie->setPlateauDeJeu($plateauEnJeu);
@@ -193,6 +194,7 @@ class LesRoisDuController extends AbstractController
             $cases->setDescriptifDefi($uneCase->getDescriptifDefi())
                 ->setConsignes($uneCase->getConsignes())
                 ->setCodeValidation($uneCase->getCodeValidation())
+                ->setNumero($uneCase->getNumero())
             ;
 
             $cases->setPlateauEnJeu($plateauEnJeu);
