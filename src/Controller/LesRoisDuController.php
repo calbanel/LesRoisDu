@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Plateau;
@@ -18,14 +18,21 @@ use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\UtilisateurType;
 
 class LesRoisDuController extends AbstractController
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     /**
      * @Route("/", name="accueil")
      */
@@ -51,26 +58,25 @@ class LesRoisDuController extends AbstractController
         $utilisateur=new Utilisateur();
 
         // Création de l'objet formulaire
-        $formulaireUtilisateur=$this->createFormBuilder($utilisateur)
-        ->add('Nom',TextType::class)
-        ->add('Prenom',TextType::class)
-        ->add('AdresseMail',EmailType::class)
-        ->add('Pseudo',TextType::class)
-        ->add('MotDePasse', RepeatedType::class, ['type'=>PasswordType::class,
-                                                  'invalid_message'=> 'Les mots de passe doivent correspondre',
-                                                  'options'=> ['attr' => ['class' => 'password-field']],
-                                                  'required'=>true,
-                                                  'first_options'=>['label'=>'Mot de passe'],
-                                                  'second_options' => ['label' => 'Confirmez votre mot de passe']])
-        ->add('Avatar',UrlType::class)        
-        ->getForm();
-
+        $formulaireUtilisateur=$this->createForm(UtilisateurType::class, $utilisateur);
+      
         $formulaireUtilisateur->handleRequest($request);
 
         if ($formulaireUtilisateur->isSubmitted() && $formulaireUtilisateur->isValid())
         {        
-           // l'utilisateur cree un compte il n'est donc pas invité
+           
+            $utilisateur->setAvatar("https://nsa40.casimages.com/img/2020/02/20/200220051454807035.jpg");
+            // l'utilisateur a le role USER
+            $roles[] =  'ROLE_USER';
+            $utilisateur->setRoles($roles);
+            // l'utilisateur cree un compte il n'est donc pas invité
             $utilisateur->setEstInvite(false);
+
+            $plainPassword = $utilisateur->getPlainPassword();
+            $utilisateur->setMotDePasse($this->passwordEncoder->encodePassword(
+                $utilisateur,
+                $plainPassword
+             ));
            
             // Enregistrer la ressource en base de données
            $manager->persist($utilisateur);

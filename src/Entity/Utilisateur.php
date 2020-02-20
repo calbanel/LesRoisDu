@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="utilisateur")
@@ -34,6 +35,12 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="string", length=30)
      */
     private $pseudo;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -158,6 +165,16 @@ class Utilisateur implements UserInterface
         $this->pseudo = $pseudo;
 
         return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     public function getMotDePasse(): ?string

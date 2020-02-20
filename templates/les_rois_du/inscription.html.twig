@@ -35,29 +35,18 @@
                 <div class="fields">
 
                     {{form_start(vueFormulaireInscription)}}
+                           
+
                     <div class="field half">
-                        {{form_row(vueFormulaireInscription.Nom)}}
+                        {{form_row(vueFormulaireInscription.email)}}
+                    </div>
+                    <div class="field half">
+                        {{form_row(vueFormulaireInscription.pseudo)}}
                     </div>
 
                     <div class="field half">
-                        {{form_row(vueFormulaireInscription.Prenom)}}
+                        {{form_row(vueFormulaireInscription.plainPassword)}}
                     </div>
-
-                    <div class="field half">
-                        {{form_row(vueFormulaireInscription.AdresseMail)}}
-                    </div>
-                    <div class="field half">
-                        {{form_row(vueFormulaireInscription.Pseudo)}}
-                    </div>
-
-                    <div class="field half">
-                        {{form_row(vueFormulaireInscription.MotDePasse)}}
-                    </div>
-
-                    <div class="field half">
-                            {{form_row(vueFormulaireInscription.Avatar)}}
-                        </div>
-
 
                     <ul class="actions">
                         <li><a href="" class="button submit">Valider l'inscription </a></li>
