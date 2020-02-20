@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
 class Utilisateur implements UserInterface
@@ -35,7 +36,7 @@ class Utilisateur implements UserInterface
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=255)
      */
     private $motDePasse;
 
@@ -141,7 +142,7 @@ class Utilisateur implements UserInterface
      */
     public function getPassword()
     {
-        // not needed for apps that do not check user passwords
+        return (string) $this->motDePasse;
     }
 
     /**
@@ -150,6 +151,7 @@ class Utilisateur implements UserInterface
     public function getSalt()
     {
         // not needed for apps that do not check user passwords
+        return null;
     }
     
     /**

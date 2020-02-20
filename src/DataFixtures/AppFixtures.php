@@ -10,14 +10,25 @@ use App\Entity\Pion;
 use App\Entity\Cases;
 use App\Entity\Ressource;
 use App\Entity\Utilisateur;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\Partie;
 use Faker;
 
 class AppFixtures extends Fixture
 {
+
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create('fr_FR');
+
+
 
         $plateau12 = new Plateau();
         $plateau12->setNom("12 cases");
@@ -78,7 +89,13 @@ class AppFixtures extends Fixture
         $roles[] = 'ROLE_USER';
         $utilisateur1 = new Utilisateur();
         $utilisateur1->setPseudo("calbanel");
-        $utilisateur1->setMotDePasse("mcb");
+
+        $plainPassword = 'mcb';
+        $utilisateur1->setMotDePasse($this->passwordEncoder->encodePassword(
+            $utilisateur1,
+            $plainPassword
+        ));
+
         $utilisateur1->setAdresseMail("clement.albanel@gmail.com");
         $utilisateur1->setNom("Albanel");
         $utilisateur1->setPrenom("Clement");
@@ -89,7 +106,13 @@ class AppFixtures extends Fixture
 
         $utilisateur2 = new Utilisateur();
         $utilisateur2->setPseudo("eauzi");
-        $utilisateur2->setMotDePasse("souce");
+
+        $plainPassword = 'souce';
+        $utilisateur2->setMotDePasse($this->passwordEncoder->encodePassword(
+            $utilisateur2,
+            $plainPassword
+        ));
+
         $utilisateur2->setAdresseMail("emma.auzi@gmail.com");
         $utilisateur2->setNom("Auzi");
         $utilisateur2->setPrenom("Emma");
