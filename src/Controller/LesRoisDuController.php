@@ -122,9 +122,13 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/compte", name="espace_compte")
      */
-    public function affichageEspaceCompte()
+    public function affichageEspaceCompte(UserInterface $user)
     {
-        return $this->render('les_rois_du/espacecompte.html.twig');
+        
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $user = $repositoryUtilisateur->find($userId);
+        return $this->render('les_rois_du/espacecompte.html.twig', ['utilisateur'=>$user]);
     }
 
  
