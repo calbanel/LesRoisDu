@@ -3,8 +3,7 @@ class InputHandler {
       
         //Récupération des éléments cliquable de notre jeu
         var dice = game.dice;
-        var cases = game.cases;
-        console.log(cases);
+        var parcours = game.parcours;
         var map = game.map;
 
 
@@ -20,13 +19,18 @@ class InputHandler {
 		    var lig = Math.floor(this.sourisY/map.TILE_HEIGHT);
 
             if(this.sourisX && this.sourisY){
-                    var id = game.map.tileset.getIdTile(this.sourisX, this.sourisY, game.map);
+                    var id = game.map.tileset.getIdTile(col, lig, game.map);
 
                     switch(id){
                         case 1:
-                            if(cases.isClicked(col, lig)){
-                                cases.displayDefi();
+                            
+                            for(var i=0; i < parcours.cases.length; i++)
+                            {
+                                if( parcours.cases[i].isClicked(col, lig)){
+                                    parcours.cases[i].displayDefi();
+                                }
                             }
+                            
                             break;
                         case 2: 
                             if(dice.isClicked(col, lig)){
