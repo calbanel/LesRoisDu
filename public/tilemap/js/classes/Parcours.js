@@ -1,11 +1,25 @@
 class Parcours{
-    constructor(map){
+    constructor(nom, map){
 
         this.casesPosition = new Array();
         this.cases = new Array();
         this.map = map;
 
 
+    // Création de l'objet XmlHttpRequest
+	var xhr = getXMLHttpRequest();
+
+	// Chargement du fichier
+	xhr.open("GET", assetsBaseDir +'maps/' + 'defi'+ '.json', false);
+	xhr.send(null);
+	if(xhr.readyState != 4 || (xhr.status != 200 && xhr.status != 0)) // Code == 0 en local
+		throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
+	var mapJsonData = xhr.responseText;
+	
+	// Récupération des données 
+    var mapData = JSON.parse(mapJsonData);
+    
+    this.listeDefis = mapData.defis;
 
     }
 
@@ -47,9 +61,14 @@ class Parcours{
 
         var defi = 'defi n°'
 
+        for(var i = 0; i<this.listeDefis.length; i++){
+            console.log(this.listeDefis.length);
+            console.log(positionCases.length);
+        }
         for(var i = 0; i < positionCases.length; i++){
 
-            this.cases[i] = new Case('case.png', defi + i,
+            this.cases[i] = new Case('case.png',
+                                     this.listeDefis[i].defi,
                                      positionCases[i][0],
                                      positionCases[i][1]);
 

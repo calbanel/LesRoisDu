@@ -10,7 +10,7 @@ class Game {
 
         this.pion = new Pion("pion_rouge.png", 1, 1);
         this.dice = new De("de.png", 0, 1);
-        this.parcours = new Parcours(this.map);
+        this.parcours = new Parcours("defi", this.map);
 
         
 

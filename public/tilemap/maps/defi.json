@@ -1,0 +1,132 @@
+{
+ "defis":[
+        {
+          "case":0,
+          "defi":"Faire 10 pompes"
+        },
+        {
+          "case":1,
+          "defi":"Ecrire du Shakespear"
+        },
+        {
+          "case":2,
+          "defi":"Passer diamant sur league of legend"
+        },
+        {
+          "case":3,
+          "defi":"Trouver la réponse à 42"
+        },
+        {
+          "case":4,
+          "defi":"Fais ce que tu veux"
+        },
+        {
+          "case":5,
+          "defi":"Oublie ton prénom"
+        },
+        {
+          "case":6,
+          "defi":"Regarde à ta droite"
+        },
+        {
+          "case":7,
+          "defi":"Regarde à ta gauche"
+        },
+        {
+          "case":8,
+          "defi":"Fait tes lacets"
+        },
+        {
+          "case":9,
+          "defi":"Passe un doctorat"
+        },
+        {
+          "case":10,
+          "defi":"Passe ton permis"
+        },
+        {
+          "case":11,
+          "defi":"Cite les 10 premières décimal de PI"
+        },
+        {
+          "case":12,
+          "defi":"Le chat de Schrödinger est-il vivant ou mort ?"
+        },
+        {
+          "case":13,
+          "defi":"Qui est Ada Lovelace ?"
+        },
+        {
+          "case":14,
+          "defi":"Fait 10 tours de terrain en faisant un parcours complet"
+        },
+        {
+          "case":15,
+          "defi":"Combien de touche possède un clavier numérique ?"
+        },
+        {
+          "case":16,
+          "defi":"Combien de touche possède un terrain de rugby ?"
+        },
+        {
+          "case":17,
+          "defi":"Fais tes devoirs"
+        },
+        {
+          "case":18,
+          "defi":"Résout  5x – 2(x + 4) = 8 + 3x"
+        },
+        {
+          "case":19,
+          "defi":"Faire 11 pompes"
+        },
+        {
+          "case":21,
+          "defi":"Réconcilie Israel et la Palestine"
+        },
+        {
+          "case":22,
+          "defi":"Destitue Donald Trump"
+        },
+        {
+          "case":23,
+          "defi":"Fais toi élire président et enseuite démissionne"
+        },
+        {
+          "case":24,
+          "defi":"Fait ce que tu veux"
+        },
+        {
+          "case":25,
+          "defi":"Bois 10 gorgées"
+        },
+        {
+          "case":26,
+          "defi":"c'est la 27eme case"
+        },
+        {
+          "case":27,
+          "defi":"Dis à quelqu'un que tu aimes, que tu l'aimes"
+        },
+        {
+          "case":28,
+          "defi":"Faire 28 pompes"
+        },
+        {
+          "case":29,
+          "defi":"Oublie pas tes affaires !"
+        },
+        {
+          "case":30,
+          "defi":"Ferme les yeux, médite et réconcilie toi avec toi même enfant"
+        },
+        {
+          "case":31,
+          "defi":"Bravo, c'est fini"
+        },
+        {
+          "case":32,
+          "defi":"Bravo, cette fois ci c'est vraiment fini"
+        }]
+        
+}
