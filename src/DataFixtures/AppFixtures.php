@@ -23,6 +23,7 @@ class AppFixtures extends Fixture
         $plateau12->setNom("12 cases");
         $plateau12->setDescription($faker->realText($maxNbChars = 400, $indexSize = 2));
         $plateau12->setNiveauDifficulte("Facile");
+        $plateau12->setNbCases(12);
 
         $manager->persist($plateau12);
 
@@ -30,6 +31,7 @@ class AppFixtures extends Fixture
         $plateau13->setNom("13 cases");
         $plateau13->setDescription($faker->realText($maxNbChars = 400, $indexSize = 2));
         $plateau13->setNiveauDifficulte("Difficile");
+        $plateau13->setNbCases(13);
 
         $manager->persist($plateau13);
 
@@ -37,6 +39,7 @@ class AppFixtures extends Fixture
         $plateau14->setNom("14 cases");
         $plateau14->setDescription($faker->realText($maxNbChars = 400, $indexSize = 2));
         $plateau14->setNiveauDifficulte("Difficile");
+        $plateau14->setNbCases(14);
 
         $manager->persist($plateau14);
 
@@ -44,6 +47,7 @@ class AppFixtures extends Fixture
         $plateau15->setNom("15 cases");
         $plateau15->setDescription("Lazone en personne");
         $plateau15->setNiveauDifficulte("Facile");
+        $plateau15->setNbCases(15);
 
         $manager->persist($plateau15);
 
@@ -51,6 +55,7 @@ class AppFixtures extends Fixture
         $plateau16->setNom("16 cases");
         $plateau16->setDescription("Et merci bien");
         $plateau16->setNiveauDifficulte("Moyen");
+        $plateau16->setNbCases(16);
 
         $manager->persist($plateau16);
 
@@ -58,6 +63,7 @@ class AppFixtures extends Fixture
         $plateau17->setNom("17 cases");
         $plateau17->setDescription($faker->realText($maxNbChars = 400, $indexSize = 2));
         $plateau17->setNiveauDifficulte("Facile");
+        $plateau17->setNbCases(17);
 
         $manager->persist($plateau17);
 
@@ -65,6 +71,7 @@ class AppFixtures extends Fixture
         $plateau18->setNom("18 cases");
         $plateau18->setDescription($faker->realText($maxNbChars = 400, $indexSize = 2));
         $plateau18->setNiveauDifficulte("Moyen");
+        $plateau18->setNbCases(18);
 
         $manager->persist($plateau18);
 
@@ -95,6 +102,7 @@ class AppFixtures extends Fixture
         $plateauEnJeu->setNom("16 cases");
         $plateauEnJeu->setDescription("Et merci bien");
         $plateauEnJeu->setNiveauDifficulte("Moyen");
+        $plateauEnJeu->setNbCases(16);
 
         $partie = new Partie();
         $partie->setPlateau($plateau16);
@@ -104,6 +112,9 @@ class AppFixtures extends Fixture
         $partie->setNom("Partie De Clém");
         $partie->setDescription("Partie carrément incroyable !");
         $partie->setCode("ABCDE");
+        $partie->setNbPlateaux(1);
+        $partie->setNbPionParPlateau(4);
+        $partie->setNbFacesDe(4);
 
         $utilisateur1->addPartiesCree($partie);
         $utilisateur2->addPartiesRejoin($partie);
@@ -166,6 +177,7 @@ class AppFixtures extends Fixture
         $plateauEnJeu2->setNom("15 cases");
         $plateauEnJeu2->setDescription("Lazone en personne");
         $plateauEnJeu2->setNiveauDifficulte("Facile");
+        $plateauEnJeu2->setNbCases(15);
 
         $partie2 = new Partie();
         $partie2->setPlateau($plateau15);
@@ -175,6 +187,9 @@ class AppFixtures extends Fixture
         $partie2->setNom("Partie D'Emma'");
         $partie2->setDescription("Rah oe !");
         $partie2->setCode("EDCBA");
+        $partie2->setNbPlateaux(1);
+        $partie2->setNbPionParPlateau(4);
+        $partie2->setNbFacesDe(4);
 
         $utilisateur2->addPartiesCree($partie2);
         $utilisateur1->addPartiesRejoin($partie2);
