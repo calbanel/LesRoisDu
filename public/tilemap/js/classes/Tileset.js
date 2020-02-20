@@ -27,6 +27,7 @@ class Tileset{
 	}
 
 	getIdTile(col, lig, map){
+		var id = "undefined";
 		if (col>= 0 && col <= map.terrainWidth && lig >= 0 && lig<= map.terrainHeight)
 		{
 			id = map.terrain[(lig  * map.terrainWidth) + col];
@@ -40,7 +41,7 @@ class Tileset{
 		return position = {
 			col: Math.floor(x/map.TILE_WIDTH),
 			lig: Math.floor(y/map.TILE_HEIGHT)
-		};
+		}
 	}
 
 }

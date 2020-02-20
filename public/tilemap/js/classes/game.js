@@ -25,7 +25,7 @@ class Game {
         this.map.addCase(this.cases);
         this.map.addPion(this.pion);
         this.map.addDe(this.dice);
-        this.parcours.getPositionCases();
+        this.parcours.creerCasesDuParcours();
     }
 
     update(deltaTime){
@@ -34,5 +34,6 @@ class Game {
 
     draw(ctx){
         this.map.draw(ctx);
+        this.parcours.draw(ctx,this.map);
     }
 }

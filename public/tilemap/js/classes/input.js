@@ -4,7 +4,6 @@ class InputHandler {
         //Récupération des éléments cliquable de notre jeu
         var dice = game.dice;
         var cases = game.cases;
-        console.log(cases);
         var map = game.map;
 
 
