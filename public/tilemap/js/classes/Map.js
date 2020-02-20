@@ -14,7 +14,7 @@ class Map{
 	
 	// Récupération des données 
 	var mapData = JSON.parse(mapJsonData);
-	var nomTileSet = 'Octogone.png'
+	var nomTileSet = 'Octogone_128.png'
 	this.tileset = new Tileset(nomTileSet);
 
 	this.terrain = mapData.layers[0].data;

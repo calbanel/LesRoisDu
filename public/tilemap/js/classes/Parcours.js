@@ -67,7 +67,7 @@ class Parcours{
         }
         for(var i = 0; i < positionCases.length; i++){
 
-            this.cases[i] = new Case('case.png',
+            this.cases[i] = new Case('Case_128.png',
                                      this.listeDefis[i].defi,
                                      positionCases[i][0],
                                      positionCases[i][1]);

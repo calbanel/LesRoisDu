@@ -9,7 +9,7 @@ class Tileset{
 				throw new Error("Erreur de chargement du tileset nommé \"" + url + "\".");
 			}
 			//Largeur du tileset et tile
-			this.referenceDuTileset.largeur = this.width / 64;
+			this.referenceDuTileset.largeur = this.width / 128;
 		
 		}	
 

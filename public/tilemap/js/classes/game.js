@@ -2,7 +2,7 @@ class Game {
 
     constructor()
     {
-        this.map = new Map("plateau30cases");
+        this.map = new Map("plateauBlancCase");
         const GAME_WIDTH =  this.map.getLargeur();
         const GAME_HEIGHT = this.map.getHauteur();
 	    canvas.width  = GAME_WIDTH;
