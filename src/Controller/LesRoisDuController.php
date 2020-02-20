@@ -23,6 +23,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UtilisateurType;
+use App\Form\PartieType;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class LesRoisDuController extends AbstractController
 {
@@ -75,7 +77,7 @@ class LesRoisDuController extends AbstractController
            $manager->flush();
 
            // Rediriger l'utilisateur vers la page d'accueil
-           return $this->redirectToRoute('hub');
+           return $this->redirectToRoute('app_login');
         }
         
         
@@ -95,10 +97,14 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties", name="espace_partie")
      */
-    public function affichageEspacePartie()
+    public function affichageEspacePartie(UserInterface $user)
     {
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $createur = $repositoryUtilisateur->find($userId);
+
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
-        $parties = $repositoryPartie->findAll();
+        $parties = $repositoryPartie->findBy(['createur' => $createur]);
         //$this->addFlash('success',"misere"); 
         return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
     }
@@ -136,26 +142,17 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties/creation", name="creation_partie")
      */
-    public function affichageCreationPartie(Request $request, ObjectManager $manager)
+    public function affichageCreationPartie(Request $request, ObjectManager $manager, UserInterface $user)
     {
         
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
-        $createur = $repositoryUtilisateur->find(3);
+        $userId = $user->getId();
+        $createur = $repositoryUtilisateur->find($userId);
        // Création d'une entrprise vierge
        $partie=new Partie();
 
        // Création de l'objet formulaire
-       $formulairePartie=$this->createFormBuilder($partie)
-       ->add('Nom',TextType::class)
-       ->add('Description',TextareaType::class)
-       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
-       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
-       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
-      ->add('plateau', EntityType::class, ['class' => Plateau::class,
-                                                'choice_label' => 'nom',
-                                                'multiple' => false,
-                                                'expanded' => false])
-       ->getForm();
+       $formulairePartie=$this->createForm(PartieType::class, $partie);
 
        $formulairePartie->handleRequest($request);
 
