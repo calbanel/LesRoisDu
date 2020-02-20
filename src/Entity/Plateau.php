@@ -48,6 +48,11 @@ class Plateau
      */
     private $utilisateurs;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbCases;
+
     public function __construct()
     {
         $this->parties = new ArrayCollection();
@@ -180,6 +185,18 @@ class Plateau
         if ($this->utilisateurs->contains($utilisateur)) {
             $this->utilisateurs->removeElement($utilisateur);
         }
+
+        return $this;
+    }
+
+    public function getNbCases(): ?int
+    {
+        return $this->nbCases;
+    }
+
+    public function setNbCases(int $nbCases): self
+    {
+        $this->nbCases = $nbCases;
 
         return $this;
     }

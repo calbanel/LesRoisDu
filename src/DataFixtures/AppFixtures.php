@@ -68,6 +68,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($plateau18);
 
+        $roles[] = 'ROLE_USER';
         $utilisateur1 = new Utilisateur();
         $utilisateur1->setPseudo("calbanel");
         $utilisateur1->setMotDePasse("mcb");
@@ -76,6 +77,8 @@ class AppFixtures extends Fixture
         $utilisateur1->setPrenom("Clement");
         $utilisateur1->setEstInvite(false);
         $utilisateur1->setAvatar($faker->imageUrl($width = 200,$height = 200,'cats'));
+        $utilisateur1->setEmail("clement.albanel@gmail.com");
+        $utilisateur1->setRoles($roles);
 
         $utilisateur2 = new Utilisateur();
         $utilisateur2->setPseudo("eauzi");
@@ -85,6 +88,8 @@ class AppFixtures extends Fixture
         $utilisateur2->setPrenom("Emma");
         $utilisateur2->setEstInvite(false);
         $utilisateur2->setAvatar($faker->imageUrl($width = 200,$height = 200,'cats'));
+        $utilisateur2->setEmail("emma.auzi@gmail.com");
+        $utilisateur2->setRoles($roles);
 
         $plateauEnJeu = new PlateauEnJeu();
         $plateauEnJeu->setNom("16 cases");
@@ -230,6 +235,7 @@ class AppFixtures extends Fixture
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
                 ->setPlateau($plateau12)
+                ->setNumero($i+1)
             ;
             
             array_push($tabCases, $cases);
@@ -242,6 +248,7 @@ class AppFixtures extends Fixture
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
                 ->setPlateau($plateau13)
+                ->setNumero($i+1)
             ;
             
             array_push($tabCases, $cases);
@@ -255,6 +262,7 @@ class AppFixtures extends Fixture
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
                 ->setPlateau($plateau14)
+                ->setNumero($i+1)
             ;
             
             array_push($tabCases, $cases);
@@ -266,6 +274,7 @@ class AppFixtures extends Fixture
             $cases->setDescriptifDefi($faker->realText($maxNbChars = 100, $indexSize = 2))
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
+                ->setNumero($i+1)
             ;
 
             array_push($cases15, $cases);
@@ -280,6 +289,7 @@ class AppFixtures extends Fixture
             $cases->setDescriptifDefi($cases15[$i]->getDescriptifDefi())
                 ->setConsignes($cases15[$i]->getConsignes())
                 ->setCodeValidation($cases15[$i]->getCodeValidation())
+                ->setNumero($i+1)
             ;
             $cases->setPlateauEnJeu($plateauEnJeu2);
             $plateauEnJeu2->addCase($cases);
@@ -296,6 +306,7 @@ class AppFixtures extends Fixture
             $cases->setDescriptifDefi($faker->realText($maxNbChars = 100, $indexSize = 2))
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
+                ->setNumero($i+1)
             ;
 
             array_push($cases16, $cases);
@@ -310,6 +321,7 @@ class AppFixtures extends Fixture
             $cases->setDescriptifDefi($cases16[$i]->getDescriptifDefi())
                 ->setConsignes($cases16[$i]->getConsignes())
                 ->setCodeValidation($cases16[$i]->getCodeValidation())
+                ->setNumero($i+1)
             ;
             $cases->setPlateauEnJeu($plateauEnJeu);
             $plateauEnJeu->addCase($cases);
@@ -325,6 +337,7 @@ class AppFixtures extends Fixture
             $cases->setDescriptifDefi($faker->realText($maxNbChars = 100, $indexSize = 2))
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
+                ->setNumero($i+1)
                 ->setPlateau($plateau17)
             ;
             
@@ -338,6 +351,7 @@ class AppFixtures extends Fixture
                 ->setConsignes($faker->realText($maxNbChars = 400, $indexSize = 2))
                 ->setCodeValidation($faker->randomNumber($nbDigits = 5, $strict = false))
                 ->setPlateau($plateau18)
+                ->setNumero($i+1)
             ;
             
             array_push($tabCases, $cases);

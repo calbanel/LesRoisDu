@@ -53,6 +53,11 @@ class PlateauEnJeu
      */
     private $cases;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbCases;
+
     public function __construct()
     {
         $this->pions = new ArrayCollection();
@@ -188,6 +193,18 @@ class PlateauEnJeu
                 $case->setPlateauEnJeu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNbCases(): ?int
+    {
+        return $this->nbCases;
+    }
+
+    public function setNbCases(int $nbCases): self
+    {
+        $this->nbCases = $nbCases;
 
         return $this;
     }
