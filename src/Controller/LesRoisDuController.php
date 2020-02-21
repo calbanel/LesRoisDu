@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Plateau;
@@ -18,28 +18,29 @@ use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\UtilisateurType;
+use App\Form\PartieType;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class LesRoisDuController extends AbstractController
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     /**
      * @Route("/", name="accueil")
      */
     public function index()
     {
         return $this->render('les_rois_du/index.html.twig');
-    }
-
-    /**
-     * @Route("/connexion", name="page_connexion")
-     */
-    public function affichagePageConnexion()
-    {
-        return $this->render('les_rois_du/connexion.html.twig');
     }
     
     /**
@@ -51,33 +52,32 @@ class LesRoisDuController extends AbstractController
         $utilisateur=new Utilisateur();
 
         // Création de l'objet formulaire
-        $formulaireUtilisateur=$this->createFormBuilder($utilisateur)
-        ->add('Nom',TextType::class)
-        ->add('Prenom',TextType::class)
-        ->add('AdresseMail',EmailType::class)
-        ->add('Pseudo',TextType::class)
-        ->add('MotDePasse', RepeatedType::class, ['type'=>PasswordType::class,
-                                                  'invalid_message'=> 'Les mots de passe doivent correspondre',
-                                                  'options'=> ['attr' => ['class' => 'password-field']],
-                                                  'required'=>true,
-                                                  'first_options'=>['label'=>'Mot de passe'],
-                                                  'second_options' => ['label' => 'Confirmez votre mot de passe']])
-        ->add('Avatar',UrlType::class)        
-        ->getForm();
-
+        $formulaireUtilisateur=$this->createForm(UtilisateurType::class, $utilisateur);
+      
         $formulaireUtilisateur->handleRequest($request);
 
         if ($formulaireUtilisateur->isSubmitted() && $formulaireUtilisateur->isValid())
         {        
-           // l'utilisateur cree un compte il n'est donc pas invité
+           
+            $utilisateur->setAvatar("https://nsa40.casimages.com/img/2020/02/20/200220051454807035.jpg");
+            // l'utilisateur a le role USER
+            $roles[] =  'ROLE_USER';
+            $utilisateur->setRoles($roles);
+            // l'utilisateur cree un compte il n'est donc pas invité
             $utilisateur->setEstInvite(false);
+
+            $plainPassword = $utilisateur->getPlainPassword();
+            $utilisateur->setMotDePasse($this->passwordEncoder->encodePassword(
+                $utilisateur,
+                $plainPassword
+             ));
            
             // Enregistrer la ressource en base de données
            $manager->persist($utilisateur);
            $manager->flush();
 
            // Rediriger l'utilisateur vers la page d'accueil
-           return $this->redirectToRoute('hub');
+           return $this->redirectToRoute('app_login');
         }
         
         
@@ -97,10 +97,14 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties", name="espace_partie")
      */
-    public function affichageEspacePartie()
+    public function affichageEspacePartie(UserInterface $user)
     {
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $createur = $repositoryUtilisateur->find($userId);
+
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
-        $parties = $repositoryPartie->findAll();
+        $parties = $repositoryPartie->findBy(['createur' => $createur]);
         //$this->addFlash('success',"misere"); 
         return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
     }
@@ -118,9 +122,13 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/compte", name="espace_compte")
      */
-    public function affichageEspaceCompte()
+    public function affichageEspaceCompte(UserInterface $user)
     {
-        return $this->render('les_rois_du/espacecompte.html.twig');
+        
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $user = $repositoryUtilisateur->find($userId);
+        return $this->render('les_rois_du/espacecompte.html.twig', ['utilisateur'=>$user]);
     }
 
  
@@ -138,26 +146,17 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties/creation", name="creation_partie")
      */
-    public function affichageCreationPartie(Request $request, ObjectManager $manager)
+    public function affichageCreationPartie(Request $request, ObjectManager $manager, UserInterface $user)
     {
         
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
-        $createur = $repositoryUtilisateur->find(3);
+        $userId = $user->getId();
+        $createur = $repositoryUtilisateur->find($userId);
        // Création d'une entrprise vierge
        $partie=new Partie();
 
        // Création de l'objet formulaire
-       $formulairePartie=$this->createFormBuilder($partie)
-       ->add('Nom',TextType::class)
-       ->add('Description',TextareaType::class)
-       ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
-       ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
-       ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
-      ->add('plateau', EntityType::class, ['class' => Plateau::class,
-                                                'choice_label' => 'nom',
-                                                'multiple' => false,
-                                                'expanded' => false])
-       ->getForm();
+       $formulairePartie=$this->createForm(PartieType::class, $partie);
 
        $formulairePartie->handleRequest($request);
 

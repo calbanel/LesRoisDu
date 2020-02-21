@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="utilisateur")
@@ -36,24 +37,15 @@ class Utilisateur implements UserInterface
     private $pseudo;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $motDePasse;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $adresseMail;
-
-    /**
-     * @ORM\Column(type="string", length=60, nullable=true)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=60, nullable=true)
-     */
-    private $prenom;
 
     /**
      * @ORM\Column(type="boolean")
@@ -175,6 +167,16 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
     public function getMotDePasse(): ?string
     {
         return $this->motDePasse;
@@ -183,42 +185,6 @@ class Utilisateur implements UserInterface
     public function setMotDePasse(string $motDePasse): self
     {
         $this->motDePasse = $motDePasse;
-
-        return $this;
-    }
-
-    public function getAdresseMail(): ?string
-    {
-        return $this->adresseMail;
-    }
-
-    public function setAdresseMail(string $adresseMail): self
-    {
-        $this->adresseMail = $adresseMail;
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(?string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(?string $prenom): self
-    {
-        $this->prenom = $prenom;
 
         return $this;
     }
