@@ -101,12 +101,13 @@ class LesRoisDuController extends AbstractController
     {
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();
-        $createur = $repositoryUtilisateur->find($userId);
+        $user = $repositoryUtilisateur->find($userId);
 
-        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
-        $parties = $repositoryPartie->findBy(['createur' => $createur]);
-        //$this->addFlash('success',"misere"); 
-        return $this->render('les_rois_du/espacepartie.html.twig', ['parties'=>$parties]);
+        $cree = $user->getPartiesCree();
+
+        $rejoins = $user->getPartiesRejoins();
+
+        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins]);
     }
 
     /**

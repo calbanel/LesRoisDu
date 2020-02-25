@@ -28,11 +28,13 @@
                 <h1>ESPACE PARTIES</h1>
 
 
+
                 <section id="one" class="wrapper style2 spotlights">
 
-
+                <BR>
+                <h2><center>Parties créées</center></h2>
                     <!-- Boucle pour chaque partie  -->
-                    {% for partie in parties %}
+                    {% for partie in partiesCree %}
                     <section>
                         <a href="#" class="image"><img src="img/LesRoisDuBad.png" alt=""
                                 data-position="center center" /></a>
@@ -79,8 +81,38 @@
                     <!-- Fin boucle -->
                     {% endfor %}
 
-            </div>
-        </section>
+
+        <BR>
+        <h2><center>Parties rejointes</center></h2>
+
+
+
+                    <!-- Boucle pour chaque partie  -->
+                    {% for partie in partiesRejoins %}
+                    <section>
+                        <a href="#" class="image"><img src="img/LesRoisDuBad.png" alt=""
+                                data-position="center center" /></a>
+                        <div class="content">
+                            <div class="inner">
+                                {% for message in app.flashes('success') %}
+
+                                <p> {{ message }}</p>
+
+                                {% endfor %}
+
+                                <h2> {{ partie.nom }}</h2>
+                                <p>{{ partie.description }} </p>
+                                <ul class="actions">
+                                    <li><a href="{{path ('partie_en_cours', {'idPartie': partie.id}) }}"
+                                            class="button">Consulter</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Fin boucle -->
+                    {% endfor %}
+
 
 
     </div>
