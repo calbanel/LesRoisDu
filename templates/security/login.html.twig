@@ -59,7 +59,7 @@
 {% if app.user %}
   <a href="{{ path('app_logout') }}">Se déconnecter</a>
   {% else %}
-  <a href="#"> Se connecter en tant qu'invité </a>
+  <a href="{{ path('en_invite') }}"> Se connecter en tant qu'invité </a>
   {% endif %}
  </div>
 

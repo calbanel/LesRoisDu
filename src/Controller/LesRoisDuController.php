@@ -342,4 +342,43 @@ class LesRoisDuController extends AbstractController
 
     }
 
+    /**
+     * @Route("/invite", name="en_invite")
+     */
+    public function connexionInvite(ObjectManager $manager)
+    {
+
+        $invite = new Utilisateur();
+
+        $random = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 6, 8);
+
+        $fakeEmail = $random."@guest.com";
+        $invite->setEmail($fakeEmail);
+
+        $fakePseudo = "Guest".$random;
+
+        $invite->setPseudo($fakePseudo);
+
+        $invite->setAvatar("https://nsa40.casimages.com/img/2020/02/20/200220051454807035.jpg");
+
+        $roles[] =  'ROLE_USER';
+        $invite->setRoles($roles);
+
+        $invite->setEstInvite(true);
+
+        $plainPassword = $random;
+        $invite->setMotDePasse($this->passwordEncoder->encodePassword(
+            $invite,
+            $plainPassword
+         ));
+           
+        // Enregistrer la ressource en base de données
+        $manager->persist($invite);
+        $manager->flush();
+
+        return $this->render('les_rois_du/invite.html.twig', ['invite' => $invite]);
+    }
+
+
+
 }
