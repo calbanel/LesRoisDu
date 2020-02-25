@@ -379,6 +379,30 @@ class LesRoisDuController extends AbstractController
         return $this->render('les_rois_du/invite.html.twig', ['invite' => $invite]);
     }
 
+    /**
+     * @Route("/join{code}", name="join_partie")
+     */
+    public function joinPartie(ObjectManager $manager, UserInterface $user, $code)
+    {
+
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $joueur = $repositoryUtilisateur->find($userId);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $repositoryPartie=$entityManager->getRepository(Partie::class);
+        $partie = $repositoryPartie->findOneBy(['code' => "K50BD"]);
+
+        $joueur->addPartiesRejoin($partie);
+           
+        // Enregistrer la ressource en base de données
+        $manager->persist($partie);
+        $manager->persist($joueur);
+        $manager->flush();
+
+        return $this->redirectToRoute('espace_partie');
+    }
+
 
 
 }
