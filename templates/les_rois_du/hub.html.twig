@@ -29,11 +29,11 @@
                     <ul class="actions">
                         <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
                         <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES EXISTANTES</a></li>
-                        <li><a onClick=addBouton() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
+                        <li><a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
                         <script type="text/javaScript">
 
-                            function addBouton() {                             
-                                document.getElementById('Cible').innerHTML ='<p>Rentrez le code de la partie ci-dessous :</p>   <input id="inputRejoindre"  type="text"/>   <p><a href="" id="boutonRejoindre" class="button scrolly">Accéder</a></p>';
+                            function ajouterSaisieCode() {                             
+                                document.getElementById('Cible').innerHTML ='<p>Rentrez le code de la partie ci-dessous :</p>   <input id="inputRejoindre"  type="text"/><br>   <a href="" id="boutonRejoindre" class="button scrolly"> Accéder</a>';
                                 routeSaisie = true;
                             }
 
@@ -46,7 +46,7 @@
                                     document.getElementById("boutonRejoindre").setAttribute("href",route);
                                     console.log(route);
                                 }
-                            }, 1000);
+                            }, 100);
 
                         </script> 
 
