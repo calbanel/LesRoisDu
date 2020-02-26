@@ -29,7 +29,26 @@
                     <ul class="actions">
                         <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
                         <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES EXISTANTES</a></li>
-                        <li><a href="{{ path('join_partie', {'code':5Z12C}) }}" class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
+                        <li><a onClick=addBouton() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
+                        <script type="text/javaScript">
+
+                            function addBouton() {                             
+                                document.getElementById('Cible').innerHTML ='<p>Rentrez le code de la partie ci-dessous :</p>   <input id="inputRejoindre"  type="text"/>   <p><a href="" id="boutonRejoindre" class="button scrolly">Accéder</a></p>';
+                                routeSaisie = true;
+                            }
+
+                            routeSaisie = false; //pour éviter d'essayer de regarder le code dans le input s'il n'est pas encre créé
+                        
+                            setInterval(function(){
+                                if (routeSaisie) {
+                                    var code = document.getElementById("inputRejoindre").value;
+                                    var route = '/join' + code;
+                                    document.getElementById("boutonRejoindre").setAttribute("href",route);
+                                    console.log(route);
+                                }
+                            }, 1000);
+
+                        </script> 
 
                     </ul>
                     <div id="Cible"></div>

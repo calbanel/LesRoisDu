@@ -391,7 +391,7 @@ class LesRoisDuController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryPartie=$entityManager->getRepository(Partie::class);
-        $partie = $repositoryPartie->findOneBy(['code' => "K50BD"]);
+        $partie = $repositoryPartie->findOneBy(['code' => $code]);
 
         $joueur->addPartiesRejoin($partie);
            
