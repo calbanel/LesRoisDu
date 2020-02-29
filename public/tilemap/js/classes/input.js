@@ -26,7 +26,7 @@ class InputHandler {
                     case 1:
 
                         if (pion.isClicked(this.sourisX, this.sourisY)) {
-                            
+                             
                             alert('je suis un pion et je suis cliké');
 
                         } else {
@@ -41,9 +41,9 @@ class InputHandler {
 
                         break;
                     case 2:
-                        if (dice.isClicked(col, lig)) {
+                        if (dice.isClicked(this.sourisX, this.sourisY)) {
 
-                            alert('Je suis le dé');
+                            dice.lancerDe();
                         }
                         break;
                     default:

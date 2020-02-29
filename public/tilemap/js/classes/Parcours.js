@@ -58,6 +58,7 @@ class Parcours{
     creerCasesDuParcours(){
 
         var positionCases = this.getPositionCases();
+        console.log(positionCases);
 
         var defi = 'defi n°'
 
