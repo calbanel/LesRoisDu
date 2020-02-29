@@ -1,7 +1,7 @@
 class Pion{
-	constructor(url, colonne, ligne){
-		this.colonne = colonne;
-		this.ligne = ligne;
+	constructor(url, x, y){
+		this.x = x;
+		this.y = y;
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
 		this.image.referenceDuPerso = this;
@@ -24,8 +24,8 @@ class Pion{
 	draw(context, map) {
 		context.drawImage(
 		this.image,
-		((this.colonne - 1) * map.TILE_WIDTH) + map.TILE_WIDTH / 4,
-		((this.ligne - 1) * map.TILE_HEIGHT) + map.TILE_HEIGHT/4,
+		this.x,
+		this.y,
 		this.largeur,
 		this.hauteur
 		);
@@ -33,13 +33,28 @@ class Pion{
 	
 	
 	
-	teleporterVersCase(colonne,ligne) {
-		this.colonne = colonne;
-		this.ligne = ligne;
+	teleporterVersCase(x,y) {
+		this.x = x;
+		this.y = y;
 			
 		return true;
 	}
 	
+
+	isClicked(x, y) {
+		var myTop = this.y;
+		var myRgt = this.x + this.largeur;
+		var myBot = this.y + this.hauteur;
+		var myLft = this.x;
+
+		var clicked = true;
+		if(y < myTop || y > myBot || x < myLft || x > myRgt)
+		{
+			return false;
+		}
+		return clicked;
+
+	}
 	
 }
 

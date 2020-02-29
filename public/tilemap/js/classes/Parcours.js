@@ -62,8 +62,6 @@ class Parcours{
         var defi = 'defi n°'
 
         for(var i = 0; i<this.listeDefis.length; i++){
-            console.log(this.listeDefis.length);
-            console.log(positionCases.length);
         }
         for(var i = 0; i < positionCases.length; i++){
 
