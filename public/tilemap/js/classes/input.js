@@ -26,11 +26,9 @@ class InputHandler {
                     case 1:
 
                         if (pion.isClicked(this.sourisX, this.sourisY)) {
-                             
-                            pion.update(map);
+                            pion.update();
 
                         } else {
-
                             parcours.update(col, lig);
 
                         }

@@ -85,7 +85,7 @@ class Map{
 
 		// Dessin des pions
 		for(var i = 0, l = this.pions.length ; i < l ; i++) {
-			this.pions[i].draw(context, this);
+			this.pions[i].draw(context);
 		}
 		
 
