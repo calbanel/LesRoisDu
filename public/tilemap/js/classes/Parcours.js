@@ -23,8 +23,12 @@ class Parcours{
 
     }
 
-    update(deltaTime){
-
+    update(col, lig){
+        for (var i = 0; i < this.cases.length; i++) {
+            if (this.cases[i].isClicked(col, lig)) {
+                this.cases[i].displayDefi();
+            }
+        }
     }
     
     draw(context, map){
@@ -62,8 +66,6 @@ class Parcours{
         var defi = 'defi n°'
 
         for(var i = 0; i<this.listeDefis.length; i++){
-            console.log(this.listeDefis.length);
-            console.log(positionCases.length);
         }
         for(var i = 0; i < positionCases.length; i++){
 

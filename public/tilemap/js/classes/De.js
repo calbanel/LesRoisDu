@@ -1,8 +1,8 @@
 class De{
 
-	constructor(url, colonne, ligne){
-		this.colonne = colonne;
-		this.ligne = ligne;
+	constructor(url, x, y){
+		this.x = x;
+		this.y = y;
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
 		this.image.referenceDuPerso = this;
@@ -19,15 +19,15 @@ class De{
 		this.image.src = assetsBaseDir + "sprites/" + url;
 	}
 
-	update(deltaTime){
-
+	update(){
+		this.lancerDe();
 	}
 
 	draw(context, map){
 		context.drawImage(
 			this.image,
-			((this.colonne - 1) * map.TILE_WIDTH) + map.TILE_WIDTH,
-			((this.ligne - 1) * map.TILE_HEIGHT) + map.TILE_HEIGHT,
+			this.x,
+			this.y,
 			this.largeur,
 			this.hauteur
 			);
@@ -35,16 +35,27 @@ class De{
 
 	
 
-	isClicked(col, lig) {
+	isClicked(x, y) {
+		var myTop = this.y;
+		var myRgt = this.x + this.largeur;
+		var myBot = this.y + this.hauteur;
+		var myLft = this.x;
 
 		var clicked = true;
-		if(col != this.colonne || lig != this.ligne)
+		if(y < myTop || y > myBot || x < myLft || x > myRgt)
 		{
 			return false;
 		}
 		return clicked;
 
 	}
+
+	lancerDe(){
+		var faceDe=Math.random();
+		var faceObtenue=Math.ceil(faceDe*4);
+		alert("Vous avancez de "+ faceObtenue + " case(s) !");
+	}
+
 }
 
 	
