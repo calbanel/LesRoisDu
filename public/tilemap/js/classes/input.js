@@ -27,7 +27,7 @@ class InputHandler {
 
                         if (pion.isClicked(this.sourisX, this.sourisY)) {
                              
-                            alert('je suis un pion et je suis cliké');
+                            alert(pion.getIdCaseAround(map));
 
                         } else {
                             for (var i = 0; i < parcours.cases.length; i++) {

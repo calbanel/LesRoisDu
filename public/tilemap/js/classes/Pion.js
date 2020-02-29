@@ -1,7 +1,12 @@
 class Pion{
 	constructor(url, x, y){
+		//Position dans le canvas
 		this.x = x;
 		this.y = y;
+		//Position dans la map
+		this.col = Math.floor(this.x / 128);
+		this.lig = Math.floor(this.y / 128);
+
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
 		this.image.referenceDuPerso = this;
@@ -33,9 +38,9 @@ class Pion{
 	
 	
 	
-	teleporterVersCase(x,y) {
-		this.x = x;
-		this.y = y;
+	teleportToCase(col,lig) {
+		this.col = col;
+		this.lig = lig;
 			
 		return true;
 	}
@@ -53,6 +58,37 @@ class Pion{
 			return false;
 		}
 		return clicked;
+
+	}
+
+	getPositionInMap(){
+		this.col = Math.floor(this.x / 128);
+		this.lig = Math.floor(this.y / 128);
+		
+		return { col: this.col, lig: this.lig};
+	}
+
+	getIdCaseAround(map){
+		var posPion = this.getPositionInMap();
+		var tabId = new Array();
+
+
+		var caseTop = { col: posPion.col, lig: posPion.lig - 1 }
+		var caseRgt = { col: posPion.col + 1, lig: posPion.lig }
+		var caseBot = { col: posPion.col, lig: posPion.lig + 1 }
+		var caseLft = { col: posPion.col - 1, lig: posPion.lig }
+
+		var idTop = map.terrain[(caseTop.lig * map.terrainWidth) + caseTop.col];
+		var idRgt = map.terrain[(caseRgt.lig * map.terrainWidth) + caseRgt.col];
+		var idBot = map.terrain[(caseBot.lig * map.terrainWidth) + caseBot.col];
+		var idLft = map.terrain[(caseLft.lig * map.terrainWidth) + caseLft.col];
+
+		tabId.push(idTop);
+		tabId.push(idRgt);
+		tabId.push(idBot);
+		tabId.push(idLft);
+
+		return tabId;
 
 	}
 	
