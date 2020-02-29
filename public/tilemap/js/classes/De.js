@@ -19,8 +19,8 @@ class De{
 		this.image.src = assetsBaseDir + "sprites/" + url;
 	}
 
-	update(deltaTime){
-
+	update(){
+		this.lancerDe();
 	}
 
 	draw(context, map){

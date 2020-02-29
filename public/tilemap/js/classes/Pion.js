@@ -1,5 +1,5 @@
-class Pion{
-	constructor(url, x, y){
+class Pion {
+	constructor(url, x, y) {
 		//Position dans le canvas
 		this.x = x;
 		this.y = y;
@@ -14,44 +14,32 @@ class Pion{
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
 		this.image.referenceDuPerso = this;
-		this.image.onload = function() {
-			if(!this.complete) 
+		this.image.onload = function () {
+			if (!this.complete)
 				throw "Erreur de chargement du sprite nommé \"" + url + "\".";
-		
+
 			// Taille du pion
 			this.referenceDuPerso.largeur = this.width;
-			this.referenceDuPerso.hauteur = this.height ;
+			this.referenceDuPerso.hauteur = this.height;
 		}
 
-	this.image.src = assetsBaseDir + "sprites/" + url;
+		this.image.src = assetsBaseDir + "sprites/" + url;
 	}
 
-	update(){
+	
 
-	}
-	
-	draw(context, map) {
-		context.drawImage(
-		this.image,
-		this.x,
-		this.y,
-		this.largeur,
-		this.hauteur
-		);
-	}
-	
-	
-	
-	teleportToCase(col,lig) {
+
+
+	teleportToCase(col, lig) {
 		this.oldCol = this.col;
 		this.oldLig = this.lig;
 
 		this.col = col;
 		this.lig = lig;
-			
+
 		return true;
 	}
-	
+
 
 	isClicked(x, y) {
 		var myTop = this.y;
@@ -60,22 +48,21 @@ class Pion{
 		var myLft = this.x;
 
 		var clicked = true;
-		if(y < myTop || y > myBot || x < myLft || x > myRgt)
-		{
+		if (y < myTop || y > myBot || x < myLft || x > myRgt) {
 			return false;
 		}
 		return clicked;
 
 	}
 
-	getPositionInMap(map){
+	getPositionInMap(map) {
 		this.col = Math.floor(this.x / map.TILE_WIDTH);
 		this.lig = Math.floor(this.y / map.TILE_HEIGHT);
-		
-		return { col: this.col, lig: this.lig};
+
+		return { col: this.col, lig: this.lig };
 	}
 
-	getInfoCasesAround(map){
+	getInfoCasesAround(map) {
 		//On récupère la position du pion dans la map
 		var posPion = this.getPositionInMap(map);
 
@@ -92,17 +79,42 @@ class Pion{
 		var idLft = map.terrain[(posLft.lig * map.terrainWidth) + posLft.col];
 
 		var CasesAround = [
-			[{ id: idTop, pos: posTop}],
-			[{ id: idRgt, pos: posRgt}],
-			[{ id: idBot, pos: posBot}],
-			[{ id: idLft, pos: posLft}]
-			];
+			[{ id: idTop, pos: posTop }],
+			[{ id: idRgt, pos: posRgt }],
+			[{ id: idBot, pos: posBot }],
+			[{ id: idLft, pos: posLft }]
+		];
 
 		//On retourne l'ID et la position des cases autour du pion
 		return CasesAround;
 
 	}
-	
+
+	update(map) {
+
+		var casesAround = this.getInfoCasesAround(map);
+
+		casesAround.forEach(function (caseAround) {
+			if (caseAround[0].id == 1) {
+				alert('Jai une case connexe et sa position est : ' +
+					caseAround[0].pos.col + ' en colone et : '
+					+ caseAround[0].pos.lig + ' en ligne');
+
+			}
+
+		});
+	}
+
+	draw(context, map) {
+		context.drawImage(
+			this.image,
+			this.x,
+			this.y,
+			this.largeur,
+			this.hauteur
+		);
+	}
+
 }
 
 

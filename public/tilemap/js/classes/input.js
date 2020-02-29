@@ -27,24 +27,11 @@ class InputHandler {
 
                         if (pion.isClicked(this.sourisX, this.sourisY)) {
                              
-                            var casesAround = pion.getInfoCasesAround(map);
-
-                            casesAround.forEach(function(caseAround) {
-                                if (caseAround[0].id == 1) {
-                                    console.log('Jai une case connexe et sa position est : ' + 
-                                    caseAround[0].pos.col + ' en colone et : '
-                                     + caseAround[0].pos.lig + ' en ligne' );
-                                    
-                                }
-                                
-                            });
+                            pion.update(map);
 
                         } else {
-                            for (var i = 0; i < parcours.cases.length; i++) {
-                                if (parcours.cases[i].isClicked(col, lig)) {
-                                    parcours.cases[i].displayDefi();
-                                }
-                            }
+
+                            parcours.update(col, lig);
 
                         }
 
@@ -53,11 +40,12 @@ class InputHandler {
                     case 2:
                         if (dice.isClicked(this.sourisX, this.sourisY)) {
 
-                            dice.lancerDe();
+                            dice.update();
                         }
                         break;
+
                     default:
-                        alert('Je sais même pas où t\'as cliqué fry');
+                        alert('Je sais même pas où t\'as cliqué');
                 }
 
             }
