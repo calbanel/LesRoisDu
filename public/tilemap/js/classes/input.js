@@ -27,7 +27,17 @@ class InputHandler {
 
                         if (pion.isClicked(this.sourisX, this.sourisY)) {
                              
-                            alert(pion.getIdCaseAround(map));
+                            var casesAround = pion.getInfoCasesAround(map);
+
+                            casesAround.forEach(function(caseAround) {
+                                if (caseAround[0].id == 1) {
+                                    console.log('Jai une case connexe et sa position est : ' + 
+                                    caseAround[0].pos.col + ' en colone et : '
+                                     + caseAround[0].pos.lig + ' en ligne' );
+                                    
+                                }
+                                
+                            });
 
                         } else {
                             for (var i = 0; i < parcours.cases.length; i++) {

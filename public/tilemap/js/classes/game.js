@@ -8,7 +8,7 @@ class Game {
 	    canvas.width  = GAME_WIDTH;
         canvas.height = GAME_HEIGHT;
 
-        this.pion = new Pion("pion_rouge.png", 250, 250);
+        this.pion = new Pion("pion_rouge.png", 10, 10);
         this.dice = new De("de.png", 128, 128);
         this.parcours = new Parcours("defi", this.map);
 

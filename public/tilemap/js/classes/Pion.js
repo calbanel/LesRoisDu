@@ -7,6 +7,10 @@ class Pion{
 		this.col = Math.floor(this.x / 128);
 		this.lig = Math.floor(this.y / 128);
 
+		//Position du pion avant le déplacement
+		this.oldCol = 0;
+		this.oldLig = 0;
+
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
 		this.image.referenceDuPerso = this;
@@ -39,6 +43,9 @@ class Pion{
 	
 	
 	teleportToCase(col,lig) {
+		this.oldCol = this.col;
+		this.oldLig = this.lig;
+
 		this.col = col;
 		this.lig = lig;
 			
@@ -61,34 +68,38 @@ class Pion{
 
 	}
 
-	getPositionInMap(){
-		this.col = Math.floor(this.x / 128);
-		this.lig = Math.floor(this.y / 128);
+	getPositionInMap(map){
+		this.col = Math.floor(this.x / map.TILE_WIDTH);
+		this.lig = Math.floor(this.y / map.TILE_HEIGHT);
 		
 		return { col: this.col, lig: this.lig};
 	}
 
-	getIdCaseAround(map){
-		var posPion = this.getPositionInMap();
-		var tabId = new Array();
+	getInfoCasesAround(map){
+		//On récupère la position du pion dans la map
+		var posPion = this.getPositionInMap(map);
 
+		//On récupère la position des cases autour du pion
+		var posTop = { col: posPion.col, lig: posPion.lig - 1 }
+		var posRgt = { col: posPion.col + 1, lig: posPion.lig }
+		var posBot = { col: posPion.col, lig: posPion.lig + 1 }
+		var posLft = { col: posPion.col - 1, lig: posPion.lig }
 
-		var caseTop = { col: posPion.col, lig: posPion.lig - 1 }
-		var caseRgt = { col: posPion.col + 1, lig: posPion.lig }
-		var caseBot = { col: posPion.col, lig: posPion.lig + 1 }
-		var caseLft = { col: posPion.col - 1, lig: posPion.lig }
+		//On récupère l'ID des cases autour du pion
+		var idTop = map.terrain[(posTop.lig * map.terrainWidth) + posTop.col];
+		var idRgt = map.terrain[(posRgt.lig * map.terrainWidth) + posRgt.col];
+		var idBot = map.terrain[(posBot.lig * map.terrainWidth) + posBot.col];
+		var idLft = map.terrain[(posLft.lig * map.terrainWidth) + posLft.col];
 
-		var idTop = map.terrain[(caseTop.lig * map.terrainWidth) + caseTop.col];
-		var idRgt = map.terrain[(caseRgt.lig * map.terrainWidth) + caseRgt.col];
-		var idBot = map.terrain[(caseBot.lig * map.terrainWidth) + caseBot.col];
-		var idLft = map.terrain[(caseLft.lig * map.terrainWidth) + caseLft.col];
+		var CasesAround = [
+			[{ id: idTop, pos: posTop}],
+			[{ id: idRgt, pos: posRgt}],
+			[{ id: idBot, pos: posBot}],
+			[{ id: idLft, pos: posLft}]
+			];
 
-		tabId.push(idTop);
-		tabId.push(idRgt);
-		tabId.push(idBot);
-		tabId.push(idLft);
-
-		return tabId;
+		//On retourne l'ID et la position des cases autour du pion
+		return CasesAround;
 
 	}
 	
