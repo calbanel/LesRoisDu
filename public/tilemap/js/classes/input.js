@@ -7,6 +7,7 @@ class InputHandler {
         var map = game.map;
         var pion = game.pion;
 
+        var toolBox = new ToolBox();
 
         this.sourisX = 0;
         this.sourisY = 0;
@@ -16,8 +17,8 @@ class InputHandler {
             this.sourisX = event.pageX - rect.left;
             this.sourisY = event.pageY - rect.top;
 
-            var col = Math.floor(this.sourisX / map.TILE_WIDTH);
-            var lig = Math.floor(this.sourisY / map.TILE_HEIGHT);
+            var col = toolBox.convertXtoCol(this.sourisX, map.TILE_WIDTH);
+            var lig = toolBox.convertYtoLig(this.sourisY, map.TILE_HEIGHT);
 
             if (this.sourisX && this.sourisY) {
                 var id = game.map.tileset.getIdTile(col, lig, game.map);

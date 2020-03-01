@@ -50,4 +50,12 @@ class ToolBox {
 
     }
 
+    convertXtoCol(x, tileWidth) {
+		return Math.floor(x / tileWidth);
+	}
+
+	convertYtoLig(y, tileHeight) {
+		return Math.floor(y / tileHeight);
+	}
+
 }
