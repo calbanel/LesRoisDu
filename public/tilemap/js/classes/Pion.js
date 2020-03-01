@@ -45,7 +45,8 @@ class Pion {
 
 			for (let i = 0; i < nbCaseTogo; i++) {
 
-				this.goToNextCase();
+						this.goToNextCase();
+				
 			}
 
 			this.isSelected = false;
@@ -67,7 +68,6 @@ class Pion {
 
 	convertXtoCol() {
 		return this.col = Math.floor(this.x / this.map.TILE_WIDTH);
-
 	}
 
 	convertYtoLig() {
@@ -121,14 +121,26 @@ class Pion {
 
 	}
 
-	teleportToCase(col, lig) {
-		//On enregistre l'ancienne position
+	saveOldPosition(){
 		this.oldCol = this.col;
 		this.oldLig = this.lig;
+	}
+
+	setCol(col){
+		this.col = col;
+	}
+
+	setLig(lig){
+		this.lig = lig;
+	}
+	
+	teleportToCase(col, lig) {
+		//On enregistre l'ancienne position
+		this.saveOldPosition();
 
 		//On change de position
-		this.col = col;
-		this.lig = lig;
+		this.setCol(col);
+		this.setLig(lig);
 
 		//On met à jour la position
 		this.x = this.col * this.map.TILE_WIDTH;
@@ -139,12 +151,13 @@ class Pion {
 
 		var casesAround = this.getInfoCasesAround();
 
-		casesAround.forEach(caseAround => {
-			if (caseAround[0].id == 1 &&
-				!this.isNextCaseWasMyLastOne(caseAround) &&
-				this.isNextCaseIsActuallyOnTheCanvas(caseAround)) {
+		casesAround.forEach(caseAround => { //Pour toutes les cases autour du pion
 
-				this.nextCol = caseAround[0].pos.col;
+			if (caseAround[0].id == 1 && //Si la cases est une case du parcours
+				!this.isNextCaseWasMyLastOne(caseAround) && // Et qu'elle n'était pas ma case précédente
+				this.isNextCaseIsActuallyOnTheCanvas(caseAround)) { //Et que la case est dans le canvas
+
+				this.nextCol = caseAround[0].pos.col; //
 				this.nextLig = caseAround[0].pos.lig;
 
 			}
@@ -156,6 +169,7 @@ class Pion {
 	}
 
 	isNextCaseWasMyLastOne(caseAround) {
+
 		if (caseAround[0].pos.col == this.oldCol &&
 			caseAround[0].pos.lig == this.oldLig) {
 			return true;
@@ -184,6 +198,8 @@ class Pion {
 	showMeNormally(){
 		this.image.src = assetsBaseDir + "sprites/" + "pion_vert.png"
 	}
+
+
 
 }
 

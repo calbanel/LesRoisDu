@@ -1,78 +1,68 @@
-class Parcours{
-    constructor(nom, map){
+class Parcours {
+
+    constructor(nom, map) {
 
         this.casesPosition = new Array();
         this.cases = new Array();
         this.map = map;
 
+        this.toolBox = new ToolBox();
 
-    // Création de l'objet XmlHttpRequest
-	var xhr = getXMLHttpRequest();
-
-	// Chargement du fichier
-	xhr.open("GET", assetsBaseDir +'maps/' + 'defi'+ '.json', false);
-	xhr.send(null);
-	if(xhr.readyState != 4 || (xhr.status != 200 && xhr.status != 0)) // Code == 0 en local
-		throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
-	var mapJsonData = xhr.responseText;
-	
-	// Récupération des données 
-    var mapData = JSON.parse(mapJsonData);
-    
-    this.listeDefis = mapData.defis;
+        this.jsonMap = this.toolBox.getJsonDefi();
+        this.listeDefis = this.jsonMap.defis;
 
     }
 
-    update(col, lig){
+    update(col, lig) {
         for (var i = 0; i < this.cases.length; i++) {
             if (this.cases[i].isClicked(col, lig)) {
                 this.cases[i].displayDefi();
             }
         }
     }
-    
-    draw(context, map){
-        
-        for(var i = 0; i< this.cases.length; i++){
+
+    draw(context, map) {
+
+        for (var i = 0; i < this.cases.length; i++) {
             this.cases[i].draw(context, map);
         }
-        
+
     }
-    
-    getPositionCases(){
+
+    getPositionCases() {
         var nbLignes = this.map.terrain.length / this.map.terrainWidth;
         var nbColonne = this.map.terrainWidth
-		var ligne = 0;
-		var colonne = 0;
-		for(ligne; ligne < nbLignes ; ligne++) {
-			
-			for(var colonne = 0 ; colonne < nbColonne ; colonne++) {
-                var tuile = this.map.terrain[(ligne  * nbColonne) + colonne];
+        var ligne = 0;
+        var colonne = 0;
+        for (ligne; ligne < nbLignes; ligne++) {
 
-                if(tuile == 1){
+            for (var colonne = 0; colonne < nbColonne; colonne++) {
+                var tuile = this.map.terrain[(ligne * nbColonne) + colonne];
+
+                if (tuile == 1) {
                     this.casesPosition.push(new Array(colonne, ligne));
                 }
-			}
+            }
         }
 
         return this.casesPosition;
 
     }
 
-    creerCasesDuParcours(){
+    creerCasesDuParcours() {
 
         var positionCases = this.getPositionCases();
 
         var defi = 'defi n°'
 
-        for(var i = 0; i<this.listeDefis.length; i++){
+        for (var i = 0; i < this.listeDefis.length; i++) {
         }
-        for(var i = 0; i < positionCases.length; i++){
+        for (var i = 0; i < positionCases.length; i++) {
 
             this.cases[i] = new Case('Case_128.png',
-                                     this.listeDefis[i].defi,
-                                     positionCases[i][0],
-                                     positionCases[i][1]);
+                this.listeDefis[i].defi,
+                positionCases[i][0],
+                positionCases[i][1]);
 
         }
     }

@@ -32,7 +32,6 @@ class InputHandler {
 
                         } else {
                             parcours.update(col, lig);
-
                         }
 
 
