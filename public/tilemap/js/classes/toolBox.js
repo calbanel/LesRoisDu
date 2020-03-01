@@ -12,6 +12,9 @@ class ToolBox {
         ToolBox.instance = this;
     }
 
+    /*IL Y A DEUX GETJSON différent parce que je ne sais pour quelle raison,
+     je n'arrive pas à récupérer l'attribut nom depuis l'objet parcours
+    */
     getJsonDefi() {
 
         // Création de l'objet XmlHttpRequest
@@ -56,6 +59,15 @@ class ToolBox {
 
 	convertYtoLig(y, tileHeight) {
 		return Math.floor(y / tileHeight);
-	}
+    }
+    
+    getIdTile(col, lig, map){
+        var id = "undefined";
+        if (col>= 0 && col <= map.terrainWidth && lig >= 0 && lig<= map.terrainHeight)
+        {
+            id = map.terrain[(lig  * map.terrainWidth) + col];
+        }
+        return id;
+    }
 
 }

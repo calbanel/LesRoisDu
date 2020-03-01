@@ -21,7 +21,7 @@ class InputHandler {
             var lig = toolBox.convertYtoLig(this.sourisY, map.TILE_HEIGHT);
 
             if (this.sourisX && this.sourisY) {
-                var id = game.map.tileset.getIdTile(col, lig, game.map);
+                var id = toolBox.getIdTile(col, lig, game.map);
 
                 switch (id) {
                     case 1:

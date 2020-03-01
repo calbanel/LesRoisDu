@@ -1,5 +1,8 @@
 class Pion {
 	constructor(url, map, x, y) {
+		//Petit toolBox des familles
+		this.toolBox = new ToolBox();
+
 		//Informations de la map
 		this.map = map;
 
@@ -8,8 +11,8 @@ class Pion {
 		this.y = y;
 
 		//Position dans la map
-		this.col = this.convertXtoCol();
-		this.lig = this.convertYtoLig();
+		this.col = this.toolBox.convertXtoCol(this.x, this.map.TILE_WIDTH);
+		this.lig = this.toolBox.convertYtoLig(this.y, this.map.TILE_HEIGHT);
 
 		//Position du pion avant le déplacement
 		this.oldCol = 0;
@@ -66,14 +69,6 @@ class Pion {
 		);
 	}
 
-	convertXtoCol() {
-		return this.col = Math.floor(this.x / this.map.TILE_WIDTH);
-	}
-
-	convertYtoLig() {
-		return this.lig = Math.floor(this.y / this.map.TILE_HEIGHT);
-	}
-
 	isClicked(x, y) {
 		var myTop = this.y;
 		var myRgt = this.x + this.largeur;
@@ -103,11 +98,10 @@ class Pion {
 		var posLft = { col: posPion.col - 1, lig: posPion.lig }
 
 		//On récupère l'ID des cases autour du pion
-		var idTop = this.map.terrain[(posTop.lig * this.map.terrainWidth) + posTop.col];
-		var idRgt = this.map.terrain[(posRgt.lig * this.map.terrainWidth) + posRgt.col];
-		var idBot = this.map.terrain[(posBot.lig * this.map.terrainWidth) + posBot.col];
-		var idLft = this.map.terrain[(posLft.lig * this.map.terrainWidth) + posLft.col];
-
+		var idTop = this.toolBox.getIdTile(posTop.col, posTop.lig, this.map);
+		var idRgt = this.toolBox.getIdTile(posRgt.col, posRgt.lig, this.map);
+		var idBot = this.toolBox.getIdTile(posBot.col, posBot.lig, this.map);
+		var idLft = this.toolBox.getIdTile(posLft.col, posLft.lig, this.map);
 
 		var CasesAround = [
 			[{ id: idTop, pos: posTop }],

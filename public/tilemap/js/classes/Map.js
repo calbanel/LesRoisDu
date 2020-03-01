@@ -13,7 +13,6 @@ class Map {
 		this.terrain = mapData.layers[0].data;
 		this.terrainHeight = mapData.layers[0].height;
 		this.terrainWidth = mapData.layers[0].width;
-
 		this.TILE_HEIGHT = mapData.tileheight;
 		this.TILE_WIDTH = mapData.tilewidth;
 
@@ -23,6 +22,8 @@ class Map {
 		this.dice = new De();
 
 		this.parcours = new Parcours();
+
+		this.toolBox.setMap(this);
 
 
 	}
