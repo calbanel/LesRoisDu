@@ -6,6 +6,7 @@ class Pion {
 		//Position dans le canvas
 		this.x = x;
 		this.y = y;
+
 		//Position dans la map
 		this.col = this.convertXtoCol();
 		this.lig = this.convertYtoLig();
@@ -17,7 +18,10 @@ class Pion {
 		//Prochaine case où il faut se déplacer
 		this.nextCol = 0;
 		this.nextLig = 0;
-		
+
+		//Etat du pion
+		this.isSelected = false;
+
 
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
@@ -34,33 +38,42 @@ class Pion {
 		this.image.src = assetsBaseDir + "sprites/" + url;
 	}
 
-	update() {
-		console.log('Ma position en col : ' + this.col);
-		console.log('Ma position en lig : ' + this.lig);
-		this.goToNextCase();
-		console.log('Ma position en col : ' + this.col);
-		console.log('Ma position en lig : ' + this.lig);
+	update(diceFace) {
+
+		if (this.isSelected) {
+			var nbCaseTogo = diceFace;
+
+			for (let i = 0; i < nbCaseTogo; i++) {
+
+				this.goToNextCase();
+			}
+
+			this.isSelected = false;
+			
+		}
+
+
 	}
 
 	draw(context) {
 		context.drawImage(
 			this.image,
-			((this.col - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT,
-			((this.lig - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT,
+			(((this.col - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT),
+			(((this.lig - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT),
 			this.largeur,
 			this.hauteur
 		);
 	}
 
-	convertXtoCol(){
+	convertXtoCol() {
 		return this.col = Math.floor(this.x / this.map.TILE_WIDTH);
-		
+
 	}
-	
-	convertYtoLig(){
+
+	convertYtoLig() {
 		return this.lig = Math.floor(this.y / this.map.TILE_HEIGHT);
 	}
-	
+
 	isClicked(x, y) {
 		var myTop = this.y;
 		var myRgt = this.x + this.largeur;
@@ -69,7 +82,7 @@ class Pion {
 
 		var clicked = true;
 		if (y < myTop || y > myBot || x < myLft || x > myRgt) {
-			return false;
+			clicked = false;
 		}
 		return clicked;
 
@@ -120,22 +133,19 @@ class Pion {
 		//On met à jour la position
 		this.x = this.col * this.map.TILE_WIDTH;
 		this.y = this.lig * this.map.TILE_HEIGHT;
-
-		return true;
 	}
 
-	goToNextCase(){
+	goToNextCase() {
 
 		var casesAround = this.getInfoCasesAround();
 
 		casesAround.forEach(caseAround => {
-			if (caseAround[0].id == 1 && 
+			if (caseAround[0].id == 1 &&
 				!this.isNextCaseWasMyLastOne(caseAround) &&
 				this.isNextCaseIsActuallyOnTheCanvas(caseAround)) {
 
 				this.nextCol = caseAround[0].pos.col;
 				this.nextLig = caseAround[0].pos.lig;
-
 
 			}
 
@@ -144,27 +154,35 @@ class Pion {
 		this.teleportToCase(this.nextCol, this.nextLig);
 
 	}
-	
-	isNextCaseWasMyLastOne(caseAround){
+
+	isNextCaseWasMyLastOne(caseAround) {
 		if (caseAround[0].pos.col == this.oldCol &&
 			caseAround[0].pos.lig == this.oldLig) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
-	isNextCaseIsActuallyOnTheCanvas(caseAround){
+	isNextCaseIsActuallyOnTheCanvas(caseAround) {
 
 		if (caseAround[0].pos.col >= 0 &&
-			caseAround[0].pos.col <= this.map.terrainWidth && 
+			caseAround[0].pos.col <= this.map.terrainWidth - 1 &&
 			caseAround[0].pos.lig >= 0 &&
-			caseAround[0].pos.lig <= this.map.terrainHeight){
+			caseAround[0].pos.lig <= this.map.terrainHeight - 1) {
 
 			return true;
-		}else{
+		} else {
 			return false;
 		}
+	}
+
+	showIsSelected(){
+		this.image.src = assetsBaseDir + "sprites/" + "pion_rouge.png";
+	}
+
+	showMeNormally(){
+		this.image.src = assetsBaseDir + "sprites/" + "pion_vert.png"
 	}
 
 }

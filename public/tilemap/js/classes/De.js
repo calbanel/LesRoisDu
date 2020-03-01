@@ -1,8 +1,20 @@
 class De{
 
 	constructor(url, x, y){
+		//Position du dé
 		this.x = x;
 		this.y = y;
+
+		//Nombre de face du dé
+		this.nbFaces = 4;
+
+		//Face courante
+		this.faceCourante = 0;
+
+		//Obervers du dé
+		this.observers = [];
+
+
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
 		this.image.referenceDuPerso = this;
@@ -14,6 +26,8 @@ class De{
 		// Taille de la De
 		this.referenceDuPerso.largeur = this.width;
 		this.referenceDuPerso.hauteur = this.height;
+
+
 	}
 
 		this.image.src = assetsBaseDir + "sprites/" + url;
@@ -21,6 +35,7 @@ class De{
 
 	update(){
 		this.lancerDe();
+		alert('Vous avez obtenu ' + this.faceCourante + '.');
 	}
 
 	draw(context, map){
@@ -34,6 +49,15 @@ class De{
 	}
 
 	
+	addObservers(o){
+		this.observers.push(o);
+	}
+
+	notifyObservers(){
+		for (let o of this.observers) {
+			o.update(this.faceCourante);
+		}
+	}
 
 	isClicked(x, y) {
 		var myTop = this.y;
@@ -51,9 +75,10 @@ class De{
 	}
 
 	lancerDe(){
-		var faceDe=Math.random();
-		var faceObtenue=Math.ceil(faceDe*4);
-		alert("Vous avancez de "+ faceObtenue + " case(s) !");
+		var faceObtenue = Math.floor(Math.random() * this.nbFaces) + 1;
+		this.faceCourante = faceObtenue;
+
+		this.notifyObservers();
 	}
 
 }

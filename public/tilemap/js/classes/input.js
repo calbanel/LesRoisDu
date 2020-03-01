@@ -26,7 +26,9 @@ class InputHandler {
                     case 1:
 
                         if (pion.isClicked(this.sourisX, this.sourisY)) {
-                            pion.update();
+                            
+                            pion.isSelected = true;
+                            pion.showIsSelected();
 
                         } else {
                             parcours.update(col, lig);
@@ -39,6 +41,7 @@ class InputHandler {
                         if (dice.isClicked(this.sourisX, this.sourisY)) {
 
                             dice.update();
+                            pion.showMeNormally();
                         }
                         break;
 

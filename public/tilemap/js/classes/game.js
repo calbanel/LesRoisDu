@@ -8,7 +8,7 @@ class Game {
 	    canvas.width  = GAME_WIDTH;
         canvas.height = GAME_HEIGHT;
 
-        this.pion = new Pion("pion_rouge.png", this.map, 0, this.map.TILE_HEIGHT * 2);
+        this.pion = new Pion("pion_vert.png", this.map, 0, 0);
         this.dice = new De("de.png", 128, 128);
         this.parcours = new Parcours("defi", this.map);
 
@@ -25,6 +25,7 @@ class Game {
         this.map.setDice(this.dice);
         this.parcours.creerCasesDuParcours();
         this.map.setParcours(this.parcours);
+        this.dice.addObservers(this.pion);
     }
 
     update(deltaTime){
