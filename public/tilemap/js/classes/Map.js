@@ -23,8 +23,6 @@ class Map {
 
 		this.parcours = new Parcours();
 
-		this.toolBox.setMap(this);
-
 
 	}
 
