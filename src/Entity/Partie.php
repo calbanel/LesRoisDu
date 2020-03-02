@@ -69,6 +69,11 @@ class Partie
      */
     private $nbFacesDe;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $estLance;
+
     public function __construct()
     {
         $this->joueurs = new ArrayCollection();
@@ -209,6 +214,18 @@ class Partie
     public function setNbFacesDe(int $nbFacesDe): self
     {
         $this->nbFacesDe = $nbFacesDe;
+
+        return $this;
+    }
+
+    public function getEstLance(): ?bool
+    {
+        return $this->estLance;
+    }
+
+    public function setEstLance(bool $estLance): self
+    {
+        $this->estLance = $estLance;
 
         return $this;
     }

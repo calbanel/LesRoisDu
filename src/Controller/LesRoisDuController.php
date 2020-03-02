@@ -180,6 +180,8 @@ class LesRoisDuController extends AbstractController
         $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
         $partie->setCode($code);
 
+        $partie->setEstLance(false);
+
         $createur->addPartiesCree($partie);
 
         $manager->persist($partie);

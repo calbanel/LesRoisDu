@@ -96,9 +96,6 @@ class AppFixtures extends Fixture
             $plainPassword
         ));
 
-        $utilisateur1->setAdresseMail("clement.albanel@gmail.com");
-        $utilisateur1->setNom("Albanel");
-        $utilisateur1->setPrenom("Clement");
         $utilisateur1->setEstInvite(false);
         $utilisateur1->setAvatar($faker->imageUrl($width = 200,$height = 200,'cats'));
         $utilisateur1->setEmail("clement.albanel@gmail.com");
@@ -112,10 +109,6 @@ class AppFixtures extends Fixture
             $utilisateur2,
             $plainPassword
         ));
-
-        $utilisateur2->setAdresseMail("emma.auzi@gmail.com");
-        $utilisateur2->setNom("Auzi");
-        $utilisateur2->setPrenom("Emma");
         $utilisateur2->setEstInvite(false);
         $utilisateur2->setAvatar($faker->imageUrl($width = 200,$height = 200,'cats'));
         $utilisateur2->setEmail("emma.auzi@gmail.com");
@@ -138,6 +131,7 @@ class AppFixtures extends Fixture
         $partie->setNbPlateaux(1);
         $partie->setNbPionParPlateau(4);
         $partie->setNbFacesDe(4);
+        $partie->setEstLance(false);
 
         $utilisateur1->addPartiesCree($partie);
         $utilisateur2->addPartiesRejoin($partie);
@@ -213,6 +207,7 @@ class AppFixtures extends Fixture
         $partie2->setNbPlateaux(1);
         $partie2->setNbPionParPlateau(4);
         $partie2->setNbFacesDe(4);
+        $partie2->setEstLance(false);
 
         $utilisateur2->addPartiesCree($partie2);
         $utilisateur1->addPartiesRejoin($partie2);
