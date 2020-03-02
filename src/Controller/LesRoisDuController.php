@@ -25,6 +25,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UtilisateurType;
 use App\Form\PartieType;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use App\Security\LoginAuthenticator;
 
 class LesRoisDuController extends AbstractController
 {
@@ -347,7 +349,7 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/invite", name="en_invite")
      */
-    public function connexionInvite(ObjectManager $manager)
+    public function connexionInvite(ObjectManager $manager, Request $request, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator)
     {
 
         $invite = new Utilisateur();
@@ -378,7 +380,12 @@ class LesRoisDuController extends AbstractController
         $manager->persist($invite);
         $manager->flush();
 
-        return $this->render('les_rois_du/invite.html.twig', ['invite' => $invite]);
+        return $guardHandler->authenticateUserAndHandleSuccess(
+                $invite,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
     }
 
     /**
