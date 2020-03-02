@@ -399,28 +399,10 @@ class LesRoisDuController extends AbstractController
         return $this->redirectToRoute('espace_partie');
     }
 
-
-    /**
-     * @Route("/api/plateaux/{idPlateau}/{numCase}", name="api_cases")
-     */
-    public function apiCases($idPlateau, $numCase)
-    {
-
-        $repositoryCases=$this->getDoctrine()->getRepository(Cases::class);
-        $case = $repositoryCases->findOneBy(['plateau' => $idPlateau, 'numero' => $numCase]);
-
-        $numero = $case->getNumero();
-        $defi = $case->getDescriptifDefi();
-        $consignes = $case->getConsignes();
-        $code = $case->getCodeValidation();
-
-        return $this->json(['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code]);
-    }
-
     /**
      * @Route("/api/plateaux/{idPlateau}", name="api_plateaux")
      */
-    public function apiPlateauxCases($idPlateau)
+    public function apiPlateaux($idPlateau)
     {
 
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
@@ -432,6 +414,48 @@ class LesRoisDuController extends AbstractController
         $nbCases = $plateau->getNbCases();
 
         return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases]);
+    }
+
+    /**
+     * @Route("/api/plateaux/{idPlateau}/cases", name="api_cases")
+     */
+    public function apiToutesCases($idPlateau)
+    {
+
+        $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
+        $plateau = $repositoryPlateau->find($idPlateau);
+
+        $caseData = [];
+
+        $tabCase = $plateau->getCases();
+
+        foreach($tabCase as $uneCase){
+
+            $ressourceData = [];
+            
+            $numero = $uneCase->getNumero();
+            $defi = $uneCase->getDescriptifDefi();
+            $consignes = $uneCase->getConsignes();
+            $code = $uneCase->getCodeValidation();
+
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource){
+
+                $chemin = $uneRessource->getChemin();
+                $infosR = ['chemin' => $chemin];
+
+                array_push($ressourceData, $infosR);
+                
+            }
+
+            $infos = ['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code, 'ressources' => $ressourceData];
+
+            array_push($caseData, $infos);
+        }
+
+        $data = ['cases' => $caseData];
+
+        return $this->json($data);
     }
 
 
