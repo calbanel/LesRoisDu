@@ -27,6 +27,10 @@ use App\Form\PartieType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use App\Security\LoginAuthenticator;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class LesRoisDuController extends AbstractController
 {
@@ -393,6 +397,41 @@ class LesRoisDuController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('espace_partie');
+    }
+
+
+    /**
+     * @Route("/api/plateaux/{idPlateau}/{numCase}", name="api_cases")
+     */
+    public function apiCases($idPlateau, $numCase)
+    {
+
+        $repositoryCases=$this->getDoctrine()->getRepository(Cases::class);
+        $case = $repositoryCases->findOneBy(['plateau' => $idPlateau, 'numero' => $numCase]);
+
+        $numero = $case->getNumero();
+        $defi = $case->getDescriptifDefi();
+        $consignes = $case->getConsignes();
+        $code = $case->getCodeValidation();
+
+        return $this->json(['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code]);
+    }
+
+    /**
+     * @Route("/api/plateaux/{idPlateau}", name="api_plateaux")
+     */
+    public function apiPlateauxCases($idPlateau)
+    {
+
+        $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
+        $plateau = $repositoryPlateau->find($idPlateau);
+
+        $nom = $plateau->getNom();
+        $description = $plateau->getDescription();
+        $difficulte = $plateau->getNiveauDifficulte();
+        $nbCases = $plateau->getNbCases();
+
+        return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases]);
     }
 
 
