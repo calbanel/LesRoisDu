@@ -165,8 +165,7 @@ class LesRoisDuController extends AbstractController
 
        if ($formulairePartie->isSubmitted())
        { 
-   
-        try {    
+      
         $plateau = $partie->getPlateau();
 
         $plateauEnJeu = new PlateauEnJeu();
@@ -228,15 +227,6 @@ class LesRoisDuController extends AbstractController
           // Enregistrer la ressource en base de données
           
           $manager->flush();
-          $this->addFlash('success',"Add done!");
-        } catch (DBALException $e) {
-            $this->addFlash('success',"Add not done: " . $e->getMessage());
-        return $this->redirectToRoute('espace_partie');
-        }
-     catch (\Exception $e) {
-        $this->addFlash('success',"Add not done: " . $e->getMessage());
-        return $this->redirectToRoute('espace_partie');
-    }
 
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_partie');
@@ -302,7 +292,7 @@ class LesRoisDuController extends AbstractController
      */
     public function supprimerUnePartie($idPartie)
     {
-        try {  
+ 
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryPartie=$entityManager->getRepository(Partie::class);
 
@@ -334,14 +324,7 @@ class LesRoisDuController extends AbstractController
         $entityManager->remove($partie);
 
         $entityManager->flush();
-        $this->addFlash('success',"Add done!");
-        } catch (DBALException $e) {
-            $this->addFlash('success',"Add not done: " . $e->getMessage());
-        }
-     catch (\Exception $e) {
-        $this->addFlash('success',"Add not done: " . $e->getMessage());
 
-    }
     return $this->redirectToRoute('espace_partie');
 
     }
@@ -354,7 +337,7 @@ class LesRoisDuController extends AbstractController
 
         $invite = new Utilisateur();
 
-        $random = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 6, 8);
+        $random = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 5, 5);
 
         $fakeEmail = $random."@guest.com";
         $invite->setEmail($fakeEmail);
