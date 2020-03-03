@@ -65,7 +65,7 @@ class LesRoisDuController extends AbstractController
         if ($formulaireUtilisateur->isSubmitted() && $formulaireUtilisateur->isValid())
         {        
            
-            $utilisateur->setAvatar("img/avatar8.jpg");
+            $utilisateur->setAvatar("/img/avatar8.jpg");
             // l'utilisateur a le role USER
             $roles[] =  'ROLE_USER';
             $utilisateur->setRoles($roles);
@@ -255,12 +255,21 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties/{idPartie}", name="partie_en_cours")
      */
-    public function affichagePartieEnCours($idPartie)
+    public function affichagePartieEnCours($idPartie, UserInterface $user)
     {
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
         $parties = $repositoryPartie->findAll();
-        return $this->render('les_rois_du/partieencours.html.twig',['partie'=>$partie, 'parties'=>$parties]);
+
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $user = $repositoryUtilisateur->find($userId);
+
+        $cree = $user->getPartiesCree();
+
+        $rejoins = $user->getPartiesRejoins();
+        
+        return $this->render('les_rois_du/partieencours.html.twig',['partie'=>$partie,'partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
     }
 
     /**
@@ -363,7 +372,7 @@ class LesRoisDuController extends AbstractController
 
         $invite->setPseudo($fakePseudo);
 
-        $invite->setAvatar("img/avatarGuest.jpg");
+        $invite->setAvatar("/img/avatarGuest.jpg");
 
         $roles[] =  'ROLE_USER';
         $invite->setRoles($roles);
@@ -481,7 +490,7 @@ class LesRoisDuController extends AbstractController
         $userId = $user->getId();
         $utilisateur = $repositoryUtilisateur->find($userId);
 
-        $avatar = "img/avatar" . $code . ".jpg";
+        $avatar = "/img/avatar" . $code . ".jpg";
 
         $utilisateur->setAvatar($avatar);
 
