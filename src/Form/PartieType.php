@@ -15,6 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\PlateauRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class PartieType extends AbstractType
 {
@@ -26,7 +28,7 @@ class PartieType extends AbstractType
             ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
             ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
             ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
-            ->add('plateau', EntityType::class, ['class' => Plateau::class,
+            ->add('plateau', EntityType::class, [   'class' => Plateau::class,
                                                     'choice_label' => 'nom',
                                                     'multiple' => false,
                                                     'expanded' => false])
@@ -38,5 +40,6 @@ class PartieType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Partie::class,
         ]);
+
     }
 }

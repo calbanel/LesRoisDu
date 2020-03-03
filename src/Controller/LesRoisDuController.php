@@ -52,7 +52,7 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/inscription", name="page_inscription")
      */
-    public function affichagePageInscription(Request $request, ObjectManager $manager)
+    public function affichagePageInscription(Request $request, ObjectManager $manager, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator)
     {
         // Création d'une entrprise vierge
         $utilisateur=new Utilisateur();
@@ -65,7 +65,7 @@ class LesRoisDuController extends AbstractController
         if ($formulaireUtilisateur->isSubmitted() && $formulaireUtilisateur->isValid())
         {        
            
-            $utilisateur->setAvatar("https://nsa40.casimages.com/img/2020/02/20/200220051454807035.jpg");
+            $utilisateur->setAvatar("img/avatar8.jpg");
             // l'utilisateur a le role USER
             $roles[] =  'ROLE_USER';
             $utilisateur->setRoles($roles);
@@ -83,7 +83,12 @@ class LesRoisDuController extends AbstractController
            $manager->flush();
 
            // Rediriger l'utilisateur vers la page d'accueil
-           return $this->redirectToRoute('app_login');
+           return $guardHandler->authenticateUserAndHandleSuccess(
+                $utilisateur,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
         }
         
         
@@ -163,7 +168,8 @@ class LesRoisDuController extends AbstractController
        $partie=new Partie();
 
        // Création de l'objet formulaire
-       $formulairePartie=$this->createForm(PartieType::class, $partie);
+
+       $formulairePartie = $this->createForm(PartieType::class, $partie);
 
        $formulairePartie->handleRequest($request);
 
@@ -346,11 +352,11 @@ class LesRoisDuController extends AbstractController
         $fakeEmail = $random."@guest.com";
         $invite->setEmail($fakeEmail);
 
-        $fakePseudo = "Guest".$random;
+        $fakePseudo = "Guest_".$random;
 
         $invite->setPseudo($fakePseudo);
 
-        $invite->setAvatar("https://nsa40.casimages.com/img/2020/02/20/200220051454807035.jpg");
+        $invite->setAvatar("img/avatarGuest.jpg");
 
         $roles[] =  'ROLE_USER';
         $invite->setRoles($roles);
@@ -456,6 +462,26 @@ class LesRoisDuController extends AbstractController
         $data = ['cases' => $caseData];
 
         return $this->json($data);
+    }
+
+    /**
+     * @Route("/changement{code}", name="changement_avatar")
+     */
+    public function changementAvatar(ObjectManager $manager, UserInterface $user, $code)
+    {
+
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
+        $avatar = "img/avatar" . $code . ".jpg";
+
+        $utilisateur->setAvatar($avatar);
+
+        $manager->persist($utilisateur);
+        $manager->flush();
+
+        return $this->redirectToRoute('espace_compte');
     }
 
 

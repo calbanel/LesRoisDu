@@ -1,0 +1,41 @@
+.image-case {
+	width:100%;
+	height:100%;
+	display:block;
+	position: relative;
+	object-fit: fill;
+}
+	
+.info-case{
+	position:absolute;
+	width:16%;
+	height:16%;
+	left:79%;
+	top:5%;
+	display:block;
+}
+
+.bg-case{
+background: url("/img/test.svg")  no-repeat; 
+background-size: 200px 200px;
+background-size: cover;
+background-color: rgba(0,0,0,.1);
+}
+
+#avatars{
+  width:300px;
+  height: 300px;
+  overflow-y: auto;
+}
+.avatars > input{
+  display: none;
+}
+
+.avatars > input + img{
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.avatars > input:checked + img{
+  border: 2px solid red;
+}

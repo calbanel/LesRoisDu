@@ -47,8 +47,89 @@
                                            
                                     </div>
                                     <div class="col-md-6">
-                                        <center><h4> Avatar</h4>
-                                        <img src={{utilisateur.avatar}} height=300px width=300px> 
+                                        <center><h4> Changement d'avatar</h4>
+                                            <div id="avatars">
+                                              <form id="changement">
+                                              <label class="avatars">
+                                                <input type="radio" name="avatar" value="1"/>
+                                                <img src="{{ asset('/img/avatar1.jpg') }}" alt="" />
+                                              </label>
+                                              
+                                              <label class="avatars">
+                                                <input type="radio" name="avatar" value="2"/>
+                                                <img src="{{ asset('/img/avatar2.jpg') }}" alt="" />
+                                              </label>
+                                              
+                                              <label class="avatars">
+                                                <input type="radio" name="avatar" value="3"/>
+                                                <img src="{{ asset('/img/avatar3.jpg') }}" alt="" />
+                                              </label>
+                                              
+                                              <label class="avatars">
+                                                <input type="radio" name="avatar" value="4"/>
+                                                <img src="{{ asset('/img/avatar4.jpg') }}" alt="" />
+                                              </label>
+                                              
+                                              <label class="avatars">
+                                                <input type="radio" name="avatar" value="5"/>
+                                                <img src="{{ asset('/img/avatar5.jpg') }}" alt=""  />
+                                              </label>
+                                              
+                                              <label class="avatars">
+                                                <input type="radio" name="avatar" value="6"/>
+                                                <img src="{{ asset('/img/avatar6.jpg') }}" alt=""  />
+                                              </label>
+
+                                               <label class="avatars">
+                                                <input type="radio" name="avatar" value="7"/>
+                                                <img src="{{ asset('/img/avatar7.jpg') }}" alt=""  />
+                                              </label>
+
+                                               <label class="avatars">
+                                                <input type="radio" name="avatar" value="8"/>
+                                                <img src="{{ asset('/img/avatar8.jpg') }}" alt=""  />
+                                              </label>
+
+                                              </form>
+
+                                              
+                                            </div>
+                                            <BR>
+                                            <div id="Cible"></div>
+                                      
+                                                <script type="text/javaScript">
+
+                                                       var routeSaisie = false;
+                                                       var chemin = "#";
+                                                
+                                                    setInterval(function(){
+
+                                                        var radios = document.getElementsByName('avatar');
+                                                        
+
+                                                        if(chemin != "#" && routeSaisie == false){
+                                                            document.getElementById('Cible').innerHTML ='<a id="changementAvatar" href="#" class="button scrolly" disabled>CHANGER</a>';
+                                                            routeSaisie = true;
+                                                        }
+                                                        
+                                                        for(var i = 0; i < radios.length; i++){
+                                                         if(radios[i].checked){
+                                                         chemin = radios[i].value;
+                                                         }
+                                                        }
+
+
+                                                        var route = '/changement' + chemin;
+                                                        if(routeSaisie == true){
+                                                             document.getElementById("changementAvatar").setAttribute("href",route);
+                                                        }
+                                                        //console.log(route);
+                                                        //console.log(routeSaisie);
+                                                        
+                                                    }, 100);
+
+                                                </script> 
+                                        
                                          </center>
                                 
 
