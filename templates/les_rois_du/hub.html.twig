@@ -5,13 +5,18 @@
 {% block sidebar %}
 <body class="is-preload">
 		<!-- Sidebar -->
-			<section id="sidebar">
+			<section id="sidebar"> 
+
+
+
 				<div class="inner">
 					<nav>
 						<ul>
+                            <li><a href="#bienvenue">Bienvenue</a></li>
 							<li><a href="#partie">Parties</a></li>
 							<li><a href="#plateaux">Plateaux</a></li>
 							<li><a href="#compte">Compte</a></li>
+                            <li><a href="{{path('app_logout')}}">Se déconnecter</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -20,15 +25,39 @@
 {% endblock %}
     
 {%block body%}
+
 <div id="wrapper">
+    
+            <section id="bienvenue" class="wrapper style1 fullscreen fade-up">
+                    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-1">
+            <img alt="Avatar" src="{{utilisateur.avatar}}" />
+        </div>
+        <div class="col-md-8">
+            <h3>
+                Bienvenue sur notre application {{utilisateur.pseudo}} !
+            </h3>
+            <p>
+                Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+            </p>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+</div>
+            </section>
         <!-- Intro -->
             <section id="partie" class="wrapper style1 fullscreen fade-up">
                 <div class="inner">
                     <h1>Parties</h1>
                     <p>C'est ici pour les parties</p>
                     <ul class="actions">
-                        <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
                         <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES EXISTANTES</a></li>
+                        <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
                         <li><a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
                         <script type="text/javaScript">
 

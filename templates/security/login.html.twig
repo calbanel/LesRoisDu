@@ -1,6 +1,21 @@
 {% extends 'monTemplate.html.twig' %}
 
+{% block sidebar %}
 
+<body class="is-preload">
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <nav>
+                <ul>
+
+                    <li><a href="{{ path('accueil')}}">ACCUEIL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    {% endblock %}
 
 {% block body %}
 
@@ -55,11 +70,13 @@
     </button> </li>
 </ul>
 </form>
+
 {% endif %}
 {% if app.user %}
+<a href="{{ path('hub') }}">Retourner au hub</a><BR>
   <a href="{{ path('app_logout') }}">Se déconnecter</a>
   {% else %}
-  <a href="{{ path('en_invite') }}"> Se connecter en tant qu'invité </a>
+  <a href="{{ path('en_invite') }}"> Se connecter en tant qu'invité </a><BR><BR>
   {% endif %}
  </div>
 

@@ -100,9 +100,13 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/hub", name="hub")
      */
-    public function affichageHub()
+    public function affichageHub(UserInterface $user)
     {
-        return $this->render('les_rois_du/hub.html.twig');
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $user = $repositoryUtilisateur->find($userId);
+        
+        return $this->render('les_rois_du/hub.html.twig', ['utilisateur'=>$user]);
     }
 
     /**
