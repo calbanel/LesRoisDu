@@ -9,8 +9,10 @@
             <nav>
                 <ul>
                             <li><a href="{{path ('hub')}}">HUB</a></li>
+                            {% if utilisateur.estInvite == false %}
                             <li><a href="{{path ('espace_plateau')}}">ESPACE PLATEAU</a></li>
                             <li><a href="{{path ('espace_compte')}}">ESPACE COMPTE</a></li>
+                            {% endif %}
                             <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
                 </ul>
             </nav>
@@ -33,7 +35,7 @@
 
 
                 <section id="one" class="wrapper style2 spotlights">
-
+{% if utilisateur.estInvite == false %}
                 <BR>
                 <h2><center>Parties créées</center></h2>
                     <!-- Boucle pour chaque partie  -->
@@ -56,7 +58,7 @@
 
                     <!-- Fin boucle -->
                     {% endfor %}
-
+{%endif%}
 
         <BR>
         <h2><center>Parties rejointes</center></h2>

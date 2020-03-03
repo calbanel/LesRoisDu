@@ -14,8 +14,10 @@
 						<ul>
                             <li><a href="#bienvenue">Bienvenue</a></li>
 							<li><a href="#partie">Parties</a></li>
+                            {% if utilisateur.estInvite == false %}
 							<li><a href="#plateaux">Plateaux</a></li>
 							<li><a href="#compte">Compte</a></li>
+                            {%endif%}
                             <li><a href="{{path('app_logout')}}">Se déconnecter</a></li>
 						</ul>
 					</nav>
@@ -56,7 +58,9 @@
                     <p>C'est ici pour les parties</p>
                     <ul class="actions">
                         <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES EXISTANTES</a></li>
+                        {% if utilisateur.estInvite == false %}
                         <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
+                        {%endif%}
                         <li><a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
                         <script type="text/javaScript">
 
@@ -84,6 +88,7 @@
             </section>
             
         <!-- Intro -->
+        {% if utilisateur.estInvite == false %}
         <section id="plateaux" class="wrapper style1 fullscreen fade-up">
                 <div class="inner">
                     <h1>Plateaux</h1>
@@ -104,6 +109,7 @@
                     </ul>
                 </div>
             </section>
+            {%endif%}
 
 </div>
 {%endblock%}

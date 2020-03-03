@@ -105,7 +105,7 @@ class LesRoisDuController extends AbstractController
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();
         $user = $repositoryUtilisateur->find($userId);
-        
+
         return $this->render('les_rois_du/hub.html.twig', ['utilisateur'=>$user]);
     }
 
@@ -122,7 +122,7 @@ class LesRoisDuController extends AbstractController
 
         $rejoins = $user->getPartiesRejoins();
 
-        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins]);
+        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
     }
 
     /**
@@ -153,10 +153,13 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageEspacePlateau()
     {
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $user = $repositoryUtilisateur->find($userId);
         $repositoryPlateaux=$this->getDoctrine()->getRepository(Plateau::class);
         $plateaux = $repositoryPlateaux->findAll();
         
-        return $this->render('les_rois_du/espaceplateau.html.twig', ['plateaux'=>$plateaux]);
+        return $this->render('les_rois_du/espaceplateau.html.twig', ['plateaux'=>$plateaux, 'utilisateur'=>$user]);
     }
 
     /**
