@@ -19,10 +19,11 @@ class UtilisateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
-            ->add('pseudo')
+            ->add('email',EmailType::class)
+            ->add('pseudo',TextType::class)
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passe saisis ne correspondent pas.',
                 'first_options'  => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Répétez le mot de passe'),
             ))

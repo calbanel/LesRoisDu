@@ -23,6 +23,8 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message= "L'adresse mail doit être renseignée")
+     *  @Assert\Email(message= "L'adresse mail n'est pas valide")
      */
     private $email;
 
@@ -33,12 +35,13 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=30, unique=true)
+     * @Assert\NotBlank(message= "Le pseudo doit être renseigné")
      */
     private $pseudo;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @Assert\NotBlank(message="Le mot de passe doit être renseigné")
+     * @Assert\Length(min=6,max=4096, minMessage = "Le mot de passe doit faire au minimum {{ limit }} caractères")
      */
     private $plainPassword;
 
