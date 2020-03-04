@@ -159,7 +159,7 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/plateaux", name="espace_plateau")
      */
-    public function affichageEspacePlateau()
+    public function affichageEspacePlateau(UserInterface $user)
     {
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();

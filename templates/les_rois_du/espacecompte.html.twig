@@ -1,118 +1,120 @@
 {% extends 'monTemplate.html.twig' %}
 
 {% block sidebar %}
+
 <body class="is-preload">
-        <!-- Sidebar -->
-            <section id="sidebar">
-                <div class="inner">
-                    <nav>
-                        <ul>
-                            <li><a href="{{path ('hub')}}">HUB</a></li>
-                            <li><a href="{{path ('espace_partie')}}">ESPACE PARTIE</a></li>
-                            <li><a href="{{path ('espace_plateau')}}">ESPACE PLATEAU</a></li>
-                            <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
-                        </ul>
-                    </nav>
+  <!-- Sidebar -->
+  <section id="sidebar">
+    <div class="inner">
+      <nav>
+        <ul>
+          <li><a href="{{path ('hub')}}">MENU</a></li>
+          <li><a href="{{path ('espace_partie')}}">ESPACE PARTIE</a></li>
+          <li><a href="{{path ('espace_plateau')}}">ESPACE PLATEAU</a></li>
+          <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  {% endblock %}
+
+  {% block body %}
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Intro -->
+    <section id="intro" class="wrapper style1 fullscreen fade-up">
+
+
+
+
+      <div class="inner">
+        <h1>ESPACE COMPTE</h1>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+
+              <h4> Avatar </h4>
+              <img src="{{ utilisateur.avatar }}" alt="" /><br> <br>
+
+              <h4> Adresse mail </h4>
+              {{ app.user.username }}<br> <br>
+
+              <h4> Pseudo </h4>
+              {{ utilisateur.pseudo }}<br> <br>
+
+              <h4> Nombre de partie créées </h4>
+              {{ utilisateur.partiesCree|length }}<br> <br>
+
+              <h4> Nombre de partie rejointes </h4>
+              {{ utilisateur.partiesRejoins|length }}<br> <br>
+
+
+
+
+            </div>
+            <div class="col-md-6">
+              <center>
+                <h4> Changement d'avatar</h4>
+                <div id="avatars">
+                  <form id="changement">
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="1" />
+                      <img src="{{ asset('/img/avatar1.jpg') }}" alt="" />
+                    </label>
+
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="2" />
+                      <img src="{{ asset('/img/avatar2.jpg') }}" alt="" />
+                    </label>
+
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="3" />
+                      <img src="{{ asset('/img/avatar3.jpg') }}" alt="" />
+                    </label>
+
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="4" />
+                      <img src="{{ asset('/img/avatar4.jpg') }}" alt="" />
+                    </label>
+
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="5" />
+                      <img src="{{ asset('/img/avatar5.jpg') }}" alt="" />
+                    </label>
+
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="6" />
+                      <img src="{{ asset('/img/avatar6.jpg') }}" alt="" />
+                    </label>
+
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="7" />
+                      <img src="{{ asset('/img/avatar7.jpg') }}" alt="" />
+                    </label>
+
+                    <label class="avatars">
+                      <input type="radio" name="avatar" value="8" />
+                      <img src="{{ asset('/img/avatar8.jpg') }}" alt="" />
+                    </label>
+
+                  </form>
+
+
                 </div>
-            </section>
+                <BR>
+                <div id="Cible"></div><BR><BR><BR><BR>
+                <blockquote class="blockquote" style="color: #D5D0CF">
+                  <p class="mb-0">
+                    Plus d'options et de personnalisations sont à venir dans les prochaines versions.
+                  </p>
+                  <footer class="blockquote-footer" style="color: #D5D0CF">
+                    L'équipe <cite>LesRoisDu</cite>
+                  </footer>
+                </blockquote>
 
-{% endblock %}
-
-{% block body %}
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Intro -->
-					<section id="intro" class="wrapper style1 fullscreen fade-up">
-						  
-                          
-
-
-                        <div class="inner">
-							<h1>ESPACE COMPTE</h1>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-6">
-
-                                        <h4> Avatar </h4>
-                                        <img src="{{ utilisateur.avatar }}" alt="" /><br> <br>
-                                        
-                                         <h4> Adresse mail </h4>
-                                        {{ app.user.username }}<br> <br>
-
-                                        <h4> Pseudo </h4>
-                                        {{ utilisateur.pseudo }}<br> <br>
-
-                                        <h4> Nombre de partie créées </h4>
-                                        {{ utilisateur.partiesCree|length }}<br> <br>
-
-                                        <h4> Nombre de partie rejointes </h4>
-                                        {{ utilisateur.partiesRejoins|length }}<br> <br>
-                                    
-
-                                    
-                                           
-                                    </div>
-                                    <div class="col-md-6">
-                                        <center><h4> Changement d'avatar</h4>
-                                            <div id="avatars">
-                                              <form id="changement">
-                                              <label class="avatars">
-                                                <input type="radio" name="avatar" value="1"/>
-                                                <img src="{{ asset('/img/avatar1.jpg') }}" alt="" />
-                                              </label>
-                                              
-                                              <label class="avatars">
-                                                <input type="radio" name="avatar" value="2"/>
-                                                <img src="{{ asset('/img/avatar2.jpg') }}" alt="" />
-                                              </label>
-                                              
-                                              <label class="avatars">
-                                                <input type="radio" name="avatar" value="3"/>
-                                                <img src="{{ asset('/img/avatar3.jpg') }}" alt="" />
-                                              </label>
-                                              
-                                              <label class="avatars">
-                                                <input type="radio" name="avatar" value="4"/>
-                                                <img src="{{ asset('/img/avatar4.jpg') }}" alt="" />
-                                              </label>
-                                              
-                                              <label class="avatars">
-                                                <input type="radio" name="avatar" value="5"/>
-                                                <img src="{{ asset('/img/avatar5.jpg') }}" alt=""  />
-                                              </label>
-                                              
-                                              <label class="avatars">
-                                                <input type="radio" name="avatar" value="6"/>
-                                                <img src="{{ asset('/img/avatar6.jpg') }}" alt=""  />
-                                              </label>
-
-                                               <label class="avatars">
-                                                <input type="radio" name="avatar" value="7"/>
-                                                <img src="{{ asset('/img/avatar7.jpg') }}" alt=""  />
-                                              </label>
-
-                                               <label class="avatars">
-                                                <input type="radio" name="avatar" value="8"/>
-                                                <img src="{{ asset('/img/avatar8.jpg') }}" alt=""  />
-                                              </label>
-
-                                              </form>
-
-                                              
-                                            </div>
-                                            <BR>
-                                            <div id="Cible"></div><BR><BR><BR><BR>
-                                            <blockquote class="blockquote" style="color: #D5D0CF">
-                                                <p class="mb-0">
-                                                    Plus d'options et de personalisations sont à venir dans les prochaines versions.
-                                                </p>
-                                                <footer class="blockquote-footer" style="color: #D5D0CF">
-                                                    L'équipe <cite>LesRoisDu</cite>
-                                                </footer>
-                                            </blockquote>
-                                      
-                                                <script type="text/javaScript">
+                <script type="text/javaScript">
 
                                                        var routeSaisie = false;
                                                        var chemin = "#";
@@ -143,25 +145,25 @@
                                                         
                                                     }, 100);
 
-                                                </script> 
-                                        
-                                         </center>
-                                
+                                                </script>
 
-                                    </div>
-                                </div>
-                            </div>
+              </center>
 
 
-                            
-                            
+            </div>
+          </div>
+        </div>
 
 
 
 
 
-						</div>
-					</section>
 
-			</div>
-{% endblock %}
+
+
+
+      </div>
+    </section>
+
+  </div>
+  {% endblock %}
