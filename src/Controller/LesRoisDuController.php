@@ -49,6 +49,14 @@ class LesRoisDuController extends AbstractController
         return $this->render('les_rois_du/index.html.twig');
     }
     
+     /**
+     * @Route("/credits", name="credits")
+     */
+    public function afiichageCredits()
+    {
+        return $this->render('les_rois_du/credits.html.twig');
+    }
+
     /**
      * @Route("/inscription", name="page_inscription")
      */
