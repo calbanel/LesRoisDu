@@ -188,7 +188,7 @@ class LesRoisDuController extends AbstractController
 
        $formulairePartie->handleRequest($request);
 
-       if ($formulairePartie->isSubmitted())
+       if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
        { 
       
         $plateau = $partie->getPlateau();

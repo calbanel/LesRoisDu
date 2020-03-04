@@ -24,7 +24,7 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message= "L'adresse mail doit être renseignée")
-     *  @Assert\Email(message= "L'adresse mail n'est pas valide")
+     * @Assert\Email(message= "L'adresse mail n'est pas valide")
      */
     private $email;
 
