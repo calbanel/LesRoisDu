@@ -1,32 +1,56 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
 
 
-<div class="container-fluid">
+{% extends 'monTemplate.html.twig' %}
+
+{% block sidebar %}
+
+<body class="is-preload">
+  <!-- Sidebar -->
+  <section id="sidebar">
+    <div class="inner">
+      <nav>
+        <ul>
+          <li><a href="{{ path('partie_en_cours', {'idPartie' : partie.id}) }}">RETOUR à la partie</a></li>
+          <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  {% endblock %}
+
+  {% block body %}
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Intro -->
+    <section id="intro" class="wrapper style1 fullscreen fade-up">
+
+
+
+
+      <div class="inner">
+        <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center" style="color: #D5D0CF">
+			<h2 class="text-center">
 				Paramètres {{partie.nom}}
 			</h2>
-			<BR>
-			<BR>
+			
 		</div>
 	</div>
+	<BR>
 	<div class="row">
-		<div class="col-md-2">
 
-		</div>
 		<div class="col-md-2">
-			<button type="button" class="btn btn-warning btn-block" disabled>Reinitialiser la partie</button>
-			<BR>
-			<BR>
+			<button type="button" class="button scrolly" disabled>Reinitialiser la partie</button>
+		
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 		</div>
 		<div class="col-md-2">
 			<div class="alert alert-warning" style="display: none">
-			    <!--<button type="button" class="close" id="fermer">&times;</button>-->
+			    <!--<button type="button" class="close" id="fermer">×</button>-->
 			    <h4 class="alert-heading">Attention!</h4> 
 			    <p>Êtes vous sure de vouloir supprimer la partie ?</p>
 			    <!--<button type="button" class="close btn btn-danger" id="fermer">Non</button>-->
@@ -35,7 +59,7 @@
 			    <!--<button type="button" class="btn btn-success">Oui</button>-->
 			    
 			  </div>
-			  <input type="button" class="btn btn-danger btn-block" value="Supprimer la partie">
+			  <input type="button" class="btn button scrolly" value="Supprimer la partie">
 			</div>
 			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
 			<script>  
@@ -50,67 +74,45 @@
 			    })
 			  })
 			</script>
-			<BR>
-			<BR>
+			
 		</div>
 		<div class="col-md-2">
 
 		</div>
 	</div>
+	<BR>
 	<div class="row">
+		<div class="col-md-1">
+
+		</div>
+		<div class="col-md-4">
+			<h4> Nom de la partie </h4>
+              {{partie.nom}}<br> <br>
+
+              <h4> Nombre de plateaux </h4>
+              {{partie.nbPlateaux}}<br> <br>
+
+              <h4>Nombre de pions </h4>
+              {{partie.nbPionParPlateau}}<br> <br>
+
+              <h4> Nombre de faces sur le dé </h4>
+              {{partie.nbFacesDe}}<br> <br>
+
+		</div>
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-4">
-			<dl>
-				<dt style="color: #D5D0CF">
-					Nom de la partie
-				</dt>
-				<dd style="color: #D5D0CF">
-					{{partie.nom}}
-				</dd>
-				<dt style="color: #D5D0CF">
-					Nombre de plateaux
-				</dt>
-				<dd style="color: #D5D0CF">
-					1
-				</dd>
-				<dt style="color: #D5D0CF">
-					Nombre de pions
-				</dt>
-				<dd style="color: #D5D0CF">
-					4
-				</dd>
-				<dt style="color: #D5D0CF">
-					Nombre de faces sur le dé
-				</dt>
-				<dd style="color: #D5D0CF">
-					4
-				</dd>
-				
-			</dl>
-		</div>
-		<div class="col-md-4">
-			<dl>
-				<dt style="color: #D5D0CF">
-					Description du plateau
-				</dt>
-				<dd style="color: #D5D0CF">
-					{{partie.description}}
-				</dd>
-				<dt style="color: #D5D0CF">
-					Code d'invitation
-				</dt>
-				<dd style="color: #D5D0CF">
-					{{partie.code}}
-				</dd>
-			</dl>
+		<div class="col-md-3">
+			<h4> Description du plateau </h4>
+              {{partie.description}}<br> <br>
+
+              <h4> Code d'invitation </h4>
+              {{partie.code}}<br> <br>
+
 		</div>
 		<div class="col-md-2">
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2">
-		</div>
 		<div class="col-md-6">
 			<BR>
 			<blockquote class="blockquote" style="color: #D5D0CF">
@@ -122,16 +124,26 @@
 				</footer>
 			</blockquote>
 		</div>
-		<div class="col-md-1">
-			<a href="{{ path('partie_en_cours', {'idPartie' : partie.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour</a>
+		<div class="col-md-3">
 
 		</div>
 		<div class="col-md-1">
-			<button type="button" class="btn btn-success btn-block" disabled>Valider</button>
+			<button type="button" class="button scrolly" disabled>Valider</button>
 		</div>
 		<div class="col-md-2">
 		</div>
 	</div>
 </div>
 
-{% endblock %}
+
+
+
+
+
+
+
+      </div>
+    </section>
+
+  </div>
+  {% endblock %}

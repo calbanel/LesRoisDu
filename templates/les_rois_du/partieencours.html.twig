@@ -37,6 +37,26 @@
         <section id="intro" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
                 <h2><center>{{partie.nom}}</center></h2>
+                <div class="row">
+                <div class="col-md-9">
+                    </div>
+                <div class="col-md-1">
+                    {% if utilisateur.pseudo == partie.createur.pseudo %}
+                    <a role="button" href="{{ path('parametres_partie', {'idPartie' : partie.id}) }}" class="btn button scrolly">
+                        Paramètres
+                    </a>
+                    {% else %}
+                    <button type="button" class="button scrolly" disabled>
+                        Paramètres
+                    </button>
+                    {% endif %}
+
+                </div>
+                <div class="col-md-2">
+                    </div>
+            </div>
+            <br>
+
 
                  <canvas id="canvas" >Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
 
