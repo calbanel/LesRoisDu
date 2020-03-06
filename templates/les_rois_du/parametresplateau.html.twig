@@ -1,63 +1,71 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
 
 
-<div class="container-fluid">
+{% extends 'monTemplate.html.twig' %}
+
+{% block sidebar %}
+
+<body class="is-preload">
+  <!-- Sidebar -->
+  <section id="sidebar">
+    <div class="inner">
+      <nav>
+        <ul>
+          <li><a href="{{ path('plateau', {'idPlateau' : plateau.id}) }}">RETOUR au plateau</a></li>
+          <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  {% endblock %}
+
+  {% block body %}
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Intro -->
+    <section id="intro" class="wrapper style1 fullscreen fade-up">
+
+
+
+
+      <div class="inner">
+        <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center" style="color: #D5D0CF">
+			<h2 class="text-center">
 				Paramètres {{plateau.nom}}
 			</h2>
-			<BR>
-			<BR>
+			
 		</div>
 	</div>
+	<BR>
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-1">
+
 		</div>
 		<div class="col-md-4">
-			<dl>
-				<dt style="color: #D5D0CF">
-					Nom du plateau
-				</dt>
-				<dd style="color: #D5D0CF">
-					{{plateau.nom}}
-				</dd>
-				<dt style="color: #D5D0CF">
-					Niveau de difficulté
-				</dt>
-				<dd style="color: #D5D0CF">
-					{{plateau.niveauDifficulte}}
-				</dd>
-				<dt style="color: #D5D0CF">
-					Nombre de cases
-				</dt>
-				<dd style="color: #D5D0CF">
-					{% set nbCases = 0 %}
-					{% for uneCase in plateau.cases %}
-						{% set nbCases = nbCases + 1 %}
-					{% endfor %}
-					{{nbCases}}
-				</dd>
-			</dl>
+			<h4> Nom du plateau </h4>
+              {{plateau.nom}}<br> <br>
+
+              <h4> Niveau de difficulté </h4>
+              {{plateau.niveauDifficulte}}<br> <br>
+
+              <h4>Nombre de cases </h4>
+              {{plateau.nbCases}}<br> <br>
+
+		</div>
+		<div class="col-md-1">
 		</div>
 		<div class="col-md-4">
-			<dl>
-				<dt style="color: #D5D0CF">
-					Description du plateau
-				</dt>
-				<dd style="color: #D5D0CF">
-					{{plateau.description}}
-				</dd>
-			</dl>
+			<h4> Description du plateau </h4>
+              {{plateau.description}}<br> <br>
+
 		</div>
 		<div class="col-md-2">
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2">
-		</div>
 		<div class="col-md-6">
 			<BR>
 			<blockquote class="blockquote" style="color: #D5D0CF">
@@ -69,16 +77,27 @@
 				</footer>
 			</blockquote>
 		</div>
-		<div class="col-md-1">
-			<a href="{{ path('plateau', {'idPlateau' : plateau.id}) }}" class="btn btn-danger btn-block" role="button" aria-pressed="true">Retour</a>
+		<div class="col-md-3">
 
 		</div>
 		<div class="col-md-1">
-			<button type="button" class="btn btn-success btn-block" disabled>Valider</button>
+			<BR>
+			<button type="button" class="button scrolly" disabled>Valider</button>
 		</div>
 		<div class="col-md-2">
 		</div>
 	</div>
 </div>
 
-{% endblock %}
+
+
+
+
+
+
+
+      </div>
+    </section>
+
+  </div>
+  {% endblock %}
