@@ -38,7 +38,13 @@
             <div class="inner">
                 <h2><center>{{partie.nom}}</center></h2>
                 <div class="row">
-                <div class="col-md-9">
+              
+                <div class="col-md-3">
+                    <button type="button" class="button scrolly" disabled>
+                        Expulser joueur
+                    </button>
+                    </div>
+                    <div class="col-md-6">
                     </div>
                 <div class="col-md-1">
                     {% if utilisateur.pseudo == partie.createur.pseudo %}
@@ -72,6 +78,12 @@
             <script type="text/javascript" src="{{asset('tilemap/js/classes/Tileset.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
+
+            <br>
+            <p>Créateur de la partie: {{partie.createur.pseudo}}<br>
+            Joueur: {{partie.plateauDeJeu.joueur.pseudo}}</p>
+
+            
 
 
                 </div>
