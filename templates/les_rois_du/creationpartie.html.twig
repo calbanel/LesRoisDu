@@ -38,11 +38,14 @@
           {{ form_row(vueFormulaireCreationPartie.nbPlateaux, { 'label' : 'Nombre de plateaux' })}}
           {{ form_row(vueFormulaireCreationPartie.nbPionParPlateau, { 'label' : 'Nombre de pions par plateau' })}}
           {{ form_row(vueFormulaireCreationPartie.nbFacesDe, { 'label' : 'Nombre de faces sur le dé' })}}
-          {{ form_row(vueFormulaireCreationPartie.plateau, { 'label' : 'Nombre de faces sur le dé' })}}
-         
-
+          {{ form_row(vueFormulaireCreationPartie.plateau, { 'label' : 'Plateau' })}}
+         <Br>
+          <ul class="actions">
+                        <li><a href="" class="button submit">Valider la création </a></li>
+                        <li><a href="{{ path('hub')}}" class="button">Annuler la création </a></li>
+                    </ul>
         </div>
-        <button type="submit" class="btn btn-dark">Valider</button>
+
         <!-- <ul class="actions">
           <li><a href="" class="button submit">Valider</a></li>
           <li><a href="" class="button submit">Annuler </a></li>

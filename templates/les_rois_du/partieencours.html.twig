@@ -81,7 +81,7 @@
 
             <br>
             <p>Créateur de la partie: {{partie.createur.pseudo}}<br>
-            Joueur: {{partie.plateauDeJeu.joueur.pseudo}}</p>
+            Joueur: {% if partie.plateauDeJeu.joueur is null %} {% else %}{{partie.plateauDeJeu.joueur.pseudo}}{% endif %}</p>
 
             
 
