@@ -85,6 +85,15 @@ class LesRoisDuController extends AbstractController
                 $utilisateur,
                 $plainPassword
              ));
+
+            $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
+            $plateau = $repositoryPlateau->find(7);
+
+            $utilisateur->addPlateau($plateau);
+
+            $plateau2 = $repositoryPlateau->find(6);
+
+            $utilisateur->addPlateau($plateau2);
            
             // Enregistrer la ressource en base de données
            $manager->persist($utilisateur);
@@ -293,12 +302,16 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/plateaux/{idPlateau}", name="plateau")
      */
-    public function affichagePlateau($idPlateau)
+    public function affichagePlateau($idPlateau, UserInterface $user)
     {
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $user = $repositoryUtilisateur->find($userId);
+
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
         $plateau = $repositoryPlateau->find($idPlateau);
-        $plateaux = $repositoryPlateau->findAll();
-        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'plateaux'=>$plateaux]);
+
+        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'utilisateur'=>$user]);
     }
 
     /**
