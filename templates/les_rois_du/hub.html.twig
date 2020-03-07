@@ -42,7 +42,18 @@
                 Bienvenue sur notre application {{utilisateur.pseudo}} !
             </h3></center>
             <p>
-                Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+                {% if utilisateur.estInvite == false %} 
+                LesRoisDu est une application à but pédagogique. Vous pouvez dès à présent créer des parties à partir des plateaux déjà disponibles.
+                Des joueurs pourront ensuite la rejoindre et s'affronter dessus ! Vous trouverez sur la barre à gauche tous les espaces disponibles relatifs à :
+                 vos parties, vos plateaux ainsi qu'à votre compte. 
+                
+                
+                {% else %} 
+                LesRoisDu est une application à but pédagogique. Vous pouvez dès à présent rejoindre des parties et vous affronter dessus !
+                Vous trouverez sur la barre à gauche l'espace relatif aux parties.
+                Pour pouvoir créer des parties et avoir accès à plus de contenu, il vous faut créer un compte personnel.
+
+                {% endif %}
             </p>
         </div>
         <div class="col-md-2">
@@ -55,7 +66,7 @@
             <section id="partie" class="wrapper style1 fullscreen fade-up">
                 <div class="inner">
                     <h1>Parties</h1>
-                    <p>C'est ici pour les parties</p>
+                    <p>C'est par ici pour les parties !</p>
                     <ul class="actions">
                         <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES EXISTANTES</a></li>
                         {% if utilisateur.estInvite == false %}
@@ -74,7 +85,7 @@
                             setInterval(function(){
                                 if (routeSaisie) {
                                     var code = document.getElementById("inputRejoindre").value;
-                                    var route = '/join' + code;
+                                    var route = '/parties/join' + code;
                                     document.getElementById("boutonRejoindre").setAttribute("href",route);
                                     //console.log(route);
                                 }
@@ -92,7 +103,7 @@
         <section id="plateaux" class="wrapper style1 fullscreen fade-up">
                 <div class="inner">
                     <h1>Plateaux</h1>
-                    <p>C'est ici pour les plateaux</p>
+                    <p>C'est par ici pour les plateaux !</p>
                     <ul class="actions">
                         <li><a href="{{ path('espace_plateau') }}" class="button scrolly">CONSULTER LA LISTE DES PLATEAUX</a></li>
                     </ul>
@@ -103,7 +114,7 @@
         <section id="compte" class="wrapper style1 fullscreen fade-up">
                 <div class="inner">
                     <h1>Compte utilisateur</h1>
-                    <p>C'est ici pour aller dans son compte</p>
+                    <p>C'est par ici pour consulter son compte !</p>
                     <ul class="actions">
                         <li><a href="{{ path('espace_compte') }}" class="button scrolly">MON COMPTE</a></li>
                     </ul>

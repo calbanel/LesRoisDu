@@ -34,8 +34,14 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/hub, roles: [ROLE_USER, ROLE_INVITE] }
+        - { path: ^/parties, roles: [ROLE_USER, ROLE_INVITE] }
+        - { path: ^/creation, roles: ROLE_USER }
+        - { path: ^/parametres, roles: ROLE_USER }
+        - { path: ^/supression, roles: ROLE_USER }
+        - { path: ^/plateaux, roles: ROLE_USER }
+        - { path: ^/compte, roles: ROLE_USER }
+        - { path: ^/api, roles: [ROLE_USER, ROLE_INVITE] }
 
     encoders:
         # use your user class name here
