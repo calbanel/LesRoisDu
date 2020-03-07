@@ -31,6 +31,8 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class LesRoisDuController extends AbstractController
 {
@@ -180,7 +182,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/parties/creation", name="creation_partie")
+     * @Route("/creation/parties", name="creation_partie")
      */
     public function affichageCreationPartie(Request $request, ObjectManager $manager, UserInterface $user)
     {
@@ -270,10 +272,41 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
+     * @Route("/parties/join{code}", name="join_partie")
+     */
+    public function joinPartie(ObjectManager $manager, UserInterface $user, $code)
+    {
+
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $joueur = $repositoryUtilisateur->find($userId);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $repositoryPartie=$entityManager->getRepository(Partie::class);
+        $partie = $repositoryPartie->findOneBy(['code' => $code]);
+
+        if($partie->getJoueurs()->isEmpty()){
+
+        $joueur->addPartiesRejoin($partie);
+        $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
+           
+        // Enregistrer la ressource en base de données
+        $manager->persist($partie);
+        $manager->persist($joueur);
+        $manager->flush();
+        }
+
+        return $this->redirectToRoute('espace_partie');
+    }
+
+
+    /**
      * @Route("/parties/{idPartie}", name="partie_en_cours")
      */
     public function affichagePartieEnCours($idPartie, UserInterface $user)
     {
+
+        
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
         $parties = $repositoryPartie->findAll();
@@ -285,18 +318,53 @@ class LesRoisDuController extends AbstractController
         $cree = $user->getPartiesCree();
 
         $rejoins = $user->getPartiesRejoins();
-        
+
+        $trouve = false;
+
+        foreach($cree as $unePartie){
+            if($unePartie->getId() == $partie->getId()){
+                $trouve = true;
+            }
+        }
+
+        foreach($rejoins as $unePartie){
+            if($unePartie->getId() == $partie->getId()){
+                $trouve = true;
+            }
+        }
+
+        if ($trouve == true)
+        {        
         return $this->render('les_rois_du/partieencours.html.twig',['partie'=>$partie,'partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
+        }
+        else{
+            return $this->redirectToRoute('espace_partie');
+        }
     }
 
     /**
-     * @Route("/parties/{idPartie}/parametres", name="parametres_partie")
+     * @Route("/parametres/parties/{idPartie}", name="parametres_partie")
      */
-    public function affichageParametresPartie($idPartie)
+    public function affichageParametresPartie($idPartie, UserInterface $user)
     {
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
+
+        if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
+
         return $this->render('les_rois_du/parametrespartie.html.twig',['partie'=>$partie]);
+
+        }
+        else
+        {
+            return $this->redirectToRoute('espace_partie');
+        }
+
+        
     }
 
     /**
@@ -315,21 +383,32 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/plateaux/{idPlateau}/parametres", name="parametres_plateau")
+     * @Route("/parametres/plateaux/{idPlateau}", name="parametres_plateau")
      */
     public function affichageParametresPlateau($idPlateau)
     {
+
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
         $plateau = $repositoryPlateau->find($idPlateau);
         return $this->render('les_rois_du/parametresplateau.html.twig',['plateau'=>$plateau]);
     }
 
     /**
-     * @Route("/parties/supression/{idPartie}", name="supprimer_partie")
+     * @Route("/supression/parties/{idPartie}", name="supprimer_partie")
      */
-    public function supprimerUnePartie($idPartie)
+    public function supprimerUnePartie($idPartie, UserInterface $user)
     {
- 
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $partie = $repositoryPartie->find($idPartie);
+
+        if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
+
+        
+
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryPartie=$entityManager->getRepository(Partie::class);
 
@@ -361,8 +440,11 @@ class LesRoisDuController extends AbstractController
         $entityManager->remove($partie);
 
         $entityManager->flush();
+    }
 
     return $this->redirectToRoute('espace_partie');
+
+
 
     }
 
@@ -406,30 +488,6 @@ class LesRoisDuController extends AbstractController
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
-    }
-
-    /**
-     * @Route("/parties/join{code}", name="join_partie")
-     */
-    public function joinPartie(ObjectManager $manager, UserInterface $user, $code)
-    {
-
-        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
-        $userId = $user->getId();
-        $joueur = $repositoryUtilisateur->find($userId);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $repositoryPartie=$entityManager->getRepository(Partie::class);
-        $partie = $repositoryPartie->findOneBy(['code' => $code]);
-
-        $joueur->addPartiesRejoin($partie);
-           
-        // Enregistrer la ressource en base de données
-        $manager->persist($partie);
-        $manager->persist($joueur);
-        $manager->flush();
-
-        return $this->redirectToRoute('espace_partie');
     }
 
     /**
