@@ -1,8 +1,15 @@
 class Case {
 
 	constructor(url, defi, colonne, ligne) {
+
+		//Position dans la map
 		this.colonne = colonne;
 		this.ligne = ligne;
+
+		//Position relative au Canvas
+		this.x = this.colonne * 128;
+		this.y = this.ligne * 128;
+
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
 		this.image.referenceDuPerso = this;
@@ -22,8 +29,15 @@ class Case {
 
 	}
 
-	update(deltaTime) {
+	update() {
+		this.displayDefi();
+	}
 
+	updateOnClick(x , y){
+		if (this.isClicked(x,y)) {
+			console.log("Moi, case col : " + this.colonne + "; lig : " + this.ligne + " Je suis suis cliqué" );
+			this.update();
+		}
 	}
 
 	draw(context, map) {
@@ -36,11 +50,15 @@ class Case {
 		);
 	}
 
+	isClicked(x, y) {
+		var myTop = this.y;
+		var myRgt = this.x + this.largeur;
+		var myBot = this.y + this.hauteur;
+		var myLft = this.x;
 
-
-	isClicked(col, lig) {
 		var clicked = true;
-		if (col != this.colonne || lig != this.ligne) {
+		if(y < myTop || y > myBot || x < myLft || x > myRgt)
+		{
 			return false;
 		}
 		return clicked;

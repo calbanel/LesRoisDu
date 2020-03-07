@@ -60,6 +60,14 @@ class ToolBox {
 	convertYtoLig(y, tileHeight) {
 		return Math.floor(y / tileHeight);
     }
+
+    convertColToX(object){
+        return (object.col * object.map.TILE_WIDTH) + object.posXPlayer;
+    }
+
+    convertLigToY(){
+        return (object.lig * object.map.TILE_WIDTH) + object.posYPlayer;
+    }
     
     getIdTile(col, lig, map){
         var id = "undefined";

@@ -13,13 +13,21 @@ class Parcours {
 
     }
 
-    update(col, lig) {
-        for (var i = 0; i < this.cases.length; i++) {
-            if (this.cases[i].isClicked(col, lig)) {
-                this.cases[i].displayDefi();
-            }
-        }
+    getCases(){
+        return this.cases;
     }
+
+    update() {
+
+    }
+
+    updateOnClick(x , y){
+        
+        this.cases.forEach(casess => {
+            casess.updateOnClick(x,y);
+        });
+		
+	}
 
     draw(context, map) {
 
@@ -37,10 +45,11 @@ class Parcours {
         for (ligne; ligne < nbLignes; ligne++) {
 
             for (var colonne = 0; colonne < nbColonne; colonne++) {
-                var tuile = this.map.terrain[(ligne * nbColonne) + colonne];
+                var tuile = this.toolBox.getIdTile(colonne, ligne, this.map);
 
                 if (tuile == 1) {
                     this.casesPosition.push(new Array(colonne, ligne));
+                    
                 }
             }
         }
@@ -53,13 +62,11 @@ class Parcours {
 
         var positionCases = this.getPositionCases();
 
-        var defi = 'defi n°'
-
         for (var i = 0; i < this.listeDefis.length; i++) {
         }
         for (var i = 0; i < positionCases.length; i++) {
 
-            this.cases[i] = new Case('Case_128.png',
+            this.cases[i] = new Case('case_128.png',
                 this.listeDefis[i].defi,
                 positionCases[i][0],
                 positionCases[i][1]);

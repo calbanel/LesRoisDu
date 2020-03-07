@@ -38,6 +38,12 @@ class De{
 		alert('Vous avez obtenu ' + this.faceCourante + '.');
 	}
 
+	updateOnClick(x , y){
+		if (this.isClicked(x,y)) {
+			this.update();
+		}
+	}
+
 	draw(context, map){
 		context.drawImage(
 			this.image,
@@ -55,7 +61,7 @@ class De{
 
 	notifyObservers(){
 		for (let o of this.observers) {
-			o.update(this.faceCourante);
+			o.updateFaceCourante(this.faceCourante);
 		}
 	}
 

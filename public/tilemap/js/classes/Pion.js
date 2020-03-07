@@ -26,19 +26,19 @@ class Pion {
 				this.posXPlayer = 32 - 32 / 2;
 				this.posYPlayer = 32 - 32 / 2;
 				break;
-		
-			case 2: 
+
+			case 2:
 				this.posXPlayer = 96 - 32 / 2;
 				this.posYPlayer = 32 - 32 / 2;
 				break;
 
-			
-			case 3: 
+
+			case 3:
 				this.posXPlayer = 32 - 32 / 2;
 				this.posYPlayer = 96 - 32 / 2;
 				break;
 
-			case 4: 
+			case 4:
 				this.posXPlayer = 96 - 32 / 2;
 				this.posYPlayer = 96 - 32 / 2;
 				break;
@@ -50,7 +50,7 @@ class Pion {
 
 		this.x = this.posXPlayer;
 		this.y = this.posYPlayer;
-		
+
 
 		//Position dans la map
 		this.col = this.toolBox.convertXtoCol(this.x, this.map.TILE_WIDTH);
@@ -67,25 +67,35 @@ class Pion {
 		//Etat du pion
 		this.isSelected = false;
 
+		//Etat du dé
+		this.faceCouranteDe = 0;
 
-		
 	}
 
-	update(diceFace) {
+	update() {
 
 		if (this.isSelected) {
-			var nbCaseTogo = diceFace;
 
-			for (let i = 0; i < nbCaseTogo; i++) {
-
-						this.goToNextCase();
-				
-			}
+			this.advanceBasedOnPawnValue();
 
 			this.isSelected = false;
-			
+
+		} else {
+			this.isSelected = true;
 		}
 
+
+	}
+
+	updateOnClick(x, y) {
+		if (this.isClicked(x, y)) {
+			this.update();
+		}
+	}
+
+	updateFaceCourante(faceCourante) {
+
+		this.faceCouranteDe = faceCourante;
 
 	}
 
@@ -145,19 +155,19 @@ class Pion {
 
 	}
 
-	saveOldPosition(){
+	saveOldPosition() {
 		this.oldCol = this.col;
 		this.oldLig = this.lig;
 	}
 
-	setCol(col){
+	setCol(col) {
 		this.col = col;
 	}
 
-	setLig(lig){
+	setLig(lig) {
 		this.lig = lig;
 	}
-	
+
 	teleportToCase(col, lig) {
 		//On enregistre l'ancienne position
 		this.saveOldPosition();
@@ -192,6 +202,15 @@ class Pion {
 
 	}
 
+	advanceBasedOnPawnValue() {
+
+		for (let i = 0; i < this.faceCouranteDe; i++) {
+
+			this.goToNextCase();
+
+		}
+	}
+
 	isNextCaseWasMyLastOne(caseAround) {
 
 		if (caseAround[0].pos.col == this.oldCol &&
@@ -215,11 +234,11 @@ class Pion {
 		}
 	}
 
-	showIsSelected(){
+	showIsSelected() {
 		this.image.src = assetsBaseDir + "sprites/" + "pion_rouge.png";
 	}
 
-	showMeNormally(){
+	showMeNormally() {
 		this.image.src = assetsBaseDir + "sprites/" + "pion_vert.png"
 	}
 
