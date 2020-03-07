@@ -312,17 +312,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/case{idCase}_{numCase}", name="consultation_case")
-     */
-    public function affichageCase($idCase,$numCase)
-    {
-        $repositoryCases=$this->getDoctrine()->getRepository(Cases::class);
-        $cases = $repositoryCases->find($idCase);
-        return $this->render('les_rois_du/consultationcase.html.twig',['case'=>$cases, 'numCase'=>$numCase]);
-    }
-
-    /**
-     * @Route("/supression/partie{idPartie}", name="supprimer_partie")
+     * @Route("/parties/supression/{idPartie}", name="supprimer_partie")
      */
     public function supprimerUnePartie($idPartie)
     {
@@ -406,7 +396,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/join{code}", name="join_partie")
+     * @Route("/parties/join{code}", name="join_partie")
      */
     public function joinPartie(ObjectManager $manager, UserInterface $user, $code)
     {
@@ -489,7 +479,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/changement{code}", name="changement_avatar")
+     * @Route("/compte/changement{code}", name="changement_avatar")
      */
     public function changementAvatar(ObjectManager $manager, UserInterface $user, $code)
     {
