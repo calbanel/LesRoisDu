@@ -382,7 +382,7 @@ class LesRoisDuController extends AbstractController
 
         $invite->setAvatar("/img/avatarGuest.jpg");
 
-        $roles[] =  'ROLE_USER';
+        $roles[] =  'ROLE_INVITE';
         $invite->setRoles($roles);
 
         $invite->setEstInvite(true);
