@@ -2,131 +2,131 @@
  "defis":[
         {
           "case":0,
-          "defi":"Faire 10 pompes"
+          "defi":""
         },
         {
           "case":1,
-          "defi":"Ecrire du Shakespear"
+          "defi":"Service"
         },
         {
           "case":2,
-          "defi":"Passer diamant sur league of legend"
+          "defi":"Echange à la diagonale"
         },
         {
           "case":3,
-          "defi":"Trouver la réponse à 42"
+          "defi":"Match sur côté"
         },
         {
           "case":4,
-          "defi":"Fais ce que tu veux"
+          "defi":"Echange à la diagonale"
         },
         {
           "case":5,
-          "defi":"Oublie ton prénom"
+          "defi":"Match à l'avant"
         },
         {
           "case":6,
-          "defi":"Regarde à ta droite"
+          "defi":"Service"
         },
         {
           "case":7,
-          "defi":"Regarde à ta gauche"
+          "defi":"Match sur côté"
         },
         {
           "case":8,
-          "defi":"Fait tes lacets"
+          "defi":"Match à l'avant"
         },
         {
           "case":9,
-          "defi":"Passe un doctorat"
+          "defi":"Match tout terrain"
         },
         {
           "case":10,
-          "defi":"Passe ton permis"
+          "defi":"Service"
         },
         {
           "case":11,
-          "defi":"Cite les 10 premières décimal de PI"
+          "defi":"Echange à la diagonale"
         },
         {
           "case":12,
-          "defi":"Le chat de Schrödinger est-il vivant ou mort ?"
+          "defi":"Match tout terrain"
         },
         {
           "case":13,
-          "defi":"Qui est Ada Lovelace ?"
+          "defi":"Match sur côté"
         },
         {
           "case":14,
-          "defi":"Fait 10 tours de terrain en faisant un parcours complet"
+          "defi":"Echange à la diagonale"
         },
         {
           "case":15,
-          "defi":"Combien de touche possède un clavier numérique ?"
+          "defi":"Match à l'avant"
         },
         {
           "case":16,
-          "defi":"Combien de touche possède un terrain de rugby ?"
+          "defi":"Match sur côté"
         },
         {
           "case":17,
-          "defi":"Fais tes devoirs"
+          "defi":"Service"
         },
         {
           "case":18,
-          "defi":"Résout  5x – 2(x + 4) = 8 + 3x"
+          "defi":"Match sur côté"
         },
         {
           "case":19,
-          "defi":"Faire 11 pompes"
+          "defi":"Match tout terrain"
         },
         {
           "case":21,
-          "defi":"Réconcilie Israel et la Palestine"
+          "defi":"Match tout terrain"
         },
         {
           "case":22,
-          "defi":"Destitue Donald Trump"
+          "defi":"Match à l'avant"
         },
         {
           "case":23,
-          "defi":"Fais toi élire président et ensuite démissionne"
+          "defi":"Match sur côté"
         },
         {
           "case":24,
-          "defi":"Fait ce que tu veux"
+          "defi":"Match tout terrain"
         },
         {
           "case":25,
-          "defi":"Bois 10 gorgées"
+          "defi":"Match à l'avant"
         },
         {
           "case":26,
-          "defi":"c'est la 27eme case"
+          "defi":"Match tout terraine"
         },
         {
           "case":27,
-          "defi":"dab"
+          "defi":"Match tout terrain"
         },
         {
           "case":28,
-          "defi":"Fait 28 pompes"
+          "defi":"Match tout terrain"
         },
         {
           "case":29,
-          "defi":"Oublie pas tes affaires !"
+          "defi":"Match à l'avant"
         },
         {
           "case":30,
-          "defi":"Ferme les yeux"
+          "defi":"Match à l'avant"
         },
         {
           "case":31,
-          "defi":"Bravo, c'est fini"
+          "defi":"Match tout terrain"
         },
         {
           "case":32,
-          "defi":"Bravo, cette fois ci c'est vraiment fini"
+          "defi":""
         }]
         
 }
