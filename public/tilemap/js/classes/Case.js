@@ -30,12 +30,11 @@ class Case {
 	}
 
 	update() {
-		this.displayDefi();
+		//this.displayDefi();
 	}
 
 	updateOnClick(x , y){
 		if (this.isClicked(x,y)) {
-			console.log("Moi, case col : " + this.colonne + "; lig : " + this.ligne + " Je suis suis cliqué" );
 			this.update();
 		}
 	}

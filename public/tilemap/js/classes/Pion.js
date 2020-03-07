@@ -1,46 +1,38 @@
 class Pion {
-	constructor(url, map, player) {
+	constructor(map, player) {
 		//Petit toolBox des familles
 		this.toolBox = new ToolBox();
 
 		//Informations de la map
 		this.map = map;
 
-		// Chargement de l'image dans l'attribut image
-		this.image = new Image();
-		this.image.referenceDuPerso = this;
-		this.image.onload = function () {
-			if (!this.complete)
-				throw "Erreur de chargement du sprite nommé \"" + url + "\".";
-
-			// Taille du pion
-			this.referenceDuPerso.largeur = this.width;
-			this.referenceDuPerso.hauteur = this.height;
-		}
-
-		this.image.src = assetsBaseDir + "sprites/" + url;
+		
 
 		//Position dans le canvas
 		switch (player) {
 			case 1:
 				this.posXPlayer = 32 - 32 / 2;
 				this.posYPlayer = 32 - 32 / 2;
+				this.couleur = 'vert';
 				break;
 
 			case 2:
 				this.posXPlayer = 96 - 32 / 2;
 				this.posYPlayer = 32 - 32 / 2;
+				this.couleur = 'rouge';
 				break;
 
 
 			case 3:
 				this.posXPlayer = 32 - 32 / 2;
 				this.posYPlayer = 96 - 32 / 2;
+				this.couleur = 'jaune';
 				break;
 
 			case 4:
 				this.posXPlayer = 96 - 32 / 2;
 				this.posYPlayer = 96 - 32 / 2;
+				this.couleur = 'bleu';
 				break;
 
 			default:
@@ -70,32 +62,44 @@ class Pion {
 		//Etat du dé
 		this.faceCouranteDe = 0;
 
+		// Chargement de l'image dans l'attribut image
+		this.image = new Image();
+		this.image.referenceDuPerso = this;
+		this.image.onload = function () {
+			if (!this.complete)
+				throw "Erreur de chargement du sprite nommé \"" + url + "\".";
+
+			// Taille du pion
+			this.referenceDuPerso.largeur = this.width;
+			this.referenceDuPerso.hauteur = this.height;
+		}
+
+		this.image.src = assetsBaseDir + "sprites/" + "pion_" + this.couleur + ".png";
+
 	}
 
 	update() {
 
 		if (this.isSelected) {
-
 			this.advanceBasedOnPawnValue();
-
-			this.isSelected = false;
-
-		} else {
-			this.isSelected = true;
-		}
-
+		} 
 
 	}
 
 	updateOnClick(x, y) {
 		if (this.isClicked(x, y)) {
-			this.update();
+			this.isSelected = true;
+			this.showMeSelected();
+		}else{
+			this.isSelected = false;
+			this.showMeNormally();
 		}
 	}
 
 	updateFaceCourante(faceCourante) {
 
 		this.faceCouranteDe = faceCourante;
+		this.update();
 
 	}
 
@@ -234,12 +238,12 @@ class Pion {
 		}
 	}
 
-	showIsSelected() {
-		this.image.src = assetsBaseDir + "sprites/" + "pion_rouge.png";
+	showMeSelected() {
+		this.image.src = assetsBaseDir + "sprites/" + "pion_" + this.couleur + "_selected.png";
 	}
 
 	showMeNormally() {
-		this.image.src = assetsBaseDir + "sprites/" + "pion_vert.png"
+		this.image.src = assetsBaseDir + "sprites/" + "pion_" + this.couleur + ".png";
 	}
 
 

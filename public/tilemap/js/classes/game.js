@@ -15,10 +15,10 @@ class Game {
 
         //Nos pions
         this.pions = [];
-        this.pions.push(new Pion("pion_vert.png", this.map, 1));
-        this.pions.push(new Pion("pion_jaune.png", this.map, 2));
-        this.pions.push(new Pion("pion_bleu.png", this.map, 3));
-        this.pions.push(new Pion("pion_rouge.png", this.map, 4));
+        this.pions.push(new Pion(this.map, 1));
+        this.pions.push(new Pion(this.map, 2));
+        this.pions.push(new Pion(this.map, 3));
+        this.pions.push(new Pion(this.map, 4));
 
         //Notre dé
         this.dice = new De("de.png", 128, 128);
