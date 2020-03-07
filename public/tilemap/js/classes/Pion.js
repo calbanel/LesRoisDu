@@ -1,30 +1,10 @@
 class Pion {
-	constructor(url, map, x, y) {
+	constructor(url, map, player) {
 		//Petit toolBox des familles
 		this.toolBox = new ToolBox();
 
 		//Informations de la map
 		this.map = map;
-
-		//Position dans le canvas
-		this.x = x;
-		this.y = y;
-
-		//Position dans la map
-		this.col = this.toolBox.convertXtoCol(this.x, this.map.TILE_WIDTH);
-		this.lig = this.toolBox.convertYtoLig(this.y, this.map.TILE_HEIGHT);
-
-		//Position du pion avant le déplacement
-		this.oldCol = 0;
-		this.oldLig = 0;
-
-		//Prochaine case où il faut se déplacer
-		this.nextCol = 0;
-		this.nextLig = 0;
-
-		//Etat du pion
-		this.isSelected = false;
-
 
 		// Chargement de l'image dans l'attribut image
 		this.image = new Image();
@@ -39,6 +19,56 @@ class Pion {
 		}
 
 		this.image.src = assetsBaseDir + "sprites/" + url;
+
+		//Position dans le canvas
+		switch (player) {
+			case 1:
+				this.posXPlayer = 32 - 32 / 2;
+				this.posYPlayer = 32 - 32 / 2;
+				break;
+		
+			case 2: 
+				this.posXPlayer = 96 - 32 / 2;
+				this.posYPlayer = 32 - 32 / 2;
+				break;
+
+			
+			case 3: 
+				this.posXPlayer = 32 - 32 / 2;
+				this.posYPlayer = 96 - 32 / 2;
+				break;
+
+			case 4: 
+				this.posXPlayer = 96 - 32 / 2;
+				this.posYPlayer = 96 - 32 / 2;
+				break;
+
+			default:
+				alert('Il ne peut exister de joueur ' + player + '.');
+				break;
+		}
+
+		this.x = this.posXPlayer;
+		this.y = this.posYPlayer;
+		
+
+		//Position dans la map
+		this.col = this.toolBox.convertXtoCol(this.x, this.map.TILE_WIDTH);
+		this.lig = this.toolBox.convertXtoCol(this.y, this.map.TILE_HEIGHT);
+
+		//Position du pion avant le déplacement
+		this.oldCol = 0;
+		this.oldLig = 0;
+
+		//Prochaine case où il faut se déplacer
+		this.nextCol = 0;
+		this.nextLig = 0;
+
+		//Etat du pion
+		this.isSelected = false;
+
+
+		
 	}
 
 	update(diceFace) {
@@ -62,8 +92,8 @@ class Pion {
 	draw(context) {
 		context.drawImage(
 			this.image,
-			(((this.col - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT),
-			(((this.lig - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT),
+			(((this.col - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT) + this.posXPlayer,
+			(((this.lig - 1) * this.map.TILE_HEIGHT) + this.map.TILE_HEIGHT) + this.posYPlayer,
 			this.largeur,
 			this.hauteur
 		);
@@ -137,8 +167,8 @@ class Pion {
 		this.setLig(lig);
 
 		//On met à jour la position
-		this.x = this.col * this.map.TILE_WIDTH;
-		this.y = this.lig * this.map.TILE_HEIGHT;
+		this.x = (this.col * this.map.TILE_WIDTH) + this.posXPlayer;
+		this.y = (this.lig * this.map.TILE_HEIGHT) + this.posYPlayer;
 	}
 
 	goToNextCase() {
