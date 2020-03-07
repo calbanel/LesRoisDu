@@ -7,15 +7,17 @@ class InputHandler {
 
         observers.push(game.dice);
 
-        var cases = game.parcours.getCases();
-        cases.forEach(casess => {
-            observers.push(casess);
-        });
+       
        
         var pions = game.pions;
         pions.forEach(pion => {
             observers.push(pion);
-        })
+        });
+
+        var cases = game.parcours.getCases();
+        cases.forEach(casess => {
+            observers.push(casess);
+        });
        
 
         //Position du clique
@@ -42,17 +44,5 @@ class InputHandler {
         })
 
     }
-
-    
-	addObservers(o){
-		this.observers.push(o);
-    }
-    
-    notifyObservers(){
-		for (let o of this.observers) {
-			o.updateOnClick(this.sourisX , this.sourisY);
-		}
-	}
-
 
 }

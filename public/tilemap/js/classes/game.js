@@ -20,6 +20,9 @@ class Game {
         this.pions.push(new Pion(this.map, 3));
         this.pions.push(new Pion(this.map, 4));
 
+        //Nos cases
+        this.cases = this.parcours.getCases();
+
         //Notre dé
         this.dice = new De("de.png", 128, 128);
 
@@ -35,6 +38,11 @@ class Game {
 
         this.pions.forEach(pion => {
             this.map.addPion(pion);
+
+            this.cases.forEach(casess => {
+                casess.addPionObserved(pion);
+            })
+            
         });
 
         this.map.setDice(this.dice);

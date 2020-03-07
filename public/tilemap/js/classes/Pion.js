@@ -88,11 +88,15 @@ class Pion {
 
 	updateOnClick(x, y) {
 		if (this.isClicked(x, y)) {
+
 			this.isSelected = true;
 			this.showMeSelected();
+
 		}else{
+
 			this.isSelected = false;
 			this.showMeNormally();
+
 		}
 	}
 

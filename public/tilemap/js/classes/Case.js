@@ -27,16 +27,37 @@ class Case {
 		this.image.src = assetsBaseDir + "sprites/" + url;
 
 
+		this.pionObserved = [];
 	}
 
 	update() {
-		//this.displayDefi();
+		this.displayDefi();
 	}
 
-	updateOnClick(x , y){
-		if (this.isClicked(x,y)) {
+	updateOnClick(x, y) {
+		if (this.isClicked(x, y) &&
+			!this.isAnyPionSelected()
+		) {
 			this.update();
 		}
+	}
+
+	addPionObserved(pion) {
+		this.pionObserved.push(pion);
+	}
+
+	isAnyPionSelected() {
+
+		var isPionSelected = false;
+
+		this.pionObserved.forEach(pion => {
+			if (pion.isSelected) {
+				isPionSelected = true;
+			}
+
+		});
+
+		return isPionSelected;
 	}
 
 	draw(context, map) {
@@ -56,8 +77,7 @@ class Case {
 		var myLft = this.x;
 
 		var clicked = true;
-		if(y < myTop || y > myBot || x < myLft || x > myRgt)
-		{
+		if (y < myTop || y > myBot || x < myLft || x > myRgt) {
 			return false;
 		}
 		return clicked;
