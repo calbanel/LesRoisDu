@@ -68,7 +68,7 @@
                     <h1>Parties</h1>
                     <p>C'est par ici pour les parties !</p>
                     <ul class="actions">
-                        <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES EXISTANTES</a></li>
+                        <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES </a></li>
                         {% if utilisateur.estInvite == false %}
                         <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
                         {%endif%}

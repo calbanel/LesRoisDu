@@ -26,7 +26,7 @@ class PartieType extends AbstractType
             ->add('nom',TextType::class)
             ->add('description',TextareaType::class)
             ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
-            ->add('nbPionParPlateau',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+            ->add('nbPionParPlateau',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
             ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
             ->add('plateau', EntityType::class, [   'class' => Plateau::class,
                                                     'choice_label' => 'nom',
