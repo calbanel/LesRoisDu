@@ -7,8 +7,6 @@ class InputHandler {
 
         observers.push(game.dice);
 
-       
-       
         var pions = game.pions;
         pions.forEach(pion => {
             observers.push(pion);
@@ -27,9 +25,12 @@ class InputHandler {
         //EVENT LISTENER
         canvas.addEventListener('mousedown', function (event) {
             var rect = canvas.getBoundingClientRect();
-            this.sourisX = event.pageX - rect.left;
-            this.sourisY = event.pageY - rect.top;
+            this.sourisX = event.x - rect.left;
+            this.sourisY = event.y - rect.top;
 
+            console.log(this.sourisX);
+            console.log(this.sourisY);
+            
             if (this.sourisX && this.sourisY) {
                 for (let o of observers) {
                     o.updateOnClick(this.sourisX , this.sourisY);
