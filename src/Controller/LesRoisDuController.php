@@ -285,15 +285,17 @@ class LesRoisDuController extends AbstractController
         $repositoryPartie=$entityManager->getRepository(Partie::class);
         $partie = $repositoryPartie->findOneBy(['code' => $code]);
 
-        if($partie->getJoueurs()->isEmpty()){
+        if(!is_null($partie)){            
+            if($partie->getJoueurs()->isEmpty()){
 
-        $joueur->addPartiesRejoin($partie);
-        $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
-           
-        // Enregistrer la ressource en base de données
-        $manager->persist($partie);
-        $manager->persist($joueur);
-        $manager->flush();
+            $joueur->addPartiesRejoin($partie);
+            $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
+            
+            // Enregistrer la ressource en base de données
+            $manager->persist($partie);
+            $manager->persist($joueur);
+            $manager->flush();
+            }
         }
 
         return $this->redirectToRoute('espace_partie');
@@ -337,7 +339,8 @@ class LesRoisDuController extends AbstractController
         {        
         return $this->render('les_rois_du/partieencours.html.twig',['partie'=>$partie,'partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
         }
-        else{
+        else
+        {
             return $this->redirectToRoute('espace_partie');
         }
     }
@@ -547,6 +550,30 @@ class LesRoisDuController extends AbstractController
         $data = ['cases' => $caseData];
 
         return $this->json($data);
+    }
+
+    /**
+     * @Route("/api/partie/{idPartie}", name="api_parties")
+     */
+    public function apiPartie($idPartie)
+    {
+
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $partie = $repositoryPartie->find($idPartie);
+
+        $nom = $partie->getNom();
+        $description = $partie->getDescription();
+        $createur = $partie->getCreateur()->getPseudo();
+        if ($partie->getJoueurs()->isEmpty()){
+            $joueur = "NILL";
+        }
+        else
+        {
+            $joueur = $partie->getJoueurs()->get(0)->getPseudo();
+        }
+        $estLance = $partie->getEstLance();
+
+        return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'estLance' => $estLance]);
     }
 
     /**
