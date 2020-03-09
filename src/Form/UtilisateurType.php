@@ -25,7 +25,7 @@ class UtilisateurType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe saisis ne correspondent pas.',
                 'first_options'  => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Répétez le mot de passe'),
+                'second_options' => array('label' => 'Répéter le mot de passe'),
             ))
         ;
     }

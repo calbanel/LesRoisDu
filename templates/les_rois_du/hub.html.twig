@@ -39,18 +39,18 @@
         <div class="col-md-8">
             <center><img alt="Avatar" src="{{utilisateur.avatar}}" />
             <h3>
-                Bienvenue sur notre application {{utilisateur.pseudo}} !
+                 {{utilisateur.pseudo}}, bienvenue sur LesRoisDu !
             </h3></center>
             <p>
                 {% if utilisateur.estInvite == false %} 
                 LesRoisDu est une application à but pédagogique. Vous pouvez dès à présent créer des parties à partir des plateaux déjà disponibles.
-                Des joueurs pourront ensuite la rejoindre et s'affronter dessus ! Vous trouverez sur la barre à gauche tous les espaces disponibles relatifs à :
+                Des joueurs pourront ensuite la rejoindre et s'affronter dessus ! Vous trouverez sur le menu de gauche tous les espaces disponibles relatifs à :
                  vos parties, vos plateaux ainsi qu'à votre compte. 
                 
                 
                 {% else %} 
                 LesRoisDu est une application à but pédagogique. Vous pouvez dès à présent rejoindre des parties et vous affronter dessus !
-                Vous trouverez sur la barre à gauche l'espace relatif aux parties.
+                Vous trouverez sur le menu à gauche l'espace relatif aux parties.
                 Pour pouvoir créer des parties et avoir accès à plus de contenu, il vous faut créer un compte personnel.
 
                 {% endif %}

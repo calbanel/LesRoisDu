@@ -8,12 +8,12 @@
         <div class="inner">
             <nav>
                 <ul>
-                            <li><a href="{{path ('hub')}}">MENU</a></li>
-                            {% if utilisateur.estInvite == false %}
-                            <li><a href="{{path ('espace_plateau')}}">ESPACE PLATEAU</a></li>
-                            <li><a href="{{path ('espace_compte')}}">ESPACE COMPTE</a></li>
-                            {% endif %}
-                            <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
+                    <li><a href="{{path ('hub')}}">MENU</a></li>
+                    {% if utilisateur.estInvite == false %}
+                    <li><a href="{{path ('espace_plateau')}}">ESPACE PLATEAU</a></li>
+                    <li><a href="{{path ('espace_compte')}}">ESPACE COMPTE</a></li>
+                    {% endif %}
+                    <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
                 </ul>
             </nav>
         </div>
@@ -35,9 +35,18 @@
 
 
                 <section id="one" class="wrapper style2 spotlights">
-{% if utilisateur.estInvite == false %}
-                <BR>
-                <h2><center>Parties créées</center></h2>
+                    {% if utilisateur.estInvite == false %}
+                    <BR>
+                    <h2>
+                        <center><strong><span style="text-decoration: underline;"> Parties créées </span> </strong>
+                        </center>
+                    </h2>
+
+
+                    {% if partiesCree is empty %}
+                    <center>Vous n'avez pas encore créé de parties.</center>
+
+                    {% else %}
                     <!-- Boucle pour chaque partie  -->
                     {% for partie in partiesCree %}
                     <section>
@@ -58,14 +67,23 @@
 
                     <!-- Fin boucle -->
                     {% endfor %}
-{%endif%}
+                    {% endif %}
+                    {% endif %}
 
-        <BR>
-        <h2><center>Parties rejointes</center></h2>
+                    <BR><br><br>
+                    <h2>
+                        <center><strong> <span style="text-decoration: underline;">Parties rejointes </span></strong>
+                        </center>
+                    </h2>
 
 
 
                     <!-- Boucle pour chaque partie  -->
+                    {% if partiesRejoins is empty %}
+                    <center>Vous n'avez pas encore rejoint de parties.</center>
+
+                    {% else %}
+
                     {% for partie in partiesRejoins %}
                     <section>
                         <a href="#" class="image"><img src="img/LesRoisDuBad.png" alt=""
@@ -90,11 +108,11 @@
 
                     <!-- Fin boucle -->
                     {% endfor %}
+                    {% endif %}
 
 
-
-    </div>
-    </section>
+            </div>
+        </section>
 
     </div>
     {% endblock %}

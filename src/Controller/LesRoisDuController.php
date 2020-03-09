@@ -190,7 +190,7 @@ class LesRoisDuController extends AbstractController
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();
         $createur = $repositoryUtilisateur->find($userId);
-       // Création d'une entrprise vierge
+       // Création d'une entreprise vierge
        $partie=new Partie();
 
        // Création de l'objet formulaire
