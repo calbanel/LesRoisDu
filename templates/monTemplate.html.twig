@@ -21,15 +21,16 @@
 
 {% block header %}
 <header id="header" class="wrapper style1-alt">
-		{% if app.user is not null %}
+		
+	
+	{% if app.user is not null %}
 		<div class="inner">
 				<p>
-					<center> Vous êtes connecté en tant que	{{utilisateur.email}} - <a href="{{path ('app_logout')}}">Se déconnecter</a></center>
+					<center> Vous êtes connecté en tant que	{{app.user.email}} - <a href="{{path ('app_logout')}}">Se déconnecter</a></center>
 
 				</p>
 		</div>
 		{% endif %}
-
 </header>
 
 {% endblock %}
