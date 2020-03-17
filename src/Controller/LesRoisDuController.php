@@ -64,7 +64,7 @@ class LesRoisDuController extends AbstractController
      */
     public function affichagePageInscription(Request $request, ObjectManager $manager, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator)
     {
-        // Création d'une entrprise vierge
+        // Création d'un utilisateur vierge
         $utilisateur=new Utilisateur();
 
         // Création de l'objet formulaire
@@ -158,7 +158,7 @@ class LesRoisDuController extends AbstractController
      * @Route("/compte", name="espace_compte")
      */
     public function affichageEspaceCompte(UserInterface $user)
-    {
+    {  
         
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();

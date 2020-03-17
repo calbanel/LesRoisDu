@@ -26,7 +26,7 @@
 	{% if app.user is not null %}
 		<div class="inner">
 				<p>
-					<center> Vous êtes connecté en tant que	{{app.user.email}} - <a href="{{path ('app_logout')}}">Se déconnecter</a></center>
+					<center> Vous êtes connecté en tant que	{{app.user.pseudo}} - <a href="{{path ('app_logout')}}">Se déconnecter</a></center>
 
 				</p>
 		</div>

@@ -115,15 +115,12 @@
                 </blockquote>
 
                 <script type="text/javaScript">
-
                                                        var routeSaisie = false;
                                                        var chemin = "#";
                                                 
                                                     setInterval(function(){
-
                                                         var radios = document.getElementsByName('avatar');
                                                         
-
                                                         if(chemin != "#" && routeSaisie == false){
                                                             document.getElementById('Cible').innerHTML ='<a id="changementAvatar" href="#" class="button scrolly" disabled>CHANGER</a>';
                                                             routeSaisie = true;
@@ -134,8 +131,6 @@
                                                          chemin = radios[i].value;
                                                          }
                                                         }
-
-
                                                         var route = '/compte/changement' + chemin;
                                                         if(routeSaisie == true){
                                                              document.getElementById("changementAvatar").setAttribute("href",route);
@@ -144,7 +139,6 @@
                                                         //console.log(routeSaisie);
                                                         
                                                     }, 100);
-
                                                 </script>
 
               </center>
