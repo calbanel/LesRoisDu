@@ -37,10 +37,12 @@ use Doctrine\Common\Collections\Collection;
 class LesRoisDuController extends AbstractController
 {
     private $passwordEncoder;
+    private $lien;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->lien = "http://iparla.iutbayonne.univ-pau.fr:8001";
     }
 
     /**
@@ -210,6 +212,38 @@ class LesRoisDuController extends AbstractController
         $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
         $plateauEnJeu->setNbCases($plateau->getNbCases());
 
+        $pions1 = new Pion();
+        $pions1->setNom("rouge");
+        $pions1->setCouleur("red");
+        $pions1->setAvancementPlateau(0);
+        $pions1->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pions1);
+
+        $pions2 = new Pion();
+        $pions2->setNom("vert");
+        $pions2->setCouleur("green");
+        $pions2->setAvancementPlateau(0);
+        $pions2->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pions2);
+
+        $pions3 = new Pion();
+        $pions3->setNom("bleu");
+        $pions3->setCouleur("blue");
+        $pions3->setAvancementPlateau(0);
+        $pions3->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pions3);
+
+        $pions4 = new Pion();
+        $pions4->setNom("jaune");
+        $pions4->setCouleur("yellow");
+        $pions4->setAvancementPlateau(0);
+        $pions4->setPlateauEnJeu($plateauEnJeu);
+
+        $manager->persist($pions4);
+
 
         $partie->setPlateauDeJeu($plateauEnJeu);
         $partie->setCreateur($createur);
@@ -285,13 +319,18 @@ class LesRoisDuController extends AbstractController
         $repositoryPartie=$entityManager->getRepository(Partie::class);
         $partie = $repositoryPartie->findOneBy(['code' => $code]);
 
+        $plateauDeJeu = $partie->getPlateauDeJeu();
+
         if(!is_null($partie)){            
             if($partie->getJoueurs()->isEmpty()){
 
             $joueur->addPartiesRejoin($partie);
             $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
+
+            $plateauDeJeu->setJoueur($joueur);
             
             // Enregistrer la ressource en base de données
+            $manager->persist($plateauDeJeu);
             $manager->persist($partie);
             $manager->persist($joueur);
             $manager->flush();
@@ -494,6 +533,29 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
+     * @Route("/compte/changement{code}", name="changement_avatar")
+     */
+    public function changementAvatar(ObjectManager $manager, UserInterface $user, $code)
+    {
+
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
+        $avatar = "/img/avatar" . $code . ".jpg";
+
+        $utilisateur->setAvatar($avatar);
+
+        $manager->persist($utilisateur);
+        $manager->flush();
+
+        return $this->redirectToRoute('espace_compte');
+    }
+
+
+
+
+    /**
      * @Route("/api/plateaux/{idPlateau}", name="api_plateaux")
      */
     public function apiPlateaux($idPlateau)
@@ -511,9 +573,46 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/api/plateaux/{idPlateau}/cases", name="api_cases")
+     * @Route("/api/plateauEnJeu/{idPlateauEnJeu}", name="api_plateaudejeu")
      */
-    public function apiToutesCases($idPlateau)
+    public function apiPlateauEnJeu($idPlateauEnJeu)
+    {
+
+        $repositoryPlateauEnJeu=$this->getDoctrine()->getRepository(PlateauEnJeu::class);
+        $plateau = $repositoryPlateauEnJeu->find($idPlateauEnJeu);
+
+        $nom = $plateau->getNom();
+        $description = $plateau->getDescription();
+        $difficulte = $plateau->getNiveauDifficulte();
+        $nbCases = $plateau->getNbCases();
+
+        if (is_null($plateau->getJoueur())){
+            $joueur = "";
+        }
+        else
+        {
+            $joueur = $plateau->getJoueur()->getPseudo();
+        }
+
+        $pions = $plateau->getPions();
+        $arrayInfoPions = [];
+
+        foreach ($pions as $unPion) {
+            $nom= $unPion->getNom();
+            $couleur= $unPion->getCouleur();
+            $position= $unPion->getAvancementPlateau();
+            array_push($arrayInfoPions, ['nom' => $nom, 'couleur' => $couleur, 'position' => $position]);       
+        }
+
+        $partie = $this->lien."/api/partie/".$plateau->getPartie()->getId();
+
+        return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions]);
+    }
+
+    /**
+     * @Route("/api/plateaux/{idPlateau}/cases", name="api_cases_plateau")
+     */
+    public function apiToutesCasesPlateau($idPlateau)
     {
 
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
@@ -542,6 +641,52 @@ class LesRoisDuController extends AbstractController
                 
             }
 
+            
+
+            $infos = ['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code, 'ressources' => $ressourceData];
+
+            array_push($caseData, $infos);
+        }
+
+        $data = ['cases' => $caseData];
+
+        return $this->json($data);
+    }
+
+    /**
+     * @Route("/api/plateauEnJeu/{idPlateauEnJeu}/cases", name="api_cases_plateauenjeu")
+     */
+    public function apiToutesCasesPlateauEnJeu($idPlateauEnJeu)
+    {
+
+        $repositoryPlateauEnJeu=$this->getDoctrine()->getRepository(PlateauEnJeu::class);
+        $plateau = $repositoryPlateauEnJeu->find($idPlateauEnJeu);
+
+        $caseData = [];
+
+        $tabCase = $plateau->getCases();
+
+        foreach($tabCase as $uneCase){
+
+            $ressourceData = [];
+            
+            $numero = $uneCase->getNumero();
+            $defi = $uneCase->getDescriptifDefi();
+            $consignes = $uneCase->getConsignes();
+            $code = $uneCase->getCodeValidation();
+
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource){
+
+                $chemin = $uneRessource->getChemin();
+                $infosR = ['chemin' => $chemin];
+
+                array_push($ressourceData, $infosR);
+                
+            }
+
+            
+
             $infos = ['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code, 'ressources' => $ressourceData];
 
             array_push($caseData, $infos);
@@ -565,7 +710,7 @@ class LesRoisDuController extends AbstractController
         $description = $partie->getDescription();
         $createur = $partie->getCreateur()->getPseudo();
         if ($partie->getJoueurs()->isEmpty()){
-            $joueur = "NILL";
+            $joueur = "";
         }
         else
         {
@@ -573,29 +718,10 @@ class LesRoisDuController extends AbstractController
         }
         $estLance = $partie->getEstLance();
 
-        return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'estLance' => $estLance]);
+        $plateauDeJeu = $this->lien."/api/plateauEnJeu/".$partie->getPlateauDeJeu()->getId();
+
+        return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
     }
 
-    /**
-     * @Route("/compte/changement{code}", name="changement_avatar")
-     */
-    public function changementAvatar(ObjectManager $manager, UserInterface $user, $code)
-    {
-
-        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
-        $userId = $user->getId();
-        $utilisateur = $repositoryUtilisateur->find($userId);
-
-        $avatar = "/img/avatar" . $code . ".jpg";
-
-        $utilisateur->setAvatar($avatar);
-
-        $manager->persist($utilisateur);
-        $manager->flush();
-
-        return $this->redirectToRoute('espace_compte');
-    }
-
-
-
+ 
 }
