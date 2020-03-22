@@ -319,9 +319,10 @@ class LesRoisDuController extends AbstractController
         $repositoryPartie=$entityManager->getRepository(Partie::class);
         $partie = $repositoryPartie->findOneBy(['code' => $code]);
 
-        $plateauDeJeu = $partie->getPlateauDeJeu();
+        
 
-        if(!is_null($partie)){            
+        if(!is_null($partie)){  
+            $plateauDeJeu = $partie->getPlateauDeJeu();          
             if($partie->getJoueurs()->isEmpty()){
 
             $joueur->addPartiesRejoin($partie);
