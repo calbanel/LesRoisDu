@@ -85,8 +85,21 @@
             <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
 
             <br>
-            <p>Créateur de la partie: {{partie.createur.pseudo}}<br>
-            Joueur: {% if partie.plateauDeJeu.joueur is null %} {% else %}{{partie.plateauDeJeu.joueur.pseudo}}{% endif %}</p>
+            <p id="creaJoueur"></p>
+            <script type="text/javascript">
+                setInterval(function(){
+                    fetch('http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/'+{{partie.id}})
+                      .then(response => {
+                        return response.json()
+                      })
+                      .then(data => {
+                        console.log(data);
+
+                            document.getElementById("creaJoueur").innerHTML = "Créateur de la partie: " + data["createur"] + "<br>Joueur: " + data["joueur"];
+
+                     })
+                }, 2000);
+            </script>
 
             
 
