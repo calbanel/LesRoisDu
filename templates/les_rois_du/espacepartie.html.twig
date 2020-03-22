@@ -8,7 +8,7 @@
         <div class="inner">
             <nav>
                 <ul>
-                    <li><a href="{{path ('hub')}}">MENU</a></li>
+                    <li><a href="{{path ('hub')}}">ACCUEIL</a></li>
                     {% if utilisateur.estInvite == false %}
                     <li><a href="{{path ('espace_plateau')}}">ESPACE PLATEAUX</a></li>
                     <li><a href="{{path ('espace_compte')}}">ESPACE COMPTE</a></li>
@@ -32,7 +32,34 @@
             <div class="inner">
                 <h1>ESPACE PARTIES</h1>
 
+                <ul class="actions">
+                        {% if utilisateur.estInvite == false %}
+                        <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
+                        {%endif%}
+                        <li><a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
+                        <script type="text/javaScript">
 
+                            function ajouterSaisieCode() {                             
+                                document.getElementById('Cible').innerHTML ='<p>Saisir ci dessous le code de la partie à rejoindre en respectant les minuscules et majuscules :</p>   <input id="inputRejoindre"  type="text"/><br>   <a href="" id="boutonRejoindre" class="button scrolly"> Accéder</a>';
+                                routeSaisie = true;
+                            }
+
+                            routeSaisie = false; //pour éviter d'essayer de regarder le code dans le input s'il n'est pas encre créé
+                        
+                            setInterval(function(){
+                                if (routeSaisie) {
+                                    var code = document.getElementById("inputRejoindre").value;
+                                    var route = '/parties/join' + code;
+                                    document.getElementById("boutonRejoindre").setAttribute("href",route);
+                                    //console.log(route);
+                                }
+                            }, 100);
+
+                        </script> 
+
+                    </ul>
+                    <div id="Cible"></div>
+                    <BR>
 
                 <section id="one" class="wrapper style2 spotlights">
                     {% if utilisateur.estInvite == false %}
