@@ -27,9 +27,6 @@ class InputHandler {
             var rect = canvas.getBoundingClientRect();
             this.sourisX = event.x - rect.left;
             this.sourisY = event.y - rect.top;
-
-            console.log(this.sourisX);
-            console.log(this.sourisY);
             
             if (this.sourisX && this.sourisY) {
                 for (let o of observers) {

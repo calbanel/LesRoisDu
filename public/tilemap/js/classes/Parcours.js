@@ -63,7 +63,9 @@ class Parcours {
         var positionCases = this.getPositionCases();
 
         for (var i = 0; i < this.listeDefis.length; i++) {
+
         }
+        
         for (var i = 0; i < positionCases.length; i++) {
 
             this.cases[i] = new Case('case_128.png',

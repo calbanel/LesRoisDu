@@ -1,9 +1,12 @@
 	var canvas = document.getElementById('canvas');
 	var ctx = canvas.getContext('2d');
-    
+	
+	
 
-
-	var game = new Game();
+	var game = new Game("plateauBlancCase", "defi");
+	
+	game.initialize();
+	game.load();
 	game.start();
 	var lastTime = 0;
 	function gameLoop(timestamp) {
