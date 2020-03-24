@@ -21,7 +21,7 @@ class ToolBox {
         var xhr = getXMLHttpRequest();
 
         // Chargement du fichier
-        xhr.open("GET", assetsBaseDir + 'maps/' + 'defi' + '.json', false);
+        xhr.open("GET", assetsBaseDir + 'plateaux/' + 'defi' + '.json', false);
         xhr.send(null);
         if (xhr.readyState != 4 || (xhr.status != 200 && xhr.status != 0)) // Code == 0 en local
             throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
@@ -40,7 +40,7 @@ class ToolBox {
         var xhr = getXMLHttpRequest();
 
         // Chargement du fichier
-        xhr.open("GET", assetsBaseDir + 'maps/' + nom + '.json', false);
+        xhr.open("GET", assetsBaseDir + 'plateaux/' + nom + '.json', false);
         xhr.send(null);
         if (xhr.readyState != 4 || (xhr.status != 200 && xhr.status != 0)) // Code == 0 en local
             throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
@@ -82,7 +82,7 @@ class ToolBox {
         var xhr = new XMLHttpRequest();
 
         // On souhaite juste récupérer le contenu du fichier, la méthode GET suffit amplement :
-        var url = assetsBaseDir + 'maps/' + url + '.json'
+        var url = assetsBaseDir + 'plateaux/' + url + '.json'
         xhr.open('GET', url);
     
         xhr.addEventListener('readystatechange', function() { // On gère ici une requête asynchrone

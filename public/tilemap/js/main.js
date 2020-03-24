@@ -3,7 +3,7 @@
 	
 	
 
-	var game = new Game("plateauBlancCase", "defi");
+	var game = new Game("plateau_13_128", "defi");
 	
 	game.initialize();
 	game.load();
