@@ -1,12 +1,12 @@
 class De{
 
-	constructor(url, x, y){
+	constructor(url, faceDe){
 		//Position du dé
-		this.x = x;
-		this.y = y;
+		this.x = 128;
+		this.y = 128;
 
 		//Nombre de face du dé
-		this.nbFaces = 4;
+		this.nbFaces = faceDe;
 
 		//Face courante
 		this.faceCourante = 0;

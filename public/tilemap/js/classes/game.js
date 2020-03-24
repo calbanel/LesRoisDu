@@ -10,6 +10,7 @@ class Game {
 
         //Récupération des infos dans les fichiers JSON
         //Récupérations des informations relatives à la map
+        //this.map = loadPlateau(this.idPlateau);
         this.map = new Map(this.idPlateau);
 
         //Récupérations des informations relatives aux défis
@@ -23,7 +24,7 @@ class Game {
 
         //Initialisation du/des pion(s)
         this.pions = [];
-        this.nombrePion = 4;
+        this.nombrePion = 2;
         for (let index = 1; index < this.nombrePion + 1; index++) {
             
             this.pions.push(new Pion(this.map, index));
@@ -31,7 +32,7 @@ class Game {
         }
 
         //Initialisation du dé
-        this.dice = new De("de.png", 128, 128);
+        this.dice = new De("de.png", 3);
 
         //Gestionnaire d'évênement
         new InputHandler(this);
