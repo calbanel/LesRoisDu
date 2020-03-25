@@ -1,8 +1,5 @@
 {% extends 'monTemplate.html.twig' %}
 
-
-
-
 {% block sidebar %}
 
 <body class="is-preload">
@@ -23,55 +20,90 @@
             </nav>
         </div>
     </section>
-
     {% endblock %}
 
     {% block body %}
-
     <div id="wrapper">
 
-                
-               
-
-        
         <section id="intro" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
-                <h2><center>{{partie.nom}}</center></h2>
+                <h2>
+                    <center>{{partie.nom}}</center>
+                </h2>
                 <div class="row">
-              
-                <div class="col-md-3">
-                   
+
+                    <div class="col-md-3">
                     </div>
 
                     {% if partie.plateauDeJeu.joueur is not null %}
-                        {% if utilisateur.pseudo == partie.plateauDeJeu.joueur.pseudo %}
-                        <div class="col-md-12">
-                            <p> Pour jouer il vous suffit de sélectionner un pion puis le lancer le dé. Votre pion se déplacera du nombre 
-                            cases obtenues ! Un fois le pion arrivé sur la case, vous pouvez accéder au défi en cliquant dessus. </p>
-                        </div>
-                        {%endif%}
-                    {%endif%}    
-                    <div class="col-md-1">
+                    {% if utilisateur.pseudo == partie.plateauDeJeu.joueur.pseudo %}
+                    <div class="col-md-12">
+                        <p> Pour jouer il vous suffit de sélectionner un pion puis le lancer le dé. Votre pion se
+                            déplacera du nombre
+                            cases obtenues ! Un fois le pion arrivé sur la case, vous pouvez accéder au défi en cliquant
+                            dessus. </p>
+                    </div>
+                </div>
+                <br>
+                <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour
+                    jouer.</canvas>
+
+                <script> var assetsBaseDir = "{{ asset('tilemap/') }}"
+                </script>
+                <script type="text/javascript" src="{{asset('tilemap/js/XmlHttpRequest.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/toolBox.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/input.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Parcours.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/game.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/De.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Pion.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Case.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Tileset.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
+
+                <br>
+                <p id="creaJoueur"></p>
+                <script type="text/javascript">
+                    setInterval(function () {
+                        fetch('http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/' + {{ partie.id }})
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(data => {
+                            console.log(data);
+
+                            document.getElementById("creaJoueur").innerHTML = "Créateur de la partie: " + data["createur"] + "<br>Joueur: " + data["joueur"];
+
+                        })
+                }, 2000);
+                </script>
+                {%endif%}
+                {%endif%}
+                <div class="col-md-1">
 
                     {% if utilisateur.pseudo == partie.createur.pseudo %}
                     <ul class="actions">
-                    <a role="button" href="{{ path('parametres_partie', {'idPartie' : partie.id}) }}" class="btn button scrolly">
-                        Paramètres
-                    </a>
-                    {% else %}
-                   
-                    {% endif %}
+                        <a role="button" href="{{ path('parametres_partie', {'idPartie' : partie.id}) }}"
+                            class="btn button scrolly">
+                            Paramètres
+                        </a>
+                        {% else %}
+
+                        {% endif %}
 
                 </div>
                 <div class="col-md-2">
-                    </div>
+                </div>
             </div>
             <br>
 
 
-                 <canvas id="canvas" >Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
+            <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour
+                jouer.</canvas>
 
-                            <script> var assetsBaseDir = "{{ asset('tilemap/') }}"</script>
+            <script> var assetsBaseDir = "{{ asset('tilemap/') }}"
+            </script>
             <script type="text/javascript" src="{{asset('tilemap/js/XmlHttpRequest.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/toolBox.js')}}"></script>
             <script type="text/javascript" src="{{asset('tilemap/js/classes/input.js')}}"></script>
@@ -85,27 +117,11 @@
             <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
 
             <br>
-            <p id="creaJoueur"></p>
-            <script type="text/javascript">
-                setInterval(function(){
-                    fetch('http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/'+{{partie.id}})
-                      .then(response => {
-                        return response.json()
-                      })
-                      .then(data => {
-                        console.log(data);
+            <p>Créateur de la partie: {{partie.createur.pseudo}}<br>
+                Joueur: {% if partie.plateauDeJeu.joueur is null %}
+                {% else %}{{partie.plateauDeJeu.joueur.pseudo}}{% endif %}</p>
 
-                            document.getElementById("creaJoueur").innerHTML = "Créateur de la partie: " + data["createur"] + "<br>Joueur: " + data["joueur"];
+    </div>
+    </section>
 
-                     })
-                }, 2000);
-            </script>
-
-            
-
-
-                </div>
-        </section>
-
-        {% endblock %}
-
+    {% endblock %}
