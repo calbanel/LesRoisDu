@@ -1,8 +1,5 @@
 {% extends 'monTemplate.html.twig' %}
 
-
-
-
 {% block sidebar %}
 
 <body class="is-preload">
@@ -28,17 +25,20 @@
             <div class="inner">
 
                 <h2>S'inscrire</h2>
-            
-            <p> Si vous ne souhaitez <strong>  pas entrer d'informations personnelles</strong>, vous devez vous connecter en tant qu'<strong>invité</strong> (dans la section
-                <a href="{{ path('app_login')}}">"Connexion"</a>). Cependant, un compte invité offre <strong>moins de possibilité</strong> qu'un compte personnel.
-                    Il vous permettra seulement de <strong>rejoindre des parties</strong> et de <strong>jouer</strong> dessus.</p>
+
+                <p> Si vous ne souhaitez <strong> pas entrer d'informations personnelles</strong>, vous devez vous
+                    connecter en tant qu'<strong>invité</strong> (dans la section
+                    <a href="{{ path('app_login')}}">"Connexion"</a>). Cependant, un compte invité offre <strong>moins
+                        de possibilité</strong> qu'un compte personnel.
+                    Il vous permettra seulement de <strong>rejoindre des parties</strong> et de <strong>jouer</strong>
+                    dessus.</p>
 
                 <div class="fields">
 
                     {{form_start(vueFormulaireInscription) }}
-                           
+
                     <p> Tous les champs sont obligatoires. <br>
-                    Le mot de passe doit faire au minimum 6 caractères . </p>
+                        Le mot de passe doit faire au minimum 6 caractères . </p>
 
                     <div class="field half">
                         {{form_row(vueFormulaireInscription.email)}}

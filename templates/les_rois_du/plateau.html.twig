@@ -1,8 +1,5 @@
 {% extends 'monTemplate.html.twig' %}
 
-
-
-
 {% block sidebar %}
 
 <body class="is-preload">
@@ -11,7 +8,6 @@
         <div class="inner">
             <nav>
                 <ul>
-
                     <li><a href="{{ path('espace_plateau')}}">RETOUR à l'espace plateau</a></li>
                     {% for plat in utilisateur.plateaux %}
                     <li><a href="{{ path('plateau', {'idPlateau' : plat.id}) }}">{{plat.nom}}</a></li>
@@ -27,56 +23,54 @@
 
     <div id="wrapper">
 
-                
-               
-
-        
         <section id="intro" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
-                <h2><center>{{plateau.nom}}</center></h2>
+                <h2>
+                    <center>{{plateau.nom}}</center>
+                </h2>
                 <div class="row">
 
- <div class="col-md-3">
-                    <button type="button" class="button scrolly" disabled>
-                        Partager plateau
-                    </button>
+                    <div class="col-md-3">
+                        <button type="button" class="button scrolly" disabled>
+                            Partager plateau
+                        </button>
                     </div>
                     <div class="col-md-6">
                     </div>
-                <div class="col-md-1">
 
-                    <a role="button" href="{{ path('parametres_plateau', {'idPlateau' : plateau.id}) }}" class="btn button scrolly">
-                        Paramètres
-                    </a>
+                    <div class="col-md-1">
 
-                </div>
-                <div class="col-md-2">
+                        <a role="button" href="{{ path('parametres_plateau', {'idPlateau' : plateau.id}) }}"
+                            class="btn button scrolly">
+                            Paramètres
+                        </a>
+
                     </div>
-            </div>
-            <br>
-
-
-                 <canvas id="canvas" >Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
-
-                            <script> var assetsBaseDir = "{{ asset('tilemap/') }}"</script>
-            <script type="text/javascript" src="{{asset('tilemap/js/XmlHttpRequest.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/toolBox.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/input.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/Parcours.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/game.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/De.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/Pion.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/Case.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/Tileset.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
-            <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
-
-
-            
-
-
+                    <div class="col-md-2">
+                    </div>
                 </div>
+                <br>
+
+
+                <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour
+                    jouer.</canvas>
+
+                <script> 
+                var assetsBaseDir = "{{ asset('tilemap/') }}" 
+                </script>
+                <script type="text/javascript" src="{{asset('tilemap/js/XmlHttpRequest.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/toolBox.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/input.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Parcours.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/game.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/De.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Pion.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Case.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Tileset.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
+
+            </div>
         </section>
 
         {% endblock %}
-

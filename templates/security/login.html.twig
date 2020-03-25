@@ -16,46 +16,47 @@
     </section>
 
     {% endblock %}
-{% block header %}
-{% endblock %}
+    {% block header %}
+    {% endblock %}
 
-{% block body %}
+    {% block body %}
 
-<div id="wrapper">
- <section id="intro" class="wrapper style1 fullscreen fade-up">
+    <div id="wrapper">
+        <section id="intro" class="wrapper style1 fullscreen fade-up">
 
-<div class="inner">
-<h1>Connexion</h1>
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+            <div class="inner">
+                <h1>Connexion</h1>
+                <form method="post">
+                    {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que {{ app.user.username }}.
-        </div>
-    {% else %}
+                    {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connecté en tant que {{ app.user.username }}.
+                    </div>
+                    {% else %}
 
-   
-    <p> Vous devez utiliser l'adresse mail et le mot de passe définis lors de votre inscription pour vous connecter. Si vous ne souhaitez pas vous inscrire, vous devez utiliser le lien pour vous connecter en tant qu'invité.</p>
-     <div class="fields">
-            <div class="field half">
-             <label for="inputEmail">Adresse mail</label>
-             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-            </div>
 
-          
-          <div class="field half">  
-        <label for="inputPassword">Mot de passe</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" required>
-        </div>
-</div>
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+                    <p> Vous devez utiliser l'adresse mail et le mot de passe définis lors de votre inscription pour
+                        vous connecter. Si vous ne souhaitez pas vous inscrire, vous devez utiliser le lien pour vous
+                        connecter en tant qu'invité.</p>
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="inputEmail">Adresse mail</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                class="form-control" required autofocus>
+                        </div>
 
-    {#
+
+                        <div class="field half">
+                            <label for="inputPassword">Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" required>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
 
@@ -66,28 +67,25 @@
         </div>
     #}
 
-  <ul class="actions">
-   <li> <button class="button scrolly" type="submit">
-        SE CONNECTER 
-    </button> </li>
-</ul>
-</form>
+                    <ul class="actions">
+                        <li> <button class="button scrolly" type="submit">
+                                SE CONNECTER
+                            </button> </li>
+                    </ul>
+                </form>
 
-{% endif %}
-{% if app.user %}
-<a href="{{ path('hub') }}">Retourner au menu</a><BR>
-  <a href="{{ path('app_logout') }}">Se déconnecter</a>
-  {% else %}
-  <a href="{{ path('en_invite') }}"> Se connecter en tant qu'invité </a><BR><BR>
-  {% endif %}
- </div>
-
- 
-    
- </section>
- </div>
-
-{% endblock %}
+                {% endif %}
+                {% if app.user %}
+                <a href="{{ path('hub') }}">Retourner au menu</a><BR>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% else %}
+                <a href="{{ path('en_invite') }}"> Se connecter en tant qu'invité </a><BR><BR>
+                {% endif %}
+            </div>
 
 
-                   
+
+        </section>
+    </div>
+
+    {% endblock %}

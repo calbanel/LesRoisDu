@@ -1,60 +1,60 @@
 {% extends 'monTemplate.html.twig' %}
 
 {% block sidebar %}
+
 <body class="is-preload">
-        <!-- Sidebar -->
-            <section id="sidebar">
-                <div class="inner">
-                    <nav>
-                        <ul>
-                            <li><a href="{{path ('hub')}}">MENU</a></li>
-                            <li><a href="{{path ('espace_partie')}}">ESPACE PARTIES</a></li>
-                            <li><a href="{{path ('espace_compte')}}">ESPACE COMPTE</a></li>
-                            <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </section>
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <nav>
+                <ul>
+                    <li><a href="{{path ('hub')}}">MENU</a></li>
+                    <li><a href="{{path ('espace_partie')}}">ESPACE PARTIES</a></li>
+                    <li><a href="{{path ('espace_compte')}}">ESPACE COMPTE</a></li>
+                    <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
 
-{% endblock %}
+    {% endblock %}
 
-{% block body %}
-		<!-- Wrapper -->
-			<div id="wrapper">
+    {% block body %}
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-				<!-- Intro -->
-					<section id="intro" class="wrapper style1 fullscreen fade-up">
-						<div class="inner">
-                            <h1>ESPACE PLATEAUX</h1>
-                            
-                            <section id="one" class="wrapper style2 spotlights">
-                                    
+        <!-- Intro -->
+        <section id="intro" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h1>ESPACE PLATEAUX</h1>
 
-                                <!-- Boucle pour chaque plateau (à rajouter)-->
-                                
-                                {% for plateau in utilisateur.plateaux %}
-                                <section>
-                                        <a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="center center" /></a>
-                                        <div class="content">
-                                            <div class="inner">
-                                                <h2> {{plateau.nom}} </h2>
-                                                <p> {{plateau.description}} </p>
-                                                <ul class="actions">
-                                                    <li><a href="{{path ('plateau', {'idPlateau': plateau.id}) }}" class="button">Consulter</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </section>
+                <section id="one" class="wrapper style2 spotlights">
 
-                                    <!-- Fin boucle -->
-                                    {% endfor %}
 
-						</div>
-					</section>
+                    <!-- Boucle pour chaque plateau (à rajouter)-->
 
-                  
+                    {% for plateau in utilisateur.plateaux %}
+                    <section>
+                        <a href="#" class="image"><img src="images/pic03.jpg" alt=""
+                                data-position="center center" /></a>
+                        <div class="content">
+                            <div class="inner">
+                                <h2> {{plateau.nom}} </h2>
+                                <p> {{plateau.description}} </p>
+                                <ul class="actions">
+                                    <li><a href="{{path ('plateau', {'idPlateau': plateau.id}) }}"
+                                            class="button">Consulter</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Fin boucle -->
+                    {% endfor %}
+
             </div>
-           
-           
+        </section>
 
-{% endblock %}
+
+    </div>
+    {% endblock %}
