@@ -18,7 +18,7 @@ class SupressionInviteCommand extends Command
     {
         $this
             ->setDescription('Suppression comptes invités.')
-            ->setHelp('Cette commande permet de supprimer tout les utilisateur invités.')
+            ->setHelp('Cette commande permet de supprimer tous les utilisateurs invités.')
         ;
     }
 
@@ -42,7 +42,7 @@ class SupressionInviteCommand extends Command
 
         $output->writeln([
         '================================',
-        'Suppression des invités terminé !',
+        'Suppression des invités terminée !',
         '================================',
          ]);
 

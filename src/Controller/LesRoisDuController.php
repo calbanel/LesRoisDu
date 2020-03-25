@@ -214,7 +214,6 @@ class LesRoisDuController extends AbstractController
         $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
         $plateauEnJeu->setNbCases($plateau->getNbCases());
 
-<<<<<<< HEAD
         $pions1 = new Pion();
         $pions1->setNom("rouge");
         $pions1->setCouleur("red");
@@ -248,9 +247,6 @@ class LesRoisDuController extends AbstractController
         $manager->persist($pions4);
 
 
-=======
-        // On attribue le plateauEnJeu à la partie
->>>>>>> bonnesPratiques
         $partie->setPlateauDeJeu($plateauEnJeu);
         $partie->setCreateur($createur);
 
