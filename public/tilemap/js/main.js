@@ -4,6 +4,6 @@
 
 
 	
-	var game = new Game("http://iparla.iutbayonne.univ-pau.fr:8000/api/plateaux/4");
+	var game = new Game("http://iparla.iutbayonne.univ-pau.fr:8001/api/plateaux/4");
 	
 
