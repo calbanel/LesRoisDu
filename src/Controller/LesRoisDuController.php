@@ -604,13 +604,29 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/api/plateauEnJeu/{idPlateauEnJeu}", name="api_plateaudejeu")
+     * @Route("/api/partie/{idPartie}", name="api_parties")
      */
-    public function apiPlateauEnJeu($idPlateauEnJeu)
+    public function apiPartie($idPartie)
     {
 
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $partie = $repositoryPartie->find($idPartie);
+
+        // On récupère les informations de la partie pour les retourner en json
+        $nom = $partie->getNom();
+        $description = $partie->getDescription();
+        $createur = $partie->getCreateur()->getPseudo();
+        if ($partie->getJoueurs()->isEmpty()){
+            $joueur = "";
+        }
+        else
+        {
+            $joueur = $partie->getJoueurs()->get(0)->getPseudo();
+        }
+        $estLance = $partie->getEstLance();
+
         $repositoryPlateauEnJeu=$this->getDoctrine()->getRepository(PlateauEnJeu::class);
-        $plateau = $repositoryPlateauEnJeu->find($idPlateauEnJeu);
+        $plateau = $repositoryPlateauEnJeu->find($partie->getPlateauDeJeu()->getId());
 
         $nom = $plateau->getNom();
         $description = $plateau->getDescription();
@@ -668,32 +684,7 @@ class LesRoisDuController extends AbstractController
             array_push($caseData, $infos);
         }
 
-        return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions, 'cases' => $caseData]);
-    }
-
-    /**
-     * @Route("/api/partie/{idPartie}", name="api_parties")
-     */
-    public function apiPartie($idPartie)
-    {
-
-        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
-        $partie = $repositoryPartie->find($idPartie);
-
-        // On récupère les informations de la partie pour les retourner en json
-        $nom = $partie->getNom();
-        $description = $partie->getDescription();
-        $createur = $partie->getCreateur()->getPseudo();
-        if ($partie->getJoueurs()->isEmpty()){
-            $joueur = "";
-        }
-        else
-        {
-            $joueur = $partie->getJoueurs()->get(0)->getPseudo();
-        }
-        $estLance = $partie->getEstLance();
-
-        $plateauDeJeu = $this->lien."/api/plateauEnJeu/".$partie->getPlateauDeJeu()->getId();
+        $plateauDeJeu = ['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions, 'cases' => $caseData];
 
         return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
     }
