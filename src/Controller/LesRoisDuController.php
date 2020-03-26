@@ -623,6 +623,9 @@ class LesRoisDuController extends AbstractController
         {
             $joueur = $partie->getJoueurs()->get(0)->getPseudo();
         }
+        $nbPions = $partie->getNbPionParPlateau();
+        $nbPlateaux = $partie->getNbPlateaux();
+        $nbFacesDe = $partie->getNbFacesDe();
         $estLance = $partie->getEstLance();
 
         $repositoryPlateauEnJeu=$this->getDoctrine()->getRepository(PlateauEnJeu::class);
@@ -686,7 +689,7 @@ class LesRoisDuController extends AbstractController
 
         $plateauDeJeu = ['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions, 'cases' => $caseData];
 
-        return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
+        return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'nbPionsParPlateau' => $nbPions, 'nbPlateaux' => $nbPlateaux, 'nbFacesDe' => $nbFacesDe, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
     }
 
  
