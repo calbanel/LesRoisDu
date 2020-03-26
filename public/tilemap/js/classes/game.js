@@ -1,22 +1,26 @@
 class Game {
 
-    constructor(idPlateau, listeDefi)
+    constructor(url)
     {
-        this.idPlateau = idPlateau;
-        this.listeDefi = listeDefi;
+
+        var toolBox = new ToolBox();
+        toolBox.requete(url);
+
     }
 
-    initialize(){
+    initialize(objRes){
 
+        var nbCases = 27;
+        var map = 'plateau_' + nbCases +'_128';
         //Récupération des infos dans les fichiers JSON
         //Récupérations des informations relatives à la map
         //this.map = loadPlateau(this.idPlateau);
-        this.map = new Map(this.idPlateau);
+        this.map = new Map(map);
 
         //Récupérations des informations relatives aux défis
 
         //Initialisation du plateau
-        this.parcours = new Parcours(this.listeDefi, this.map);
+        this.parcours = new Parcours("defi", this.map);
         this.parcours.creerCasesDuParcours();
 
         //Nos cases
@@ -32,7 +36,7 @@ class Game {
         }
 
         //Initialisation du dé
-        this.dice = new De("de.png", 3);
+        this.dice = new De("de.png", 7);
 
         //Gestionnaire d'évênement
         new InputHandler(this);
@@ -43,6 +47,7 @@ class Game {
         canvas.height = GAME_HEIGHT;
 
 
+        game.start();
     }
 
     load()
@@ -70,6 +75,8 @@ class Game {
         this.pions.forEach(pion => {
             this.dice.addObservers(pion);
         });
+
+        this.gameLoop();
         
     }
 
@@ -79,5 +86,24 @@ class Game {
 
     draw(ctx){
         this.map.draw(ctx);
+    }
+
+    gameLoop() {
+        var lastTime = 0;
+        function gameLoop(timestamp) {
+          let deltaTime = timestamp - lastTime;
+          lastTime = timestamp;
+        
+          ctx.clearRect(0, 0, game.GAME_WIDTH, game.GAME_HEIGHT);
+        
+          
+          game.update(deltaTime);
+          game.draw(ctx);
+        
+          requestAnimationFrame(gameLoop);
+        }
+        
+        requestAnimationFrame(gameLoop);
+        
     }
 }
