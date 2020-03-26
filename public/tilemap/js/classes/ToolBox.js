@@ -8,6 +8,7 @@ class ToolBox {
             return ToolBox.instance;
         }
 
+        this.json = 0;
         Object.freeze(this);
         ToolBox.instance = this;
     }
@@ -21,7 +22,7 @@ class ToolBox {
         var xhr = getXMLHttpRequest();
 
         // Chargement du fichier
-        xhr.open("GET", assetsBaseDir + 'maps/' + 'defi' + '.json', false);
+        xhr.open("GET", assetsBaseDir + 'plateaux/' + 'defi' + '.json', false);
         xhr.send(null);
         if (xhr.readyState != 4 || (xhr.status != 200 && xhr.status != 0)) // Code == 0 en local
             throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
@@ -40,7 +41,7 @@ class ToolBox {
         var xhr = getXMLHttpRequest();
 
         // Chargement du fichier
-        xhr.open("GET", assetsBaseDir + 'maps/' + nom + '.json', false);
+        xhr.open("GET", assetsBaseDir + 'plateaux/' + nom + '.json', false);
         xhr.send(null);
         if (xhr.readyState != 4 || (xhr.status != 200 && xhr.status != 0)) // Code == 0 en local
             throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
@@ -53,18 +54,19 @@ class ToolBox {
 
     }
 
-    getJsonFromApi(url) {
+    requete(url) {
 
         var xhr = new XMLHttpRequest();
-
-        // On souhaite juste récupérer le contenu du fichier, la méthode GET suffit amplement :
-        xhr.open('GET', url);
     
         xhr.addEventListener('readystatechange', function() { // On gère ici une requête asynchrone
     
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
     
-                console.log(this);
+
+                var data = this.responseText;
+                var objRes = JSON.parse(data);
+                game.initialize(objRes);
+                
     
             }else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status != 200) {
     
@@ -72,32 +74,10 @@ class ToolBox {
             }
     
         });
-    
-        xhr.send(null); // La requête est prête, on envoie tout !
-
-    }
-
-    getJsonFromInside(url) {
-
-        var xhr = new XMLHttpRequest();
-
+        
         // On souhaite juste récupérer le contenu du fichier, la méthode GET suffit amplement :
-        var url = assetsBaseDir + 'maps/' + url + '.json'
         xhr.open('GET', url);
-    
-        xhr.addEventListener('readystatechange', function() { // On gère ici une requête asynchrone
-    
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
-    
-                //console.log(this);
-    
-            }else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status != 200) {
-    
-                alert('Une erreur est survenue ! !\n\nCode :' + xhr.status + '\nTexte : ' + xhr.statusText);
-            }
-    
-        });
-    
+
         xhr.send(null); // La requête est prête, on envoie tout !
 
     }
