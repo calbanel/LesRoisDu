@@ -62,10 +62,7 @@ class ToolBox {
     
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
     
-
-                var data = this.responseText;
-                var objRes = JSON.parse(data);
-                game.initialize(objRes);
+                game.initialize(JSON.parse(this.responseText));
                 
     
             }else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status != 200) {

@@ -9,8 +9,9 @@ class Game {
     }
 
     initialize(objRes){
-
-        var nbCases = objRes.nbCases;
+        var nbCases = objRes.plateau_de_jeu.nbCases;
+        var nbPion = objRes.nbPionsParPlateau;
+        var nbFacesDe = objRes.nbFacesDe;
         var map = 'plateau_' + nbCases +'_128';
         //Récupération des infos dans les fichiers JSON
         //Récupérations des informations relatives à la map
@@ -28,7 +29,7 @@ class Game {
 
         //Initialisation du/des pion(s)
         this.pions = [];
-        this.nombrePion = 2;
+        this.nombrePion = nbPion;
         for (let index = 1; index < this.nombrePion + 1; index++) {
             
             this.pions.push(new Pion(this.map, index));
@@ -36,7 +37,7 @@ class Game {
         }
 
         //Initialisation du dé
-        this.dice = new De("de.png", 7);
+        this.dice = new De("de.png", nbFacesDe);
 
         //Gestionnaire d'évênement
         new InputHandler(this);
