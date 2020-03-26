@@ -21,16 +21,17 @@
 
 {% block header %}
 <header id="header" class="wrapper style1-alt">
-		
-	
-	{% if app.user is not null %}
-		<div class="inner">
-				<p>
-					<center> Vous êtes connecté en tant que	{{app.user.pseudo}} - <a href="{{path ('app_logout')}}">Se déconnecter</a></center>
 
-				</p>
-		</div>
-		{% endif %}
+
+	{% if app.user is not null %}
+	<div class="inner">
+		<p>
+			<center> Vous êtes connecté en tant que {{app.user.pseudo}} - <a href="{{path ('app_logout')}}">Se
+					déconnecter</a></center>
+
+		</p>
+	</div>
+	{% endif %}
 </header>
 
 {% endblock %}
@@ -70,19 +71,19 @@
 	{% block footer %}
 	<!-- Footer -->
 
-		<footer id="footer" class="wrapper style1-alt">
-			<div class="inner">
-				<p>
-					<a href="{{ path('credits')}}">Crédits</a> /
-					<a href="">Conditions générales d'utilisation</a> /
-					<a href="">Aides</a> /
-					<a href=""> Règles du jeu</a>
+	<footer id="footer" class="wrapper style1-alt">
+		<div class="inner">
+			<p>
+				<a href="{{ path('credits')}}">Crédits</a> /
+				<a href="">Conditions générales d'utilisation</a> /
+				<a href="">Aides</a> /
+				<a href=""> Règles du jeu</a>
 
-				</p>
-			</div>
-		</footer>
+			</p>
+		</div>
+	</footer>
 
-	
+
 
 	{% endblock %}
 

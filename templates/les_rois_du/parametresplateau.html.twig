@@ -1,103 +1,95 @@
-
-
 {% extends 'monTemplate.html.twig' %}
 
 {% block sidebar %}
 
 <body class="is-preload">
-  <!-- Sidebar -->
-  <section id="sidebar">
-    <div class="inner">
-      <nav>
-        <ul>
-          <li><a href="{{ path('plateau', {'idPlateau' : plateau.id}) }}">RETOUR au plateau</a></li>
-          <li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
-        </ul>
-      </nav>
-    </div>
-  </section>
-
-  {% endblock %}
-
-  {% block body %}
-  <!-- Wrapper -->
-  <div id="wrapper">
-
-    <!-- Intro -->
-    <section id="intro" class="wrapper style1 fullscreen fade-up">
-
-
-
-
-      <div class="inner">
-        <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h2 class="text-center">
-				Paramètres {{plateau.nom}}
-			</h2>
-			
+	<!-- Sidebar -->
+	<section id="sidebar">
+		<div class="inner">
+			<nav>
+				<ul>
+					<li><a href="{{ path('plateau', {'idPlateau' : plateau.id}) }}">RETOUR au plateau</a></li>
+					<li><a href="{{path ('app_logout')}}">SE DECONNECTER</a></li>
+				</ul>
+			</nav>
 		</div>
+	</section>
+	{% endblock %}
+
+	{% block body %}
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Intro -->
+		<section id="intro" class="wrapper style1 fullscreen fade-up">
+
+			<div class="inner">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 class="text-center">
+								Paramètres {{plateau.nom}}
+							</h2>
+
+						</div>
+					</div>
+					<BR>
+
+					<div class="row">
+						<div class="col-md-1">
+						</div>
+
+						<div class="col-md-4">
+							<h4> Nom du plateau </h4>
+							{{plateau.nom}}<br> <br>
+
+							<h4> Niveau de difficulté </h4>
+							{{plateau.niveauDifficulte}}<br> <br>
+
+							<h4>Nombre de cases </h4>
+							{{plateau.nbCases}}<br> <br>
+
+						</div>
+						
+						<div class="col-md-1">
+						</div>
+
+						<div class="col-md-4">
+							<h4> Description du plateau </h4>
+							{{plateau.description}}<br> <br>
+						</div>
+
+						<div class="col-md-2">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<BR>
+							<blockquote class="blockquote" style="color: #D5D0CF">
+								<p class="mb-0">
+									Dans cette version les paramètres ne peuvent pas être modifiés.
+								</p>
+								<footer class="blockquote-footer" style="color: #D5D0CF">
+									L'équipe <cite>LesRoisDu</cite>
+								</footer>
+							</blockquote>
+						</div>
+
+						<div class="col-md-3">
+						</div>
+
+						<div class="col-md-1">
+							<BR>
+							<button type="button" class="button scrolly" disabled>Valider</button>
+						</div>
+
+						<div class="col-md-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
 	</div>
-	<BR>
-	<div class="row">
-		<div class="col-md-1">
-
-		</div>
-		<div class="col-md-4">
-			<h4> Nom du plateau </h4>
-              {{plateau.nom}}<br> <br>
-
-              <h4> Niveau de difficulté </h4>
-              {{plateau.niveauDifficulte}}<br> <br>
-
-              <h4>Nombre de cases </h4>
-              {{plateau.nbCases}}<br> <br>
-
-		</div>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-4">
-			<h4> Description du plateau </h4>
-              {{plateau.description}}<br> <br>
-
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<BR>
-			<blockquote class="blockquote" style="color: #D5D0CF">
-				<p class="mb-0">
-					Dans cette version les paramètres ne peuvent pas être modifiés.
-				</p>
-				<footer class="blockquote-footer" style="color: #D5D0CF">
-					L'équipe <cite>LesRoisDu</cite>
-				</footer>
-			</blockquote>
-		</div>
-		<div class="col-md-3">
-
-		</div>
-		<div class="col-md-1">
-			<BR>
-			<button type="button" class="button scrolly" disabled>Valider</button>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </section>
-
-  </div>
-  {% endblock %}
+	{% endblock %}

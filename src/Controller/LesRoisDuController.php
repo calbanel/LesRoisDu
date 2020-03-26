@@ -69,21 +69,27 @@ class LesRoisDuController extends AbstractController
         // Création d'un utilisateur vierge
         $utilisateur=new Utilisateur();
 
-        // Création de l'objet formulaire
+        // Création de l'objet formulaire à partir du formulaire externalisé "UtilisateurType"
         $formulaireUtilisateur=$this->createForm(UtilisateurType::class, $utilisateur);
       
+         /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu
+        dans cette requête contient des variables pseudo,email etc. alors la méthode handleRequest()
+        récupère les valeurs de ces variables et les affecte à l'objet $utilisateur */
         $formulaireUtilisateur->handleRequest($request);
 
         if ($formulaireUtilisateur->isSubmitted() && $formulaireUtilisateur->isValid())
         {        
-           
+           // Avatar par défaut
             $utilisateur->setAvatar("/img/avatar8.jpg");
-            // l'utilisateur a le role USER
+
+            // L'utilisateur a le role USER
             $roles[] =  'ROLE_USER';
             $utilisateur->setRoles($roles);
-            // l'utilisateur cree un compte il n'est donc pas invité
+
+            // L'utilisateur crée un compte il n'est donc pas invité
             $utilisateur->setEstInvite(false);
 
+            // Hashage du mot de passe
             $plainPassword = $utilisateur->getPlainPassword();
             $utilisateur->setMotDePasse($this->passwordEncoder->encodePassword(
                 $utilisateur,
@@ -99,7 +105,7 @@ class LesRoisDuController extends AbstractController
 
             $utilisateur->addPlateau($plateau2);
            
-            // Enregistrer la ressource en base de données
+            // Enregistrer l'utilisateur en base de données
            $manager->persist($utilisateur);
            $manager->flush();
 
@@ -108,12 +114,9 @@ class LesRoisDuController extends AbstractController
                 $utilisateur,
                 $request,
                 $authenticator,
-                'main' // firewall name in security.yaml
+                'main' // Nom du parefeu dans security.yaml
             );
-        }
-        
-        
-        
+        }      
         
         return $this->render('les_rois_du/inscription.html.twig',['vueFormulaireInscription' => $formulaireUtilisateur->createView()]);
     }
@@ -150,9 +153,7 @@ class LesRoisDuController extends AbstractController
      * @Route("/TESTparties", name="TESTespace_partie")
      */
     public function affichageTESTEspacePartie()
-    {
-        
-        
+    {     
         return $this->render('les_rois_du/TESTespacepartie.html.twig');
     }
 
@@ -192,11 +193,11 @@ class LesRoisDuController extends AbstractController
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();
         $createur = $repositoryUtilisateur->find($userId);
-       // Création d'une entreprise vierge
+       
+       // Création d'une partie vierge
        $partie=new Partie();
 
-       // Création de l'objet formulaire
-
+       // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
        $formulairePartie = $this->createForm(PartieType::class, $partie);
 
        $formulairePartie->handleRequest($request);
@@ -206,6 +207,7 @@ class LesRoisDuController extends AbstractController
       
         $plateau = $partie->getPlateau();
 
+        // On copie le plateau sélectionné dans le plateauEnJeu de la partie
         $plateauEnJeu = new PlateauEnJeu();
         $plateauEnJeu->setNom($plateau->getNom());
         $plateauEnJeu->setDescription($plateau->getDescription());
@@ -250,7 +252,6 @@ class LesRoisDuController extends AbstractController
 
         $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
         $partie->setCode($code);
-
         $partie->setEstLance(false);
 
         $createur->addPartiesCree($partie);
@@ -261,6 +262,7 @@ class LesRoisDuController extends AbstractController
 
         $manager->persist($createur);
         
+        // On récupère les cases du plateau et les copie une par une dans le plateauEnJeu
         $tabCase = $plateau->getCases();
         foreach($tabCase as $uneCase){
             $cases = new Cases();
@@ -273,7 +275,8 @@ class LesRoisDuController extends AbstractController
             $cases->setPlateauEnJeu($plateauEnJeu);
             
             $manager->persist($cases);
-
+            
+            // On récupère les ressources des cases du plateau et les copie une par une dans les cases du plateauEnJeu
             $tabRessource = $uneCase->getRessources();
             foreach($tabRessource as $uneRessource){
                 $ressource = new Ressource();
@@ -290,12 +293,9 @@ class LesRoisDuController extends AbstractController
             }
         }
         
-
             $manager->persist($plateauEnJeu);
-        
-              
-          // Enregistrer la ressource en base de données
-          
+                 
+          // Enregistrer en base de données   
           $manager->flush();
 
           // Rediriger l'utilisateur vers la page d'accueil
@@ -346,9 +346,7 @@ class LesRoisDuController extends AbstractController
      * @Route("/parties/{idPartie}", name="partie_en_cours")
      */
     public function affichagePartieEnCours($idPartie, UserInterface $user)
-    {
-
-        
+    {   
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
         $parties = $repositoryPartie->findAll();
@@ -357,29 +355,33 @@ class LesRoisDuController extends AbstractController
         $userId = $user->getId();
         $user = $repositoryUtilisateur->find($userId);
 
+        // On récupère les parties créées par l'utilisateur
         $cree = $user->getPartiesCree();
 
+        // On récupère les parties rjointes par l'utilisateur
         $rejoins = $user->getPartiesRejoins();
 
+        // La partie n'est pas une des parties rejointes ou créées par l'utilisateur
         $trouve = false;
 
         foreach($cree as $unePartie){
             if($unePartie->getId() == $partie->getId()){
-                $trouve = true;
+                $trouve = true; // La partie est l'une des parties créées par l'utilisateur
             }
         }
 
         foreach($rejoins as $unePartie){
             if($unePartie->getId() == $partie->getId()){
-                $trouve = true;
+                $trouve = true; // La partie est l'une des parties rejointes par l'utilisateur
             }
         }
 
+        // Si l'utilisateur a créé ou rejoint la partie il peut la voir
         if ($trouve == true)
         {        
         return $this->render('les_rois_du/partieencours.html.twig',['partie'=>$partie,'partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
         }
-        else
+        else // Sinon il est redirigé sur l'espace des parties
         {
             return $this->redirectToRoute('espace_partie');
         }
@@ -397,6 +399,7 @@ class LesRoisDuController extends AbstractController
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
 
+        // Si l'utilsateur est le créateur de la partie, il peut voir ses paramètres
         if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
 
         return $this->render('les_rois_du/parametrespartie.html.twig',['partie'=>$partie]);
@@ -448,9 +451,7 @@ class LesRoisDuController extends AbstractController
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
 
-        if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
-
-        
+        if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){ // Seul le créateur peut supprimer sa partie
 
         $entityManager = $this->getDoctrine()->getManager();
         $repositoryPartie=$entityManager->getRepository(Partie::class);
@@ -460,10 +461,10 @@ class LesRoisDuController extends AbstractController
         $plateauEnJeu = $partie->getPlateauDeJeu();
 
         $tabCase = $plateauEnJeu->getCases();
-        foreach($tabCase as $uneCase){
+        foreach($tabCase as $uneCase){ // On enlève les cases une par une
             
             $tabRessource = $uneCase->getRessources();
-            foreach($tabRessource as $uneRessource){
+            foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
              
                 $entityManager->remove($uneRessource);
                 
@@ -473,16 +474,16 @@ class LesRoisDuController extends AbstractController
         }
 
         $tabPion = $plateauEnJeu->getPions();
-        foreach($tabPion as $unePion){
+        foreach($tabPion as $unPion){ // On enlève chaque pion un par un
 
-            $entityManager->remove($unePion);
+            $entityManager->remove($unPion);
         }
 
-        $entityManager->remove($plateauEnJeu);
+        $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
         
-        $entityManager->remove($partie);
+        $entityManager->remove($partie); // On supprime la partie
 
-        $entityManager->flush();
+        $entityManager->flush(); // On enregistre les changements en BD
     }
 
     return $this->redirectToRoute('espace_partie');
@@ -497,6 +498,7 @@ class LesRoisDuController extends AbstractController
     public function connexionInvite(ObjectManager $manager, Request $request, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator)
     {
 
+        // Création d'un utilisateur invité qui a des données générées aléatoirement
         $invite = new Utilisateur();
 
         $random = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 5, 5);
@@ -505,7 +507,6 @@ class LesRoisDuController extends AbstractController
         $invite->setEmail($fakeEmail);
 
         $fakePseudo = "Guest_".$random;
-
         $invite->setPseudo($fakePseudo);
 
         $invite->setAvatar("/img/avatarGuest.jpg");
@@ -521,7 +522,7 @@ class LesRoisDuController extends AbstractController
             $plainPassword
          ));
            
-        // Enregistrer la ressource en base de données
+        // Enregistrer l'invité en base de données
         $manager->persist($invite);
         $manager->flush();
 
@@ -529,7 +530,7 @@ class LesRoisDuController extends AbstractController
                 $invite,
                 $request,
                 $authenticator,
-                'main' // firewall name in security.yaml
+                'main' // Nom du parefeu dans security.yaml
             );
     }
 
@@ -565,6 +566,7 @@ class LesRoisDuController extends AbstractController
         $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
         $plateau = $repositoryPlateau->find($idPlateau);
 
+        // On récupère les informations du plateau pour les retourner en json
         $nom = $plateau->getNom();
         $description = $plateau->getDescription();
         $difficulte = $plateau->getNiveauDifficulte();
@@ -621,6 +623,7 @@ class LesRoisDuController extends AbstractController
 
         $caseData = [];
 
+        // On récupère les informations des cases du plateau pour les retourner en json
         $tabCase = $plateau->getCases();
 
         foreach($tabCase as $uneCase){
@@ -707,6 +710,7 @@ class LesRoisDuController extends AbstractController
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
 
+        // On récupère les informations de la partie pour les retourner en json
         $nom = $partie->getNom();
         $description = $partie->getDescription();
         $createur = $partie->getCreateur()->getPseudo();
