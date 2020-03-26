@@ -554,9 +554,6 @@ class LesRoisDuController extends AbstractController
         return $this->redirectToRoute('espace_compte');
     }
 
-
-
-
     /**
      * @Route("/api/plateaux/{idPlateau}", name="api_plateaux")
      */
@@ -572,7 +569,38 @@ class LesRoisDuController extends AbstractController
         $difficulte = $plateau->getNiveauDifficulte();
         $nbCases = $plateau->getNbCases();
 
-        return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases]);
+        $caseData = [];
+
+        // On récupère les informations des cases du plateau pour les retourner en json
+        $tabCase = $plateau->getCases();
+
+        foreach($tabCase as $uneCase){
+
+            $ressourceData = [];
+            
+            $numero = $uneCase->getNumero();
+            $defi = $uneCase->getDescriptifDefi();
+            $consignes = $uneCase->getConsignes();
+            $code = $uneCase->getCodeValidation();
+
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource){
+
+                $chemin = $uneRessource->getChemin();
+                $infosR = ['chemin' => $chemin];
+
+                array_push($ressourceData, $infosR);
+                
+            }
+
+            
+
+            $infos = ['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code, 'ressources' => $ressourceData];
+
+            array_push($caseData, $infos);
+        }
+
+        return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'cases' => $caseData]);
     }
 
     /**
@@ -609,18 +637,6 @@ class LesRoisDuController extends AbstractController
 
         $partie = $this->lien."/api/partie/".$plateau->getPartie()->getId();
 
-        return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions]);
-    }
-
-    /**
-     * @Route("/api/plateaux/{idPlateau}/cases", name="api_cases_plateau")
-     */
-    public function apiToutesCasesPlateau($idPlateau)
-    {
-
-        $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
-        $plateau = $repositoryPlateau->find($idPlateau);
-
         $caseData = [];
 
         // On récupère les informations des cases du plateau pour les retourner en json
@@ -652,53 +668,7 @@ class LesRoisDuController extends AbstractController
             array_push($caseData, $infos);
         }
 
-        $data = ['cases' => $caseData];
-
-        return $this->json($data);
-    }
-
-    /**
-     * @Route("/api/plateauEnJeu/{idPlateauEnJeu}/cases", name="api_cases_plateauenjeu")
-     */
-    public function apiToutesCasesPlateauEnJeu($idPlateauEnJeu)
-    {
-
-        $repositoryPlateauEnJeu=$this->getDoctrine()->getRepository(PlateauEnJeu::class);
-        $plateau = $repositoryPlateauEnJeu->find($idPlateauEnJeu);
-
-        $caseData = [];
-
-        $tabCase = $plateau->getCases();
-
-        foreach($tabCase as $uneCase){
-
-            $ressourceData = [];
-            
-            $numero = $uneCase->getNumero();
-            $defi = $uneCase->getDescriptifDefi();
-            $consignes = $uneCase->getConsignes();
-            $code = $uneCase->getCodeValidation();
-
-            $tabRessource = $uneCase->getRessources();
-            foreach($tabRessource as $uneRessource){
-
-                $chemin = $uneRessource->getChemin();
-                $infosR = ['chemin' => $chemin];
-
-                array_push($ressourceData, $infosR);
-                
-            }
-
-            
-
-            $infos = ['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code, 'ressources' => $ressourceData];
-
-            array_push($caseData, $infos);
-        }
-
-        $data = ['cases' => $caseData];
-
-        return $this->json($data);
+        return $this->json(['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions, 'cases' => $caseData]);
     }
 
     /**
