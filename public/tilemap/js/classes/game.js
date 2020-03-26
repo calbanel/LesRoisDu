@@ -10,7 +10,7 @@ class Game {
 
     initialize(objRes){
 
-        var nbCases = 27;
+        var nbCases = objRes.nbCases;
         var map = 'plateau_' + nbCases +'_128';
         //Récupération des infos dans les fichiers JSON
         //Récupérations des informations relatives à la map
