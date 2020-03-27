@@ -32,6 +32,7 @@
                         de possibilité</strong> qu'un compte personnel.
                     Il vous permettra seulement de <strong>rejoindre des parties</strong> et de <strong>jouer</strong>
                     dessus.</p>
+                    <p>Pour vous inscrire vous devez lire et accepter les  <a href="{{ path('CGU')}}">conditions générales d'utilisation.</a></p>
 
                 <div class="fields">
 
@@ -52,6 +53,12 @@
                     <div class="field half">
                         {{form_row(vueFormulaireInscription.plainPassword)}}
                     </div>
+
+                    <div class="field half">
+                        {{form_row(vueFormulaireInscription.termsAccepted)}}
+                    </div>
+
+                    
 
                     <ul class="actions">
                         <li><a href="" class="button submit">Valider l'inscription </a></li>

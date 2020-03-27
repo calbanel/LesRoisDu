@@ -53,6 +53,14 @@ class LesRoisDuController extends AbstractController
         return $this->render('les_rois_du/index.html.twig');
     }
     
+    /**
+     * @Route("/ConditonsUtilisations", name="CGU")
+     */
+    public function CGU()
+    {
+        return $this->render('les_rois_du/CGU.html.twig');
+    }
+
      /**
      * @Route("/credits", name="credits")
      */

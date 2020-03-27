@@ -41,6 +41,9 @@
                     <p> Vous devez utiliser l'adresse mail et le mot de passe définis lors de votre inscription pour
                         vous connecter. Si vous ne souhaitez pas vous inscrire, vous devez utiliser le lien pour vous
                         connecter en tant qu'invité.</p>
+
+                    <p>Pour vous connecter en tant qu'invité vous devez lire et accepter les <a href="{{ path('CGU')}}">conditions générales d'utilisation</a>
+                        relatives aux comptes invités.</p>
                     <div class="fields">
                         <div class="field half">
                             <label for="inputEmail">Adresse mail</label>
@@ -79,8 +82,31 @@
                 <a href="{{ path('hub') }}">Retourner au menu</a><BR>
                 <a href="{{ path('app_logout') }}">Se déconnecter</a>
                 {% else %}
-                <a href="{{ path('en_invite') }}"> Se connecter en tant qu'invité </a><BR><BR>
-                {% endif %}
+                <a onClick="accepterCGU()"> Se connecter en tant qu'invité </a><BR><BR>
+                    <script type="text/javaScript">
+                    
+
+                        function accepterCGU() {                      
+                            document.getElementById('Cible').innerHTML ='<input id="accepterCGU"  type="checkbox" checked><label for="accepterCGU">J\'ai lu et j\'accepte les conditions générales d\'utilisation  </label> <br> <a href="" id="accepter" class="button scrolly"> Me connecter en tant qu\'invité</a>';                      
+                        }
+                 
+                        setInterval(function(){
+                            if (document.getElementById("accepterCGU").checked = true) {
+                                var route = '/invite';
+                                document.getElementById("accepter").setAttribute("href",route);
+                            }
+                            else{
+                                alert("Vous devez accepter les conditions générales d\'utilisation pour pour connecter en tant qu'invité");
+                            }
+                        }, 100);
+
+                    </script>
+                
+                
+                    <div id="Cible"></div>
+                
+                
+                    {% endif %}
             </div>
 
 
