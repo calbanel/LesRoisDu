@@ -31,6 +31,22 @@
         <section id="intro" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
                 <h1>ESPACE PARTIES</h1>
+
+                {% if erreur == 0 %}
+                {% elseif erreur == 1 %}
+                    <div class="alert alert-danger" role="alert">
+                      Cette partie n'existe pas !
+                    </div>
+                {% elseif erreur == 2 %}
+                    <div class="alert alert-danger" role="alert">
+                      Vous ne pouvez pas rejoindre cette partie car le nombre maximum de joueur a été atteint !
+                    </div>
+                {% else %}
+                    <div class="alert alert-success" role="alert">
+                      Partie rejointe avec succès !
+                    </div>
+                {%endif%}
+                <BR>
  
                 <ul class="actions">
                         {% if utilisateur.estInvite == false %}

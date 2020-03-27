@@ -155,7 +155,9 @@ class LesRoisDuController extends AbstractController
 
         $rejoins = $user->getPartiesRejoins();
 
-        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
+        $erreur = 0;
+
+        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user, 'erreur' => 0]);
     }
 
     /**
@@ -326,20 +328,37 @@ class LesRoisDuController extends AbstractController
             $plateauDeJeu = $partie->getPlateauDeJeu();          
             if($partie->getJoueurs()->isEmpty()){
 
-            $joueur->addPartiesRejoin($partie);
-            $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
+                $erreur = -1;
 
-            $plateauDeJeu->setJoueur($joueur);
-            
-            // Enregistrer la ressource en base de données
-            $manager->persist($plateauDeJeu);
-            $manager->persist($partie);
-            $manager->persist($joueur);
-            $manager->flush();
+                $joueur->addPartiesRejoin($partie);
+                $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
+
+                $plateauDeJeu->setJoueur($joueur);
+                
+                // Enregistrer la ressource en base de données
+                $manager->persist($plateauDeJeu);
+                $manager->persist($partie);
+                $manager->persist($joueur);
+                $manager->flush();
+
+            }
+            else
+            {
+                $erreur = 2;
             }
         }
+        else
+        {
+            $erreur = 1;
+        }
 
-        return $this->redirectToRoute('espace_partie');
+        $cree = $joueur->getPartiesCree();
+
+        $rejoins = $joueur->getPartiesRejoins();
+
+        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user, 'erreur' => $erreur]);
+
+        //return $this->redirectToRoute('espace_partie');
     }
 
 
