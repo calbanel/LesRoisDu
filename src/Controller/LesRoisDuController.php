@@ -34,6 +34,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LesRoisDuController extends AbstractController
 {
@@ -155,9 +156,7 @@ class LesRoisDuController extends AbstractController
 
         $rejoins = $user->getPartiesRejoins();
 
-        $erreur = 0;
-
-        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user, 'erreur' => 0]);
+        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
     }
 
     /**
@@ -328,7 +327,7 @@ class LesRoisDuController extends AbstractController
             $plateauDeJeu = $partie->getPlateauDeJeu();          
             if($partie->getJoueurs()->isEmpty()){
 
-                $erreur = -1;
+                
 
                 $joueur->addPartiesRejoin($partie);
                 $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
@@ -340,25 +339,22 @@ class LesRoisDuController extends AbstractController
                 $manager->persist($partie);
                 $manager->persist($joueur);
                 $manager->flush();
+                $this->addFlash('success', 'Vous avez rejoins la partie !');
 
             }
             else
             {
-                $erreur = 2;
+                $this->addFlash('echec', 'Vous ne pouvez pas rejoindre cette partie car le nombre maximum de joueur a été atteint !');
             }
         }
         else
         {
-            $erreur = 1;
+            $this->addFlash('echec', "La partie n'existe pas !");
+
         }
 
-        $cree = $joueur->getPartiesCree();
+        return $this->redirectToRoute('espace_partie');
 
-        $rejoins = $joueur->getPartiesRejoins();
-
-        return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user, 'erreur' => $erreur]);
-
-        //return $this->redirectToRoute('espace_partie');
     }
 
 
@@ -515,7 +511,7 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/supression/compte/{idCompte}", name="supprimer_compte")
      */
-    public function supprimerUnCompte($idCompte, UserInterface $user, TokenStorageInterface $tokenStorage)
+    public function supprimerUnCompte($idCompte, UserInterface $user, TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();
@@ -566,6 +562,7 @@ class LesRoisDuController extends AbstractController
         
 
         $tokenStorage->setToken(null);
+        $session->invalidate();
 
         return $this->redirectToRoute('accueil');
         }

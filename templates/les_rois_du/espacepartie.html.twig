@@ -32,20 +32,20 @@
             <div class="inner">
                 <h1>ESPACE PARTIES</h1>
 
-                {% if erreur == 0 %}
-                {% elseif erreur == 1 %}
-                    <div class="alert alert-danger" role="alert">
-                      Cette partie n'existe pas !
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible show" role="alert">
+                      {{message}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
                     </div>
-                {% elseif erreur == 2 %}
-                    <div class="alert alert-danger" role="alert">
-                      Vous ne pouvez pas rejoindre cette partie car le nombre maximum de joueur a été atteint !
+                {% endfor %}
+                {% for message in app.flashes('echec') %}
+                    <div class="alert alert-danger alert-dismissible show" role="alert">
+                      {{message}}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                     </div>
-                {% else %}
-                    <div class="alert alert-success" role="alert">
-                      Partie rejointe avec succès !
-                    </div>
-                {%endif%}
+                {% endfor %}
                 <BR>
  
                 <ul class="actions">
