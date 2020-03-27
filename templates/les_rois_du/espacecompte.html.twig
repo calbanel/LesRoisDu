@@ -98,7 +98,9 @@
                 </div>
                 <BR>
 
-                <div id="Cible"></div><BR><BR><BR><BR>
+                <div id="Cible"></div><BR><BR>
+
+                
                 <blockquote class="blockquote" style="color: #D5D0CF">
                   <p class="mb-0">
                     Plus d'options et de personnalisations sont à venir dans les prochaines versions.
@@ -107,6 +109,20 @@
                     L'équipe <cite>LesRoisDu</cite>
                   </footer>
                 </blockquote>
+                <BR><BR>
+                <div class="alert alert-warning" style="display: none">
+                
+                <h4 class="alert-heading">Attention!</h4>
+                <p>Êtes vous sûr de vouloir supprimer votre compte ?</p>
+    
+                <a style="color:aliceblue" class="btn btn-danger fermeture" role="button"
+                  aria-pressed="true">Non</a>
+                <a href="{{ path('supprimer_compte', {'idCompte' : utilisateur.id}) }}"
+                  class="btn btn-success" role="button" aria-pressed="true">Oui</a>
+                
+
+              </div>
+              <input type="button" class="btn button scrolly" value="Supprimer son compte">
 
                 <script type="text/javaScript">
                                                        var routeSaisie = false;
@@ -133,7 +149,22 @@
                                                     }, 100);
                                                 </script>
 
+
+
               </center>
+              <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script>
+              $(function () {
+                $("input.btn").click(function () {
+                  $("input.btn").hide("slow")
+                  $(".alert").show("slow")
+                })
+                $(".fermeture").click(function () {
+                  $(".alert").hide("slow")
+                  $("input.btn").show()
+                })
+              })
+            </script>
 
 
             </div>

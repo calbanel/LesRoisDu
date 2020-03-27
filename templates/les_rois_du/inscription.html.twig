@@ -39,7 +39,7 @@
                     {{form_start(vueFormulaireInscription) }}
 
                     <p> Tous les champs sont obligatoires. <br>
-                        Le mot de passe doit faire au minimum 6 caractères . </p>
+                        Le mot de passe doit faire au minimum 6 caractères. </p>
 
                     <div class="field half">
                         {{form_row(vueFormulaireInscription.email)}}
@@ -47,7 +47,7 @@
 
 
                     <div class="field half">
-                        {{form_row(vueFormulaireInscription.pseudo)}}
+                        {{form_row(vueFormulaireInscription.pseudo, {'label':'Pseudo (Eviter de renseigner votre nom ou prénom)'}) }}
                     </div>
 
                     <div class="field half">

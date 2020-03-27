@@ -87,16 +87,15 @@
                     
 
                         function accepterCGU() {                      
-                            document.getElementById('Cible').innerHTML ='<input id="accepterCGU"  type="checkbox" checked><label for="accepterCGU">J\'ai lu et j\'accepte les conditions générales d\'utilisation  </label> <br> <a href="" id="accepter" class="button scrolly"> Me connecter en tant qu\'invité</a>';                      
+                            document.getElementById('Cible').innerHTML ='<input id="accepterCGU"  type="checkbox"><label for="accepterCGU">J\'ai lu et j\'accepte les conditions générales d\'utilisation  </label> <br> <a href="/invite" id="accepter" class="button scrolly disabled"> Me connecter en tant qu\'invité</a>';                      
                         }
                  
                         setInterval(function(){
-                            if (document.getElementById("accepterCGU").checked = true) {
-                                var route = '/invite';
-                                document.getElementById("accepter").setAttribute("href",route);
+                            if (document.getElementById("accepterCGU").checked == true) {
+                                document.getElementById("accepter").setAttribute("class","button scrolly");
                             }
                             else{
-                                alert("Vous devez accepter les conditions générales d\'utilisation pour pour connecter en tant qu'invité");
+                                document.getElementById("accepter").setAttribute("class","button scrolly disabled");
                             }
                         }, 100);
 

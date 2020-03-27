@@ -33,6 +33,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LesRoisDuController extends AbstractController
 {
@@ -155,14 +157,6 @@ class LesRoisDuController extends AbstractController
         $rejoins = $user->getPartiesRejoins();
 
         return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
-    }
-
-    /**
-     * @Route("/TESTparties", name="TESTespace_partie")
-     */
-    public function affichageTESTEspacePartie()
-    {     
-        return $this->render('les_rois_du/TESTespacepartie.html.twig');
     }
 
     /**
@@ -333,20 +327,34 @@ class LesRoisDuController extends AbstractController
             $plateauDeJeu = $partie->getPlateauDeJeu();          
             if($partie->getJoueurs()->isEmpty()){
 
-            $joueur->addPartiesRejoin($partie);
-            $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
+                
 
-            $plateauDeJeu->setJoueur($joueur);
-            
-            // Enregistrer la ressource en base de données
-            $manager->persist($plateauDeJeu);
-            $manager->persist($partie);
-            $manager->persist($joueur);
-            $manager->flush();
+                $joueur->addPartiesRejoin($partie);
+                $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
+
+                $plateauDeJeu->setJoueur($joueur);
+                
+                // Enregistrer la ressource en base de données
+                $manager->persist($plateauDeJeu);
+                $manager->persist($partie);
+                $manager->persist($joueur);
+                $manager->flush();
+                $this->addFlash('success', 'Vous avez rejoins la partie !');
+
             }
+            else
+            {
+                $this->addFlash('echec', 'Vous ne pouvez pas rejoindre cette partie car le nombre maximum de joueur a été atteint !');
+            }
+        }
+        else
+        {
+            $this->addFlash('echec', "La partie n'existe pas !");
+
         }
 
         return $this->redirectToRoute('espace_partie');
+
     }
 
 
@@ -496,6 +504,71 @@ class LesRoisDuController extends AbstractController
 
     return $this->redirectToRoute('espace_partie');
 
+
+
+    }
+
+    /**
+     * @Route("/supression/compte/{idCompte}", name="supprimer_compte")
+     */
+    public function supprimerUnCompte($idCompte, UserInterface $user, TokenStorageInterface $tokenStorage, SessionInterface $session)
+    {
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
+        $compte = $repositoryUtilisateur->find($idCompte);
+
+        if ($compte->getPseudo() == $utilisateur->getPseudo()){ // Seul le propriétaire du compte peut supprimer son compte
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        foreach ($compte->getPartiesCree() as $partie) {
+
+        //$this->redirectToRoute('app_logout');
+
+        $plateauEnJeu = $partie->getPlateauDeJeu();
+
+        $tabCase = $plateauEnJeu->getCases();
+        foreach($tabCase as $uneCase){ // On enlève les cases une par une
+            
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
+             
+                $entityManager->remove($uneRessource);
+                
+            }
+
+            $entityManager->remove($uneCase);
+        }
+
+        $tabPion = $plateauEnJeu->getPions();
+        foreach($tabPion as $unPion){ // On enlève chaque pion un par un
+
+            $entityManager->remove($unPion);
+        }
+
+        $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
+        
+        $entityManager->remove($partie); // On supprime la partie
+
+         // On enregistre les changements en BD
+        }
+
+        $entityManager->remove($compte);
+
+        $entityManager->flush();
+
+        
+
+        $tokenStorage->setToken(null);
+        $session->invalidate();
+
+        return $this->redirectToRoute('accueil');
+        }
+        else{
+            return $this->redirectToRoute('espace_compte');
+        }
 
 
     }
