@@ -159,14 +159,6 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/TESTparties", name="TESTespace_partie")
-     */
-    public function affichageTESTEspacePartie()
-    {     
-        return $this->render('les_rois_du/TESTespacepartie.html.twig');
-    }
-
-    /**
      * @Route("/compte", name="espace_compte")
      */
     public function affichageEspaceCompte(UserInterface $user)
@@ -502,6 +494,70 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
+     * @Route("/supression/compte/{idCompte}", name="supprimer_compte")
+     */
+    public function supprimerUnCompte($idCompte, UserInterface $user, TokenStorageInterface $tokenStorage)
+    {
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
+        $compte = $repositoryUtilisateur->find($idCompte);
+
+        if ($compte->getPseudo() == $utilisateur->getPseudo()){ // Seul le propriétaire du compte peut supprimer son compte
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        foreach ($compte->getPartiesCree() as $partie) {
+
+        //$this->redirectToRoute('app_logout');
+
+        $plateauEnJeu = $partie->getPlateauDeJeu();
+
+        $tabCase = $plateauEnJeu->getCases();
+        foreach($tabCase as $uneCase){ // On enlève les cases une par une
+            
+            $tabRessource = $uneCase->getRessources();
+            foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
+             
+                $entityManager->remove($uneRessource);
+                
+            }
+
+            $entityManager->remove($uneCase);
+        }
+
+        $tabPion = $plateauEnJeu->getPions();
+        foreach($tabPion as $unPion){ // On enlève chaque pion un par un
+
+            $entityManager->remove($unPion);
+        }
+
+        $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
+        
+        $entityManager->remove($partie); // On supprime la partie
+
+         // On enregistre les changements en BD
+        }
+
+        $entityManager->remove($compte);
+
+        $entityManager->flush();
+
+        
+
+        $tokenStorage->setToken(null);
+
+        return $this->redirectToRoute('accueil');
+        }
+        else{
+            return $this->redirectToRoute('espace_compte');
+        }
+
+
+    }
+
+    /**
      * @Route("/invite", name="en_invite")
      */
     public function connexionInvite(ObjectManager $manager, Request $request, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator)
@@ -699,70 +755,6 @@ class LesRoisDuController extends AbstractController
         $plateauDeJeu = ['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions, 'cases' => $caseData];
 
         return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'nbPionsParPlateau' => $nbPions, 'nbPlateaux' => $nbPlateaux, 'nbFacesDe' => $nbFacesDe, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
-    }
-
-    /**
-     * @Route("/supression/compte/{idCompte}", name="supprimer_compte")
-     */
-    public function supprimerUnCompte($idCompte, UserInterface $user, TokenStorageInterface $tokenStorage)
-    {
-        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
-        $userId = $user->getId();
-        $utilisateur = $repositoryUtilisateur->find($userId);
-
-        $compte = $repositoryUtilisateur->find($idCompte);
-
-        if ($compte->getPseudo() == $utilisateur->getPseudo()){ // Seul le propriétaire du compte peut supprimer son compte
-
-        $entityManager = $this->getDoctrine()->getManager();
-
-        foreach ($compte->getPartiesCree() as $partie) {
-
-        //$this->redirectToRoute('app_logout');
-
-        $plateauEnJeu = $partie->getPlateauDeJeu();
-
-        $tabCase = $plateauEnJeu->getCases();
-        foreach($tabCase as $uneCase){ // On enlève les cases une par une
-            
-            $tabRessource = $uneCase->getRessources();
-            foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
-             
-                $entityManager->remove($uneRessource);
-                
-            }
-
-            $entityManager->remove($uneCase);
-        }
-
-        $tabPion = $plateauEnJeu->getPions();
-        foreach($tabPion as $unPion){ // On enlève chaque pion un par un
-
-            $entityManager->remove($unPion);
-        }
-
-        $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
-        
-        $entityManager->remove($partie); // On supprime la partie
-
-         // On enregistre les changements en BD
-        }
-
-        $entityManager->remove($compte);
-
-        $entityManager->flush();
-
-        
-
-        $tokenStorage->setToken(null);
-
-        return $this->redirectToRoute('accueil');
-        }
-        else{
-            return $this->redirectToRoute('espace_compte');
-        }
-
-
     }
 
  
