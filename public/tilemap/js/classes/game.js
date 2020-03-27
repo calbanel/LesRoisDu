@@ -10,8 +10,6 @@ class Game {
 
     initialize(objRes){
         var nbCases = objRes.plateau_de_jeu.nbCases;
-        var nbPion = objRes.nbPionsParPlateau;
-        var nbFacesDe = objRes.nbFacesDe;
         var map = 'plateau_' + nbCases +'_128';
         //Récupération des infos dans les fichiers JSON
         //Récupérations des informations relatives à la map
@@ -20,23 +18,31 @@ class Game {
 
         //Récupérations des informations relatives aux défis
 
-        //Initialisation du plateau
-        this.parcours = new Parcours("defi", this.map);
-        this.parcours.creerCasesDuParcours();
+        //INITIALISATION DU PLATEAU
+        //Récupération des défis
+        var casesDuPlateau = objRes.plateau_de_jeu.cases;
+        var defis = [];
 
+        for (let index = 0; index < casesDuPlateau.length; index++) {
+            const element = casesDuPlateau[index];
+            defis.push(element.defi);
+        }
+        this.parcours = new Parcours(defis, this.map);
+        this.parcours.creerCasesDuParcours();
         //Nos cases
         this.cases = this.parcours.getCases();
 
-        //Initialisation du/des pion(s)
+        //INITIALISATION DU/DES PIONS(S)
+        var nbPion = objRes.nbPionsParPlateau;
         this.pions = [];
-        this.nombrePion = nbPion;
-        for (let index = 1; index < this.nombrePion + 1; index++) {
+        for (let index = 1; index < nbPion + 1; index++) {
             
             this.pions.push(new Pion(this.map, index));
             
         }
 
-        //Initialisation du dé
+        //INITIALISATION DU DE
+        var nbFacesDe = objRes.nbFacesDe;
         this.dice = new De("de.png", nbFacesDe);
 
         //Gestionnaire d'évênement

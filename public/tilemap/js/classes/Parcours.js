@@ -1,15 +1,14 @@
 class Parcours {
 
-    constructor(nom, map) {
+    constructor(tabDefis, map) {
 
         this.casesPosition = new Array();
         this.cases = new Array();
         this.map = map;
 
         this.toolBox = new ToolBox();
-
-        this.jsonMap = this.toolBox.getJsonDefi();
-        this.listeDefis = this.jsonMap.defis;
+        this.listeDefis = tabDefis;
+        
 
     }
 
@@ -69,7 +68,7 @@ class Parcours {
         for (var i = 0; i < positionCases.length; i++) {
 
             this.cases[i] = new Case('case_128.png',
-                this.listeDefis[i].defi,
+                this.listeDefis[i],
                 positionCases[i][0],
                 positionCases[i][1]);
 
