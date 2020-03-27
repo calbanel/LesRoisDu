@@ -1,11 +1,14 @@
 class Pion {
-	constructor(map, player) {
+	constructor(map, player, nbCases) {
 		//Petit toolBox des familles
 		this.toolBox = new ToolBox();
 
 		//Informations de la map
 		this.map = map;
 
+		this.nbCases = nbCases;
+
+		this.posPion = 1;
 		
 
 		//Position dans le canvas
@@ -212,10 +215,23 @@ class Pion {
 
 	advanceBasedOnPawnValue() {
 
-		for (let i = 0; i < this.faceCouranteDe; i++) {
+		if (this.posPion > this.nbCases) {
+			alert('STOP ! Vous êtes arrivé au bout du parcours !');
+		} else {
 
-			this.goToNextCase();
+			for (let i = 0; i < this.faceCouranteDe; i++) {
+				
+				this.posPion = this.posPion + 1;
 
+				if (this.posPion < this.nbCases ) {
+					this.goToNextCase();
+				}
+
+				if (this.posPion == this.nbCases) {
+					this.goToNextCase();
+					alert('Bravo ! Vous avez terminé le parcours !');
+				}
+			}
 		}
 	}
 
