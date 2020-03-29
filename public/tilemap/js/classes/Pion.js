@@ -312,7 +312,15 @@ class Pion {
 	}
 
 	setPositionIntoAPI(position, player){
-		var pionstab = [{'player': player, 'placement': position}];
+
+		if(position > this.nbCases){
+			var pos = this.nbCases-1;
+		}
+		else{
+			var pos = position;
+		}
+
+		var pionstab = [{'player': player, 'placement': pos}];
 
 		var jsonString = JSON.stringify({pions: pionstab});
 
