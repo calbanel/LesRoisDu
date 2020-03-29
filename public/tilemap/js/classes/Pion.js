@@ -1,5 +1,5 @@
 class Pion {
-	constructor(map, player, nbCases) {
+	constructor(map, player, position, nbCases) {
 		//Petit toolBox des familles
 		this.toolBox = new ToolBox();
 
@@ -11,16 +11,10 @@ class Pion {
 		this.player = player;
 		//Position dans le canvas
 		this.setPlayer(player);
-		this.x = this.posXPlayer;
-		this.y = this.posYPlayer;
-		//Position dans la map
-		this.col = this.toolBox.convertXtoCol(this.x, this.map.TILE_WIDTH);
-		this.lig = this.toolBox.convertXtoCol(this.y, this.map.TILE_HEIGHT);
 
-		this.setPosition();
-
-
-
+		this.setPosition(position);
+		this.positionnePionByPositionDansParcours();
+		this.updateXandYposition();
 
 		//Position du pion avant le déplacement
 		this.oldCol = 0;
@@ -86,53 +80,8 @@ class Pion {
 		}
 	}
 
-	setPosition(){
-		// Retrieving data:
-		if (localStorage.getItem("positionPion" + this.player) === null) {
-					this.posPion = 0;
-		} else {
-			//SESSION storage
-			// Getting	 data:
-			switch (this.player) {
-				case 1:
-					var position = "positionPion" + this.player;
-					var text = localStorage.getItem(position);
-					var obj = JSON.parse(text);
-					this.posPion = obj.positionPion1;
-					this.positionnePionByPositionDansParcours();
-					break;
-
-				case 2:
-					var position = "positionPion" + this.player;
-					var text = localStorage.getItem(position);
-					var obj = JSON.parse(text);
-					this.posPion = obj.positionPion2;
-					this.positionnePionByPositionDansParcours();
-					break;
-
-				case 3:
-					var position = "positionPion" + this.player;
-					var text = localStorage.getItem(position);
-					var obj = JSON.parse(text);
-					this.posPion = obj.positionPion3;
-					this.positionnePionByPositionDansParcours();
-					break;
-
-				case 4:
-					var position = "positionPion" + this.player;
-					var text = localStorage.getItem(position);
-					var obj = JSON.parse(text);
-					this.posPion = obj.positionPion4;
-					this.positionnePionByPositionDansParcours();
-					break;
-
-				default:
-					alert('Ce joueur n\'existe pas');
-					break;
-			}
-
-
-		}
+	setPosition(position){
+			this.posPion = position;
 	}
 
 	update() {
@@ -141,44 +90,10 @@ class Pion {
 			this.advanceBasedOnPawnValue();
 		}
 
-
-		//SESSION storage
-		var positionPion, positionPionToStoreInJson;
-		// Storing data:
-		switch (this.player) {
-			case 1:
-				positionPion = { positionPion1: this.posPion};
-				positionPionToStoreInJson = JSON.stringify(positionPion);
-				localStorage.setItem("positionPion1", positionPionToStoreInJson);
-				break;
-
-			case 2:
-				positionPion = { positionPion2: this.posPion};
-				positionPionToStoreInJson = JSON.stringify(positionPion);
-				localStorage.setItem("positionPion2", positionPionToStoreInJson);
-				break;
-
-			case 3:
-				positionPion = { positionPion3: this.posPion};
-				positionPionToStoreInJson = JSON.stringify(positionPion);
-				localStorage.setItem("positionPion3", positionPionToStoreInJson);
-				break;
-
-			case 4:
-				positionPion = { positionPion4: this.posPion};
-				positionPionToStoreInJson = JSON.stringify(positionPion);
-				localStorage.setItem("positionPion4", positionPionToStoreInJson);
-				break;
-
-			default:
-				alert('Il ne peut y avoir plus de 4 joueurs');
-				break;
-		}
-
 		this.positionnePionByPositionDansParcours();
-
-	}
-
+		this.updateXandYposition();
+		this.setPositionIntoAPI(this.posPion, this.player);
+}
 	updateOnClick(x, y) {
 		if (this.isClicked(x, y)) {
 
@@ -277,9 +192,7 @@ class Pion {
 		this.setCol(col);
 		this.setLig(lig);
 
-		//On met à jour la position
-		this.x = (this.col * this.map.TILE_WIDTH) + this.posXPlayer;
-		this.y = (this.lig * this.map.TILE_HEIGHT) + this.posYPlayer;
+
 	}
 
 	goToNextCase() {
@@ -376,19 +289,44 @@ class Pion {
 	}
 
 	getInfoCaseCourante(positionPion){
-			var positionCases = this.getPositionCases()
+		var positionCases;
+		if (positionPion > this.nbCases) {
+			return false;
+		} else {
+			positionCases= this.getPositionCases();
 			return positionCases[[positionPion][0]];
+		}
+
+
 	}
 
 	positionnePionByPositionDansParcours(){
 		var positionPionCase = (this.getInfoCaseCourante(this.posPion));
-		var col = positionPionCase[0];
-		var lig = positionPionCase[1];
-
-		this.col = col;
-		this.lig = lig;
+		if (positionPionCase) {
+			var col = positionPionCase[0];
+			var lig = positionPionCase[1];
+			this.col = col;
+			this.lig = lig;
+		}
 
 	}
 
+	setPositionIntoAPI(position, player){
+		var pionstab = [{'player': player, 'placement': position}];
+
+		var jsonString = JSON.stringify({pions: pionstab});
+
+		$.ajax({
+	        type: "POST",
+	        url: parametres + idPartie,
+	        data: "$data="+jsonString
+    	});
+	}
+
+	updateXandYposition(){
+		//On met à jour la position
+		this.x = (this.col * this.map.TILE_WIDTH) + this.posXPlayer;
+		this.y = (this.lig * this.map.TILE_HEIGHT) + this.posYPlayer;
+	}
 
 }
