@@ -218,6 +218,7 @@ class LesRoisDuController extends AbstractController
         $plateauEnJeu->setNbCases($plateau->getNbCases());
 
         $pions1 = new Pion();
+        $pions1->setNumeroJoueur(2);
         $pions1->setNom("rouge");
         $pions1->setCouleur("red");
         $pions1->setAvancementPlateau(0);
@@ -226,6 +227,7 @@ class LesRoisDuController extends AbstractController
         $manager->persist($pions1);
 
         $pions2 = new Pion();
+        $pions2->setNumeroJoueur(1);
         $pions2->setNom("vert");
         $pions2->setCouleur("green");
         $pions2->setAvancementPlateau(0);
@@ -234,6 +236,7 @@ class LesRoisDuController extends AbstractController
         $manager->persist($pions2);
 
         $pions3 = new Pion();
+        $pions3->setNumeroJoueur(4);
         $pions3->setNom("bleu");
         $pions3->setCouleur("blue");
         $pions3->setAvancementPlateau(0);
@@ -242,6 +245,7 @@ class LesRoisDuController extends AbstractController
         $manager->persist($pions3);
 
         $pions4 = new Pion();
+        $pions4->setNumeroJoueur(3);
         $pions4->setNom("jaune");
         $pions4->setCouleur("yellow");
         $pions4->setAvancementPlateau(0);
@@ -751,10 +755,11 @@ class LesRoisDuController extends AbstractController
         $arrayInfoPions = [];
 
         foreach ($pions as $unPion) {
+            $player = $unPion->getNumeroJoueur();
             $nom= $unPion->getNom();
             $couleur= $unPion->getCouleur();
             $position= $unPion->getAvancementPlateau();
-            array_push($arrayInfoPions, ['nom' => $nom, 'couleur' => $couleur, 'position' => $position]);       
+            array_push($arrayInfoPions, ['player' => $player, 'nom' => $nom, 'couleur' => $couleur, 'position' => $position]);       
         }
 
         $partie = $this->lien."/api/partie/".$plateau->getPartie()->getId();
