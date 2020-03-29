@@ -37,8 +37,12 @@ class De{
 		this.lancerDe();
 		alert('Vous avez obtenu ' + this.faceCourante + '.');
 
+		var pionRouge = JSON.parse(localStorage.getItem('positionPion2'));
+		var pionVert = JSON.parse(localStorage.getItem('positionPion1'));
+		var pionBleu = JSON.parse(localStorage.getItem('positionPion4'));
+		var pionJaune = JSON.parse(localStorage.getItem('positionPion3'));
 
-		var pionstab = [{'couleur': "red", 'placement': 1},{'couleur': "green", 'placement': 4},{'couleur': "blue", 'placement': 3},{'couleur': "yellow", 'placement': 2}];
+		var pionstab = [{'couleur': "red", 'placement': pionRouge.positionPion2},{'couleur': "green", 'placement': pionVert.positionPion1},{'couleur': "blue", 'placement': pionBleu.positionPion4},{'couleur': "yellow", 'placement': pionJaune.positionPion3}];
 
 		var jsonString = JSON.stringify({pions: pionstab});
 
