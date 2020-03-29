@@ -318,7 +318,7 @@ class Pion {
 
 		$.ajax({
 	        type: "POST",
-	        url: parametres + idPartie,
+	        url: parametres,
 	        data: "$data="+jsonString
     	});
 	}
