@@ -37,6 +37,11 @@ class Pion
      */
     private $plateauEnJeu;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numeroJoueur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Pion
     public function setPlateauEnJeu(?PlateauEnJeu $plateauEnJeu): self
     {
         $this->plateauEnJeu = $plateauEnJeu;
+
+        return $this;
+    }
+
+    public function getNumeroJoueur(): ?int
+    {
+        return $this->numeroJoueur;
+    }
+
+    public function setNumeroJoueur(int $numeroJoueur): self
+    {
+        $this->numeroJoueur = $numeroJoueur;
 
         return $this;
     }
