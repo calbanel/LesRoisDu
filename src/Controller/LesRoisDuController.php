@@ -55,7 +55,7 @@ class LesRoisDuController extends AbstractController
     {
         return $this->render('les_rois_du/index.html.twig');
     }
-    
+
     /**
      * @Route("/ConditonsUtilisations", name="CGU")
      */
@@ -82,14 +82,14 @@ class LesRoisDuController extends AbstractController
 
         // Création de l'objet formulaire à partir du formulaire externalisé "UtilisateurType"
         $formulaireUtilisateur=$this->createForm(UtilisateurType::class, $utilisateur);
-      
+
          /* On demande au formulaire d'analyser la dernière requête Http. Si le tableau POST contenu
         dans cette requête contient des variables pseudo,email etc. alors la méthode handleRequest()
         récupère les valeurs de ces variables et les affecte à l'objet $utilisateur */
         $formulaireUtilisateur->handleRequest($request);
 
         if ($formulaireUtilisateur->isSubmitted() && $formulaireUtilisateur->isValid())
-        {        
+        {
            // Avatar par défaut
             $utilisateur->setAvatar("/img/avatar8.jpg");
 
@@ -115,7 +115,7 @@ class LesRoisDuController extends AbstractController
             $plateau2 = $repositoryPlateau->find(6);
 
             $utilisateur->addPlateau($plateau2);
-           
+
             // Enregistrer l'utilisateur en base de données
            $manager->persist($utilisateur);
            $manager->flush();
@@ -127,8 +127,8 @@ class LesRoisDuController extends AbstractController
                 $authenticator,
                 'main' // Nom du parefeu dans security.yaml
             );
-        }      
-        
+        }
+
         return $this->render('les_rois_du/inscription.html.twig',['vueFormulaireInscription' => $formulaireUtilisateur->createView()]);
     }
 
@@ -164,15 +164,15 @@ class LesRoisDuController extends AbstractController
      * @Route("/compte", name="espace_compte")
      */
     public function affichageEspaceCompte(UserInterface $user)
-    {  
-        
+    {
+
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();
         $user = $repositoryUtilisateur->find($userId);
         return $this->render('les_rois_du/espacecompte.html.twig', ['utilisateur'=>$user]);
     }
 
- 
+
     /**
      * @Route("/plateaux", name="espace_plateau")
      */
@@ -183,7 +183,7 @@ class LesRoisDuController extends AbstractController
         $user = $repositoryUtilisateur->find($userId);
         $repositoryPlateaux=$this->getDoctrine()->getRepository(Plateau::class);
         $plateaux = $repositoryPlateaux->findAll();
-        
+
         return $this->render('les_rois_du/espaceplateau.html.twig', ['plateaux'=>$plateaux, 'utilisateur'=>$user]);
     }
 
@@ -192,11 +192,11 @@ class LesRoisDuController extends AbstractController
      */
     public function affichageCreationPartie(Request $request, ObjectManager $manager, UserInterface $user)
     {
-        
+
         $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
         $userId = $user->getId();
         $createur = $repositoryUtilisateur->find($userId);
-       
+
        // Création d'une partie vierge
        $partie=new Partie();
 
@@ -206,8 +206,8 @@ class LesRoisDuController extends AbstractController
        $formulairePartie->handleRequest($request);
 
        if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
-       { 
-      
+       {
+
         $plateau = $partie->getPlateau();
 
         // On copie le plateau sélectionné dans le plateauEnJeu de la partie
@@ -268,7 +268,7 @@ class LesRoisDuController extends AbstractController
         $plateauEnJeu->setPartie($partie);
 
         $manager->persist($createur);
-        
+
         // On récupère les cases du plateau et les copie une par une dans le plateauEnJeu
         $tabCase = $plateau->getCases();
         foreach($tabCase as $uneCase){
@@ -280,9 +280,9 @@ class LesRoisDuController extends AbstractController
             ;
 
             $cases->setPlateauEnJeu($plateauEnJeu);
-            
+
             $manager->persist($cases);
-            
+
             // On récupère les ressources des cases du plateau et les copie une par une dans les cases du plateauEnJeu
             $tabRessource = $uneCase->getRessources();
             foreach($tabRessource as $uneRessource){
@@ -290,19 +290,19 @@ class LesRoisDuController extends AbstractController
 
                 $ressource->setChemin($uneRessource->getChemin());
 
-            
+
                 $ressource->setCases($cases);
                 $cases->addRessource($ressource);
                 $manager->persist($cases);
-            
+
                 $manager->persist($ressource);
 
             }
         }
-        
+
             $manager->persist($plateauEnJeu);
-                 
-          // Enregistrer en base de données   
+
+          // Enregistrer en base de données
           $manager->flush();
 
           // Rediriger l'utilisateur vers la page d'accueil
@@ -326,19 +326,19 @@ class LesRoisDuController extends AbstractController
         $repositoryPartie=$entityManager->getRepository(Partie::class);
         $partie = $repositoryPartie->findOneBy(['code' => $code]);
 
-        
 
-        if(!is_null($partie)){  
-            $plateauDeJeu = $partie->getPlateauDeJeu();          
+
+        if(!is_null($partie)){
+            $plateauDeJeu = $partie->getPlateauDeJeu();
             if($partie->getJoueurs()->isEmpty()){
 
-                
+
 
                 $joueur->addPartiesRejoin($partie);
                 $joueur->addPlateauEnJeux($partie->getPlateauDeJeu());
 
                 $plateauDeJeu->setJoueur($joueur);
-                
+
                 // Enregistrer la ressource en base de données
                 $manager->persist($plateauDeJeu);
                 $manager->persist($partie);
@@ -367,7 +367,7 @@ class LesRoisDuController extends AbstractController
      * @Route("/parties/{idPartie}", name="partie_en_cours")
      */
     public function affichagePartieEnCours($idPartie, UserInterface $user)
-    {   
+    {
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
         $parties = $repositoryPartie->findAll();
@@ -399,7 +399,7 @@ class LesRoisDuController extends AbstractController
 
         // Si l'utilisateur a créé ou rejoint la partie il peut la voir
         if ($trouve == true)
-        {        
+        {
         return $this->render('les_rois_du/partieencours.html.twig',['partie'=>$partie,'partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
         }
         else // Sinon il est redirigé sur l'espace des parties
@@ -431,7 +431,7 @@ class LesRoisDuController extends AbstractController
             return $this->redirectToRoute('espace_partie');
         }
 
-        
+
     }
 
     /**
@@ -483,12 +483,12 @@ class LesRoisDuController extends AbstractController
 
         $tabCase = $plateauEnJeu->getCases();
         foreach($tabCase as $uneCase){ // On enlève les cases une par une
-            
+
             $tabRessource = $uneCase->getRessources();
             foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
-             
+
                 $entityManager->remove($uneRessource);
-                
+
             }
 
             $entityManager->remove($uneCase);
@@ -501,7 +501,7 @@ class LesRoisDuController extends AbstractController
         }
 
         $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
-        
+
         $entityManager->remove($partie); // On supprime la partie
 
         $entityManager->flush(); // On enregistre les changements en BD
@@ -536,12 +536,12 @@ class LesRoisDuController extends AbstractController
 
         $tabCase = $plateauEnJeu->getCases();
         foreach($tabCase as $uneCase){ // On enlève les cases une par une
-            
+
             $tabRessource = $uneCase->getRessources();
             foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
-             
+
                 $entityManager->remove($uneRessource);
-                
+
             }
 
             $entityManager->remove($uneCase);
@@ -554,7 +554,7 @@ class LesRoisDuController extends AbstractController
         }
 
         $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
-        
+
         $entityManager->remove($partie); // On supprime la partie
 
          // On enregistre les changements en BD
@@ -564,7 +564,7 @@ class LesRoisDuController extends AbstractController
 
         $entityManager->flush();
 
-        
+
 
         $tokenStorage->setToken(null);
         $session->invalidate();
@@ -607,7 +607,7 @@ class LesRoisDuController extends AbstractController
             $invite,
             $plainPassword
          ));
-           
+
         // Enregistrer l'invité en base de données
         $manager->persist($invite);
         $manager->flush();
@@ -663,7 +663,7 @@ class LesRoisDuController extends AbstractController
         foreach($tabCase as $uneCase){
 
             $ressourceData = [];
-            
+
             $numero = $uneCase->getNumero();
             $defi = $uneCase->getDescriptifDefi();
             $consignes = $uneCase->getConsignes();
@@ -676,10 +676,10 @@ class LesRoisDuController extends AbstractController
                 $infosR = ['chemin' => $chemin];
 
                 array_push($ressourceData, $infosR);
-                
+
             }
 
-            
+
 
             $infos = ['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code, 'ressources' => $ressourceData];
 
@@ -704,14 +704,14 @@ class LesRoisDuController extends AbstractController
         $pions = $plateau->getPions();
 
         if ($request->getMethod() == 'POST') {
-        
+
             $pionsNouveau = json_decode($request->request->get('$data'),true);
 
             foreach ($pions as $unPion) {
 
                 foreach ($pionsNouveau['pions'] as $unPionNouveau) {
-                    
-                    if ($unPionNouveau['couleur'] == $unPion->getCouleur()) {
+
+                    if ($unPionNouveau['player'] == $unPion->getNumeroJoueur()) {
 
                         $unPion->setAvancementPlateau($unPionNouveau["placement"]);
                         $manager->persist($unPion);
@@ -759,7 +759,7 @@ class LesRoisDuController extends AbstractController
             $nom= $unPion->getNom();
             $couleur= $unPion->getCouleur();
             $position= $unPion->getAvancementPlateau();
-            array_push($arrayInfoPions, ['player' => $player, 'nom' => $nom, 'couleur' => $couleur, 'position' => $position]);       
+            array_push($arrayInfoPions, ['player' => $player, 'nom' => $nom, 'couleur' => $couleur, 'position' => $position]);
         }
 
         $partie = $this->lien."/api/partie/".$plateau->getPartie()->getId();
@@ -772,7 +772,7 @@ class LesRoisDuController extends AbstractController
         foreach($tabCase as $uneCase){
 
             $ressourceData = [];
-            
+
             $numero = $uneCase->getNumero();
             $defi = $uneCase->getDescriptifDefi();
             $consignes = $uneCase->getConsignes();
@@ -785,10 +785,10 @@ class LesRoisDuController extends AbstractController
                 $infosR = ['chemin' => $chemin];
 
                 array_push($ressourceData, $infosR);
-                
+
             }
 
-            
+
 
             $infos = ['numero' => $numero, 'defi' => $defi, 'consignes' => $consignes, 'code' => $code, 'ressources' => $ressourceData];
 
@@ -800,5 +800,5 @@ class LesRoisDuController extends AbstractController
         return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'nbPionsParPlateau' => $nbPions, 'nbPlateaux' => $nbPlateaux, 'nbFacesDe' => $nbFacesDe, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
     }
 
- 
+
 }

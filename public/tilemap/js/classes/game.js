@@ -32,10 +32,11 @@ class Game {
 
         //INITIALISATION DU/DES PIONS(S)
         var nbPion = objRes.nbPionsParPlateau;
+        var lesPions = objRes.plateau_de_jeu.pions;
         this.pions = [];
-        for (let index = 1; index < nbPion + 1; index++) {
+        for (let index = 0; index < nbPion; index++) {
 
-            this.pions.push(new Pion(this.map, index, nbCases));
+            this.pions.push(new Pion(this.map, lesPions[index].player, lesPions[index].position, nbCases));
 
         }
 
