@@ -36,10 +36,22 @@ class De{
 	update(){
 		this.lancerDe();
 		alert('Vous avez obtenu ' + this.faceCourante + '.');
-		fetch("/api/partie/" + idPartie, {
-  		method: "POST",
-  		body: "test"
-		})
+
+
+		var pionstab = [{'couleur': "red", 'placement': 1},{'couleur': "green", 'placement': 4},{'couleur': "blue", 'placement': 3},{'couleur': "yellow", 'placement': 2}];
+
+		var jsonString = JSON.stringify({pions: pionstab});
+
+		$.ajax({
+	        type: "POST",
+	        url: "http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/" + idPartie,
+	        data: "$data="+jsonString,
+  			success: function() {
+            	console.log("Position pions mis à jour");
+        	}
+
+    	});
+
 	}
 
 	updateOnClick(x , y){

@@ -41,6 +41,7 @@ class LesRoisDuController extends AbstractController
     private $passwordEncoder;
     private $lien;
 
+
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
@@ -687,11 +688,36 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/api/partie/{idPartie}", name="api_parties")
      */
-    public function apiPartie($idPartie)
+    public function apiPartie($idPartie, Request $request, ObjectManager $manager)
     {
+
 
         $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
         $partie = $repositoryPartie->find($idPartie);
+
+        $plateau = $partie->getPlateauDeJeu();
+
+        $pions = $plateau->getPions();
+
+        if ($request->getMethod() == 'POST') {
+        
+            $pionsNouveau = json_decode($request->request->get('$data'),true);
+
+            foreach ($pions as $unPion) {
+
+                foreach ($pionsNouveau['pions'] as $unPionNouveau) {
+                    
+                    if ($unPionNouveau['couleur'] == $unPion->getCouleur()) {
+
+                        $unPion->setAvancementPlateau($unPionNouveau["placement"]);
+                        $manager->persist($unPion);
+                        $manager->flush();
+
+                    }
+
+                }
+            }
+        }
 
         // On récupère les informations de la partie pour les retourner en json
         $nom = $partie->getNom();
@@ -709,9 +735,6 @@ class LesRoisDuController extends AbstractController
         $nbFacesDe = $partie->getNbFacesDe();
         $estLance = $partie->getEstLance();
 
-        $repositoryPlateauEnJeu=$this->getDoctrine()->getRepository(PlateauEnJeu::class);
-        $plateau = $repositoryPlateauEnJeu->find($partie->getPlateauDeJeu()->getId());
-
         $nom = $plateau->getNom();
         $description = $plateau->getDescription();
         $difficulte = $plateau->getNiveauDifficulte();
@@ -725,7 +748,6 @@ class LesRoisDuController extends AbstractController
             $joueur = $plateau->getJoueur()->getPseudo();
         }
 
-        $pions = $plateau->getPions();
         $arrayInfoPions = [];
 
         foreach ($pions as $unPion) {
