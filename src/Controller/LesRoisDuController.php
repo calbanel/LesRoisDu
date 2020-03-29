@@ -739,7 +739,7 @@ class LesRoisDuController extends AbstractController
         $nbFacesDe = $partie->getNbFacesDe();
         $estLance = $partie->getEstLance();
 
-        $nom = $plateau->getNom();
+        $nomPlateau = $plateau->getNom();
         $description = $plateau->getDescription();
         $difficulte = $plateau->getNiveauDifficulte();
         $nbCases = $plateau->getNbCases();
@@ -756,10 +756,10 @@ class LesRoisDuController extends AbstractController
 
         foreach ($pions as $unPion) {
             $player = $unPion->getNumeroJoueur();
-            $nom= $unPion->getNom();
+            $nomPion= $unPion->getNom();
             $couleur= $unPion->getCouleur();
             $position= $unPion->getAvancementPlateau();
-            array_push($arrayInfoPions, ['player' => $player, 'nom' => $nom, 'couleur' => $couleur, 'position' => $position]);       
+            array_push($arrayInfoPions, ['player' => $player, 'nom' => $nomPion, 'couleur' => $couleur, 'position' => $position]);       
         }
 
         $partie = $this->lien."/api/partie/".$plateau->getPartie()->getId();
@@ -795,7 +795,7 @@ class LesRoisDuController extends AbstractController
             array_push($caseData, $infos);
         }
 
-        $plateauDeJeu = ['nom' => $nom, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions, 'cases' => $caseData];
+        $plateauDeJeu = ['nom' => $nomPlateau, 'description' => $description, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur, 'partie' => $partie,'pions' => $arrayInfoPions, 'cases' => $caseData];
 
         return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'nbPionsParPlateau' => $nbPions, 'nbPlateaux' => $nbPlateaux, 'nbFacesDe' => $nbFacesDe, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
     }
