@@ -22,7 +22,7 @@ class De{
 			if(!this.complete) {
 				throw "Erreur de chargement du sprite nommé \"" + url + "\".";
 			}
-				
+
 		// Taille de la De
 		this.referenceDuPerso.largeur = this.width;
 		this.referenceDuPerso.hauteur = this.height;
@@ -36,6 +36,10 @@ class De{
 	update(){
 		this.lancerDe();
 		alert('Vous avez obtenu ' + this.faceCourante + '.');
+		fetch("/api/partie/" + idPartie, {
+  		method: "POST",
+  		body: "test"
+		})
 	}
 
 	updateOnClick(x , y){
@@ -54,7 +58,7 @@ class De{
 			);
 	}
 
-	
+
 	addObservers(o){
 		this.observers.push(o);
 	}
@@ -88,5 +92,3 @@ class De{
 	}
 
 }
-
-	
