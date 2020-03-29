@@ -95,11 +95,48 @@ class Pion {
 					console.log("Initialisation de la position à la case "+ premiereCase);
 					this.posPion = premiereCase;
 		} else {
-			var position = "positionPion" + this.player;
-			var text = localStorage.getItem(position);
-			var obj = JSON.parse(text);
-			console.log(obj);
-			//this.posPion = obj.positionPion;
+			//SESSION storage
+			// Getting	 data:
+			switch (this.player) {
+				case 1:
+					var position = "positionPion" + this.player;
+					var text = localStorage.getItem(position);
+					var obj = JSON.parse(text);
+					this.posPion = obj.positionPion1;
+					console.log(this.posPion);
+					break;
+
+				case 2:
+					var position = "positionPion" + this.player;
+					var text = localStorage.getItem(position);
+					var obj = JSON.parse(text);
+					this.posPion = obj.positionPion2;
+					console.log(this.posPion);
+					break;
+
+				case 3:
+					var position = "positionPion" + this.player;
+					var text = localStorage.getItem(position);
+					var obj = JSON.parse(text);
+					this.posPion = obj.positionPion3;
+					console.log(this.posPion);
+
+					break;
+
+				case 4:
+					var position = "positionPion" + this.player;
+					var text = localStorage.getItem(position);
+					var obj = JSON.parse(text);
+					this.posPion = obj.positionPion4;
+					console.log(this.posPion);
+					break;
+
+				default:
+					alert('Ce joueur n\'existe pas');
+					break;
+			}
+
+
 		}
 	}
 
