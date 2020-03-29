@@ -23,7 +23,7 @@ class InputHandler {
         this.sourisY = 0;
 
         //EVENT LISTENER
-        canvas.addEventListener('mousedown', function (event) {
+        canvas.addEventListener('click', function (event) {
             var rect = canvas.getBoundingClientRect();
             this.sourisX = event.x - rect.left;
             this.sourisY = event.y - rect.top;
