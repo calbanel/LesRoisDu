@@ -8,40 +8,12 @@ class Pion {
 
 		this.nbCases = nbCases;
 
-		this.posPion = 1;
-		
-
+		this.player = player;
 		//Position dans le canvas
-		switch (player) {
-			case 1:
-				this.posXPlayer = 32 - 32 / 2;
-				this.posYPlayer = 32 - 32 / 2;
-				this.couleur = 'vert';
-				break;
+		this.setPlayer(player);
 
-			case 2:
-				this.posXPlayer = 96 - 32 / 2;
-				this.posYPlayer = 32 - 32 / 2;
-				this.couleur = 'rouge';
-				break;
+		this.setPosition();
 
-
-			case 3:
-				this.posXPlayer = 32 - 32 / 2;
-				this.posYPlayer = 96 - 32 / 2;
-				this.couleur = 'jaune';
-				break;
-
-			case 4:
-				this.posXPlayer = 96 - 32 / 2;
-				this.posYPlayer = 96 - 32 / 2;
-				this.couleur = 'bleu';
-				break;
-
-			default:
-				alert('Il ne peut exister de joueur ' + player + '.');
-				break;
-		}
 
 		this.x = this.posXPlayer;
 		this.y = this.posYPlayer;
@@ -81,11 +53,96 @@ class Pion {
 
 	}
 
+	setPlayer(player){
+
+		switch (player) {
+			case 1:
+				this.posXPlayer = 32 - 32 / 2;
+				this.posYPlayer = 32 - 32 / 2;
+				this.couleur = 'vert';
+				break;
+
+			case 2:
+				this.posXPlayer = 96 - 32 / 2;
+				this.posYPlayer = 32 - 32 / 2;
+				this.couleur = 'rouge';
+				break;
+
+
+			case 3:
+				this.posXPlayer = 32 - 32 / 2;
+				this.posYPlayer = 96 - 32 / 2;
+				this.couleur = 'jaune';
+				break;
+
+			case 4:
+				this.posXPlayer = 96 - 32 / 2;
+				this.posYPlayer = 96 - 32 / 2;
+				this.couleur = 'bleu';
+				break;
+
+			default:
+				alert('Il ne peut exister de joueur ' + player + '.');
+				break;
+		}
+	}
+
+	setPosition(){
+		// Retrieving data:
+		if (localStorage.getItem("positionPion" + this.player) === null) {
+					console.log("Rien n'est stocké dans positionPion local storage");
+					var premiereCase = 1;
+					console.log("Initialisation de la position à la case "+ premiereCase);
+					this.posPion = premiereCase;
+		} else {
+			var position = "positionPion" + this.player;
+			var text = localStorage.getItem(position);
+			var obj = JSON.parse(text);
+			console.log(obj);
+			//this.posPion = obj.positionPion;
+		}
+	}
+
 	update() {
 
 		if (this.isSelected) {
 			this.advanceBasedOnPawnValue();
-		} 
+		}
+
+
+		//SESSION storage
+		var positionPion, positionPionToStoreInJson;
+		// Storing data:
+		switch (this.player) {
+			case 1:
+				positionPion = { positionPion1: this.posPion};
+				positionPionToStoreInJson = JSON.stringify(positionPion);
+				localStorage.setItem("positionPion1", positionPionToStoreInJson);
+				break;
+
+			case 2:
+				positionPion = { positionPion2: this.posPion};
+				positionPionToStoreInJson = JSON.stringify(positionPion);
+				localStorage.setItem("positionPion2", positionPionToStoreInJson);
+				break;
+
+			case 3:
+				positionPion = { positionPion3: this.posPion};
+				positionPionToStoreInJson = JSON.stringify(positionPion);
+				localStorage.setItem("positionPion3", positionPionToStoreInJson);
+				break;
+
+			case 4:
+				positionPion = { positionPion4: this.posPion};
+				positionPionToStoreInJson = JSON.stringify(positionPion);
+				localStorage.setItem("positionPion4", positionPionToStoreInJson);
+				break;
+
+			default:
+				alert('Problème fry');
+				break;
+		}
+
 
 	}
 
@@ -220,7 +277,7 @@ class Pion {
 		} else {
 
 			for (let i = 0; i < this.faceCouranteDe; i++) {
-				
+
 				this.posPion = this.posPion + 1;
 
 				if (this.posPion < this.nbCases ) {
@@ -269,5 +326,3 @@ class Pion {
 
 
 }
-
-

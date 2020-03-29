@@ -70,11 +70,12 @@
 
                 <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour
                     jouer.</canvas>
+                    <button type="button" name="button" onclick="localStorage.clear()">clear</button>
 
                 <link rel="stylesheet" href="{{asset('tilemap/css/style.css')}}" />
 
                 <script type="text/javascript">
-                    var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/' + {{ partie.id }};
+                    var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8002/api/partie/' + {{ partie.id }};
                 </script>
 
                 <script> var assetsBaseDir = "{{ asset('tilemap/') }}"</script>
@@ -90,12 +91,12 @@
                 <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
                 <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
 
-                
+
 
                 <br>
                 <p id="creaJoueur"></p>
                 <script type="text/javascript">
-                    setInterval(function () 
+                    setInterval(function ()
                     {
                         fetch(parametres)
                         .then(response => {
@@ -107,7 +108,8 @@
                 }, 2000);
                 </script>
 
-                
+
+
 
             </div>
         </section>

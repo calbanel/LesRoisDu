@@ -2,10 +2,8 @@ class Game {
 
     constructor(url)
     {
-
         var toolBox = new ToolBox();
         toolBox.requete(url);
-
     }
 
     initialize(objRes){
@@ -36,9 +34,9 @@ class Game {
         var nbPion = objRes.nbPionsParPlateau;
         this.pions = [];
         for (let index = 1; index < nbPion + 1; index++) {
-            
+
             this.pions.push(new Pion(this.map, index, nbCases));
-            
+
         }
 
         //INITIALISATION DU DE
@@ -72,7 +70,7 @@ class Game {
             this.cases.forEach(casess => {
                 casess.addPionObserved(pion);
             })
-            
+
         });
 
         this.map.setDice(this.dice);
@@ -84,11 +82,11 @@ class Game {
         });
 
         this.gameLoop();
-        
+
     }
 
     update(deltaTime){
-        
+
     }
 
     draw(ctx){
@@ -100,17 +98,17 @@ class Game {
         function gameLoop(timestamp) {
           let deltaTime = timestamp - lastTime;
           lastTime = timestamp;
-        
+
           ctx.clearRect(0, 0, game.GAME_WIDTH, game.GAME_HEIGHT);
-        
-          
+
+
           game.update(deltaTime);
           game.draw(ctx);
-        
+
           requestAnimationFrame(gameLoop);
         }
-        
+
         requestAnimationFrame(gameLoop);
-        
+
     }
 }

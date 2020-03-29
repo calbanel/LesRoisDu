@@ -13,28 +13,6 @@ class ToolBox {
         ToolBox.instance = this;
     }
 
-    /*IL Y A DEUX GETJSON différent parce que je ne sais pour quelle raison,
-     je n'arrive pas à récupérer l'attribut nom depuis l'objet parcours
-    */
-    getJsonDefi() {
-
-        // Création de l'objet XmlHttpRequest
-        var xhr = getXMLHttpRequest();
-
-        // Chargement du fichier
-        xhr.open("GET", assetsBaseDir + 'plateaux/' + 'defi' + '.json', false);
-        xhr.send(null);
-        if (xhr.readyState != 4 || (xhr.status != 200 && xhr.status != 0)) // Code == 0 en local
-            throw new Error("Impossible de charger la carte nommée \"" + nom + "\" (code HTTP : " + xhr.status + ").");
-        var mapJsonData = xhr.responseText;
-
-        // Récupération des données 
-        var mapData = JSON.parse(mapJsonData);
-
-        return mapData;
-
-    }
-
     getJson(nom) {
 
         // Création de l'objet XmlHttpRequest
