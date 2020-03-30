@@ -43,11 +43,11 @@
                     {%endif%}
                 <div class="row">
 
-                    <div class="col-md-9">
+                    <div class="col-md-8">
 
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-4">
 
                         {% if utilisateur.pseudo == partie.createur.pseudo %}
                         <ul class="actions">
@@ -57,13 +57,12 @@
                             </a></li>
 
                         </ul>
-                            {% else %}
+                        {% else %}
                         {%endif%}
 
 
                     </div>
-                    <div class="col-md-2">
-                    </div>
+
                 </div>
                 <br>
 
@@ -72,11 +71,11 @@
                     jouer.</canvas>
 
                 <link rel="stylesheet" href="{{asset('tilemap/css/style.css')}}" />
-                <button type="button" onclick="localStorage.clear()" name="button">clear</button>
+
 
                 <script type="text/javascript">
                   var idPartie = {{ partie.id }};
-                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/' + idPartie;
+                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8002/api/partie/' + idPartie;
                 </script>
 
                 <script> var assetsBaseDir = "{{ asset('tilemap/') }}"</script>
@@ -94,20 +93,56 @@
 
 
 
-                <br>
-                <p id="creaJoueur"></p>
-                <script type="text/javascript">
-                    setInterval(function ()
-                    {
-                        fetch(parametres)
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(data => {
-                            document.getElementById("creaJoueur").innerHTML = "Créateur de la partie: " + data["createur"] + "<br>Joueur: " + data["joueur"];
-                        })
-                }, 5000);
-                </script>
+                <br><br>
+                <div class="row">
+                   
+                    <div class="col-md-6">
+                
+                        <p id="creaJoueur"></p>
+                        <script type="text/javascript">
+                            setInterval(function ()
+                            {
+                                fetch(parametres)
+                                .then(response => {
+                                    return response.json()
+                                })
+                                .then(data => {
+                                    document.getElementById("creaJoueur").innerHTML = "Créateur de la partie: " + data["createur"] + "<br>Joueur: " + data["joueur"];
+                                })
+                        }, 5000);
+                        </script>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        {% if utilisateur.pseudo == partie.createur.pseudo %}
+                      
+
+                            <a role="button" href="{{ path('reinitialiser_position', {'idPartie' : partie.id}) }}"
+                                class="btn button scrolly">
+                                Reinitialiser la position des pions
+                            </a>
+                            <br><BR>
+                            {% if partie.plateauDeJeu.joueur is not null %}
+                                <a role="button" href="{{ path('exclure_joueur', {'idPartie' : partie.id}) }}"
+                                    class="btn button scrolly">
+                                    Exclure le joueur
+                                </a>
+                            {%else%}
+                                <a role="button" href="{{ path('exclure_joueur', {'idPartie' : partie.id}) }}"
+                                    class="btn button scrolly disabled">
+                                    Exclure le joueur
+                                </a>
+                            {%endif%}
+
+                        
+                        {% else %}
+                        {%endif%}
+
+                    </div>
+
+                </div>
 
 
 

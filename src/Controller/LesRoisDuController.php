@@ -640,6 +640,81 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
+     * @Route("/parametres/parties/{idPartie}/exclure", name="exclure_joueur")
+     */
+    public function exclureJoueur($idPartie, UserInterface $user, ObjectManager $manager)
+    {
+
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $partie = $repositoryPartie->find($idPartie);
+
+        // Si l'utilsateur est le créateur de la partie, il peut
+        if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
+
+            if($partie->getPlateauDeJeu()->getJoueur() != null){
+
+                $joueur = $partie->getPlateauDeJeu()->getJoueur();
+                $joueur->removePartiesRejoin($partie);
+                $joueur->removePlateauEnJeux($partie->getPlateauDeJeu());
+
+                $manager->persist($joueur);
+                $manager->persist($partie);
+                $manager->persist($partie->getPlateauDeJeu());
+
+                $manager->flush();
+
+                return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
+
+            }
+
+        }
+        else
+        {
+            return $this->redirectToRoute('espace_partie');
+        }
+
+
+    }
+
+    /**
+     * @Route("/parametres/parties/{idPartie}/reinitialiser", name="reinitialiser_position")
+     */
+    public function reinitialiserPosition($idPartie, UserInterface $user, ObjectManager $manager)
+    {
+
+        $repositoryUtilisateur=$this->getDoctrine()->getRepository(Utilisateur::class);
+        $userId = $user->getId();
+        $utilisateur = $repositoryUtilisateur->find($userId);
+
+        $repositoryPartie=$this->getDoctrine()->getRepository(Partie::class);
+        $partie = $repositoryPartie->find($idPartie);
+
+        // Si l'utilsateur est le créateur de la partie, il peut 
+        if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
+
+            $pions = $partie->getPlateauDeJeu()->getPions();
+            foreach ($pions as $unPion) {
+                $unPion->setAvancementPlateau(0);
+                $manager->persist($unPion);
+            }
+            $manager->flush();
+
+            return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
+
+        }
+        else
+        {
+            return $this->redirectToRoute('espace_partie');
+        }
+
+
+    }
+
+    /**
      * @Route("/api/plateaux/{idPlateau}", name="api_plateaux")
      */
     public function apiPlateaux($idPlateau)
@@ -744,11 +819,11 @@ class LesRoisDuController extends AbstractController
         $nbCases = $plateau->getNbCases();
 
         if (is_null($plateau->getJoueur())){
-            $joueur = "";
+            $joueurPlateau = "";
         }
         else
         {
-            $joueur = $plateau->getJoueur()->getPseudo();
+            $joueurPlateau = $plateau->getJoueur()->getPseudo();
         }
 
         $arrayInfoPions = [];
@@ -793,7 +868,7 @@ class LesRoisDuController extends AbstractController
             array_push($caseData, $infos);
         }
 
-        $plateauDeJeu = ['nom' => $nomPlateau, 'description' => $descriptionP, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueur,'pions' => $arrayInfoPions, 'cases' => $caseData];
+        $plateauDeJeu = ['nom' => $nomPlateau, 'description' => $descriptionP, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueurPlateau,'pions' => $arrayInfoPions, 'cases' => $caseData];
 
         return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'nbPionsParPlateau' => $nbPions, 'nbPlateaux' => $nbPlateaux, 'nbFacesDe' => $nbFacesDe, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
     }
