@@ -70,6 +70,14 @@ class LesRoisDuController extends AbstractController
         return $this->render('les_rois_du/CGU.html.twig');
     }
 
+    /**
+     * @Route("/ButApplication", name="ButApplication")
+     */
+    public function ButApplication()
+    {
+        return $this->render('les_rois_du/ButApplication.html.twig');
+    }
+
      /**
      * @Route("/credits", name="credits")
      */
@@ -77,6 +85,14 @@ class LesRoisDuController extends AbstractController
     {
         return $this->render('les_rois_du/credits.html.twig');
     }
+
+    /**
+    * @Route("/aides", name="aides")
+    */
+   public function afichageAides()
+   {
+       return $this->render('les_rois_du/aides.html.twig');
+   }
 
     /**
      * @Route("/inscription", name="page_inscription")
@@ -643,7 +659,7 @@ class LesRoisDuController extends AbstractController
 
         $partie = $repositoryPartie->find($idPartie);
 
-        // Si l'utilsateur est le créateur de la partie, il peut 
+        // Si l'utilsateur est le créateur de la partie, il peut
         if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
 
             $pions = $partie->getPlateauDeJeu()->getPions();
@@ -781,7 +797,7 @@ class LesRoisDuController extends AbstractController
             $couleur= $unPion->getCouleur();
             $position= $unPion->getAvancementPlateau();
 
-            array_push($arrayInfoPions, ['player' => $player, 'nom' => $nomPion, 'couleur' => $couleur, 'position' => $position]);       
+            array_push($arrayInfoPions, ['player' => $player, 'nom' => $nomPion, 'couleur' => $couleur, 'position' => $position]);
         }
 
         $caseData = [];
