@@ -55,19 +55,25 @@
                 <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour
                     jouer.</canvas>
 
-                <script> 
-                var assetsBaseDir = "{{ asset('tilemap/') }}" 
+
+                <link rel="stylesheet" href="{{asset('tilemap/css/style.css')}}" />
+                <script type="text/javascript">
+                  var idPlateau = {{ plateau.id }};
+                  console.log(idPlateau);
+                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8003/api/plateaux/' + idPlateau;
+                </script>
+
+                <script>
+                var assetsBaseDir = "{{ asset('tilemap/') }}"
                 </script>
                 <script type="text/javascript" src="{{asset('tilemap/js/XmlHttpRequest.js')}}"></script>
-                <script type="text/javascript" src="{{asset('tilemap/js/classes/toolBox.js')}}"></script>
-                <script type="text/javascript" src="{{asset('tilemap/js/classes/input.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/ToolBox.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/inputForPlateau.js')}}"></script>
                 <script type="text/javascript" src="{{asset('tilemap/js/classes/Parcours.js')}}"></script>
-                <script type="text/javascript" src="{{asset('tilemap/js/classes/game.js')}}"></script>
-                <script type="text/javascript" src="{{asset('tilemap/js/classes/De.js')}}"></script>
-                <script type="text/javascript" src="{{asset('tilemap/js/classes/Pion.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/plateau.js')}}"></script>
                 <script type="text/javascript" src="{{asset('tilemap/js/classes/Case.js')}}"></script>
                 <script type="text/javascript" src="{{asset('tilemap/js/classes/Tileset.js')}}"></script>
-                <script type="text/javascript" src="{{asset('tilemap/js/classes/Map.js')}}"></script>
+                <script type="text/javascript" src="{{asset('tilemap/js/classes/MapForPlateau.js')}}"></script>
                 <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
 
             </div>
