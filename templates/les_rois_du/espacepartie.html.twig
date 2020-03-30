@@ -30,7 +30,10 @@
         <!-- Intro -->
         <section id="intro" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
+                <div class="row">
+                    <div class="col-md-12">
                 <h1>ESPACE PARTIES</h1>
+
 
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success alert-dismissible show" role="alert">
@@ -48,11 +51,11 @@
                 {% endfor %}
                 <BR>
  
-                <ul class="actions">
+
                         {% if utilisateur.estInvite == false %}
-                        <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
+                        <a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a>
                         {%endif%}
-                        <li><a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
+                        <a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a>
                         <script type="text/javaScript">
 
                             function ajouterSaisieCode() {                             
@@ -73,9 +76,13 @@
 
                         </script> 
 
-                    </ul>
+                    
                     <div id="Cible"></div>
                     <BR>
+                </div>
+            </div>
+
+
 
                 <section id="one" class="wrapper style2 spotlights">
                     {% if utilisateur.estInvite == false %}
@@ -154,8 +161,10 @@
                     {% endif %}
 
 
+
             </div>
         </section>
+
 
     </div>
     {% endblock %}

@@ -58,12 +58,13 @@
                         {{form_row(vueFormulaireInscription.termsAccepted)}}
                     </div>
 
-                    
+                    <div class="row">
+                    <div class="col-md-12">
+             <a href="" class="button submit">Valider l'inscription </a>
+             <a href="{{ path('accueil')}}" class="button scrolly">Annuler l'inscription </a>
+          </div>
+        </div>
 
-                    <ul class="actions">
-                        <li><a href="" class="button submit">Valider l'inscription </a></li>
-                        <li><a href="{{ path('accueil')}}" class="button">Annuler l'inscription </a></li>
-                    </ul>
 
 
                     {{form_end(vueFormulaireInscription)}}

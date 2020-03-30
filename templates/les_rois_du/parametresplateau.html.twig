@@ -81,7 +81,10 @@
 
 						<div class="col-md-1">
 							<BR>
-							<button type="button" class="button scrolly" disabled>Valider</button>
+							<a role="button" href="{{ path('plateau', {'idPlateau' : plateau.id}) }}"
+                                    class="btn button scrolly">
+                                    Valider
+                        	</a>
 						</div>
 
 						<div class="col-md-2">

@@ -34,10 +34,13 @@
             {{ form_row(vueFormulaireCreationPartie.plateau, { 'label' : 'Plateau' })}}
             <Br>
 
-            <ul class="actions">
-              <li><a href="" class="button submit">Valider la création </a></li>
-              <li><a href="{{ path('hub')}}" class="button">Annuler la création </a></li>
-            </ul>
+          <div class="row">
+                    <div class="col-md-12">
+             <a href="" class="button submit">Valider la création </a>
+             <a href="{{ path('hub')}}" class="button scrolly">Annuler la création </a>
+          </div>
+        </div>
+
           </div>
 
           {{form_end(vueFormulaireCreationPartie)}}

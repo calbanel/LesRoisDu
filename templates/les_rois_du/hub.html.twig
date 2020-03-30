@@ -77,15 +77,18 @@
         <!-- Intro -->
         <section id="partie" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
+                <div class="row">
+                    <div class="col-md-12">
                 <h1>Parties</h1>
                 <p>C'est par ici pour les parties !</p>
-                <ul class="actions">
-                    <li><a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES
-                        </a></li>
+                
+                
+                    <a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES
+                        </a>
                     {% if utilisateur.estInvite == false %}
-                    <li><a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a></li>
+                    <a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a>
                     {%endif%}
-                    <li><a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a></li>
+                    <a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a>
                     <script type="text/javaScript">
 
                             function ajouterSaisieCode() {                             
@@ -105,8 +108,10 @@
 
                         </script>
 
-                </ul>
+                
                 <div id="Cible"></div>
+            </div>
+        </div>
             </div>
         </section>
 
@@ -114,6 +119,8 @@
         {% if utilisateur.estInvite == false %}
         <section id="plateaux" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
+                <div class="row">
+                    <div class="col-md-12">
                 <h1>Plateaux</h1>
                 <p>C'est par ici pour les plateaux !</p>
                 <ul class="actions">
@@ -121,17 +128,23 @@
                             PLATEAUX</a></li>
                 </ul>
             </div>
+        </div>
+            </div>
         </section>
 
         <!-- Intro -->
         <section id="compte" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
+                <div class="row">
+                    <div class="col-md-12">
                 <h1>Compte utilisateur</h1>
                 <p>C'est par ici pour consulter son compte !</p>
                 <ul class="actions">
                     <li><a href="{{ path('espace_compte') }}" class="button scrolly">MON COMPTE</a></li>
                 </ul>
             </div>
+        </div>
+    </div>
         </section>
         {%endif%}
 

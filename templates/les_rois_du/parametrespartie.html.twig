@@ -128,7 +128,10 @@
 					</div>
 
 					<div class="col-md-1">
-						<button type="button" class="button scrolly" disabled>Valider</button>
+						<a role="button" href="{{ path('partie_en_cours', {'idPartie' : partie.id}) }}"
+                                    class="btn button scrolly">
+                                    Valider
+                        </a>
 					</div>
 
 					<div class="col-md-2">
