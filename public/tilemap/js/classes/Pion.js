@@ -90,7 +90,6 @@ class Pion {
 			this.advanceBasedOnPawnValue();
 		}
 
-		this.positionnePionByPositionDansParcours();
 		this.updateXandYposition();
 		this.setPositionIntoAPI(this.posPion, this.player);
 }
