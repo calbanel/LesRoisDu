@@ -226,42 +226,19 @@ class LesRoisDuController extends AbstractController
         $plateauEnJeu->setNiveauDifficulte($plateau->getNiveauDifficulte());
         $plateauEnJeu->setNbCases($plateau->getNbCases());
 
-        $pions1 = new Pion();
-        $pions1->setNumeroJoueur(2);
-        $pions1->setNom("rouge");
-        $pions1->setCouleur("red");
-        $pions1->setAvancementPlateau(0);
-        $pions1->setPlateauEnJeu($plateauEnJeu);
+        $donneesPions = [['numero' => 1, 'nom' => "vert", 'couleur' => "green"], ['numero' => 2, 'nom' => "rouge", 'couleur' => "red"], ['numero' => 3, 'nom' => "jaune", 'couleur' => "yellow"], ['numero' => 4, 'nom' => "bleu", 'couleur' => "blue"]];
 
-        $manager->persist($pions1);
+        for ($i=0; $i < $partie->getNbPionParPlateau(); $i++) { 
 
-        $pions2 = new Pion();
-        $pions2->setNumeroJoueur(1);
-        $pions2->setNom("vert");
-        $pions2->setCouleur("green");
-        $pions2->setAvancementPlateau(0);
-        $pions2->setPlateauEnJeu($plateauEnJeu);
+            $pion = new Pion();
+            $pion->setNumeroJoueur($donneesPions[$i]["numero"]);
+            $pion->setNom($donneesPions[$i]["nom"]);
+            $pion->setCouleur($donneesPions[$i]["couleur"]);
+            $pion->setAvancementPlateau(0);
+            $pion->setPlateauEnJeu($plateauEnJeu);
 
-        $manager->persist($pions2);
-
-        $pions3 = new Pion();
-        $pions3->setNumeroJoueur(4);
-        $pions3->setNom("bleu");
-        $pions3->setCouleur("blue");
-        $pions3->setAvancementPlateau(0);
-        $pions3->setPlateauEnJeu($plateauEnJeu);
-
-        $manager->persist($pions3);
-
-        $pions4 = new Pion();
-        $pions4->setNumeroJoueur(3);
-        $pions4->setNom("jaune");
-        $pions4->setCouleur("yellow");
-        $pions4->setAvancementPlateau(0);
-        $pions4->setPlateauEnJeu($plateauEnJeu);
-
-        $manager->persist($pions4);
-
+            $manager->persist($pion);
+        }
 
         $partie->setPlateauDeJeu($plateauEnJeu);
         $partie->setCreateur($user);
