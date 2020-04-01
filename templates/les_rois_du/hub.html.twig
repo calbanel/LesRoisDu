@@ -46,13 +46,13 @@
                         </center>
                         <p>
                             {% if utilisateur.estInvite == false %}
-                            LesRoisDu est une application à but pédagogique. Vous pouvez dès à présent créer des parties
+                            Les Rois du est une application à but pédagogique. Vous pouvez dès à présent créer des parties
                             à partir des plateaux déjà disponibles.
                             Des joueurs pourront ensuite la rejoindre et s'affronter dessus ! Vous trouverez sur le menu
                             de gauche tous les espaces disponibles relatifs à :
-                            vos parties, vos plateaux ainsi qu'à votre compte. 
-                            Vous pouvez consulter le <a href="#" >but de l'application</a> ainsi que des 
-                            <a href="#" >aides concernant le fonctionnement de l'application</a> à tout moment depuis 
+                            vos parties, vos plateaux ainsi qu'à votre compte.
+                            Vous pouvez consulter le <a href="{{path('ButApplication')}}" >but de l'application</a> ainsi que des
+                            <a href="{{path('aides')}}" >aides concernant le fonctionnement de l'application</a> à tout moment depuis
                             les liens présents dans le pied de page ou directement depuis les liens de cette phrase.
 
 
@@ -61,8 +61,8 @@
                             parties et vous affronter dessus !
                             Vous trouverez sur le menu à gauche l'espace relatif aux parties.
                             Pour pouvoir créer des parties et avoir accès à plus de contenu, il vous faut créer un
-                            compte personnel. Vous pouvez consulter les <a href="#" >règles du jeu</a> ainsi que des 
-                            <a href="#" >aides concernant le fonctionnement de l'application</a> à tout moment depuis 
+                            compte personnel. Vous pouvez consulter les <a href="{{path('ButApplication')}}" >but de l'applicatio</a> ainsi que des
+                            <a href="{{path('aides')}}" >aides concernant le fonctionnement de l'application</a> à tout moment depuis
                             les liens présents dans le pied de page ou directement depuis les liens de cette phrase.
 
                             {% endif %}
@@ -81,8 +81,8 @@
                     <div class="col-md-12">
                 <h1>Parties</h1>
                 <p>C'est par ici pour les parties !</p>
-                
-                
+
+
                     <a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES
                         </a>
                     {% if utilisateur.estInvite == false %}
@@ -91,13 +91,13 @@
                     <a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a>
                     <script type="text/javaScript">
 
-                            function ajouterSaisieCode() {                             
+                            function ajouterSaisieCode() {
                                 document.getElementById('Cible').innerHTML ='<p>Saisir ci dessous le code de la partie à rejoindre en respectant les minuscules et majuscules :</p>   <input id="inputRejoindre"  type="text"/><br>   <a href="" id="boutonRejoindre" class="button scrolly"> Accéder</a>';
                                 routeSaisie = true;
                             }
 
                             routeSaisie = false; // Pour éviter d'essayer de regarder le code dans le input s'il n'est pas encre créé
-                        
+
                             setInterval(function(){
                                 if (routeSaisie) {
                                     var code = document.getElementById("inputRejoindre").value;
@@ -108,7 +108,7 @@
 
                         </script>
 
-                
+
                 <div id="Cible"></div>
             </div>
         </div>

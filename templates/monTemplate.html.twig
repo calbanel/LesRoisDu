@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>{% block title %}LesRoisDu{% endblock %}</title>
+	<title>{% block title %}Les Rois Du{% endblock %}</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -26,7 +26,7 @@
 	{% if app.user is not null %}
 	<div class="inner">
 		<p>
-			<center>      Vous êtes connecté en tant que {{app.user.pseudo}} - <a href="{{path ('hub')}}">Retourner à l'accueil
+			<center>Vous êtes connecté en tant que {{app.user.pseudo}} - <a href="{{path ('hub')}}">Retourner à l'accueil
 					</a> | <a href="{{path ('app_logout')}}">Se
 					déconnecter</a></center>
 
@@ -76,11 +76,15 @@
 	<footer id="footer" class="wrapper style1-alt">
 		<div class="inner">
 			<p>
+				{% if app.user is not null %}
+				<a href="{{ path('hub')}}">Accueil</a> /
+				{% else %}
 				<a href="{{ path('accueil')}}">Accueil</a> /
-				<a href="{{ path('credits')}}">Crédits</a> /
-				<a href="{{ path('CGU')}}">Conditions générales d'utilisation</a> /
-				<a href="{{ path('aides')}}">Aides</a> /
-				<a href="{{ path('ButApplication')}}">But de l'application</a>
+				{% endif %}
+				<a href="{{ path('ButApplication')}}">But de l'application</a> /
+				<a href="{{ path('aides')}}">Aide</a> /
+				<a href="{{ path('CGU')}}">Conditions Générales d'Utilisation</a> /
+				<a href="{{ path('credits')}}">Crédits</a>
 			</p>
 		</div>
 	</footer>
