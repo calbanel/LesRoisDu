@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -26,8 +27,8 @@ class PartieType extends AbstractType
             ->add('nom',TextType::class)
             ->add('description',TextareaType::class)
             ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
-            ->add('nbPionParPlateau',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
-            ->add('nbFacesDe',IntegerType::class,['data' => '4', 'attr'=> ['readonly'=> true ]])
+            ->add('nbPionParPlateau',RangeType::class,['attr'=> ['class' => "RangeCSS", 'min'=> 1, 'max'=>4 ]])
+            ->add('nbFacesDe',RangeType::class,['attr'=> ['class' => "RangeCSS", 'min'=> 1, 'max'=>4 ]])
             ->add('plateau', EntityType::class, [   'class' => Plateau::class,
                                                     'choice_label' => 'nom',
                                                     'multiple' => false,
