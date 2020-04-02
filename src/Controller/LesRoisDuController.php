@@ -627,7 +627,7 @@ class LesRoisDuController extends AbstractController
 
                 $manager->flush();
 
-                $this->addFlash('success', 'Le joueur a été exclus.');
+                $this->addFlash('success', 'Le joueur a été exclu.');
 
                 return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
 
@@ -660,7 +660,7 @@ class LesRoisDuController extends AbstractController
             }
             $manager->flush();
 
-            $this->addFlash('success', 'La position des pions a été réinitialisé.');
+            $this->addFlash('success', 'La position des pions a été réinitialisée.');
 
             return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
 
