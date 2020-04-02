@@ -75,7 +75,7 @@
 
                 <script type="text/javascript">
                   var idPartie = {{ partie.id }};
-                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/' + idPartie;
+                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8000/api/partie/' + idPartie;
                 </script>
 
                 <script> var assetsBaseDir = "{{ asset('tilemap/') }}"</script>
@@ -126,16 +126,38 @@
                             </a>
                             <br><BR>
                             {% if partie.plateauDeJeu.joueur is not null %}
-                                <a role="button" href="{{ path('exclure_joueur', {'idPartie' : partie.id}) }}"
-                                    class="btn button scrolly">
-                                    Exclure le joueur
-                                </a>
+                                <div class="alert alert-warning" style="display: none">
+                                
+                                <h4 class="alert-heading">Attention!</h4>
+                                <p>Êtes vous sûr de vouloir exclure le joueur ?</p>
+        
+                                <a style="color:aliceblue" class="btn btn-danger fermeture" role="button"
+                                    aria-pressed="true">Non</a>
+                                <a href="{{ path('exclure_joueur', {'idPartie' : partie.id}) }}"
+                                    class="btn btn-success" role="button" aria-pressed="true">Oui</a>
+                                
+
+                            </div>
+                            <input type="button" class="btn button scrolly" value="Exclure le joueur">
                             {%else%}
                                 <a role="button" href="{{ path('exclure_joueur', {'idPartie' : partie.id}) }}"
                                     class="btn button scrolly disabled">
                                     Exclure le joueur
                                 </a>
                             {%endif%}
+                            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                                <script>
+                                    $(function () {
+                                        $("input.btn").click(function () {
+                                            $("input.btn").hide("slow")
+                                            $(".alert").show("slow")
+                                        })
+                                        $(".fermeture").click(function () {
+                                            $(".alert").hide("slow")
+                                            $("input.btn").show()
+                                        })
+                                    })
+                                </script>
 
 
                         {% else %}
