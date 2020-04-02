@@ -38,7 +38,7 @@
 					<div class="row">
 
 						<div class="col-md-2">
-							<button type="button" class="button scrolly" disabled>Reinitialiser la partie</button>
+
 
 						</div>
 						<div class="col-md-6">
@@ -123,15 +123,12 @@
 							</footer>
 						</blockquote>
 					</div>
+					<div class="col-md-2">
 
-					<div class="col-md-3">
 					</div>
-
-					<div class="col-md-1">
-						<a role="button" href="{{ path('partie_en_cours', {'idPartie' : partie.id}) }}"
-                                    class="btn button scrolly">
-                                    Valider
-                        </a>
+					<div class="col-md-2">
+					<br><bR>
+                        <a href="{{ path('partie_en_cours', {'idPartie' : partie.id}) }}"> Retourner à la partie </a>
 					</div>
 
 					<div class="col-md-2">

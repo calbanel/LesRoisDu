@@ -9,7 +9,7 @@
             <nav>
                 <ul>
 
-                    <li><a href="{{ path('espace_partie')}}">RETOUR à l'espace partie</a></li>
+                    <li><a href="{{ path('espace_partie')}}">RETOUR à l'espace parties</a></li>
                     {% for part in partiesCree %}
                     <li><a href="{{ path('partie_en_cours', {'idPartie' : part.id}) }}">{{part.nom}}</a></li>
                     {%endfor%}
@@ -33,10 +33,10 @@
                     {% if utilisateur.pseudo == partie.plateauDeJeu.joueur.pseudo %}
                     <div class="row">
                     <div class="col-md-12">
-                        <p> Pour jouer il faut sélectionner un pion puis le lancer le dé. Votre pion se
+                        <p> Pour jouer il faut sélectionner un pion puis le lancer le dé en cliquant dessus. Votre pion se
                             déplacera du nombre
-                            cases obtenues ! Une fois le pion arrivé sur la case, vous pouvez accéder au défi en cliquant
-                           sur la case. </p>
+                            cases obtenues. Vous pouvait accéder au défi en cliquant
+                           sur la case correspondante. </p>
                     </div>
                 </div>
                     {%endif%}
@@ -75,7 +75,7 @@
 
                 <script type="text/javascript">
                   var idPartie = {{ partie.id }};
-                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8003/api/partie/' + idPartie;
+                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8001/api/partie/' + idPartie;
                 </script>
 
                 <script> var assetsBaseDir = "{{ asset('tilemap/') }}"</script>

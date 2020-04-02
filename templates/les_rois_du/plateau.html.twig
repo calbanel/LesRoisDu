@@ -8,7 +8,7 @@
         <div class="inner">
             <nav>
                 <ul>
-                    <li><a href="{{ path('espace_plateau')}}">RETOUR à l'espace plateau</a></li>
+                    <li><a href="{{ path('espace_plateau')}}">RETOUR à l'espace plateaux</a></li>
                     {% for plat in utilisateur.plateaux %}
                     <li><a href="{{ path('plateau', {'idPlateau' : plat.id}) }}">{{plat.nom}}</a></li>
                     {%endfor%}
@@ -28,6 +28,11 @@
                 <h2>
                     <center>{{plateau.nom}}</center>
                 </h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <center><p> Vous pouvez accèder aux défis de ce plateau en cliquant sur ses cases. </p></center>
+                    </div>
+                </div>
                 <div class="row">
 
                     <div class="col-md-3">
@@ -60,7 +65,7 @@
                 <script type="text/javascript">
                   var idPlateau = {{ plateau.id }};
                   console.log(idPlateau);
-                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8003/api/plateaux/' + idPlateau;
+                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8001/api/plateaux/' + idPlateau;
                 </script>
 
                 <script>
@@ -77,7 +82,7 @@
                 <script type="text/javascript" src="{{asset('tilemap/js/main.js')}}"></script>
 
                 <br><br>
-                        <a href="{{ path('espace_plateau') }}"> Retourner à l'espace plateau </a>
+                        <a href="{{ path('espace_plateau') }}"> Retourner à l'espace plateaux </a>
 
             </div>
         </section>

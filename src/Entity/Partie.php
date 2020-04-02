@@ -22,11 +22,23 @@ class Partie
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank(message= "Le nom doit être renseigné")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 40,
+     *      minMessage = "Le nom doit au minimum faire {{ limit }} caractères de long",
+     *      maxMessage = "Le nom doit au maximum faire {{ limit }} caractères de long",
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 350,
+     *      minMessage = "La description doit au minimum faire {{ limit }} caractères de long",
+     *      maxMessage = "La description doit au maximum faire {{ limit }} caractères de long",
+     * )
      */
     private $description;
 
