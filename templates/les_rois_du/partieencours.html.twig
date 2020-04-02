@@ -29,10 +29,17 @@
                 <h2>
                     <center>{{partie.nom}}</center>
                 </h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible show" role="alert">
+                              {{message}}
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            </div>
+                        {% endfor %}
                 {% if partie.plateauDeJeu.joueur is not null %}
                     {% if utilisateur.pseudo == partie.plateauDeJeu.joueur.pseudo %}
-                    <div class="row">
-                    <div class="col-md-12">
+
                         <p> Pour jouer il faut sélectionner un pion puis le lancer le dé en cliquant dessus. Votre pion se
                             déplacera du nombre
                             cases obtenues. Vous pouvait accéder au défi en cliquant

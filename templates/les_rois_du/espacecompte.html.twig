@@ -28,6 +28,12 @@
 
       <div class="inner">
         <h1>ESPACE COMPTE</h1>
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible show" role="alert">
+                              {{message}}
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            </div>
+                        {% endfor %}
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6">

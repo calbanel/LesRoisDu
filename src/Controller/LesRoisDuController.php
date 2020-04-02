@@ -291,6 +291,8 @@ class LesRoisDuController extends AbstractController
           // Enregistrer en base de données
           $manager->flush();
 
+          $this->addFlash('success', 'La partie a été créée.');
+
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_partie');
        }
@@ -322,7 +324,7 @@ class LesRoisDuController extends AbstractController
                 $manager->persist($partie);
                 $manager->persist($user);
                 $manager->flush();
-                $this->addFlash('success', 'Vous avez rejoins la partie !');
+                $this->addFlash('success', 'Vous avez rejoins la partie.');
 
             }
             else
@@ -461,7 +463,11 @@ class LesRoisDuController extends AbstractController
             $entityManager->remove($partie); // On supprime la partie
 
             $entityManager->flush(); // On enregistre les changements en BD
+
+            $this->addFlash('success', 'La partie a été suprimée.');
         }
+
+
 
         return $this->redirectToRoute('espace_partie');
 
@@ -593,6 +599,8 @@ class LesRoisDuController extends AbstractController
         $manager->persist($utilisateur);
         $manager->flush();
 
+        $this->addFlash('success', 'Votre avatar a été changé.');
+
         return $this->redirectToRoute('espace_compte');
     }
 
@@ -618,6 +626,8 @@ class LesRoisDuController extends AbstractController
                 $manager->persist($partie->getPlateauDeJeu());
 
                 $manager->flush();
+
+                $this->addFlash('success', 'Le joueur a été exclus.');
 
                 return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
 
@@ -649,6 +659,8 @@ class LesRoisDuController extends AbstractController
                 $manager->persist($unPion);
             }
             $manager->flush();
+
+            $this->addFlash('success', 'La position des pions a été réinitialisé.');
 
             return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
 
