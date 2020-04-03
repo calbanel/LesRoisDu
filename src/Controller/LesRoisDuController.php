@@ -63,7 +63,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/ConditonsUtilisation", name="CGU")
+     * @Route("/cgu", name="CGU")
      */
     public function CGU()
     {
@@ -71,7 +71,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/ButApplication", name="ButApplication")
+     * @Route("/but-application", name="ButApplication")
      */
     public function ButApplication()
     {
