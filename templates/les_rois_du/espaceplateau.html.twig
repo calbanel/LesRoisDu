@@ -28,6 +28,24 @@
             <div class="inner">
                 <h1>ESPACE PLATEAUX</h1><Br>
 
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible show" role="alert">
+                      {{message}}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('echec') %}
+                    <div class="alert alert-danger alert-dismissible show" role="alert">
+                      {{message}}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    </div>
+                {% endfor %}
+                <BR>
+ 
+                <a href="{{ path('creation_plateau') }}" class="button scrolly">CREER UNE PLATEAU</a>
+                <BR><BR>
+
+
                 <section id="one" class="wrapper style2 spotlights">
 
 
