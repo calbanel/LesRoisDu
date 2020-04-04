@@ -16,7 +16,7 @@ class PlateauType extends AbstractType
             ->add('description')
             ->add('niveauDifficulte')
             ->add('nbCases')
-            ->add('utilisateurs')
+            //->add('utilisateurs')
         ;
     }
 

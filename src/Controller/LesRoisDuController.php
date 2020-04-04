@@ -31,6 +31,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UtilisateurType;
 use App\Form\PartieType;
+use App\Form\PlateauType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use App\Security\LoginAuthenticator;
@@ -297,6 +298,38 @@ class LesRoisDuController extends AbstractController
           return $this->redirectToRoute('espace_partie');
        }
         return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(),
+        ]);
+    }
+
+    /**
+     * @Route("/creation/plateaux", name="creation_plateau")
+     */
+    public function affichageCreationPlateau(Request $request, ObjectManager $manager, UserInterface $user)
+    {
+
+       // Création d'une partie vierge
+       $plateau=new Plateau();
+
+       // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
+       $formulairePlateau = $this->createForm(PlateauType::class, $plateau);
+
+       $formulairePlateau->handleRequest($request);
+
+       if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
+       {
+
+        $plateau->addUtilisateur($user);
+        $manager->persist($plateau);
+
+          // Enregistrer en base de données
+          $manager->flush();
+
+          $this->addFlash('success', 'Le plateau a été créée, vous pouvez désormais aller personnaliser ses cases.');
+
+          // Rediriger l'utilisateur vers la page d'accueil
+          return $this->redirectToRoute('espace_plateau');
+       }
+        return $this->render('les_rois_du/creationplateau.html.twig', ['vueFormulaireCreationPlateau'=>$formulairePlateau->createview(),
         ]);
     }
 

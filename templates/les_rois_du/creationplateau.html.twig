@@ -1,0 +1,57 @@
+{% extends 'monTemplate.html.twig' %}
+
+
+{% block sidebar %}
+<body class="is-preload">
+  <!-- Sidebar -->
+  <section id="sidebar">
+    <div class="inner">
+      <nav>
+        <ul>
+          <li><a href="{{path('hub')}}">RETOUR</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+  {% endblock %}
+
+  {% block body %}
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Intro -->
+    <section id="partie" class="wrapper style1 fullscreen fade-up">
+      <div class="inner">
+        <h1>CREER UNE PLATEAU</h1>
+        <section id="three" class="wrapper style1 fade-up">
+          <div class="inner">
+
+            {{form_start(vueFormulaireCreationPlateau) }}
+            {{ form_row(vueFormulaireCreationPlateau.nom)}}
+            {{ form_row(vueFormulaireCreationPlateau.description)}}
+            {{ form_row(vueFormulaireCreationPlateau.niveauDifficulte, { 'label' : 'Niveau de difficulté' })}}
+            {{ form_row(vueFormulaireCreationPlateau.nbCases, { 'label' : 'Taille du plateau (nombre de défis)' })}}
+            <Br>
+
+          <div class="row">
+                    <div class="col-md-12">
+             <a href="" class="button submit">Valider la création </a>
+             <a href="{{ path('hub')}}" class="button scrolly">Annuler la création </a>
+          </div>
+        </div>
+
+          </div>
+
+          {{form_end(vueFormulaireCreationPlateau)}}
+
+      </div>
+    </section>
+  </div>
+  </section>
+
+  </div>
+  {% endblock %}
+
+
+  {% block footer %}
+  {% endblock %}
