@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CasesRepository")
@@ -20,6 +21,13 @@ class Cases
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message= "Le descriptif doit être renseigné")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 100,
+     *      minMessage = "Le descriptif doit au minimum faire {{ limit }} caractères de long",
+     *      maxMessage = "Le descriptif doit au maximum faire {{ limit }} caractères de long",
+     * )
      */
     private $descriptifDefi;
 

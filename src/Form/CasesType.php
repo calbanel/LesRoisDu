@@ -13,11 +13,9 @@ class CasesType extends AbstractType
     {
         $builder
             ->add('descriptifDefi')
-            ->add('consignes')
-            ->add('codeValidation')
-            ->add('numero')
-            ->add('plateauEnJeu')
-            ->add('plateau')
+            //->add('consignes')
+            //->add('codeValidation')
+            //->add('numero')
         ;
     }
 

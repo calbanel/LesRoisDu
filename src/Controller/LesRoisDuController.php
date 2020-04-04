@@ -32,6 +32,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UtilisateurType;
 use App\Form\PartieType;
 use App\Form\PlateauType;
+use App\Form\CasesType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use App\Security\LoginAuthenticator;
@@ -334,6 +335,47 @@ class LesRoisDuController extends AbstractController
        }
         return $this->render('les_rois_du/creationplateau.html.twig', ['vueFormulaireCreationPlateau'=>$formulairePlateau->createview(),
         ]);
+    }
+
+    /**
+     * @Route("/creation/cases/{idPlateau}", name="creation_cases")
+     */
+    public function affichageCreationCases(Request $request, ObjectManager $manager, UserInterface $user, PlateauRepository $repositoryPlateau, $idPlateau)
+    {
+
+        $plateau = $repositoryPlateau->find($idPlateau);
+
+            if ($request->getMethod() == 'POST') {
+
+                for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
+
+                    $cases = new Cases();
+
+                    $descriptif = $request->request->get('descriptif'.$i);
+
+                    $cases->setDescriptifDefi($descriptif);
+
+                    $cases->setNumero($i);
+
+                    $cases->setPlateau($plateau);
+
+                    $manager->persist($cases);
+
+                    $manager->flush();
+
+                }
+
+                $this->addFlash('success', 'Les défis ont bien été saisis, vous pouvez désormais consulter votre plateau.');
+
+                // Rediriger l'utilisateur vers la page d'accueil
+                return $this->redirectToRoute('espace_plateau');
+                  
+            }
+
+
+            return $this->render('les_rois_du/creationcases.html.twig', ['plateau' => $plateau]); 
+
+
     }
 
     /**
@@ -769,7 +811,7 @@ class LesRoisDuController extends AbstractController
 
         $pions = $plateau->getPions();
 
-        if ($request->getMethod() == 'POST') {
+        
 
             $pionsNouveau = json_decode($request->request->get('$data'),true);
 
@@ -787,11 +829,14 @@ class LesRoisDuController extends AbstractController
 
                 }
             }
-        }
+        
 
         // On récupère les informations de la partie pour les retourner en json
-        $nom = $partie->getNom();
+
+        $name = $partie->getNom();
+
         $description = $partie->getDescription();
+
         $createur = $partie->getCreateur()->getPseudo();
         if ($partie->getJoueurs()->isEmpty()){
             $joueur = "";
@@ -862,7 +907,7 @@ class LesRoisDuController extends AbstractController
 
         $plateauDeJeu = ['nom' => $nomPlateau, 'description' => $descriptionP, 'difficulte' => $difficulte, 'nbCases' => $nbCases, 'joueur' => $joueurPlateau,'pions' => $arrayInfoPions, 'cases' => $caseData];
 
-        return $this->json(['nom' => $nom, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'nbPionsParPlateau' => $nbPions, 'nbPlateaux' => $nbPlateaux, 'nbFacesDe' => $nbFacesDe, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
+        return $this->json(['nom' => $name, 'description' => $description, 'createur' => $createur, 'joueur' => $joueur, 'nbPionsParPlateau' => $nbPions, 'nbPlateaux' => $nbPlateaux, 'nbFacesDe' => $nbFacesDe, 'estLance' => $estLance, 'plateau_de_jeu' => $plateauDeJeu]);
     }
 
 
