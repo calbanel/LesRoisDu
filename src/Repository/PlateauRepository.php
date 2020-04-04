@@ -19,22 +19,21 @@ class PlateauRepository extends ServiceEntityRepository
         parent::__construct($registry, Plateau::class);
     }
 
-    // /**
-    //  * @return Plateau[] Returns an array of Plateau objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Plateau[] Returns an array of Plateau objects
+     */
+    public function findPlateauByUser($user)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->join('p.utilisateurs','u')
+            ->andWhere(':val = u.id')
+            ->setParameter('val', $user)
             ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+  
 
     /*
     public function findOneBySomeField($value): ?Plateau
