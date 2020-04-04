@@ -52,6 +52,12 @@
                     <!-- Boucle pour chaque plateau (à rajouter)-->
 
                     {% for plateau in plateaux %}
+
+                        {% set nbCases = 0 %}
+                        {% for uneCase in plateau.cases %}
+                            {% set nbCases = nbCases + 1 %}
+                        {% endfor %}
+
                     <section>
                         <a class="image"><img src="img/logo.jpg" alt=""
                                 data-position="center center" /></a>
@@ -59,10 +65,15 @@
                             <div class="inner">
                                 <h2> {{plateau.nom}} </h2>
                                 <p> {{plateau.description}} </p>
-                                <ul class="actions">
-                                    <li><a href="{{path ('plateau', {'idPlateau': plateau.id}) }}"
-                                            class="button">Consulter</a></li>
-                                </ul>
+                                {% if nbCases == 0 %}
+
+                                    <a href=""
+                                            class="button">Saisir les défis</a>
+
+                                {%else%}
+                                    <a href="{{path ('plateau', {'idPlateau': plateau.id}) }}"
+                                            class="button">Consulter</a>
+                                {% endif %}
                             </div>
                         </div>
                     </section>

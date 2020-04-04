@@ -327,7 +327,7 @@ class LesRoisDuController extends AbstractController
           // Enregistrer en base de données
           $manager->flush();
 
-          $this->addFlash('success', 'Le plateau a été créée, vous pouvez désormais aller personnaliser ses cases.');
+          $this->addFlash('success', 'Le plateau a été créée, vous pouvez désormais aller saisir les défis.');
 
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_plateau');
