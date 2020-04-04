@@ -132,17 +132,54 @@ class LesRoisDuController extends AbstractController
              ));
 
             $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
-            $plateau = $repositoryPlateau->find(1);
 
-            $utilisateur->addPlateau($plateau);
+            for ($i=1; $i < 4; $i++) { 
 
-            $plateau2 = $repositoryPlateau->find(2);
+                $plateauOriginel = $repositoryPlateau->find($i);
 
-            $utilisateur->addPlateau($plateau2);
+                $plateau = new Plateau();
 
-            $plateau3 = $repositoryPlateau->find(3);
+                $plateau->setNom($plateauOriginel->getNom());
+                $plateau->setDescription($plateauOriginel->getDescription());
+                $plateau->setNiveauDifficulte($plateauOriginel->getNiveauDifficulte());
+                $plateau->setNbCases($plateauOriginel->getNbCases());
+                $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
+                $plateau->setCode($code);
 
-            $utilisateur->addPlateau($plateau3);
+                $tabCase = $plateauOriginel->getCases();
+                foreach($tabCase as $uneCase){
+                    $cases = new Cases();
+                    $cases->setDescriptifDefi($uneCase->getDescriptifDefi())
+                        ->setConsignes($uneCase->getConsignes())
+                        ->setCodeValidation($uneCase->getCodeValidation())
+                        ->setNumero($uneCase->getNumero())
+                    ;
+
+                    $cases->setPlateau($plateau);
+
+                    $manager->persist($cases);
+
+                    // On récupère les ressources des cases du plateau et les copie une par une dans les cases du plateau
+                    $tabRessource = $uneCase->getRessources();
+                    foreach($tabRessource as $uneRessource){
+                        $ressource = new Ressource();
+
+                        $ressource->setChemin($uneRessource->getChemin());
+
+
+                        $ressource->setCases($cases);
+                        $cases->addRessource($ressource);
+                        $manager->persist($cases);
+
+                        $manager->persist($ressource);
+
+                    }
+                }
+
+                $utilisateur->addPlateau($plateau);
+
+                $manager->persist($plateau);
+            }
 
             // Enregistrer l'utilisateur en base de données
            $manager->persist($utilisateur);
@@ -432,15 +469,53 @@ class LesRoisDuController extends AbstractController
     public function ajouterPlateau(ObjectManager $manager, UserInterface $user, $code, PlateauRepository $repositoryPlateau)
     {
 
-        $plateau = $repositoryPlateau->findOneBy(['code' => $code]);
+        $plateauOriginel = $repositoryPlateau->findOneBy(['code' => $code]);
 
-        if(!is_null($plateau)){
+        if(!is_null($plateauOriginel)){
 
-            if(!in_array($plateau,$user->getPlateaux()->toArray())){
+            if(!in_array($plateauOriginel,$user->getPlateaux()->toArray())){
+
+                $plateau = new Plateau();
+
+                $plateau->setNom($plateauOriginel->getNom());
+                $plateau->setDescription($plateauOriginel->getDescription());
+                $plateau->setNiveauDifficulte($plateauOriginel->getNiveauDifficulte());
+                $plateau->setNbCases($plateauOriginel->getNbCases());
+                $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
+                $plateau->setCode($code);
+
+                $tabCase = $plateauOriginel->getCases();
+                foreach($tabCase as $uneCase){
+                    $cases = new Cases();
+                    $cases->setDescriptifDefi($uneCase->getDescriptifDefi())
+                        ->setConsignes($uneCase->getConsignes())
+                        ->setCodeValidation($uneCase->getCodeValidation())
+                        ->setNumero($uneCase->getNumero())
+                    ;
+
+                    $cases->setPlateau($plateau);
+
+                    $manager->persist($cases);
+
+                    // On récupère les ressources des cases du plateau et les copie une par une dans les cases du plateau
+                    $tabRessource = $uneCase->getRessources();
+                    foreach($tabRessource as $uneRessource){
+                        $ressource = new Ressource();
+
+                        $ressource->setChemin($uneRessource->getChemin());
+
+
+                        $ressource->setCases($cases);
+                        $cases->addRessource($ressource);
+                        $manager->persist($cases);
+
+                        $manager->persist($ressource);
+
+                    }
+                }
 
                 $user->addPlateau($plateau);
 
-                // Enregistrer la ressource en base de données
                 $manager->persist($plateau);
                 $manager->persist($user);
                 $manager->flush();
