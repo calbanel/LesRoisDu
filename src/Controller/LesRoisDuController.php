@@ -345,6 +345,8 @@ class LesRoisDuController extends AbstractController
 
         $plateau = $repositoryPlateau->find($idPlateau);
 
+        if(in_array($plateau, $user->getPlateaux()->toArray()) && $plateau->getCases()->isEmpty()){
+
             if ($request->getMethod() == 'POST') {
 
                 for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
@@ -374,6 +376,10 @@ class LesRoisDuController extends AbstractController
 
 
             return $this->render('les_rois_du/creationcases.html.twig', ['plateau' => $plateau]); 
+        }
+        else{
+            return $this->redirectToRoute('espace_plateau');
+        }
 
 
     }
@@ -417,6 +423,42 @@ class LesRoisDuController extends AbstractController
         }
 
         return $this->redirectToRoute('espace_partie');
+
+    }
+
+    /**
+     * @Route("/plateaux/ajouter{code}", name="ajouter")
+     */
+    public function ajouterPlateau(ObjectManager $manager, UserInterface $user, $code, PlateauRepository $repositoryPlateau)
+    {
+
+        $plateau = $repositoryPlateau->findOneBy(['code' => $code]);
+
+        if(!is_null($plateau)){
+
+            if(!in_array($plateau,$user->getPlateaux()->toArray())){
+
+                $user->addPlateau($plateau);
+
+                // Enregistrer la ressource en base de données
+                $manager->persist($plateau);
+                $manager->persist($user);
+                $manager->flush();
+                $this->addFlash('success', 'Vous avez ajouté le plateau à votre espace plateaux.');
+
+            }
+            else
+            {
+                $this->addFlash('echec', 'Plateau déjà possédé !');
+            }
+        }
+        else
+        {
+            $this->addFlash('echec', "Le plateau n'existe pas !");
+
+        }
+
+        return $this->redirectToRoute('espace_plateau');
 
     }
 
@@ -539,7 +581,7 @@ class LesRoisDuController extends AbstractController
             $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
 
             $plateau = $partie->getPlateau();
-            
+
             if($plateau->getUtilisateurs()->isEmpty()){
 
                 $tabCase = $plateau->getCases();
@@ -575,7 +617,7 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/supression/plateaux/{idPlateau}", name="supprimer_plateau")
      */
-    public function supprimerUnePlateau($idPlateau, UserInterface $utilisateur, PlateauRepository $repositoryPlateau)
+    public function supprimerUnPlateau($idPlateau, UserInterface $utilisateur, PlateauRepository $repositoryPlateau)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
