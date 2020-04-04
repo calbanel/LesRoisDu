@@ -28,6 +28,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\UtilisateurType;
 use App\Form\PartieType;
@@ -335,7 +336,47 @@ class LesRoisDuController extends AbstractController
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_partie');
        }
-        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(),
+        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'creer'
+        ]);
+    }
+
+    /**
+     * @Route("/creation/modification/parties/{idPartie}", name="modification_parties")
+     */
+    public function affichageModificationPartie(Request $request, ObjectManager $manager, UserInterface $user, PartieRepository $partieRepository, $idPartie)
+    {
+
+       // Création d'une partie vierge
+       $partie=$partieRepository->find($idPartie);
+
+       // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
+       $formulairePartie = $this->createFormBuilder($partie)
+       ->add('nom',TextType::class, ['attr' => ['placeholder' => "Nom de la partie (Il apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
+            ->add('description',TextType::class, ['attr' => ['placeholder' => "Description de la partie (Elle apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
+            ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+            ->add('nbFacesDe', ChoiceType::class, ['choices'  => [
+                                                            '1' => 1,
+                                                            '2' => 2,
+                                                            '3' => 3,
+                                                            '4' => 4]])
+            ->getForm();
+
+       $formulairePartie->handleRequest($request);
+
+       if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
+       {
+
+            $manager->persist($partie);
+
+          // Enregistrer en base de données
+          $manager->flush();
+
+          $this->addFlash('success', 'La partie a été modifiée.');
+
+          // Rediriger l'utilisateur vers la page d'accueil
+          return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
+       }
+        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'modifier'
         ]);
     }
 
@@ -365,12 +406,50 @@ class LesRoisDuController extends AbstractController
           // Enregistrer en base de données
           $manager->flush();
 
-          $this->addFlash('success', 'Le plateau a été créée, vous pouvez désormais aller saisir les défis.');
+          $this->addFlash('success', 'Le plateau a été créé, vous pouvez désormais aller saisir les défis.');
 
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_plateau');
        }
-        return $this->render('les_rois_du/creationplateau.html.twig', ['vueFormulaireCreationPlateau'=>$formulairePlateau->createview(),
+        return $this->render('les_rois_du/creationplateau.html.twig', ['vueFormulaireCreationPlateau'=>$formulairePlateau->createview(), 'action' => 'creer', 'plateau' => null
+        ]);
+    }
+
+    /**
+     * @Route("/creation/modification/plateaux/{idPlateau}", name="modification_plateau")
+     */
+    public function affichageModificationPlateau(Request $request, ObjectManager $manager, UserInterface $user, PlateauRepository $plateauRepository, $idPlateau)
+    {
+
+       // Création d'une partie vierge
+       $plateau = $plateauRepository->find($idPlateau);
+
+       // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
+       $formulairePlateau = $this->createFormBuilder($plateau)
+                            ->add('nom',TextType::class, ['attr' => ['placeholder' => "Nom du plateau (Il apparaîtra dans l'espace plateau des utilisateurs à qui vous partagerai le plateau, veuillez faire attention à ce que vous saisissez)."]])
+                            ->add('description',TextType::class, ['attr' => ['placeholder' => "Description du plateau (Elle apparaîtra dans l'espace plateau des utilisateurs à qui vous partagerai le plateau, veuillez faire attention à ce que vous saisissez)."]])
+                            ->add('niveauDifficulte', ChoiceType::class, ['choices'  => [
+                                                            'Facile' => 'Facile',
+                                                            'Moyen' => 'Moyen',
+                                                            'Difficile' => 'Difficile'
+                                                        ]])
+                            ->getForm();
+
+       $formulairePlateau->handleRequest($request);
+
+       if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
+       {
+
+            $manager->persist($plateau);
+          // Enregistrer en base de données
+          $manager->flush();
+
+          $this->addFlash('success', 'Le plateau a été modifié.');
+
+          // Rediriger l'utilisateur vers la page d'accueil
+          return $this->redirectToRoute('plateau', ['idPlateau' => $plateau->getId()]);
+       }
+        return $this->render('les_rois_du/creationplateau.html.twig', ['vueFormulaireCreationPlateau'=>$formulairePlateau->createview(), 'action' => 'modifier', 'plateau' => $plateau
         ]);
     }
 
@@ -1035,7 +1114,7 @@ class LesRoisDuController extends AbstractController
 
         $pions = $plateau->getPions();
 
-        
+        if ($request->getMethod() == 'POST') {
 
             $pionsNouveau = json_decode($request->request->get('$data'),true);
 
@@ -1053,6 +1132,7 @@ class LesRoisDuController extends AbstractController
 
                 }
             }
+        }
         
 
         // On récupère les informations de la partie pour les retourner en json
@@ -1136,4 +1216,3 @@ class LesRoisDuController extends AbstractController
 
 
 }
-                                                
