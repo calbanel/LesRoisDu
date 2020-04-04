@@ -336,7 +336,7 @@ class LesRoisDuController extends AbstractController
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('espace_partie');
        }
-        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'creer'
+        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'creer', 'partie' => null
         ]);
     }
 
@@ -376,7 +376,7 @@ class LesRoisDuController extends AbstractController
           // Rediriger l'utilisateur vers la page d'accueil
           return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
        }
-        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'modifier'
+        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'modifier', 'partie' => $partie
         ]);
     }
 
