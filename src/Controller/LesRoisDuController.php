@@ -318,6 +318,9 @@ class LesRoisDuController extends AbstractController
        if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
        {
 
+        $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
+        $plateau->setCode($code);
+
         $plateau->addUtilisateur($user);
         $manager->persist($plateau);
 

@@ -54,6 +54,11 @@ class Plateau
      */
     private $nbCases;
 
+    /**
+     * @ORM\Column(type="string", length=5)
+     */
+    private $code;
+
     public function __construct()
     {
         $this->parties = new ArrayCollection();
@@ -198,6 +203,18 @@ class Plateau
     public function setNbCases(int $nbCases): self
     {
         $this->nbCases = $nbCases;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }
