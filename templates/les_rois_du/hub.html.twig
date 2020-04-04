@@ -127,21 +127,21 @@
                 <a href="{{ path('espace_plateau') }}" class="button scrolly">CONSULTER LA LISTE DES
                             PLATEAUX</a>
                 <a href="{{ path('creation_plateau') }}" class="button scrolly">CREER UNE PLATEAU</a>
-                <a onClick=ajouterSaisieCode() class="button scrolly"> AJOUTER UN PLATEAU EXISTANT</a>
+                <a onClick=ajouterSaisieCode2() class="button scrolly"> AJOUTER UN PLATEAU EXISTANT</a>
                         <script type="text/javaScript">
 
-                            function ajouterSaisieCode() {                             
-                                document.getElementById('Cible').innerHTML ='<p>Saisir ci dessous le code du plateau à ajouter en respectant les minuscules et majuscules :</p>   <input id="inputRejoindre"  type="text"/><br>   <a href="" id="boutonRejoindre" class="button scrolly"> Ajouter</a>';
-                                routeSaisie = true;
+                            function ajouterSaisieCode2() {                             
+                                document.getElementById('Cible2').innerHTML ='<p>Saisir ci dessous le code du plateau à ajouter en respectant les minuscules et majuscules :</p>   <input id="inputRejoindre2"  type="text"/><br>   <a href="" id="boutonRejoindre2" class="button scrolly"> Ajouter</a>';
+                                routeSaisie2 = true;
                             }
 
-                            routeSaisie = false; //pour éviter d'essayer de regarder le code dans le input s'il n'est pas encre créé
+                            routeSaisie2 = false; //pour éviter d'essayer de regarder le code dans le input s'il n'est pas encre créé
                         
                             setInterval(function(){
-                                if (routeSaisie) {
-                                    var code = document.getElementById("inputRejoindre").value;
-                                    var route = '/plateaux/ajouter' + code;
-                                    document.getElementById("boutonRejoindre").setAttribute("href",route);
+                                if (routeSaisie2) {
+                                    var code2 = document.getElementById("inputRejoindre2").value;
+                                    var route2 = '/plateaux/ajouter' + code2;
+                                    document.getElementById("boutonRejoindre2").setAttribute("href",route2);
                                     //console.log(route);
                                 }
                             }, 100);
@@ -149,7 +149,7 @@
                         </script> 
 
                     
-                    <div id="Cible"></div>
+                    <div id="Cible2"></div>
 
             </div>
         </div>
