@@ -30,6 +30,12 @@
                 </h2>
                 <div class="row">
                     <div class="col-md-12">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible show" role="alert">
+                              {{message}}
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            </div>
+                        {% endfor %}
                         <center><p> Vous pouvez accèder aux défis de ce plateau en cliquant sur ses cases. </p></center>
                     </div>
                 </div>
@@ -59,7 +65,7 @@
                 <script type="text/javascript">
                   var idPlateau = {{ plateau.id }};
                   console.log(idPlateau);
-                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8001/api/plateaux/' + idPlateau;
+                  var parametres = 'http://iparla.iutbayonne.univ-pau.fr:8000/api/plateaux/' + idPlateau;
                 </script>
 
                 <script>

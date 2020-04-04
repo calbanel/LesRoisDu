@@ -22,9 +22,11 @@
     <!-- Intro -->
     <section id="partie" class="wrapper style1 fullscreen fade-up">
       <div class="inner">
-        <h1>SAISIR LES DEFIS {{plateau.nom}}</h1>
+        <h1>SAISIR LES DEFIS <br>{{plateau.nom}}</h1>
         <section id="three" class="wrapper style1 fade-up">
           <div class="inner">
+
+            {% if cases is null %}
 
 
 
@@ -49,6 +51,32 @@
           </div>
         </div>
                 </form>
+
+          {% else %}
+
+                        <form id="defisForm" action="{{path('modification_cases', {'idPlateau': plateau.id})}}" method="post" >
+
+                        {% for case in cases %}
+
+
+            <label for="descriptif{{case.numero}}">Descriptif de la case n°{{case.numero}}</label>
+            <input type="text" name="descriptif{{case.numero}}" id="descriptif{{case.numero}}" minlength=10 maxlength=100 placeholder="Saisir le descriptif du défi." value="{{case.descriptifDefi}}" required>
+            <BR>
+
+
+            {% endfor %}
+
+            <Br>
+
+          <div class="row">
+                    <div class="col-md-12">
+             <input type="submit" href="" class="button" name="Valider ">
+             <a href="{{ path('hub')}}" class="button scrolly">Annuler</a>
+          </div>
+        </div>
+                </form>
+
+          {% endif %}
 
           </div>
 
