@@ -538,6 +538,26 @@ class LesRoisDuController extends AbstractController
 
             $entityManager->remove($plateauEnJeu); // On supprime le plateauEnJeu
 
+            $plateau = $partie->getPlateau();
+            
+            if($plateau->getUtilisateurs()->isEmpty()){
+
+                $tabCase = $plateau->getCases();
+                foreach($tabCase as $uneCase){ // On enlève les cases une par une
+
+                    $tabRessource = $uneCase->getRessources();
+                    foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
+
+                        $entityManager->remove($uneRessource);
+
+                    }
+
+                    $entityManager->remove($uneCase);
+                }
+
+                $entityManager->remove($plateau); // On supprime la partie
+            }
+
             $entityManager->remove($partie); // On supprime la partie
 
             $entityManager->flush(); // On enregistre les changements en BD
@@ -548,6 +568,50 @@ class LesRoisDuController extends AbstractController
 
 
         return $this->redirectToRoute('espace_partie');
+
+
+    }
+
+    /**
+     * @Route("/supression/plateaux/{idPlateau}", name="supprimer_plateau")
+     */
+    public function supprimerUnePlateau($idPlateau, UserInterface $utilisateur, PlateauRepository $repositoryPlateau)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $plateau = $repositoryPlateau->find($idPlateau);
+
+        if (in_array($utilisateur, $plateau->getUtilisateurs()->toArray())){ // Seul le créateur peut supprimer sa partie
+
+            $plateau->removeUtilisateur($utilisateur);
+
+            if($plateau->getUtilisateurs()->isEmpty() && $plateau->getParties()->isEmpty()){
+
+                $tabCase = $plateau->getCases();
+                foreach($tabCase as $uneCase){ // On enlève les cases une par une
+
+                    $tabRessource = $uneCase->getRessources();
+                    foreach($tabRessource as $uneRessource){ // Pour chaque case on enlève les ressources une par une
+
+                        $entityManager->remove($uneRessource);
+
+                    }
+
+                    $entityManager->remove($uneCase);
+                }
+
+                $entityManager->remove($plateau); // On supprime la partie
+            }
+            else{
+                $entityManager->persist($plateau);
+            }
+
+            $entityManager->flush(); // On enregistre les changements en BD
+
+            $this->addFlash('success', 'Le plateau a été suprimée.');
+        }
+
+    return $this->redirectToRoute('espace_plateau');
 
 
     }

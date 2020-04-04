@@ -67,7 +67,7 @@
                                 <p> {{plateau.description}} </p>
                                 {% if nbCases == 0 %}
 
-                                    <a href=""
+                                    <a href="{{path ('creation_cases', {'idPlateau': plateau.id}) }}"
                                             class="button">Saisir les défis</a>
 
                                 {%else%}
