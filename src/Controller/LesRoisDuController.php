@@ -606,6 +606,9 @@ class LesRoisDuController extends AbstractController
             $plateauDeJeu = $partie->getPlateauDeJeu();
             if($partie->getJoueurs()->isEmpty()){
 
+                $date = new \DateTime();
+                $partie->setDateRejoins($date);
+
                 $user->addPartiesRejoin($partie);
                 $user->addPlateauEnJeux($partie->getPlateauDeJeu());
 
@@ -1049,6 +1052,8 @@ class LesRoisDuController extends AbstractController
         if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
 
             if($partie->getPlateauDeJeu()->getJoueur() != null){
+
+                $partie->setDateRejoins(NULL);
 
                 $joueur = $partie->getPlateauDeJeu()->getJoueur();
                 $joueur->removePartiesRejoin($partie);
