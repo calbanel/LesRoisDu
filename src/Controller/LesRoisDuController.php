@@ -268,7 +268,7 @@ class LesRoisDuController extends AbstractController
 
         $donneesPions = [['numero' => 1, 'nom' => "vert", 'couleur' => "green"], ['numero' => 2, 'nom' => "rouge", 'couleur' => "red"], ['numero' => 3, 'nom' => "jaune", 'couleur' => "yellow"], ['numero' => 4, 'nom' => "bleu", 'couleur' => "blue"]];
 
-        for ($i=0; $i < $partie->getNbPionParPlateau(); $i++) { 
+        for ($i=0; $i < 4; $i++) { 
 
             $pion = new Pion();
             $pion->setNumeroJoueur($donneesPions[$i]["numero"]);
@@ -354,6 +354,11 @@ class LesRoisDuController extends AbstractController
        ->add('nom',TextType::class, ['attr' => ['placeholder' => "Nom de la partie (Il apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
             ->add('description',TextType::class, ['attr' => ['placeholder' => "Description de la partie (Elle apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
             ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+            ->add('nbPionParPlateau', ChoiceType::class, ['choices'  => [
+                                                            '1' => 1,
+                                                            '2' => 2,
+                                                            '3' => 3,
+                                                            '4' => 4]])
             ->add('nbFacesDe', ChoiceType::class, ['choices'  => [
                                                             '1' => 1,
                                                             '2' => 2,
