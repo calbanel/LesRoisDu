@@ -278,7 +278,7 @@ class LesRoisDuController extends AbstractController
 
         $plateau = $partie->getPlateau();
 
-        $date = New DateTime();
+        $date = New \DateTime();
         $partie->setDerniereModification($date);
 
         // On copie le plateau sélectionné dans le plateauEnJeu de la partie
@@ -392,7 +392,9 @@ class LesRoisDuController extends AbstractController
 
        if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
        {
-
+            $date = New \DateTime();
+            $partie->setDerniereModification($date);
+            
             $manager->persist($partie);
 
           // Enregistrer en base de données
