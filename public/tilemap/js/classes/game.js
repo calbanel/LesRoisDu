@@ -36,7 +36,7 @@ class Game {
         this.pions = [];
         for (let index = 0; index < nbPion; index++) {
 
-            this.pions.push(new Pion(this.map, lesPions[index].player, lesPions[index].position, nbCases));
+            this.pions.push(new Pion(this.map, this.parcours, lesPions[index].player, lesPions[index].position, nbCases));
 
         }
 

@@ -89,27 +89,17 @@ class Parcours {
 
             finParc = true;
             var casesAround = this.getInfoCasesAround();
-            // console.log(casesAround);
             
             casesAround.forEach(caseAround => { //Pour toutes les cases autour de ma case
-
-                // console.log(caseAround[0].id == 1);
-                // console.log(!this.isNextCaseWasMyLastOne(caseAround));
-                // console.log(this.isNextCaseIsActuallyOnTheCanvas(caseAround));
 
                 if (caseAround[0].id == 1 && //Si la cases est une case du parcours
                     !this.isNextCaseWasMyLastOne(caseAround) && // Et qu'elle n'était pas ma case précédente
                     this.isNextCaseIsActuallyOnTheCanvas(caseAround)) { //Et que la case est dans le canvas
 
                     finParc = false;
-                    
-                    // console.log(this.oldCol);
-                    // console.log(this.oldLig);
 
                     colonne = caseAround[0].pos.col;
                     ligne = caseAround[0].pos.lig;
-                    // console.log(caseAround[0].pos.col);
-                    // console.log(caseAround[0].pos.lig);
 
                 }
 
@@ -127,7 +117,6 @@ class Parcours {
 
         } 
 
-        console.log(this.casesPosition);
         return this.casesPosition;
     }
 
