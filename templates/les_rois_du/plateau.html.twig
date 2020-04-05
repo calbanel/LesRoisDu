@@ -9,7 +9,7 @@
             <nav>
                 <ul>
                     <li><a href="{{ path('espace_plateau')}}">RETOUR à l'espace plateaux</a></li>
-                    {% for plat in utilisateur.plateaux %}
+                    {% for plat in plateaux %}
                     <li><a href="{{ path('plateau', {'idPlateau' : plat.id}) }}">{{plat.nom}}</a></li>
                     {%endfor%}
                 </ul>

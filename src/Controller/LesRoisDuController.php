@@ -254,10 +254,10 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/plateaux", name="espace_plateau")
      */
-    public function affichageEspacePlateau(UserInterface $user)
+    public function affichageEspacePlateau(UserInterface $user, PlateauRepository $repositoryPlateau)
     {
 
-        $plateaux = $user->getPlateaux();
+        $plateaux = $repositoryPlateau->findPlateauByUser($user);
 
         return $this->render('les_rois_du/espaceplateau.html.twig', ['plateaux'=>$plateaux, 'utilisateur'=>$user]);
     }
@@ -795,9 +795,11 @@ class LesRoisDuController extends AbstractController
 
         $plateau = $repositoryPlateau->find($idPlateau);
 
+        $plateaux = $repositoryPlateau->findPlateauByUser($user);
+
         if(in_array($plateau,$user->getPlateaux()->toArray())){
 
-            return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'utilisateur'=>$user]);
+            return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'utilisateur'=>$user, 'plateaux' =>$plateaux]);
         }
         else{
             return $this->redirectToRoute('espace_plateau');
