@@ -374,42 +374,47 @@ class LesRoisDuController extends AbstractController
        // Création d'une partie vierge
        $partie=$partieRepository->find($idPartie);
 
-       // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
-       $formulairePartie = $this->createFormBuilder($partie)
-       ->add('nom',TextType::class, ['attr' => ['placeholder' => "Nom de la partie (Il apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
-            ->add('description',TextType::class, ['attr' => ['placeholder' => "Description de la partie (Elle apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
-            ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
-            ->add('nbPionParPlateau', ChoiceType::class, ['choices'  => [
-                                                            '1' => 1,
-                                                            '2' => 2,
-                                                            '3' => 3,
-                                                            '4' => 4]])
-            ->add('nbFacesDe', ChoiceType::class, ['choices'  => [
-                                                            '1' => 1,
-                                                            '2' => 2,
-                                                            '3' => 3,
-                                                            '4' => 4]])
-            ->getForm();
+       if(in_array($partie, $user->getPartiesCree()->toArray())){
+           // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
+           $formulairePartie = $this->createFormBuilder($partie)
+           ->add('nom',TextType::class, ['attr' => ['placeholder' => "Nom de la partie (Il apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
+                ->add('description',TextType::class, ['attr' => ['placeholder' => "Description de la partie (Elle apparaîtra dans l'espace partie des joueurs, veuillez faire attention à ce que vous saisissez)."]])
+                ->add('nbPlateaux',IntegerType::class,['data' => '1', 'attr'=> ['readonly'=> true ]])
+                ->add('nbPionParPlateau', ChoiceType::class, ['choices'  => [
+                                                                '1' => 1,
+                                                                '2' => 2,
+                                                                '3' => 3,
+                                                                '4' => 4]])
+                ->add('nbFacesDe', ChoiceType::class, ['choices'  => [
+                                                                '1' => 1,
+                                                                '2' => 2,
+                                                                '3' => 3,
+                                                                '4' => 4]])
+                ->getForm();
 
-       $formulairePartie->handleRequest($request);
+           $formulairePartie->handleRequest($request);
 
-       if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
-       {
-            $date = New \DateTime();
-            $partie->setDerniereModification($date);
+           if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
+           {
+                $date = New \DateTime();
+                $partie->setDerniereModification($date);
 
-            $manager->persist($partie);
+                $manager->persist($partie);
 
-          // Enregistrer en base de données
-          $manager->flush();
+              // Enregistrer en base de données
+              $manager->flush();
 
-          $this->addFlash('success', 'La partie a été modifiée.');
+              $this->addFlash('success', 'La partie a été modifiée.');
 
-          // Rediriger l'utilisateur vers la page d'accueil
-          return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
-       }
-        return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'modifier', 'partie' => $partie
-        ]);
+              // Rediriger l'utilisateur vers la page d'accueil
+              return $this->redirectToRoute('partie_en_cours', ['idPartie' => $idPartie]);
+           }
+            return $this->render('les_rois_du/creationpartie.html.twig', ['vueFormulaireCreationPartie'=>$formulairePartie->createview(), 'action' => 'modifier', 'partie' => $partie
+            ]);
+            }
+        else{
+            return $this->redirectToRoute('espace_partie');
+        }
     }
 
     /**
@@ -459,36 +464,42 @@ class LesRoisDuController extends AbstractController
        // Création d'une partie vierge
        $plateau = $plateauRepository->find($idPlateau);
 
-       // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
-       $formulairePlateau = $this->createFormBuilder($plateau)
-                            ->add('nom',TextType::class, ['attr' => ['placeholder' => "Nom du plateau (Il apparaîtra dans l'espace plateau des utilisateurs à qui vous partagerai le plateau, veuillez faire attention à ce que vous saisissez)."]])
-                            ->add('description',TextType::class, ['attr' => ['placeholder' => "Description du plateau (Elle apparaîtra dans l'espace plateau des utilisateurs à qui vous partagerai le plateau, veuillez faire attention à ce que vous saisissez)."]])
-                            ->add('niveauDifficulte', ChoiceType::class, ['choices'  => [
-                                                            'Facile' => 'Facile',
-                                                            'Moyen' => 'Moyen',
-                                                            'Difficile' => 'Difficile'
-                                                        ]])
-                            ->getForm();
+       if(in_array($plateau, $user->getPlateaux()->toArray())){
 
-       $formulairePlateau->handleRequest($request);
+           // Création de l'objet formulaire à partir du formulaire externalisé "PartieType"
+           $formulairePlateau = $this->createFormBuilder($plateau)
+                                ->add('nom',TextType::class, ['attr' => ['placeholder' => "Nom du plateau (Il apparaîtra dans l'espace plateau des utilisateurs à qui vous partagerai le plateau, veuillez faire attention à ce que vous saisissez)."]])
+                                ->add('description',TextType::class, ['attr' => ['placeholder' => "Description du plateau (Elle apparaîtra dans l'espace plateau des utilisateurs à qui vous partagerai le plateau, veuillez faire attention à ce que vous saisissez)."]])
+                                ->add('niveauDifficulte', ChoiceType::class, ['choices'  => [
+                                                                'Facile' => 'Facile',
+                                                                'Moyen' => 'Moyen',
+                                                                'Difficile' => 'Difficile'
+                                                            ]])
+                                ->getForm();
 
-       if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
-       {
+           $formulairePlateau->handleRequest($request);
 
-            $date = New \DateTime();
-            $plateau->setDerniereModification($date);
+           if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
+           {
 
-            $manager->persist($plateau);
-          // Enregistrer en base de données
-          $manager->flush();
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
 
-          $this->addFlash('success', 'Le plateau a été modifié.');
+                $manager->persist($plateau);
+              // Enregistrer en base de données
+              $manager->flush();
 
-          // Rediriger l'utilisateur vers la page d'accueil
-          return $this->redirectToRoute('plateau', ['idPlateau' => $plateau->getId()]);
-       }
-        return $this->render('les_rois_du/creationplateau.html.twig', ['vueFormulaireCreationPlateau'=>$formulairePlateau->createview(), 'action' => 'modifier', 'plateau' => $plateau
-        ]);
+              $this->addFlash('success', 'Le plateau a été modifié.');
+
+              // Rediriger l'utilisateur vers la page d'accueil
+              return $this->redirectToRoute('plateau', ['idPlateau' => $plateau->getId()]);
+           }
+            return $this->render('les_rois_du/creationplateau.html.twig', ['vueFormulaireCreationPlateau'=>$formulairePlateau->createview(), 'action' => 'modifier', 'plateau' => $plateau
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('espace_plateau');
+        }
     }
 
     /**
@@ -784,18 +795,29 @@ class LesRoisDuController extends AbstractController
 
         $plateau = $repositoryPlateau->find($idPlateau);
 
-        return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'utilisateur'=>$user]);
+        if(in_array($plateau,$user->getPlateaux()->toArray())){
+
+            return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'utilisateur'=>$user]);
+        }
+        else{
+            return $this->redirectToRoute('espace_plateau');
+        }
     }
 
     /**
      * @Route("/parametres/plateaux/{idPlateau}", name="parametres_plateau")
      */
-    public function affichageParametresPlateau($idPlateau, PlateauRepository $repositoryPlateau)
+    public function affichageParametresPlateau($idPlateau, UserInterface $user, PlateauRepository $repositoryPlateau)
     {
 
         $plateau = $repositoryPlateau->find($idPlateau);
 
-        return $this->render('les_rois_du/parametresplateau.html.twig',['plateau'=>$plateau]);
+        if(in_array($plateau,$user->getPlateaux()->toArray())){
+            return $this->render('les_rois_du/parametresplateau.html.twig',['plateau'=>$plateau]);
+        }
+        else{
+            return $this->redirectToRoute('espace_plateau');
+        }
     }
 
     /**
