@@ -66,7 +66,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/cgu", name="CGU")
+     * @Route("/conditions-utilisation", name="CGU")
      */
     public function CGU()
     {
@@ -95,6 +95,14 @@ class LesRoisDuController extends AbstractController
    public function afichageAides()
    {
        return $this->render('les_rois_du/aides.html.twig');
+   }
+
+   /**
+    * @Route("/mentions-legales", name="mentions_legales")
+    */
+   public function afichageMentionsLegales()
+   {
+       return $this->render('les_rois_du/mentionslegales.html.twig');
    }
 
     /**
