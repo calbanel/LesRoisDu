@@ -84,7 +84,7 @@ class LesRoisDuController extends AbstractController
      /**
      * @Route("/credits", name="credits")
      */
-    public function afiichageCredits()
+    public function affichageCredits()
     {
         return $this->render('les_rois_du/credits.html.twig');
     }
@@ -92,7 +92,7 @@ class LesRoisDuController extends AbstractController
     /**
     * @Route("/aides", name="aides")
     */
-   public function afichageAides()
+   public function affichageAides()
    {
        return $this->render('les_rois_du/aides.html.twig');
    }
@@ -100,7 +100,7 @@ class LesRoisDuController extends AbstractController
    /**
     * @Route("/mentions-legales", name="mentions_legales")
     */
-   public function afichageMentionsLegales()
+   public function affichageMentionsLegales()
    {
        return $this->render('les_rois_du/mentionslegales.html.twig');
    }
@@ -277,6 +277,9 @@ class LesRoisDuController extends AbstractController
        {
 
         $plateau = $partie->getPlateau();
+
+        $date = New DateTime();
+        $partie->setDerniereModification($date);
 
         // On copie le plateau sélectionné dans le plateauEnJeu de la partie
         $plateauEnJeu = new PlateauEnJeu();
