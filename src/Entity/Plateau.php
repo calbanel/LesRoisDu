@@ -73,6 +73,11 @@ class Plateau
      */
     private $code;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $derniereModification;
+
     public function __construct()
     {
         $this->parties = new ArrayCollection();
@@ -229,6 +234,18 @@ class Plateau
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getDerniereModification(): ?\DateTimeInterface
+    {
+        return $this->derniereModification;
+    }
+
+    public function setDerniereModification(\DateTimeInterface $derniereModification): self
+    {
+        $this->derniereModification = $derniereModification;
 
         return $this;
     }
