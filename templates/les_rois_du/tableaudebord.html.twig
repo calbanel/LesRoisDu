@@ -21,8 +21,69 @@
         <section id="intro" class="wrapper style1 fullscreen fade-up">
             <div class="inner">
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>TABLEAU DE BORD DES PARTIES CRÉÉES</h1>
 
+                        <p>
+                            Sur cette page, vous avez une vision sur la position  actuelle des pions de toutes les parties que vous avez créées.
+                        </p>
+                    </div>
+                </div>
+                <br>
 
+                <div class="row row-cols-1 row-cols-md-2">
+                    
+
+                    {% for partie in parties %}
+
+                    <div class="col-md-3">
+
+                        <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+                          <div class="card-header">
+                            {{partie.nom}}
+                          </div>
+                          <ul class="list-group list-group-flush text-white bg-dark mb-3">
+
+                            {% for pion in partie.plateauDeJeu.pions %}
+
+                                {% if loop.index <= partie.nbPionParPlateau %}
+
+                                    {% if pion.couleur == 'green' %}
+
+                                        <li class="list-group-item text-success border-secondary mb-3">Pion {{pion.nom}} : {{pion.avancementPlateau}}</li>
+
+                                    {% endif %}
+
+                                    {% if pion.couleur == 'red' %}
+
+                                        <li class="list-group-item text-danger border-secondary mb-3">Pion {{pion.nom}} : {{pion.avancementPlateau}}</li>
+
+                                    {% endif %}
+
+                                    {% if pion.couleur == 'yellow' %}
+
+                                        <li class="list-group-item text-warning border-secondary mb-3">Pion {{pion.nom}} : {{pion.avancementPlateau}}</li>
+
+                                    {% endif %}
+
+                                    {% if pion.couleur == 'blue' %}
+
+                                        <li class="list-group-item text-primary border-secondary mb-3">Pion {{pion.nom}} : {{pion.avancementPlateau}}</li>
+
+                                    {% endif %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                          </ul>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
 
             </div>
         </section>
