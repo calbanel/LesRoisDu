@@ -88,6 +88,16 @@ class Partie
      */
     private $estLance;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $derniereModification;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateRejoins;
+
     public function __construct()
     {
         $this->joueurs = new ArrayCollection();
@@ -240,6 +250,30 @@ class Partie
     public function setEstLance(bool $estLance): self
     {
         $this->estLance = $estLance;
+
+        return $this;
+    }
+
+    public function getDerniereModification(): ?\DateTimeInterface
+    {
+        return $this->derniereModification;
+    }
+
+    public function setDerniereModification(\DateTimeInterface $derniereModification): self
+    {
+        $this->derniereModification = $derniereModification;
+
+        return $this;
+    }
+
+    public function getDateRejoins(): ?\DateTimeInterface
+    {
+        return $this->dateRejoins;
+    }
+
+    public function setDateRejoins(?\DateTimeInterface $dateRejoins): self
+    {
+        $this->dateRejoins = $dateRejoins;
 
         return $this;
     }

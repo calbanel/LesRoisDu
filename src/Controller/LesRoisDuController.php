@@ -84,7 +84,7 @@ class LesRoisDuController extends AbstractController
      /**
      * @Route("/credits", name="credits")
      */
-    public function afiichageCredits()
+    public function affichageCredits()
     {
         return $this->render('les_rois_du/credits.html.twig');
     }
@@ -92,7 +92,7 @@ class LesRoisDuController extends AbstractController
     /**
     * @Route("/aides", name="aides")
     */
-   public function afichageAides()
+   public function affichageAides()
    {
        return $this->render('les_rois_du/aides.html.twig');
    }
@@ -100,7 +100,7 @@ class LesRoisDuController extends AbstractController
    /**
     * @Route("/mentions-legales", name="mentions_legales")
     */
-   public function afichageMentionsLegales()
+   public function affichageMentionsLegales()
    {
        return $this->render('les_rois_du/mentionslegales.html.twig');
    }
@@ -147,6 +147,9 @@ class LesRoisDuController extends AbstractController
                 $plateauOriginel = $repositoryPlateau->find($i);
 
                 $plateau = new Plateau();
+
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
 
                 $plateau->setNom($plateauOriginel->getNom());
                 $plateau->setDescription($plateauOriginel->getDescription());
@@ -218,12 +221,12 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties", name="espace_partie")
      */
-    public function affichageEspacePartie(UserInterface $user)
+    public function affichageEspacePartie(UserInterface $user, PartieRepository $partieRepository)
     {
 
-        $cree = $user->getPartiesCree();
+        $cree = $partieRepository->findPartieByCreateur($user);
 
-        $rejoins = $user->getPartiesRejoins();
+        $rejoins = $partieRepository->findPartieByJoueur($user);
 
         return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
     }
@@ -231,10 +234,10 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/compte/parties/tableau-de-bord", name="tableau_de_bord")
      */
-    public function affichageTableauDeBordPartie(UserInterface $user)
+    public function affichageTableauDeBordPartie(UserInterface $user, PartieRepository $repositoryPartie)
     {
 
-        $cree = $user->getPartiesCree();
+        $cree = $repositoryPartie->findPartieByCreateur($user);
 
         return $this->render('les_rois_du/tableaudebord.html.twig', ['parties'=>$cree, 'utilisateur'=>$user]);
     }
@@ -277,6 +280,9 @@ class LesRoisDuController extends AbstractController
        {
 
         $plateau = $partie->getPlateau();
+
+        $date = New \DateTime();
+        $partie->setDerniereModification($date);
 
         // On copie le plateau sélectionné dans le plateauEnJeu de la partie
         $plateauEnJeu = new PlateauEnJeu();
@@ -389,6 +395,8 @@ class LesRoisDuController extends AbstractController
 
        if ($formulairePartie->isSubmitted() && $formulairePartie->isValid())
        {
+            $date = New \DateTime();
+            $partie->setDerniereModification($date);
 
             $manager->persist($partie);
 
@@ -420,6 +428,9 @@ class LesRoisDuController extends AbstractController
 
        if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
        {
+
+        $date = New \DateTime();
+        $plateau->setDerniereModification($date);
 
         $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
         $plateau->setCode($code);
@@ -464,6 +475,9 @@ class LesRoisDuController extends AbstractController
        if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
        {
 
+            $date = New \DateTime();
+            $plateau->setDerniereModification($date);
+
             $manager->persist($plateau);
           // Enregistrer en base de données
           $manager->flush();
@@ -489,6 +503,9 @@ class LesRoisDuController extends AbstractController
 
             if ($request->getMethod() == 'POST') {
 
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
+
                 for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
 
                     $cases = new Cases();
@@ -503,9 +520,12 @@ class LesRoisDuController extends AbstractController
 
                     $manager->persist($cases);
 
-                    $manager->flush();
 
                 }
+
+                $manager->persist($plateau);
+
+                $manager->flush();
 
                 $this->addFlash('success', 'Les défis ont bien été saisis, vous pouvez désormais consulter votre plateau.');
 
@@ -536,6 +556,9 @@ class LesRoisDuController extends AbstractController
 
             if ($request->getMethod() == 'POST') {
 
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
+
                 for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
 
                     $cases = $repositoryCases->findOneBy(['plateau' => $plateau, 'numero' => $i]);
@@ -546,9 +569,11 @@ class LesRoisDuController extends AbstractController
 
                     $manager->persist($cases);
 
-                    $manager->flush();
-
                 }
+
+                $manager->persist($plateau);
+
+                $manager->flush();
 
                 $this->addFlash('success', 'Les défis ont bien été modifiés.');
 
@@ -580,6 +605,9 @@ class LesRoisDuController extends AbstractController
         if(!is_null($partie)){
             $plateauDeJeu = $partie->getPlateauDeJeu();
             if($partie->getJoueurs()->isEmpty()){
+
+                $date = new \DateTime();
+                $partie->setDateRejoins($date);
 
                 $user->addPartiesRejoin($partie);
                 $user->addPlateauEnJeux($partie->getPlateauDeJeu());
@@ -622,6 +650,9 @@ class LesRoisDuController extends AbstractController
             if(!in_array($plateauOriginel,$user->getPlateaux()->toArray())){
 
                 $plateau = new Plateau();
+
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
 
                 $plateau->setNom($plateauOriginel->getNom());
                 $plateau->setDescription($plateauOriginel->getDescription());
@@ -692,10 +723,10 @@ class LesRoisDuController extends AbstractController
 
         $partie = $repositoryPartie->find($idPartie);
         // On récupère les parties créées par l'utilisateur
-        $cree = $user->getPartiesCree();
+        $cree = $repositoryPartie->findPartieByCreateur($user);
 
         // On récupère les parties rjointes par l'utilisateur
-        $rejoins = $user->getPartiesRejoins();
+        $rejoins = $repositoryPartie->findPartieByJoueur($user);
 
         // La partie n'est pas une des parties rejointes ou créées par l'utilisateur
         $trouve = false;
@@ -1021,6 +1052,8 @@ class LesRoisDuController extends AbstractController
         if ($partie->getCreateur()->getPseudo() == $utilisateur->getPseudo()){
 
             if($partie->getPlateauDeJeu()->getJoueur() != null){
+
+                $partie->setDateRejoins(NULL);
 
                 $joueur = $partie->getPlateauDeJeu()->getJoueur();
                 $joueur->removePartiesRejoin($partie);
