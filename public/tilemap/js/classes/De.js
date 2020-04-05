@@ -35,8 +35,6 @@ class De{
 
 	update(){
 		this.lancerDe();
-		alert('Vous avez obtenu ' + this.faceCourante + '.');
-
 	}
 
 	updateOnClick(x , y){

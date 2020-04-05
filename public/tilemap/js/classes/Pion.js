@@ -1,5 +1,5 @@
 class Pion {
-	constructor(map, player, position, nbCases) {
+	constructor(map, parcours, player, position, nbCases) {
 		//Petit toolBox des familles
 		this.toolBox = new ToolBox();
 
@@ -13,6 +13,7 @@ class Pion {
 		this.setPlayer(player);
 
 		this.setPosition(position);
+		this.posCases = parcours.casesPosition;
 		this.positionnePionByPositionDansParcours();
 		this.updateXandYposition();
 
@@ -137,44 +138,6 @@ class Pion {
 		return clicked;
 
 	}
-
-	getPositionInMap() {
-		return { col: this.col, lig: this.lig };
-	}
-
-	getInfoCasesAround() {
-		//On récupère la position du pion dans la map
-		var posPion = this.getPositionInMap();
-
-		//On récupère la position des cases autour du pion
-		var posTop = { col: posPion.col, lig: posPion.lig - 1 }
-		var posRgt = { col: posPion.col + 1, lig: posPion.lig }
-		var posBot = { col: posPion.col, lig: posPion.lig + 1 }
-		var posLft = { col: posPion.col - 1, lig: posPion.lig }
-
-		//On récupère l'ID des cases autour du pion
-		var idTop = this.toolBox.getIdTile(posTop.col, posTop.lig, this.map);
-		var idRgt = this.toolBox.getIdTile(posRgt.col, posRgt.lig, this.map);
-		var idBot = this.toolBox.getIdTile(posBot.col, posBot.lig, this.map);
-		var idLft = this.toolBox.getIdTile(posLft.col, posLft.lig, this.map);
-
-		var CasesAround = [
-			[{ id: idTop, pos: posTop }],
-			[{ id: idRgt, pos: posRgt }],
-			[{ id: idBot, pos: posBot }],
-			[{ id: idLft, pos: posLft }]
-		];
-
-		//On retourne l'ID et la position des cases autour du pion
-		return CasesAround;
-
-	}
-
-	saveOldPosition() {
-		this.oldCol = this.col;
-		this.oldLig = this.lig;
-	}
-
 	setCol(col) {
 		this.col = col;
 	}
@@ -184,8 +147,6 @@ class Pion {
 	}
 
 	teleportToCase(col, lig) {
-		//On enregistre l'ancienne position
-		this.saveOldPosition();
 
 		//On change de position
 		this.setCol(col);
@@ -196,67 +157,39 @@ class Pion {
 
 	goToNextCase() {
 
-		var casesAround = this.getInfoCasesAround();
+		var posCol = this.map.parcours.casesPosition[this.posPion][0];
+		var posLig = this.map.parcours.casesPosition[this.posPion][1];
 
-		casesAround.forEach(caseAround => { //Pour toutes les cases autour du pion
-
-			if (caseAround[0].id == 1 && //Si la cases est une case du parcours
-				!this.isNextCaseWasMyLastOne(caseAround) && // Et qu'elle n'était pas ma case précédente
-				this.isNextCaseIsActuallyOnTheCanvas(caseAround)) { //Et que la case est dans le canvas
-
-				this.nextCol = caseAround[0].pos.col; //
-				this.nextLig = caseAround[0].pos.lig;
-
-			}
-
-		});
-
-		this.teleportToCase(this.nextCol, this.nextLig);
+		this.teleportToCase(posCol, posLig);
 
 	}
 
 	advanceBasedOnPawnValue() {
 
-		if (this.posPion > this.nbCases) {
+		if (this.posPion >= this.nbCases - 1) {
 			alert('STOP ! Vous êtes arrivé au bout du parcours !');
 		} else {
 
+			alert('Vous avez obtenu ' + this.faceCouranteDe + '.');
+
 			for (let i = 0; i < this.faceCouranteDe; i++) {
 
-				this.posPion = this.posPion + 1;
+				if (this.posPion < this.nbCases - 1) {	
 
-				if (this.posPion < this.nbCases ) {
-					this.goToNextCase();
+					this.posPion = this.posPion + 1;
+					this.goToNextCase();					
 				}
 
-				if (this.posPion == this.nbCases) {
-					this.goToNextCase();
+				if (this.posPion == this.nbCases - 1) {
+
+					this.goToNextCase();	
+
 					alert('Bravo ! Vous avez terminé le parcours !');
+
+					break;
 				}
-			}
-		}
-	}
 
-	isNextCaseWasMyLastOne(caseAround) {
-
-		if (caseAround[0].pos.col == this.oldCol &&
-			caseAround[0].pos.lig == this.oldLig) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	isNextCaseIsActuallyOnTheCanvas(caseAround) {
-
-		if (caseAround[0].pos.col >= 0 &&
-			caseAround[0].pos.col <= this.map.terrainWidth - 1 &&
-			caseAround[0].pos.lig >= 0 &&
-			caseAround[0].pos.lig <= this.map.terrainHeight - 1) {
-
-			return true;
-		} else {
-			return false;
+			}			
 		}
 	}
 
@@ -268,46 +201,20 @@ class Pion {
 		this.image.src = assetsBaseDir + "sprites/" + "pion_" + this.couleur + ".png";
 	}
 
-	getPositionCases() {
-			var nbLignes = this.map.terrain.length / this.map.terrainWidth;
-			var nbColonne = this.map.terrainWidth
-			var ligne = 0;
-			var colonne = 0;
-			var casesPosition = [];
-			for (ligne; ligne < nbLignes; ligne++) {
-
-					for (var colonne = 0; colonne < nbColonne; colonne++) {
-							var tuile = this.toolBox.getIdTile(colonne, ligne, this.map);
-
-							if (tuile == 1) {
-									 casesPosition.push(new Array(colonne, ligne));
-							}
-					}
-			}
-			return casesPosition;
-	}
-
-	getInfoCaseCourante(positionPion){
-		var positionCases;
-		if (positionPion > this.nbCases) {
-			return false;
-		} else {
-			positionCases= this.getPositionCases();
-			return positionCases[[positionPion][0]];
-		}
-
-
-	}
-
 	positionnePionByPositionDansParcours(){
-		var positionPionCase = (this.getInfoCaseCourante(this.posPion));
-		if (positionPionCase) {
-			var col = positionPionCase[0];
-			var lig = positionPionCase[1];
+
+		if (this.posPion > 0) {
+			
+			var col = this.posCases[this.posPion][0];
+			var lig = this.posCases[this.posPion][1];
 			this.col = col;
 			this.lig = lig;
-		}
 
+		} else {
+			this.col = 0;
+			this.lig = 0;
+		}
+	
 	}
 
 	setPositionIntoAPI(position, player){
