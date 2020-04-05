@@ -73,6 +73,9 @@
                             }, 100);
 
                         </script> 
+                        {% if utilisateur.estInvite == false %}
+                    <a href="{{ path('tableau_de_bord') }}" class="button scrolly">TABLEAU DE BORD DES PARTIES Créées</a>
+                    {%endif%}
 
                     
                     <div id="Cible"></div>

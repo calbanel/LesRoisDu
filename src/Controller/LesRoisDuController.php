@@ -221,6 +221,17 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
+     * @Route("/compte/parties/tableau-de-bord", name="tableau_de_bord")
+     */
+    public function affichageTableauDeBordPartie(UserInterface $user)
+    {
+
+        $cree = $user->getPartiesCree();
+
+        return $this->render('les_rois_du/tableaudebord.html.twig', ['parties'=>$cree, 'utilisateur'=>$user]);
+    }
+
+    /**
      * @Route("/compte", name="espace_compte")
      */
     public function affichageEspaceCompte(UserInterface $user)

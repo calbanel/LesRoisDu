@@ -86,7 +86,7 @@
                     <a href="{{ path('espace_partie') }}" class="button scrolly"> CONSULTER LA LISTE DES PARTIES
                         </a>
                     {% if utilisateur.estInvite == false %}
-                    <a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a>
+                    <a href="{{ path('creation_partie') }}" class="button scrolly">CREER UNE PARTIE</a>.
                     {%endif%}
                     <a onClick=ajouterSaisieCode() class="button scrolly"> REJOINDRE UNE PARTIE</a>
                     <script type="text/javaScript">
@@ -107,6 +107,9 @@
                             }, 100);
 
                         </script>
+                    {% if utilisateur.estInvite == false %}
+                    <a href="{{ path('tableau_de_bord') }}" class="button scrolly">TABLEAU DE BORD DES PARTIES Créées</a>
+                    {%endif%}
 
 
                 <div id="Cible"></div>
