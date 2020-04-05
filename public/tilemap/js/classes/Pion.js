@@ -171,6 +171,11 @@ class Pion {
 	}
 
 	saveOldPosition() {
+		console.log("col :"+this.col);
+		console.log("lig :"+this.lig);
+		console.log("oldCol :"+this.oldCol);
+		console.log("oldLig :"+this.oldLig);
+		console.log("");
 		this.oldCol = this.col;
 		this.oldLig = this.lig;
 	}
@@ -197,21 +202,41 @@ class Pion {
 	goToNextCase() {
 
 		var casesAround = this.getInfoCasesAround();
+		console.log(casesAround);
 
 		casesAround.forEach(caseAround => { //Pour toutes les cases autour du pion
 
-			if (caseAround[0].id == 1 && //Si la cases est une case du parcours
+			console.log("case1? :"+(caseAround[0].id == 1));
+            console.log("nouv ? :"+!this.isNextCaseWasMyLastOne(caseAround));
+			console.log("canva? :"+this.isNextCaseIsActuallyOnTheCanvas(caseAround));
+			console.log("");
+
+			if ((caseAround[0].id == 1) && //Si la cases est une case du parcours
 				!this.isNextCaseWasMyLastOne(caseAround) && // Et qu'elle n'était pas ma case précédente
 				this.isNextCaseIsActuallyOnTheCanvas(caseAround)) { //Et que la case est dans le canvas
 
-				this.nextCol = caseAround[0].pos.col; //
+				this.nextCol = caseAround[0].pos.col;
 				this.nextLig = caseAround[0].pos.lig;
+
+				// console.log("posPion :"+this.posPion);
+				// console.log("col :"+this.col);
+				// console.log("lig :"+this.lig);
+				// console.log("oldCol :"+this.oldCol);
+				// console.log("oldLig :"+this.oldLig);
+				// console.log("");
 
 			}
 
 		});
 
 		this.teleportToCase(this.nextCol, this.nextLig);
+
+		// console.log("posPion :"+this.posPion);
+		// console.log("col :"+this.col);
+		// console.log("lig :"+this.lig);
+		// console.log("oldCol :"+this.oldCol);
+		// console.log("oldLig :"+this.oldLig);
+		// console.log("");
 
 	}
 
@@ -221,23 +246,38 @@ class Pion {
 			alert('STOP ! Vous êtes arrivé au bout du parcours !');
 		} else {
 
-			for (let i = 0; i < this.faceCouranteDe; i++) {
+			if (this.posPion < this.nbCases ) {
 
-				this.posPion = this.posPion + 1;
+				alert('Vous avez obtenu ' + this.faceCouranteDe + '.');
 
-				if (this.posPion < this.nbCases ) {
+				for (let i = 0; i < this.faceCouranteDe; i++)
+				{
 					this.goToNextCase();
-				}
+					this.posPion = this.posPion + 1;
+				}					
+			}
 
-				if (this.posPion == this.nbCases) {
+			if (this.posPion == this.nbCases) {
+
+				alert('Vous avez obtenu ' + this.faceCouranteDe + '.');
+
+				for (let i = 0; i < this.faceCouranteDe; i++)
+				{
 					this.goToNextCase();
-					alert('Bravo ! Vous avez terminé le parcours !');
-				}
+					this.posPion = this.posPion + 1;
+				}	
+
+				alert('Bravo ! Vous avez terminé le parcours !');
 			}
 		}
 	}
 
 	isNextCaseWasMyLastOne(caseAround) {
+
+		console.log(caseAround[0].pos.col);
+		console.log(caseAround[0].pos.lig);
+		console.log(this.oldCol);
+		console.log(this.oldLig);
 
 		if (caseAround[0].pos.col == this.oldCol &&
 			caseAround[0].pos.lig == this.oldLig) {
@@ -300,14 +340,43 @@ class Pion {
 	}
 
 	positionnePionByPositionDansParcours(){
+
 		var positionPionCase = (this.getInfoCaseCourante(this.posPion));
+
 		if (positionPionCase) {
+
 			var col = positionPionCase[0];
 			var lig = positionPionCase[1];
 			this.col = col;
 			this.lig = lig;
+
 		}
 
+		if (this.posPion > 0) {
+
+			var positionOldCase = (this.getInfoCaseCourante((this.posPion) - 1));
+	
+			var oldCol = positionOldCase[0];
+			var oldLig = positionOldCase[1];
+			this.oldCol = oldCol;
+			this.oldLig = oldLig;
+
+		}
+
+		console.log("monPion: "+this.col);
+		console.log("monPion: "+this.lig);
+		console.log("monPion: "+this.oldCol);
+		console.log("monPion: "+this.oldLig);
+
+		// this.col = 0;
+		// this.lig = 0;
+
+		// for (var i = 0; i < this.posPion; i++) {
+
+		// 	this.goToNextCase();
+
+		// }
+	
 	}
 
 	setPositionIntoAPI(position, player){
