@@ -226,7 +226,7 @@ class LesRoisDuController extends AbstractController
 
         $cree = $partieRepository->findPartieByCreateur($user);
 
-        $rejoins = $user->getPartiesRejoins();
+        $rejoins = $partieRepository->findPartieByJoueur($user);
 
         return $this->render('les_rois_du/espacepartie.html.twig', ['partiesCree'=>$cree, 'partiesRejoins'=>$rejoins, 'utilisateur'=>$user]);
     }
@@ -726,7 +726,7 @@ class LesRoisDuController extends AbstractController
         $cree = $repositoryPartie->findPartieByCreateur($user);
 
         // On récupère les parties rjointes par l'utilisateur
-        $rejoins = $user->getPartiesRejoins();
+        $rejoins = $repositoryPartie->findPartieByJoueur($user);
 
         // La partie n'est pas une des parties rejointes ou créées par l'utilisateur
         $trouve = false;

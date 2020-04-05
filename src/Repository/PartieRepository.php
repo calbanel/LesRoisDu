@@ -36,6 +36,23 @@ class PartieRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @return Partie[] Returns an array of Partie objects
+    */
+
+    public function findPartieByJoueur($user)
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.joueurs','u')
+            ->andWhere(':val = u.id')
+            ->setParameter('val', $user)
+            ->orderBy('p.dateRejoins', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     /*
     public function findOneBySomeField($value): ?Partie
     {
