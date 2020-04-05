@@ -221,10 +221,10 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/parties", name="espace_partie")
      */
-    public function affichageEspacePartie(UserInterface $user)
+    public function affichageEspacePartie(UserInterface $user, PartieRepository $partieRepository)
     {
 
-        $cree = $user->getPartiesCree();
+        $cree = $partieRepository->findPartieByCreateur($user);
 
         $rejoins = $user->getPartiesRejoins();
 
@@ -234,10 +234,10 @@ class LesRoisDuController extends AbstractController
     /**
      * @Route("/compte/parties/tableau-de-bord", name="tableau_de_bord")
      */
-    public function affichageTableauDeBordPartie(UserInterface $user)
+    public function affichageTableauDeBordPartie(UserInterface $user, PartieRepository $repositoryPartie)
     {
 
-        $cree = $user->getPartiesCree();
+        $cree = $repositoryPartie->findPartieByCreateur($user);
 
         return $this->render('les_rois_du/tableaudebord.html.twig', ['parties'=>$cree, 'utilisateur'=>$user]);
     }
@@ -720,7 +720,7 @@ class LesRoisDuController extends AbstractController
 
         $partie = $repositoryPartie->find($idPartie);
         // On récupère les parties créées par l'utilisateur
-        $cree = $user->getPartiesCree();
+        $cree = $repositoryPartie->findPartieByCreateur($user);
 
         // On récupère les parties rjointes par l'utilisateur
         $rejoins = $user->getPartiesRejoins();

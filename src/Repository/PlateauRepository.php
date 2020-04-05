@@ -28,7 +28,7 @@ class PlateauRepository extends ServiceEntityRepository
             ->join('p.utilisateurs','u')
             ->andWhere(':val = u.id')
             ->setParameter('val', $user)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.derniereModification', 'DESC')
             ->getQuery()
             ->getResult()
         ;
