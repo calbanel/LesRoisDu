@@ -35,15 +35,20 @@ class PlateauRepository extends ServiceEntityRepository
     }
   
 
-    /*
-    public function findOneBySomeField($value): ?Plateau
+    /**
+     * @return Plateau[] Returns an array of Plateau objects
+     */
+    public function findPlateauAvecCasesByUser($user)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->join('p.utilisateurs','u', 'WITH', 'u.id = :val')
+            ->leftJoin('p.cases', 'c')
+            ->groupBy('p.id')
+            ->having('count(c.id) > 0')
+            ->setParameter('val', $user)
+            ->orderBy('p.derniereModification', 'DESC')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }

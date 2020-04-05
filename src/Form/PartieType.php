@@ -50,7 +50,7 @@ class PartieType extends AbstractType
                                                             '3' => 3,
                                                             '4' => 4]])
             ->add('plateau', EntityType::class, [   'class' => Plateau::class,
-                                                    'choices' => $this->plateauRepository->findPlateauByUser($this->security->getUser()->getId()),
+                                                    'choices' => $this->plateauRepository->findPlateauAvecCasesByUser($this->security->getUser()->getId()),
                                                     'choice_label' => 'nom',
                                                     'multiple' => false,
                                                     'expanded' => false])
