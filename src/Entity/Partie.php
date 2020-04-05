@@ -93,6 +93,11 @@ class Partie
      */
     private $derniereModification;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateRejoins;
+
     public function __construct()
     {
         $this->joueurs = new ArrayCollection();
@@ -257,6 +262,18 @@ class Partie
     public function setDerniereModification(\DateTimeInterface $derniereModification): self
     {
         $this->derniereModification = $derniereModification;
+
+        return $this;
+    }
+
+    public function getDateRejoins(): ?\DateTimeInterface
+    {
+        return $this->dateRejoins;
+    }
+
+    public function setDateRejoins(?\DateTimeInterface $dateRejoins): self
+    {
+        $this->dateRejoins = $dateRejoins;
 
         return $this;
     }
