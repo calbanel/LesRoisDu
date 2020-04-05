@@ -148,6 +148,9 @@ class LesRoisDuController extends AbstractController
 
                 $plateau = new Plateau();
 
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
+
                 $plateau->setNom($plateauOriginel->getNom());
                 $plateau->setDescription($plateauOriginel->getDescription());
                 $plateau->setNiveauDifficulte($plateauOriginel->getNiveauDifficulte());
@@ -394,7 +397,7 @@ class LesRoisDuController extends AbstractController
        {
             $date = New \DateTime();
             $partie->setDerniereModification($date);
-            
+
             $manager->persist($partie);
 
           // Enregistrer en base de données
@@ -425,6 +428,9 @@ class LesRoisDuController extends AbstractController
 
        if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
        {
+
+        $date = New \DateTime();
+        $plateau->setDerniereModification($date);
 
         $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
         $plateau->setCode($code);
@@ -469,6 +475,9 @@ class LesRoisDuController extends AbstractController
        if ($formulairePlateau->isSubmitted() && $formulairePlateau->isValid())
        {
 
+            $date = New \DateTime();
+            $plateau->setDerniereModification($date);
+
             $manager->persist($plateau);
           // Enregistrer en base de données
           $manager->flush();
@@ -494,6 +503,9 @@ class LesRoisDuController extends AbstractController
 
             if ($request->getMethod() == 'POST') {
 
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
+
                 for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
 
                     $cases = new Cases();
@@ -508,9 +520,12 @@ class LesRoisDuController extends AbstractController
 
                     $manager->persist($cases);
 
-                    $manager->flush();
 
                 }
+
+                $manager->persist($plateau);
+
+                $manager->flush();
 
                 $this->addFlash('success', 'Les défis ont bien été saisis, vous pouvez désormais consulter votre plateau.');
 
@@ -541,6 +556,9 @@ class LesRoisDuController extends AbstractController
 
             if ($request->getMethod() == 'POST') {
 
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
+
                 for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
 
                     $cases = $repositoryCases->findOneBy(['plateau' => $plateau, 'numero' => $i]);
@@ -551,9 +569,11 @@ class LesRoisDuController extends AbstractController
 
                     $manager->persist($cases);
 
-                    $manager->flush();
-
                 }
+
+                $manager->persist($plateau);
+
+                $manager->flush();
 
                 $this->addFlash('success', 'Les défis ont bien été modifiés.');
 
@@ -627,6 +647,9 @@ class LesRoisDuController extends AbstractController
             if(!in_array($plateauOriginel,$user->getPlateaux()->toArray())){
 
                 $plateau = new Plateau();
+
+                $date = New \DateTime();
+                $plateau->setDerniereModification($date);
 
                 $plateau->setNom($plateauOriginel->getNom());
                 $plateau->setDescription($plateauOriginel->getDescription());
