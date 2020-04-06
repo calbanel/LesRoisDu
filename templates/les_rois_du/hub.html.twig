@@ -23,7 +23,7 @@
         </div>
     </section>
 
-    {% endblock %}
+{% endblock %}
 
     {% block header %}
     {% endblock %}
@@ -133,13 +133,13 @@
                 <a onClick=ajouterSaisieCode2() class="button scrolly"> AJOUTER UN PLATEAU EXISTANT</a>
                         <script type="text/javaScript">
 
-                            function ajouterSaisieCode2() {                             
+                            function ajouterSaisieCode2() {
                                 document.getElementById('Cible2').innerHTML ='<p>Saisir ci dessous le code du plateau à ajouter en respectant les minuscules et majuscules :</p>   <input id="inputRejoindre2"  type="text"/><br>   <a href="" id="boutonRejoindre2" class="button scrolly"> Ajouter</a>';
                                 routeSaisie2 = true;
                             }
 
                             routeSaisie2 = false; //pour éviter d'essayer de regarder le code dans le input s'il n'est pas encre créé
-                        
+
                             setInterval(function(){
                                 if (routeSaisie2) {
                                     var code2 = document.getElementById("inputRejoindre2").value;
@@ -149,9 +149,9 @@
                                 }
                             }, 100);
 
-                        </script> 
+                        </script>
 
-                    
+
                     <div id="Cible2"></div>
 
             </div>
