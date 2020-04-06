@@ -5,7 +5,26 @@
 	position: relative;
 	object-fit: fill;
 }
-	
+
+.align-self-center{
+	display: flex;
+	align-items: center;
+}
+
+.iframe-container{
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.iframe-container iframe{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .info-case{
 	position:absolute;
 	width:16%;
@@ -16,7 +35,7 @@
 }
 
 .bg-case{
-background: url("/img/test.svg")  no-repeat; 
+background: url("/img/test.svg")  no-repeat;
 background-size: 200px 200px;
 background-size: cover;
 background-color: rgba(0,0,0,.1);

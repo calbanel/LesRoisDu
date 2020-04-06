@@ -90,7 +90,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-    * @Route("/aides", name="aides")
+    * @Route("/aide", name="aides")
     */
    public function affichageAides()
    {
@@ -142,7 +142,7 @@ class LesRoisDuController extends AbstractController
 
             $repositoryPlateau=$this->getDoctrine()->getRepository(Plateau::class);
 
-            for ($i=1; $i < 4; $i++) { 
+            for ($i=1; $i < 4; $i++) {
 
                 $plateauOriginel = $repositoryPlateau->find($i);
 
@@ -293,7 +293,7 @@ class LesRoisDuController extends AbstractController
 
         $donneesPions = [['numero' => 1, 'nom' => "vert", 'couleur' => "green"], ['numero' => 2, 'nom' => "rouge", 'couleur' => "red"], ['numero' => 3, 'nom' => "jaune", 'couleur' => "yellow"], ['numero' => 4, 'nom' => "bleu", 'couleur' => "blue"]];
 
-        for ($i=0; $i < 4; $i++) { 
+        for ($i=0; $i < 4; $i++) {
 
             $pion = new Pion();
             $pion->setNumeroJoueur($donneesPions[$i]["numero"]);
@@ -517,7 +517,7 @@ class LesRoisDuController extends AbstractController
                 $date = New \DateTime();
                 $plateau->setDerniereModification($date);
 
-                for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
+                for ($i=1; $i <= $plateau->getNbCases(); $i++) {
 
                     $cases = new Cases();
 
@@ -542,11 +542,11 @@ class LesRoisDuController extends AbstractController
 
                 // Rediriger l'utilisateur vers la page d'accueil
                 return $this->redirectToRoute('espace_plateau');
-                  
+
             }
 
 
-            return $this->render('les_rois_du/creationcases.html.twig', ['plateau' => $plateau, 'cases' => null]); 
+            return $this->render('les_rois_du/creationcases.html.twig', ['plateau' => $plateau, 'cases' => null]);
         }
         else{
             return $this->redirectToRoute('espace_plateau');
@@ -570,7 +570,7 @@ class LesRoisDuController extends AbstractController
                 $date = New \DateTime();
                 $plateau->setDerniereModification($date);
 
-                for ($i=1; $i <= $plateau->getNbCases(); $i++) { 
+                for ($i=1; $i <= $plateau->getNbCases(); $i++) {
 
                     $cases = $repositoryCases->findOneBy(['plateau' => $plateau, 'numero' => $i]);
 
@@ -590,11 +590,11 @@ class LesRoisDuController extends AbstractController
 
                 // Rediriger l'utilisateur vers la page d'accueil
                 return $this->redirectToRoute('plateau', ['idPlateau' => $plateau->getId()]);
-                  
+
             }
 
 
-            return $this->render('les_rois_du/creationcases.html.twig', ['plateau' => $plateau, 'cases' => $plateau->getCases()]); 
+            return $this->render('les_rois_du/creationcases.html.twig', ['plateau' => $plateau, 'cases' => $plateau->getCases()]);
         }
         else{
             return $this->redirectToRoute('espace_plateau');
@@ -1214,7 +1214,7 @@ class LesRoisDuController extends AbstractController
                 }
             }
         }
-        
+
 
         // On récupère les informations de la partie pour les retourner en json
 
