@@ -77,7 +77,7 @@ class Parcours {
 	}
 
     getPositionCases() {
-        var colonne = 0;
+        var colonne = 1;
         var ligne = 0;
         this.oldCol = 0;
         this.oldLig = 0;
@@ -89,7 +89,7 @@ class Parcours {
 
             finParc = true;
             var casesAround = this.getInfoCasesAround();
-            
+
             casesAround.forEach(caseAround => { //Pour toutes les cases autour de ma case
 
                 if (caseAround[0].id == 1 && //Si la cases est une case du parcours
@@ -109,21 +109,21 @@ class Parcours {
             this.oldLig = this.pos.lig;
 
             this.pos.col = colonne;
-            this.pos.lig = ligne;            
+            this.pos.lig = ligne;
 
             if (!finParc) {
                 this.casesPosition.push(new Array(this.pos.col, this.pos.lig));
             }
 
-        } 
+        }
 
         return this.casesPosition;
     }
 
     creerCasesDuParcours() {
+
         var positionCases = this.getPositionCases();
-        for (var i = 0; i < this.listeDefis.length; i++) {
-        }
+
         for (var i = 0; i < positionCases.length; i++) {
             this.cases[i] = new Case('case_128.png',
                 this.listeDefis[i],

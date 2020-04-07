@@ -93,6 +93,7 @@ class Pion {
 
 		this.updateXandYposition();
 		this.setPositionIntoAPI(this.posPion, this.player);
+		console.log(this.posPion);
 }
 	updateOnClick(x, y) {
 		if (this.isClicked(x, y)) {
@@ -174,22 +175,22 @@ class Pion {
 
 			for (let i = 0; i < this.faceCouranteDe; i++) {
 
-				if (this.posPion < this.nbCases - 1) {	
+				if (this.posPion < this.nbCases - 1) {
 
 					this.posPion = this.posPion + 1;
-					this.goToNextCase();					
+					this.goToNextCase();
 				}
 
 				if (this.posPion == this.nbCases - 1) {
 
-					this.goToNextCase();	
+					this.goToNextCase();
 
 					alert('Bravo ! Vous avez terminé le parcours !');
 
 					break;
 				}
 
-			}			
+			}
 		}
 	}
 
@@ -204,7 +205,7 @@ class Pion {
 	positionnePionByPositionDansParcours(){
 
 		if (this.posPion > 0) {
-			
+
 			var col = this.posCases[this.posPion][0];
 			var lig = this.posCases[this.posPion][1];
 			this.col = col;
@@ -214,7 +215,7 @@ class Pion {
 			this.col = 0;
 			this.lig = 0;
 		}
-	
+
 	}
 
 	setPositionIntoAPI(position, player){
