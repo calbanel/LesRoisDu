@@ -21,6 +21,9 @@ class Game {
         var casesDuPlateau = objRes.plateau_de_jeu.cases;
         var defis = [];
 
+        const caseDepart = "Case départ, pas de défi !";
+        defis.push(caseDepart);
+
         for (let index = 0; index < casesDuPlateau.length; index++) {
             const element = casesDuPlateau[index];
             defis.push(element.defi);

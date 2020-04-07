@@ -77,7 +77,7 @@ class Parcours {
 	}
 
     getPositionCases() {
-        var colonne = 1;
+        var colonne = 0;
         var ligne = 0;
         this.oldCol = 0;
         this.oldLig = 0;
@@ -117,6 +117,7 @@ class Parcours {
 
         }
 
+        console.log(this.casesPosition);
         return this.casesPosition;
     }
 
