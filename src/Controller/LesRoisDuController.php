@@ -1009,6 +1009,31 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
+     * @Route("/supression/annulation-plateau/{idPlateau}", name="annuler_plateau")
+     */
+    public function annulerCreationPlateau($idPlateau, UserInterface $utilisateur, PlateauRepository $repositoryPlateau)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $plateau = $repositoryPlateau->find($idPlateau);
+
+        if (in_array($utilisateur, $plateau->getUtilisateurs()->toArray())){ // Seul le créateur peut supprimer sa partie
+
+            $plateau->removeUtilisateur($utilisateur);
+
+            $entityManager->remove($plateau);
+
+            $entityManager->flush(); // On enregistre les changements en BD
+
+            $this->addFlash('success', 'La création du plateau a été annulée.');
+        }
+
+        return $this->redirectToRoute('espace_plateau');
+
+
+    }
+
+    /**
      * @Route("/supression/compte/{idCompte}", name="supprimer_compte")
      */
     public function supprimerUnCompte($idCompte, UserInterface $user, TokenStorageInterface $tokenStorage, SessionInterface $session)
