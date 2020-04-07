@@ -90,7 +90,20 @@ class Game {
     }
 
     update(deltaTime){
-
+        this.pions.forEach(pion => {
+            pion.updatePos();
+        });
+        // fetch(parametres)
+		// .then(response => {
+		// 	return response.json()
+		// })
+		// .then(data => {
+		// 	for (var i = 0; i < nbPion; i++) {
+		// 		var posPion = data["plateau_de_jeu"]["pions"][i]["position"];
+		// 		console.log("pos "+i+" : "+posPion);
+		// 		// game.map.pions[i].setPosition(posPion);
+		// 	}
+		// })
     }
 
     draw(ctx){
@@ -105,8 +118,8 @@ class Game {
 
           ctx.clearRect(0, 0, game.GAME_WIDTH, game.GAME_HEIGHT);
 
-
           game.update(deltaTime);
+          
           game.draw(ctx);
 
           requestAnimationFrame(gameLoop);
