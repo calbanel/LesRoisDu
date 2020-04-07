@@ -649,7 +649,7 @@ class LesRoisDuController extends AbstractController
     }
 
     /**
-     * @Route("/plateaux/ajouter{code}", name="ajouter")
+     * @Route("/plateaux/ajouter{code}", name="ajouter_plateau")
      */
     public function ajouterPlateau(ObjectManager $manager, UserInterface $user, $code, PlateauRepository $repositoryPlateau)
     {
@@ -660,12 +660,95 @@ class LesRoisDuController extends AbstractController
 
             if(!in_array($plateauOriginel,$user->getPlateaux()->toArray())){
 
+                if(!$plateauOriginel->getCases()->isEmpty()){
+
+                    $plateau = new Plateau();
+
+                    $date = New \DateTime();
+                    $plateau->setDerniereModification($date);
+
+                    $plateau->setNom($plateauOriginel->getNom());
+                    $plateau->setDescription($plateauOriginel->getDescription());
+                    $plateau->setNiveauDifficulte($plateauOriginel->getNiveauDifficulte());
+                    $plateau->setNbCases($plateauOriginel->getNbCases());
+                    $code = strtoupper(substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 5, 5));
+                    $plateau->setCode($code);
+
+                    $tabCase = $plateauOriginel->getCases();
+                    foreach($tabCase as $uneCase){
+                        $cases = new Cases();
+                        $cases->setDescriptifDefi($uneCase->getDescriptifDefi())
+                            ->setConsignes($uneCase->getConsignes())
+                            ->setCodeValidation($uneCase->getCodeValidation())
+                            ->setNumero($uneCase->getNumero())
+                        ;
+
+                        $cases->setPlateau($plateau);
+
+                        $manager->persist($cases);
+
+                        // On récupère les ressources des cases du plateau et les copie une par une dans les cases du plateau
+                        $tabRessource = $uneCase->getRessources();
+                        foreach($tabRessource as $uneRessource){
+                            $ressource = new Ressource();
+
+                            $ressource->setChemin($uneRessource->getChemin());
+
+
+                            $ressource->setCases($cases);
+                            $cases->addRessource($ressource);
+                            $manager->persist($cases);
+
+                            $manager->persist($ressource);
+
+                        }
+                    }
+
+                    $user->addPlateau($plateau);
+
+                    $manager->persist($plateau);
+                    $manager->persist($user);
+                    $manager->flush();
+                    $this->addFlash('success', 'Vous avez ajouté le plateau à votre espace plateaux.');
+
+                }
+
+            }
+            else
+            {
+                $this->addFlash('echec', 'Plateau déjà possédé !');
+            }
+        }
+        else
+        {
+            $this->addFlash('echec', "Le plateau n'existe pas !");
+
+        }
+
+        return $this->redirectToRoute('espace_plateau');
+
+    }
+
+
+    /**
+     * @Route("/plateaux/dupliquer{idPlateau}", name="duplication_plateau")
+     */
+    public function dupliquerPlateau(ObjectManager $manager, UserInterface $user, $idPlateau, PlateauRepository $repositoryPlateau)
+    {
+
+        $plateauOriginel = $repositoryPlateau->find($idPlateau);
+
+
+        if(in_array($plateauOriginel,$user->getPlateaux()->toArray())){
+
+            if(!$plateauOriginel->getCases()->isEmpty()){
+
                 $plateau = new Plateau();
 
                 $date = New \DateTime();
                 $plateau->setDerniereModification($date);
 
-                $plateau->setNom($plateauOriginel->getNom());
+                $plateau->setNom($plateauOriginel->getNom()." (Copie)");
                 $plateau->setDescription($plateauOriginel->getDescription());
                 $plateau->setNiveauDifficulte($plateauOriginel->getNiveauDifficulte());
                 $plateau->setNbCases($plateauOriginel->getNbCases());
@@ -707,21 +790,12 @@ class LesRoisDuController extends AbstractController
                 $manager->persist($plateau);
                 $manager->persist($user);
                 $manager->flush();
-                $this->addFlash('success', 'Vous avez ajouté le plateau à votre espace plateaux.');
+                $this->addFlash('success', 'Plateau dupliqué.');
 
             }
-            else
-            {
-                $this->addFlash('echec', 'Plateau déjà possédé !');
-            }
-        }
-        else
-        {
-            $this->addFlash('echec', "Le plateau n'existe pas !");
-
         }
 
-        return $this->redirectToRoute('espace_plateau');
+            return $this->redirectToRoute('espace_plateau');
 
     }
 
@@ -797,7 +871,7 @@ class LesRoisDuController extends AbstractController
 
         $plateaux = $repositoryPlateau->findPlateauByUser($user);
 
-        if(in_array($plateau,$user->getPlateaux()->toArray())){
+        if(in_array($plateau,$user->getPlateaux()->toArray()) && !$plateau->getCases()->isEmpty()){
 
             return $this->render('les_rois_du/plateau.html.twig',['plateau'=>$plateau, 'utilisateur'=>$user, 'plateaux' =>$plateaux]);
         }
@@ -814,7 +888,7 @@ class LesRoisDuController extends AbstractController
 
         $plateau = $repositoryPlateau->find($idPlateau);
 
-        if(in_array($plateau,$user->getPlateaux()->toArray())){
+        if(in_array($plateau,$user->getPlateaux()->toArray()) && !$plateau->getCases()->isEmpty()){
             return $this->render('les_rois_du/parametresplateau.html.twig',['plateau'=>$plateau]);
         }
         else{
