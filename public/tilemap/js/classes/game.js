@@ -42,7 +42,7 @@ class Game {
 
         //INITIALISATION DU DE
         var nbFacesDe = objRes.nbFacesDe;
-        this.dice = new De("de.png", nbFacesDe);
+        this.dice = new De(nbFacesDe);
 
         //Gestionnaire d'évênement
         new InputHandler(this);

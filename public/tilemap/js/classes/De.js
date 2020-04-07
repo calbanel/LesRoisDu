@@ -1,6 +1,6 @@
 class De{
 
-	constructor(url, faceDe){
+	constructor(faceDe){
 		//Position du dé
 		this.x = 128;
 		this.y = 128;
@@ -20,18 +20,19 @@ class De{
 		this.image.referenceDuPerso = this;
 		this.image.onload = function() {
 			if(!this.complete) {
-				throw "Erreur de chargement du sprite nommé \"" + url + "\".";
+				throw "Erreur de chargement du sprite";
 			}
 
-		// Taille de la De
+		// Taille du sprite De
 		this.referenceDuPerso.largeur = this.width;
 		this.referenceDuPerso.hauteur = this.height;
 
 
 	}
 
-		this.image.src = assetsBaseDir + "sprites/" + url;
-	}
+	this.setSprite(faceDe);
+
+}
 
 	update(){
 		this.lancerDe();
@@ -84,6 +85,30 @@ class De{
 		this.faceCourante = faceObtenue;
 
 		this.notifyObservers();
+	}
+
+	setSprite(nbFaceDe){
+
+		switch (nbFaceDe) {
+			case 1:
+				this.image.src = assetsBaseDir + "sprites/De-1.png";
+				break;
+
+			case 2:
+				this.image.src = assetsBaseDir + "sprites/De-2.png";
+				break;
+
+			case 3:
+				this.image.src = assetsBaseDir + "sprites/De-3.png";
+				break;
+
+			case 4:
+				this.image.src = assetsBaseDir + "sprites/de.png";
+				break;
+
+			default:
+
+		}
 	}
 
 }
